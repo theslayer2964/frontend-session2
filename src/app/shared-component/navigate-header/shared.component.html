@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+  <div class="container-fluid ">
+    <img src="../../../assets/image/logo_iuh.png" style="width: 50px">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/admin"
+             *ngIf="userService.roleMatch(['ROLE_GIANGVIEN'])">Giảng viên</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/user"
+             *ngIf="userService.roleMatch(['ROLE_SINHVIEN'])">Sinh viên</a>
+        </li>
+      </ul><ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" routerLink="/user"
+           *ngIf="userService.roleMatch(['ROLE_QUANLY'])">QUAN LY Dashboard</a>
+      </li>
+    </ul>
+
+      <div style="display: flex; align-items: center;" class="pe-4">
+        <mat-icon matBadge="8" matBadgeColor="accent" matBadgeSize="small"
+                  style="color: #4da1e8; margin-right: 20px; font-size: 25px">notifications_none
+        </mat-icon>
+        <mat-icon matBadge="8" matBadgeColor="accent" matBadgeSize="small"
+                  style="color: #4da1e8; margin-right: 20px; font-size: 25px">sms
+        </mat-icon>
+        <button *ngIf="!isLoggedIn()" (click)="login()">LOGIN</button>
+        <div class="nav-item dropdown avatarName" style="display: flex; align-items: center" *ngIf="isLoggedIn()">
+          <ngx-avatar [src]="userInfo.anhDaiDien!= null ? userInfo.anhDaiDien : defaultImage " size="45"></ngx-avatar>
+          <a class="nav-link dropdown-toggle" href="#" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">{{userInfo.tenSinhVien}}</a>
+          <ul class="dropdown-menu" style="left: -31px;">
+            <li><a class="dropdown-item" href="#">Hồ Sơ</a></li>
+            <li><a class="dropdown-item" href="#">Đổi mật khẩu</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" (click)="logout()" >Đăng xuất</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>
