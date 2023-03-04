@@ -1,47 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../authentication/_service/user.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {Router} from "@angular/router";
 import {UserDataService} from "../../shared-service/userData.service";
 
 @Component({
-  selector: 'app-shared',
-  templateUrl: './shared.component.html',
-  styleUrls: ['./shared.component.css']
+    selector: 'app-shared',
+    templateUrl: './shared.component.html',
+    styleUrls: ['./shared.component.css']
 })
 export class SharedComponent implements OnInit {
-  public defaultImage: any = './assets/image/logo_iuh.png'
+    public defaultImage: any = './assets/image/logo_iuh.png'
 
-  constructor(private userAuthService: UserAuthService, private router: Router, public userService: UserService) {
-  }
-  public userInfo: any
+    constructor(private userAuthService: UserAuthService, private router: Router, public userService: UserService,
+                public userDataService: UserDataService) {
+    }
 
-  ngOnInit(): void {
-    // this.userDataService.userBehaviorSubject.subscribe(data => {
-    //   console.log(data)
-    //   // this.userInfo = data.user
-    // })
-  if(this.userAuthService.getUserInfo()){
-    this.userInfo = this.userAuthService.getUserInfo();
-    console.log("xxx: ", this.userInfo);
-  }
-  }
-  public isLoggedIn() {
-    return this.userAuthService.isLoggerIn();
-  }
+    public userInfo: any
 
+    ngOnInit(): void {
+        if (this.userAuthService.getUserInfo()) {
+            this.userInfo = this.userAuthService.getUserInfo();
+            console.log("INFO: ", this.userInfo);
+        }
+        this.userDataService.userBehaviorSubject.subscribe(data => {
+            if (data) {
+                console.log("LAN 1")
+                this.userInfo = data;
+            }
+        })
+    }
 
-  public logout() {
-    this.userAuthService.clean();
-    console.log("LOGOUT")
-    this.router.navigate([''])
-  }
+    public isLoggedIn() {
+        return this.userAuthService.isLoggerIn();
+    }
 
-  login() {
-    console.log("LOGIN")
-    this.router.navigate(['login'])
-  }
-  public getUserData(){
+    public logout() {
+        this.userAuthService.clean();
+        console.log("LOGOUT")
+        this.router.navigate([''])
+    }
 
-  }
+    login() {
+        console.log("LOGIN")
+        this.router.navigate(['login'])
+    }
 }

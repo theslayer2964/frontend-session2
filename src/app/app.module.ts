@@ -50,6 +50,7 @@ import { QuanlyLichComponent } from './quanly/quanly-lich/quanly-lich.component'
 import {FullCalendarModule} from "@fullcalendar/angular";
 import { ThemLichQlComponent } from './dialog/them-lich-ql/them-lich-ql.component';
 import { ProfileComponent } from './shared-component/profile/profile.component';
+import {UserDataService} from "./shared-service/userData.service";
 
 @NgModule({
   imports: [
@@ -114,7 +115,8 @@ import { ProfileComponent } from './shared-component/profile/profile.component';
     useClass: AuthInterceptor,
     multi: true
   },
-    UserService],
+    UserService,
+    UserDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

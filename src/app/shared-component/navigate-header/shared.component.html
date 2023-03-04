@@ -38,9 +38,16 @@
         </mat-icon>
         <button *ngIf="!isLoggedIn()" (click)="login()">LOGIN</button>
         <div class="nav-item dropdown avatarName" style="display: flex; align-items: center" *ngIf="isLoggedIn()">
-          <ngx-avatar [src]="userInfo.anhDaiDien!= null ? userInfo.anhDaiDien : defaultImage " size="45"></ngx-avatar>
-          <a class="nav-link dropdown-toggle" href="#" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">{{userInfo.tenSinhVien}}</a>
+          <ng-container *ngIf="userService.roleMatch(['ROLE_SINHVIEN'])" >
+            <ngx-avatar [src]="userInfo.anhDaiDien != null ? userInfo.anhDaiDien : defaultImage " size="45"></ngx-avatar>
+            <a class="nav-link dropdown-toggle" href="#" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">{{userInfo.tenSinhVien}}</a>
+          </ng-container>
+          <ng-container *ngIf="userService.roleMatch(['ROLE_GIANGVIEN'])" >
+            <ngx-avatar [src]="userInfo.anhDaiDien != null ? userInfo.anhDaiDien : defaultImage " size="45"></ngx-avatar>
+            <a class="nav-link dropdown-toggle" href="#" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">{{userInfo.tenGiangVien}}</a>
+          </ng-container>
           <ul class="dropdown-menu" style="left: -31px;">
             <li><a class="dropdown-item" href="#">Hồ Sơ</a></li>
             <li><a class="dropdown-item" href="#">Đổi mật khẩu</a></li>
