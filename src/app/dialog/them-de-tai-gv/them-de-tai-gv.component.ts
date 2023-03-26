@@ -18,29 +18,32 @@ export class ThemDeTaiGvComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
-      productName: ['', Validators.required],
-      category: ['', Validators.required],
-      seasons: ['', Validators.required],
-      price: ['', Validators.required],
-      comment: ['', Validators.required],
-      date: ['', Validators.required]
+      // maDeTai: [''],
+      gioiHanSoNhomThucHien: ['', Validators.required],
+      moTa: ['', Validators.required],
+      mucTieuDeTai: ['', Validators.required],
+      sanPhamDuKien: ['', Validators.required],
+      tenDeTai: ['', Validators.required],
+      yeuCauDauVao: ['', Validators.required],
+      tinhTrang: ['', Validators.required]
     })
     console.log(this.editData)
     if (this.editData) {
-      this.productForm.controls['productName'].setValue(this.editData.productName);
-      this.productForm.controls['category'].setValue(this.editData.category);
-      this.productForm.controls['seasons'].setValue(this.editData.seasons);
-      this.productForm.controls['price'].setValue(this.editData.price);
-      this.productForm.controls['comment'].setValue(this.editData.comment);
-      this.productForm.controls['date'].setValue(this.editData.date);
+      // this.productForm.controls['maDeTai'].setValue(this.editData.maDeTai);
+      this.productForm.controls['gioiHanSoNhomThucHien'].setValue(this.editData.gioiHanSoNhomThucHien);
+      this.productForm.controls['moTa'].setValue(this.editData.moTa);
+      this.productForm.controls['mucTieuDeTai'].setValue(this.editData.mucTieuDeTai);
+      this.productForm.controls['sanPhamDuKien'].setValue(this.editData.sanPhamDuKien);
+      this.productForm.controls['tenDeTai'].setValue(this.editData.tenDeTai);
+      this.productForm.controls['yeuCauDauVao'].setValue(this.editData.yeuCauDauVao);
       this.actionBtn = "Update"
     }
   }
 
-  seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
   productForm!: FormGroup;
 
-  addProduct() {
+  addDeTai() {
+    console.log("GV - THEm DETAI:", this.productForm.value);
     if(this.editData == null){
       if (this.productForm.valid) {
         this.detaiService.postDeTai(this.productForm.value)

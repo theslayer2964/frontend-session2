@@ -1,11 +1,11 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import {RouterModule} from '@angular/router';
 
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {DetaiComponent} from "./giangvien/detai/detai-container/detai.component";
 import {AdminComponent} from "./authentication/admin/admin.component";
 import {SharedComponent} from "./shared-component/navigate-header/shared.component";
@@ -40,83 +40,84 @@ import {BrowserModule} from "@angular/platform-browser";
 import {UserService} from "./authentication/_service/user.service";
 import {AuthInterceptor} from "./authentication/_auth/auth.interceptor";
 import {AuthGuard} from "./authentication/_auth/auth.guard";
-import { GiangvienContainerComponent } from './giangvien/giangvien-container/giangvien-container.component';
-import { SinhvienDetaiComponent } from './sinhvien/sinhvien-detai/sinhvien-detai.component';
+import {GiangvienContainerComponent} from './giangvien/giangvien-container/giangvien-container.component';
+import {SinhvienDetaiComponent} from './sinhvien/sinhvien-detai/sinhvien-detai.component';
 import {SinhvienChonnhomComponent} from "./sinhvien/nhom/sinhvien-chonnhom/sinhvien-chonnhom.component";
-import { NotfoundComponent } from './shared-component/notfound/notfound.component';
-import { GiangvienNhomComponent } from './giangvien/giangvien-nhom/giangvien-nhom.component';
-import { QuanlyContainerComponent } from './quanly/quanly-container/quanly-container.component';
-import { QuanlyLichComponent } from './quanly/quanly-lich/quanly-lich.component';
-import {FullCalendarModule} from "@fullcalendar/angular";
-import { ThemLichQlComponent } from './dialog/them-lich-ql/them-lich-ql.component';
-import { ProfileComponent } from './shared-component/profile/profile.component';
+import {NotfoundComponent} from './shared-component/notfound/notfound.component';
+import {GiangvienNhomComponent} from './giangvien/giangvien-nhom/giangvien-nhom.component';
+import {QuanlyContainerComponent} from './quanly/quanly-container/quanly-container.component';
+import {ThemLichQlComponent} from './dialog/them-lich-ql/them-lich-ql.component';
+import {ProfileComponent} from './shared-component/profile/profile.component';
 import {UserDataService} from "./shared-service/userData.service";
+import { QuanlyLich2Component } from './quanly/quanly-lich2/quanly-lich2.component';
+import {FullCalendarModule} from "@fullcalendar/angular";
 
 @NgModule({
-  imports: [
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule,
-    AppRoutingModule,
-    AvatarModule,
-    BrowserModule,
-    MatTabsModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatRadioModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatBadgeModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatChipsModule,
-    RouterModule,
-    MatDividerModule,
-    FullCalendarModule
-  ],
-  declarations: [
-    AppComponent,
-    AppComponent,
-    SharedComponent,
-    TabNavComponent,
-    DetaiComponent,
-    ThemDeTaiGvComponent,
-    SinhvienContainerComponent,
-    HomeComponent,
-    AdminComponent,
-    UserComponent,
-    ForbiddenComponent,
-    LoginComponent,
-    FooterComponent,
-    SinhvienChonnhomComponent,
-    GiangvienContainerComponent,
-    SinhvienDetaiComponent,
-    NotfoundComponent,
-    GiangvienNhomComponent,
-    QuanlyContainerComponent,
-    QuanlyLichComponent,
-    ThemLichQlComponent,
-    ProfileComponent,
+    imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterModule,
+        AppRoutingModule,
+        AvatarModule,
+        BrowserModule,
+        MatTabsModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatRadioModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatBadgeModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatChipsModule,
+        RouterModule,
+        MatDividerModule,
+        FullCalendarModule
+    ],
+    declarations: [
+        AppComponent,
+        AppComponent,
+        SharedComponent,
+        TabNavComponent,
+        DetaiComponent,
+        ThemDeTaiGvComponent,
+        SinhvienContainerComponent,
+        HomeComponent,
+        AdminComponent,
+        UserComponent,
+        ForbiddenComponent,
+        LoginComponent,
+        FooterComponent,
+        SinhvienChonnhomComponent,
+        GiangvienContainerComponent,
+        SinhvienDetaiComponent,
+        NotfoundComponent,
+        GiangvienNhomComponent,
+        QuanlyContainerComponent,
+        ThemLichQlComponent,
+        ProfileComponent,
+        QuanlyLich2Component,
 
-  ],
-  providers: [AuthGuard,{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  },
-    UserService,
-    UserDataService],
-  bootstrap: [AppComponent]
+    ],
+    providers: [AuthGuard, {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+    },
+        UserService,
+        UserDataService],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

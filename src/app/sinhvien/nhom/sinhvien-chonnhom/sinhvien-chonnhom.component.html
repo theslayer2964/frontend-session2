@@ -1,14 +1,12 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div>
-                <mat-form-field style="width: 500px">
-                    <mat-label>Filter</mat-label>
-                    <input matInput (keyup)="applyFilter($event)" placeholder="nhập từ khóa tìm kiếm..."
-                           #input>
-                </mat-form-field>
-
-            </div>
+<!--            <mat-form-field class="rounded-0" style="width: 800px">-->
+<!--                <mat-label>&#45;&#45; Chọn học kỳ &#45;&#45;</mat-label>-->
+<!--                <mat-select (selectionChange)="changeHocKy($event)">-->
+<!--                    <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.namHoc">{{hocKy.namHoc}}</mat-option>-->
+<!--                </mat-select>-->
+<!--            </mat-form-field>-->
             <div class="col-lg-12 col-md-12">
                 <div class="card">
                     <div class="card-header card-header-warning" style="display: flex;justify-content: space-between">
@@ -16,6 +14,13 @@
                         <!--                        <p class="card-category">New employees on 15th September, 2016</p>-->
                         <button mat-raised-button color="warn" (click)="openDialog()" style="height: 40px">Tạo nhóm
                         </button>
+                    </div>
+                    <div>
+                        <mat-form-field style="width: 500px">
+                            <mat-label>Filter</mat-label>
+                            <input matInput (keyup)="applyFilter($event)" placeholder="nhập từ khóa tìm kiếm..."
+                                   #input>
+                        </mat-form-field>
                     </div>
                     <div class="mat-elevation-z8">
                         <table mat-table [dataSource]="dataSource" matSort>

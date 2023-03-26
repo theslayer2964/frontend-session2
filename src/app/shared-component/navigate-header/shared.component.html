@@ -48,6 +48,11 @@
             <a class="nav-link dropdown-toggle" href="#" role="button"
                data-bs-toggle="dropdown" aria-expanded="false">{{userInfo.tenGiangVien}}</a>
           </ng-container>
+          <ng-container *ngIf="userService.roleMatch(['ROLE_QUANLY'])" >
+            <ngx-avatar [src]="userInfo.anhDaiDien != null ? userInfo.anhDaiDien : defaultImage " size="45"></ngx-avatar>
+            <a class="nav-link dropdown-toggle" href="#" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">{{userInfo.tenGiangVien}}</a>
+          </ng-container>
           <ul class="dropdown-menu" style="left: -31px;">
             <li><a class="dropdown-item" href="#">Hồ Sơ</a></li>
             <li><a class="dropdown-item" href="#">Đổi mật khẩu</a></li>

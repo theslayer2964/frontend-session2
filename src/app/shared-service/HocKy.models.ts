@@ -1,4 +1,4 @@
 export interface HocKy{
-    "maHocKy": string
-    "namHoc": string
+    "maHocKy": number
+    "soHocKy": number
 }

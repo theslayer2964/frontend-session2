@@ -8,7 +8,7 @@ import {UserAuthService} from "../../../authentication/_service/user-auth.servic
     providedIn: 'root'
 })
 export class DetaiService {
-    private url = "http://localhost:8080/api/giang-vien/lay-ds-de-tai-theo-nam-hk/";
+    private url = "http://localhost:8080/api/giang-vien/";
     token: string = this.userAuthService.getToken();
     private httpHeadersJWT = new HttpHeaders({
         Authorization: `Bearer ${(this.token)}`
@@ -16,16 +16,17 @@ export class DetaiService {
 
     constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) {
     }
+    maGV = this.userAuthService.getUserInfo().maGiangVien;
 
     postDeTai(data: any): Observable<any> {
-        return this.httpClient.post<any>(this.url, data, {headers: this.httpHeadersJWT}).pipe(
+        return this.httpClient.post<any>(this.url + 'them-de-tai/' +  this.maGV, data, {headers: this.httpHeadersJWT}).pipe(
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));
         ;
     }
 
-    getDeTaiRoleGV(hocKy: any): Observable<DeTai[]> {
-        return this.httpClient.get<DeTai[]>(this.url + hocKy, {headers: this.httpHeadersJWT}).pipe(
+    getDeTaiRoleGV(data: any): Observable<DeTai[]> {
+        return this.httpClient.post<DeTai[]>(this.url + 'lay-ds-de-tai-theo-nam-hk/' ,data, {headers: this.httpHeadersJWT}).pipe(
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));
     }

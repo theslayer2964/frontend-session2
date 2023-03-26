@@ -4,6 +4,9 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatDialog} from "@angular/material/dialog";
 import {NhomSvService} from "../../sinhvien-service/nhom-sv.service";
+import {HockyService} from "../../../shared-service/hocky.service";
+import {HocKy} from "../../../shared-service/HocKy.models";
+import {MatSelectChange} from "@angular/material/select";
 
 @Component({
   selector: 'app-sinhvien-chonnhom',
@@ -17,11 +20,11 @@ export class SinhvienChonnhomComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private nhomSVService: NhomSvService) { }
+  constructor(public dialog: MatDialog, private nhomSVService: NhomSvService, private hockyService: HockyService) { }
 
   ngOnInit(): void {
     this.getNhomSV()
-
+    // this.getAllHocKy();
   }
 
     applyFilter($event: KeyboardEvent) {
@@ -53,5 +56,22 @@ export class SinhvienChonnhomComponent implements OnInit {
             console.log("Error")
           }
         })
+  }
+  // dsHocKy: HocKy[];
+  // private getAllHocKy() {
+  //   this.hockyService.getHocKy().subscribe({
+  //     next: (res) => {
+  //       this.dsHocKy = res;
+  //     }, error: (err) => {
+  //       console.log(err)
+  //     }
+  //   })
+  // }
+  private hocKyHienTai: any;
+
+  changeHocKy($event: MatSelectChange) {
+    this.hocKyHienTai = $event.value
+    console.log($event.value)
+    // this.getDSDeTaiTheoHK($event.value);
   }
 }

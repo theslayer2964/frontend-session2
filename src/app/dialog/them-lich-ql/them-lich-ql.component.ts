@@ -20,6 +20,7 @@ export class ThemLichQlComponent implements OnInit {
     this.schedularForm = this.formBuilder.group({
       title: ['', Validators.required],
       teacher: ['', Validators.required],
+      lession: ['', Validators.required],
       startAt: ['', Validators.required],
       endAt: ['', Validators.required],
       room: ['', Validators.required],
