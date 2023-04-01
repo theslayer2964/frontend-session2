@@ -51,6 +51,8 @@ import {ProfileComponent} from './shared-component/profile/profile.component';
 import {UserDataService} from "./shared-service/userData.service";
 import { QuanlyLich2Component } from './quanly/quanly-lich2/quanly-lich2.component';
 import {FullCalendarModule} from "@fullcalendar/angular";
+import { NotificationsComponent } from './shared-component/notifications/notifications.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
     imports: [
@@ -77,6 +79,7 @@ import {FullCalendarModule} from "@fullcalendar/angular";
         MatPaginatorModule,
         MatSortModule,
         MatBadgeModule,
+        MatTooltipModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
@@ -108,6 +111,7 @@ import {FullCalendarModule} from "@fullcalendar/angular";
         ThemLichQlComponent,
         ProfileComponent,
         QuanlyLich2Component,
+        NotificationsComponent,
 
     ],
     providers: [AuthGuard, {

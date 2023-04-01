@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DetaiService} from "../../giangvien/detai/detai-service/detai.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 
 @Component({
   selector: 'app-them-de-tai-gv',
@@ -18,24 +19,26 @@ export class ThemDeTaiGvComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
-      // maDeTai: [''],
+      maDeTai: [''],
       gioiHanSoNhomThucHien: ['', Validators.required],
       moTa: ['', Validators.required],
       mucTieuDeTai: ['', Validators.required],
       sanPhamDuKien: ['', Validators.required],
       tenDeTai: ['', Validators.required],
       yeuCauDauVao: ['', Validators.required],
-      tinhTrang: ['', Validators.required]
+      trangThai: [''],
+      maHocKy:['']
     })
     console.log(this.editData)
     if (this.editData) {
-      // this.productForm.controls['maDeTai'].setValue(this.editData.maDeTai);
+      this.productForm.controls['maDeTai'].setValue(this.editData.maDeTai);
       this.productForm.controls['gioiHanSoNhomThucHien'].setValue(this.editData.gioiHanSoNhomThucHien);
       this.productForm.controls['moTa'].setValue(this.editData.moTa);
       this.productForm.controls['mucTieuDeTai'].setValue(this.editData.mucTieuDeTai);
       this.productForm.controls['sanPhamDuKien'].setValue(this.editData.sanPhamDuKien);
       this.productForm.controls['tenDeTai'].setValue(this.editData.tenDeTai);
       this.productForm.controls['yeuCauDauVao'].setValue(this.editData.yeuCauDauVao);
+      this.productForm.controls['maHocKy'].setValue(this.editData.hocKy.maHocKy);
       this.actionBtn = "Update"
     }
   }
@@ -51,22 +54,38 @@ export class ThemDeTaiGvComponent implements OnInit {
             next: (res) => {
               this.productForm.reset();
               this.dialogRef.close('save');
+              new NotificationsComponent().showNotification('success', 'Thêm đề tài thành công');
             },
             error: () => {
-              alert("XXX")
+              new NotificationsComponent().showNotification('DANGER', 'Không thể thêm đề tài');
             }
           })
       }
     }
     else{
-        this.detaiService.updateDeTai(this.productForm.value, this.editData.id)
+      console.log('UPDATE NGHE: ' + JSON.stringify(this.productForm.value))
+      const dtoForm = {
+        maDeTai:this.productForm.value.maDeTai,
+        tenDeTai: this.productForm.value.tenDeTai,
+        mucTieuDeTai: this.productForm.value.mucTieuDeTai,
+        sanPhamDuKien: this.productForm.value.sanPhamDuKien,
+        moTa: this.productForm.value.moTa,
+        yeuCauDauVao: this.productForm.value.yeuCauDauVao,
+        gioiHanSoNhomThucHien: this.productForm.value.gioiHanSoNhomThucHien,
+        maGiangVien:this.productForm.value.maGiangVien,
+        hocKy: {
+          maHocKy: this.productForm.value.maHocKy
+        }
+      };
+        this.detaiService.updateDeTai(dtoForm, this.editData.id)
           .subscribe({
             next: (res) => {
               this.productForm.reset();
               this.dialogRef.close('update');
+              new NotificationsComponent().showNotification('success', 'Cập nhật đề tài thành công');
             },
             error: () => {
-              alert("XXX")
+              new NotificationsComponent().showNotification('danger', 'Không thể cập nhật đề tài');
             }
           })
       this.editData = null;
