@@ -36,7 +36,7 @@
         <mat-icon matBadge="8" matBadgeColor="accent" matBadgeSize="small"
                   style="color: #4da1e8; margin-right: 20px; font-size: 25px">sms
         </mat-icon>
-        <button *ngIf="!isLoggedIn()" (click)="login()">LOGIN</button>
+        <button *ngIf="!isLoggedIn()" (click)="login()" style="border: none;background-color: #fff ">Đăng nhập</button>
         <div class="nav-item dropdown avatarName" style="display: flex; align-items: center" *ngIf="isLoggedIn()">
           <ng-container *ngIf="userService.roleMatch(['ROLE_SINHVIEN'])" >
             <ngx-avatar [src]="userInfo.anhDaiDien != null ? userInfo.anhDaiDien : defaultImage " size="45"></ngx-avatar>

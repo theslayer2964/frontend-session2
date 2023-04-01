@@ -1,66 +1,136 @@
 <div class="container" style="background-color: #FFF; border-radius: 10px; box-shadow: 1px 1px 1px 1px #f0eded ; width: 100% ">
-    <div class="row my-4" style="margin-top: 100px" >
-        <h2 class="mt-2 mb-2" style="color: #7d7d7d"><b>Thông tin giảng viên</b></h2>
-        <mat-divider></mat-divider>
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-2 mb-4 mb-md-0">
+    <div *ngIf="role === 'ROLE_SINHVIEN';then roleSinhvien else roleGiangVien"></div>
+    <ng-template #roleSinhvien>
+        <div class="row my-4" style="margin-top: 100px" >
+            <h2 class="mt-2 mb-2" style="color: #7d7d7d"><b>Thông tin sinh viên</b></h2>
+            <mat-divider></mat-divider>
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-2 mb-4 mb-md-0">
 
-            <div class="rounded-circle d-block mb-4" style="width: 230px; height: 150px; text-align: center">
-                <img src="./assets/image/logo_iuh.png" height="100%" alt=""
-                     loading="lazy" />
-                <p></p>
-                <a href="#">Xem chi tiết</a>
+                <div class="rounded-circle d-block mb-4" style="width: 230px; height: 150px; text-align: center">
+                    <img src="./assets/image/logo_iuh.png" height="100%" alt=""
+                         loading="lazy" />
+                    <p></p>
+                    <a href="#">Xem chi tiết</a>
+                </div>
+
+                <p class="text-left" style="font-size: 16px; font-family: Roboto"></p>
+
             </div>
+            <!--Grid column-->
 
-            <p class="text-left" style="font-size: 16px; font-family: Roboto"></p>
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-2 mb-4 mb-md-0" style="margin-top: 20px">
 
+                <ul class="list-unstyled">
+                    <li class="mb-4" >
+                        MSSV: <b > {{info.maSinhVien}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Họ Tên: <b > {{info.tenSinhVien}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Giới tính: <b > {{info.gioiTinh}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Ngày sinh: <b > {{info.ngaySinh}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Nơi sinh: <b > {{info.noiSinh}}</b>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-2 mb-4 mb-md-0" style="margin-top: 20px">
+
+                <ul class="list-unstyled">
+                    <li class="mb-4">
+                        Lớp học: <b > {{info.lopDanhNghia.moTa}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Năm công tác: <b > {{info.namNhapHoc}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Điện thoại: <b > {{info.dienThoai}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Loại hình đào tạo: <b > Chính quy</b>
+                    </li>
+                    <li class="mb-4">
+                        Email: <b > {{info.email}}</b>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
         </div>
-        <!--Grid column-->
+    </ng-template>
 
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-2 mb-4 mb-md-0" style="margin-top: 20px">
+    <ng-template #roleGiangVien>
+        <div class="row my-4" style="margin-top: 100px" >
+            <h2 class="mt-2 mb-2" style="color: #7d7d7d"><b>Thông tin giảng viên</b></h2>
+            <mat-divider></mat-divider>
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-2 mb-4 mb-md-0">
 
-            <ul class="list-unstyled">
-                <li class="mb-4" >
-                    MGSV: <b > 13472401</b>
-                </li>
-                <li class="mb-4">
-                    Họ Tên: <b > Nguyễn Thị Hạnh</b>
-                </li>
-                <li class="mb-4">
-                    Giới tính: <b > Nữ</b>
-                </li>
-                <li class="mb-4">
-                    Ngày sinh: <b > 09/11/1998</b>
-                </li>
-                <li class="mb-4">
-                    Nơi sinh: <b > Tỉnh Kiên Giang</b>
-                </li>
-            </ul>
+                <div class="rounded-circle d-block mb-4" style="width: 230px; height: 150px; text-align: center">
+                    <img src="./assets/image/logo_iuh.png" height="100%" alt=""
+                         loading="lazy" />
+                    <p></p>
+                    <a href="#">Xem chi tiết</a>
+                </div>
+
+                <p class="text-left" style="font-size: 16px; font-family: Roboto"></p>
+
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-2 mb-4 mb-md-0" style="margin-top: 20px">
+
+                <ul class="list-unstyled">
+                    <li class="mb-4" >
+                        MGSV: <b > {{info.maGiangVien}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Họ Tên: <b > {{info.tenGiangVien}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Giới tính: <b > {{info.gioiTinh}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Ngày sinh: <b > {{info.ngaySinh}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Số điện thoại: <b > {{info.soDienThoai}}</b>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-2 mb-4 mb-md-0" style="margin-top: 20px">
+
+                <ul class="list-unstyled">
+                    <li class="mb-4">
+                        CMND: <b > {{info.cmnd}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Năm công tác: <b > {{info.namCongTac}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Học vị: <b > {{info.hocVi}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Khoa: <b >{{info.khoa.tenKhoa}}</b>
+                    </li>
+                    <li class="mb-4">
+                        Email: <b > {{info.email}}</b>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
         </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-2 mb-4 mb-md-0" style="margin-top: 20px">
-
-            <ul class="list-unstyled">
-                <li class="mb-4">
-                    Lớp học: <b > DHKTPM15ATT</b>
-                </li>
-                <li class="mb-4">
-                    Năm công tác: <b > 2019 - 2020</b>
-                </li>
-                <li class="mb-4">
-                    Bậc đào tạo: <b > Đại học</b>
-                </li>
-                <li class="mb-4">
-                    Loại hình đào tạo: <b >Tiên tiến</b>
-                </li>
-                <li class="mb-4">
-                    Chuyên Ngành: <b > Kỹ thuật phần mềm</b>
-                </li>
-            </ul>
-        </div>
-        <!--Grid column-->
-    </div>
+    </ng-template>
 </div>

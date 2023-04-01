@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {ThemDeTaiGvComponent} from "../../../dialog/them-de-tai-gv/them-de-tai-gv.component";
 import {DetaiService} from "../detai-service/detai.service";
@@ -9,11 +9,12 @@ import {HockyService} from "../../../shared-service/hocky.service";
 import {HocKy} from "../../../shared-service/HocKy.models";
 import {MatSelectChange} from "@angular/material/select";
 import {UserAuthService} from "../../../authentication/_service/user-auth.service";
+import {NotificationsComponent} from "../../../shared-component/notifications/notifications.component";
 
 @Component({
     selector: 'app-detai',
     templateUrl: './detai.component.html',
-    styleUrls: ['./detai.component.css']
+    styleUrls: ['./detai.component.css'],
 })
 export class DetaiComponent implements OnInit {
     private hocKyHienTai: any;
@@ -29,6 +30,7 @@ export class DetaiComponent implements OnInit {
 
     dsHocKy: HocKy[];
 
+    // 1. STEP 1
     private getAllHocKy() {
         this.hockyService.getHocKy().subscribe({
             next: (res) => {
@@ -48,17 +50,17 @@ export class DetaiComponent implements OnInit {
     }
 
     editProduct(row: any) {
-        // this.dialog.open(ThemDeTaiGvComponent, {
-        //   data: row
-        // }).afterClosed().subscribe(val => {
-        //   if (val === "update") {
-        //     this.getDSDeTaiTheoHK(this.hocKyHienTai)
-        //   }
-        // })
+        this.dialog.open(ThemDeTaiGvComponent, {
+            data: row
+        }).afterClosed().subscribe(val => {
+            if (val === "update") {
+                this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
+            }
+        })
     }
 
     // Table
-    displayedColumns: string[] = ['maDeTai', 'gioiHanSoNhomThucHien', 'moTa', "mucTieuDeTai", "sanPhamDuKien", "tenDeTai", "tinhTrang", "yeuCauDauVao", "action"];
+    displayedColumns: string[] = ['maDeTai', "tenDeTai", 'gioiHanSoNhomThucHien', 'moTa', "mucTieuDeTai", "sanPhamDuKien", "trangThai", "yeuCauDauVao" ,"action"];
     dataSource!: MatTableDataSource<any>;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -77,8 +79,10 @@ export class DetaiComponent implements OnInit {
         this.detaiService.deleteDeTai(id).subscribe({
             next: (res) => {
                 this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
+                new NotificationsComponent().showNotification('success', 'Xóa đề tài thành công');
             },
             error: () => {
+                new NotificationsComponent().showNotification('danger', 'Không thể xóa đề tài');
                 console.log("Error")
             }
         })
@@ -90,7 +94,7 @@ export class DetaiComponent implements OnInit {
         console.log('XXX:', this.hocKyHienTai, this.soHocKy);
         this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
     }
-
+    // STEP 2
     private getDSDeTaiTheoHK(maHocKy: any, soHocKy: any) {
         this.detaiService.getDeTaiRoleGV({
             maGiangVien: this.userAuthService.getUserInfo().maGiangVien,
@@ -101,6 +105,7 @@ export class DetaiComponent implements OnInit {
                 next: (res) => {
                     if (res) {
                         console.log("GV _ DeTai:", res);
+                        // table
                         this.dataSource = new MatTableDataSource(res);
                         this.dataSource.paginator = this.paginator;
                         this.dataSource.sort = this.sort;

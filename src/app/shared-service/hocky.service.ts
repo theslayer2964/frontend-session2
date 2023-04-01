@@ -25,7 +25,8 @@ export class HockyService {
   }
 
   getHocKy(): Observable<HocKy[]> {
-    return this.httpClient.get<HocKy[]>(this.url,{headers: this.httpHeadersJWT}).pipe(
+    return this.httpClient.get<HocKy[]>(this.url,{headers: this.httpHeadersJWT})
+        .pipe(
         tap(recieveDeTai => recieveDeTai),
         catchError(err => of([])));
   }

@@ -3,20 +3,20 @@
   <div class="card" style="padding: 20px">
     <form [formGroup]="loginForm">
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Username</label>
+        <label for="exampleInputEmail1" class="form-label">Tên tài khoản</label>
         <input ngModel type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                formControlName="tenTaiKhoan">
         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
         <input ngModel type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
       </div>
       <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
       </div>
-      <button type="submit" class="btn btn-primary form-control rounded-0"
+      <button type="submit" class="btn btn-danger form-control rounded-0"
               [disabled]="!loginForm.valid" (click)="login()">LOGIN</button>
     </form>
   </div>
