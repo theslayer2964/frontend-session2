@@ -53,6 +53,11 @@ import { QuanlyLich2Component } from './quanly/quanly-lich2/quanly-lich2.compone
 import {FullCalendarModule} from "@fullcalendar/angular";
 import { NotificationsComponent } from './shared-component/notifications/notifications.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { QuanlyNhomComponent } from './quanly/quanly-nhom/quanly-nhom.component';
+import { QuanlyDetaiComponent } from './quanly/quanly-detai/quanly-detai.component';
+import { CaidatContainerComponent } from './caidat/caidat-container/caidat-container.component';
+import { CaidatSidebarComponent } from './caidat/caidat-sidebar/caidat-sidebar.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 @NgModule({
     imports: [
@@ -80,6 +85,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
         MatSortModule,
         MatBadgeModule,
         MatTooltipModule,
+        MatSidenavModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
@@ -112,7 +118,10 @@ import {MatTooltipModule} from "@angular/material/tooltip";
         ProfileComponent,
         QuanlyLich2Component,
         NotificationsComponent,
-
+        QuanlyNhomComponent,
+        QuanlyDetaiComponent,
+        CaidatContainerComponent,
+        CaidatSidebarComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

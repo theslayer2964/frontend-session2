@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['trangchuSV'])
       }
       if(this.role[0].roleName == 'ROLE_QUANLY'){
-        this.router.navigate(['trangchuQL'])
+        this.router.navigate(['quanly'])
       }
     }
   }
