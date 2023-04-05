@@ -54,6 +54,7 @@ import {FullCalendarModule} from "@fullcalendar/angular";
 import { NotificationsComponent } from './shared-component/notifications/notifications.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {ThemNhomComponent} from "./dialog/them-nhom/them-nhom.component";
+import {QuanlyDetaiComponent} from "./quanly/quanly-detai/quanly-detai.component";
 
 @NgModule({
     imports: [
@@ -113,7 +114,8 @@ import {ThemNhomComponent} from "./dialog/them-nhom/them-nhom.component";
         ProfileComponent,
         QuanlyLich2Component,
         NotificationsComponent,
-        ThemNhomComponent
+        ThemNhomComponent,
+        QuanlyDetaiComponent
 
     ],
     providers: [AuthGuard, {
