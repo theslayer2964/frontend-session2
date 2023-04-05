@@ -1,0 +1,45 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+}
+
+.example-radio-button {
+    margin: 5px;
+}
+table {
+    width: 110%;
+}
+
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+.container {
+    width: 1200px;
+    margin-bottom: 10px;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+th{
+    font-size: 13px;
+    color: #4da1e8;
+    font-weight: bold;
+}
+tr.mat-row:nth-child(even){
+    background-color: #c6e0f3;
+}
+
+/*.example-button {*/
+/*  margin-top: 16px;*/
+/*}*/
+
+/*.example-tooltip-uppercase {*/
+/*  text-transform: uppercase;*/
+/*}*/
+

@@ -53,6 +53,7 @@ import { QuanlyLich2Component } from './quanly/quanly-lich2/quanly-lich2.compone
 import {FullCalendarModule} from "@fullcalendar/angular";
 import { NotificationsComponent } from './shared-component/notifications/notifications.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {ThemNhomComponent} from "./dialog/them-nhom/them-nhom.component";
 
 @NgModule({
     imports: [
@@ -112,6 +113,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
         ProfileComponent,
         QuanlyLich2Component,
         NotificationsComponent,
+        ThemNhomComponent
 
     ],
     providers: [AuthGuard, {

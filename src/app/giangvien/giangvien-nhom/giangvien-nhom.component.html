@@ -1,10 +1,15 @@
+<hr>
+<!---->
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="card">
-                    <div class="card-header card-header-warning" style="display: flex;justify-content: space-between">
-                        <h4 class="card-title">DANH SÁCH NHÓM THEO ĐỀ TÀI CỦA GIẢNG VIÊN</h4>
+                    <div class="card-header"
+                         style="display: flex;justify-content: space-between;background-color: #4da1e8">
+                        <h4 class="card-title"
+                            style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH NHÓM
+                            THEO ĐỀ TÀI CỦA GIẢNG VIÊN</h4>
                         <button mat-raised-button color="warn" (click)="openDialog()" style="height: 40px">Tạo nhóm
                         </button>
                     </div>
@@ -20,38 +25,40 @@
                     </div>
                     <div>
                         <mat-form-field style="width: 500px;margin-left: 20px">
-                            <mat-label>Filter</mat-label>
+                            <mat-label>Tìm kiếm</mat-label>
                             <input matInput (keyup)="applyFilter($event)" placeholder="nhập từ khóa tìm kiếm..."
                                    #input>
                         </mat-form-field>
                     </div>
-                    <div class="mat-elevation-z8">
+                    <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;overflow: auto;">
                         <table mat-table [dataSource]="dataSource" matSort>
-                            <ng-container matColumnDef="maNhom">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã nhóm</th>
+                            <ng-container matColumnDef="maNhom" sticky>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    style="width: 100px;text-align: center" >MÃ NHÓM</th>
                                 <td mat-cell *matCellDef="let row"> {{row.maNhom}} </td>
                             </ng-container>
                             <ng-container matColumnDef="maDeTai">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã đề tài</th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">MÃ ĐỀ TÀI</th>
                                 <td mat-cell *matCellDef="let row"> {{row.maDeTai}} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="sv1">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Sinh viên 1</th>
-                                <td mat-cell *matCellDef="let row"> {{row.sv1}}</td>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">SINH VIÊN 1</th>
+                                <td mat-cell *matCellDef="let row"> {{row.dsMaSinhVien[0]}}</td>
                             </ng-container>
                             <ng-container matColumnDef="sv2">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Sinh viên 2</th>
-                                <td mat-cell *matCellDef="let row"> {{row.sv2}} </td>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">SINH VIÊN 2</th>
+                                <td mat-cell *matCellDef="let row"> {{row.dsMaSinhVien[1]}} </td>
                             </ng-container>
 
                             <!--                            &lt;!&ndash; Fruit Column &ndash;&gt;-->
                             <ng-container matColumnDef="danhGia">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Đánh giá</th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">ĐÁNH GIÁ</th>
                                 <td mat-cell *matCellDef="let row"> row.danhGia</td>
                             </ng-container>
-                            <ng-container matColumnDef="action">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>action</th>
+                            <ng-container matColumnDef="action" stickyEnd>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    style="width: 100px;text-align: center">TÙY CHỈNH</th>
                                 <td mat-cell *matCellDef="let row">
                                     <!--Row: data cua 1 dong-->
                                     <button mat-icon-button color="primary" (click)="editProduct(row)">
@@ -62,8 +69,8 @@
                                     </button>
                                 </td>
                             </ng-container>
-                            <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                             <tr class="mat-row" *matNoDataRow>
                                 <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
                             </tr>
