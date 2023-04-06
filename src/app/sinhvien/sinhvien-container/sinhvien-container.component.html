@@ -8,108 +8,79 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">content_copy</i>
-                        </div>
-                        <p class="card-category">Meomeo</p>
-                        <h3 class="card-title">Lịch
-                            <small></small>
-                        </h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons text-danger">warning</i>
-                            <a (click)="goToSVChonNhom('sv-chonNhom')">Đăng ký</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">content_copy</i>
-                        </div>
-                        <p class="card-category">Meo 2</p>
-                        <h3 class="card-title">Đề Tài
-                            <small></small>
-                        </h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons text-danger">warning</i>
-                            <a (click)="goToSVChonNhom('sv-chonNhom')">Đăng ký</a>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card card-stats" style="height: 130px">
+                            <div class="card-header card-header-warning card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">content_copy</i>
+                                </div>
+                                <h3 class="card-title">Lịch
+                                    <small></small>
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats" *ngIf="haveNhom == false">
+                                    <i class="material-icons text-danger">warning</i>
+                                    <a (click)="goToSVChonNhom('sv-chonNhom')">Đăng ký</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">content_copy</i>
-                        </div>
-                        <p class="card-category">Nhóm</p>
-                        <h3 class="card-title">Nhóm
-                            <small></small>
-                        </h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons text-danger">warning</i>
-                            <a (click)="goToSVChonNhom('sv-chonNhom')">Đăng ký</a>
+
+                    <div class="col-6">
+                        <div class="card card-stats" style="height: 130px">
+                            <div class="card-header card-header-warning card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">content_copy</i>
+                                </div>
+                                <h3 class="card-title">Đề Tài
+                                    <small></small>
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats" *ngIf="haveNhom == false">
+                                    <i class="material-icons text-danger">warning</i>
+                                    <a (click)="goToSVChonNhom('sv-chonNhom')">Đăng ký</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-success card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">store</i>
-                        </div>
-                        <p class="card-category">Đề tài</p>
-                        <h3 class="card-title">Chưa đăng ký</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">date_range</i>
-                            <a (click)="goToSVChonNhom('sv-chonDeTai')">Đăng ký</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-danger card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">info_outline</i>
-                        </div>
-                        <p class="card-category">Kết quả học tập</p>
-                        <h3 class="card-title">75</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">local_offer</i> Tracked from Github
+                <div class="row">
+                    <div class="col-3 col-md-6 col-sm-6" >
+                        <div class="card card-stats" style="height: 130px">
+                            <div class="card-header card-header-warning card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">content_copy</i>
+                                </div>
+                                <h3 class="card-title">Nhóm
+                                    <small></small>
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats" *ngIf="haveNhom == false">
+                                    <i class="material-icons text-danger">warning</i>
+                                    <a (click)="goToSVChonNhom('sv-chonNhom')">Đăng ký</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-info card-header-icon">
-                        <div class="card-icon">
-                            <i class="fa fa-twitter"></i>
-                        </div>
-                        <p class="card-category">Lịch học</p>
-                        <h3 class="card-title">+245</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">update</i> Just Updated
+                    <div class="col-3 col-md-6 col-sm-6">
+                        <div class="card card-stats" style="height: 130px">
+                            <div class="card-header card-header-success card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">store</i>
+                                </div>
+                                <h3 class="card-title">Kết quả</h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats" *ngIf="haveNhom == false">
+                                    <i class="material-icons">date_range</i>
+                                    <a (click)="goToSVChonNhom('sv-chonDeTai')">Đăng ký</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {UserAuthService} from "../../authentication/_service/user-auth.service";
 
 @Component({
   selector: 'app-sinhvien-container',
@@ -8,9 +9,17 @@ import {Router} from "@angular/router";
 })
 export class SinhvienContainerComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  nhom: any;
+
+  haveNhom: any;
+  constructor(
+      private router: Router,
+      private userAuthService :UserAuthService
+              ) { }
 
   ngOnInit(): void {
+    this.nhom = this.userAuthService.getUserInfo().nhom;
+    this.haveNhom = this.nhom != null ? true :  false;
   }
 
     goToSVChonNhom(url: string) {

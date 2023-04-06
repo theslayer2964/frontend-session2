@@ -16,7 +16,7 @@ import {NhomService} from "../../shared-service/nhom.service";
     styleUrls: ['./giangvien-nhom.component.css']
 })
 export class GiangvienNhomComponent implements OnInit {
-    displayedColumns: string[] = ['maNhom', 'maDeTai', 'sv1', 'sv2', "danhGia","action"];v
+    displayedColumns: string[] = ['maNhom', 'maDeTai', 'sv1', 'sv2', "danhGia","action"];
     dataSource!: MatTableDataSource<any>;
     dsHocKy: HocKy[];
 

@@ -23,6 +23,10 @@ export class ThemNhomComponent implements OnInit {
   dsDeTai: DeTai[];
 
   dsMaSinhVien: any[] = [];
+
+  sinhVienRole: any;
+
+  maSinhVien1;
   constructor(private formBuilder: FormBuilder,
               private detaiService: DetaiService,
               private hocKyService: HockyService,
@@ -34,21 +38,13 @@ export class ThemNhomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.hocKyService.getHocKyMoiNhat().subscribe({
-      next: (res) => {
-        this.hocKy = res;
-        console.log(this.hocKy);
-        this.getDeTaiDaDuyet(this.hocKy.maHocKy, this.hocKy.soHocKy);
-      }
-    });
+    this.sinhVienRole = this.userAuthService.getRoles()[0].roleName == 'ROLE_SINHVIEN' ? true : false;
+    if (this.sinhVienRole == true) {
+      this.maSinhVien1 = this.userAuthService.getUserInfo().maSinhVien;
+    }
     this.formNhom = this.formBuilder.group({
-      // maDeTai: [''],
       maSoSv1: ['', Validators.required],
-      // maSoSv2: ['', Validators.required],
-      // emailSv1: ['', Validators.required],
-      // emailSv2: ['', Validators.required],
-      // soDTSv1: ['', Validators.required],
-      // soDTSv2: ['', Validators.required],
+
     })
     console.log(this.editData)
     if (this.editData) {
@@ -61,40 +57,18 @@ export class ThemNhomComponent implements OnInit {
       this.formNhom.controls['soDTSv2'].setValue(this.editData.soDTSv2);
       this.actionBtn = "Update"
     }
+    if (this.sinhVienRole == false) {
+      this.hocKyService.getHocKyMoiNhat().subscribe({
+        next: (res) => {
+          this.hocKy = res;
+          console.log(this.hocKy);
+          this.getDeTaiDaDuyet(this.hocKy.maHocKy, this.hocKy.soHocKy);
+        }
+      });
+    }
   }
 
   formNhom!: FormGroup;
-
-  dangKyNhom() {
-    console.log("GV - THEm NHOM:", this.formNhom.value);
-    if(this.editData == null){
-      if (this.formNhom.valid) {
-        this.detaiService.postDeTai(this.formNhom.value)
-            .subscribe({
-              next: (res) => {
-                this.formNhom.reset();
-                this.dialogRef.close('save');
-              },
-              error: () => {
-                alert("XXX")
-              }
-            })
-      }
-    }
-    else{
-      this.detaiService.updateDeTai(this.formNhom.value, this.editData.id)
-          .subscribe({
-            next: (res) => {
-              this.formNhom.reset();
-              this.dialogRef.close('update');
-            },
-            error: () => {
-              alert("XXX")
-            }
-          })
-      this.editData = null;
-    }
-  }
 
   private maDeTaiHienTai: any;
 

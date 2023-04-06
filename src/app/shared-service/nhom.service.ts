@@ -20,12 +20,19 @@ export class NhomService {
     dangKyNhom(data: any): Observable<any>{
         return this.httpClient.post<any>(this.url + "dang-ky-nhom", data, {headers: this.httpHeadersJWT}).pipe(
             tap(recieveDeTai => recieveDeTai),
-            catchError(err => of([])));;
+            catchError(err => of([])));
     }
 
 
     getNhomRoleGV(data: any) {
         return this.httpClient.post<any>(this.url + "lay-ds-nhom", data, {headers: this.httpHeadersJWT}).pipe(
+            tap(receiveNhom => receiveNhom),
+            catchError(err => of([])));
+        ;
+    }
+
+    getNhomChuaDuyet() {
+        return this.httpClient.get<any>(this.url + "lay-ds-nhom/" + 0,  {headers: this.httpHeadersJWT}).pipe(
             tap(receiveNhom => receiveNhom),
             catchError(err => of([])));
         ;

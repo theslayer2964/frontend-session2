@@ -53,8 +53,13 @@ import { QuanlyLich2Component } from './quanly/quanly-lich2/quanly-lich2.compone
 import {FullCalendarModule} from "@fullcalendar/angular";
 import { NotificationsComponent } from './shared-component/notifications/notifications.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { QuanlyNhomComponent } from './quanly/quanly-nhom/quanly-nhom.component';
+import { QuanlyDetaiComponent } from './quanly/quanly-detai/quanly-detai.component';
+import { CaidatContainerComponent } from './caidat/caidat-container/caidat-container.component';
+import { CaidatSidebarComponent } from './caidat/caidat-sidebar/caidat-sidebar.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
 import {ThemNhomComponent} from "./dialog/them-nhom/them-nhom.component";
-import {QuanlyDetaiComponent} from "./quanly/quanly-detai/quanly-detai.component";
+import { DangkyCosanComponent } from './dialog/dangky-cosan/dangky-cosan.component';
 
 @NgModule({
     imports: [
@@ -82,6 +87,7 @@ import {QuanlyDetaiComponent} from "./quanly/quanly-detai/quanly-detai.component
         MatSortModule,
         MatBadgeModule,
         MatTooltipModule,
+        MatSidenavModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
@@ -114,9 +120,12 @@ import {QuanlyDetaiComponent} from "./quanly/quanly-detai/quanly-detai.component
         ProfileComponent,
         QuanlyLich2Component,
         NotificationsComponent,
+        QuanlyNhomComponent,
+        QuanlyDetaiComponent,
+        CaidatContainerComponent,
+        CaidatSidebarComponent,
         ThemNhomComponent,
-        QuanlyDetaiComponent
-
+        DangkyCosanComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

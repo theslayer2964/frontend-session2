@@ -12,6 +12,9 @@ import {GiangvienContainerComponent} from "./giangvien/giangvien-container/giang
 import {SinhvienDetaiComponent} from "./sinhvien/sinhvien-detai/sinhvien-detai.component";
 import {NotfoundComponent} from "./shared-component/notfound/notfound.component";
 import {QuanlyContainerComponent} from "./quanly/quanly-container/quanly-container.component";
+import {QuanlyNhomComponent} from "./quanly/quanly-nhom/quanly-nhom.component";
+import {QuanlyDetaiComponent} from "./quanly/quanly-detai/quanly-detai.component";
+import {CaidatContainerComponent} from "./caidat/caidat-container/caidat-container.component";
 
 const routes: Routes = [
 
@@ -29,7 +32,25 @@ const routes: Routes = [
         data: {roles: ['ROLE_SINHVIEN']}
     },
     {
-        path: 'trangchuQL',
+        path: 'quanly/nhom',
+        component: QuanlyNhomComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_QUANLY']}
+    },
+    {
+        path: 'quanly/detai',
+        component: QuanlyDetaiComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_QUANLY']}
+    },
+    {
+        path: 'quanly/:id',
+        component: QuanlyContainerComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_QUANLY']}
+    },
+    {
+        path: 'quanly',
         component: QuanlyContainerComponent,
         canActivate: [AuthGuard],
         data: {roles: ['ROLE_QUANLY']}
@@ -47,12 +68,6 @@ const routes: Routes = [
         data: {roles: ['ROLE_SINHVIEN']}
     },
     {
-        path: 'trangchuQL/:id',
-        component: QuanlyContainerComponent,
-        canActivate: [AuthGuard],
-        data: {roles: ['ROLE_QUANLY']}
-    },
-    {
         path: 'sv-chonNhom',
         component: SinhvienChonnhomComponent,
         canActivate: [AuthGuard],
@@ -64,9 +79,14 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {roles: ['ROLE_SINHVIEN']}
     },
+    {path: 'caidat', component: CaidatContainerComponent,
+        children: [{
+            path: '',
+            loadChildren: () => import('./caidat/caidat.module').then(m => m.CatDatModule)
+        }]},
     {path: 'login', component: LoginComponent},
     {path: 'forbidden', component: ForbiddenComponent},
-    {path:'**', component:NotfoundComponent}
+    {path: '**', component: NotfoundComponent}
 ];
 
 @NgModule({
