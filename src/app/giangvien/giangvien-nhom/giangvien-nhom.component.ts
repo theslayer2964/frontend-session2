@@ -9,6 +9,7 @@ import {MatSort} from "@angular/material/sort";
 import {ThemNhomComponent} from "../../dialog/them-nhom/them-nhom.component";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {NhomService} from "../../shared-service/nhom.service";
+import {ThemDeTaiGvComponent} from "../../dialog/them-de-tai-gv/them-de-tai-gv.component";
 
 @Component({
     selector: 'app-giangvien-nhom',
@@ -54,7 +55,7 @@ export class GiangvienNhomComponent implements OnInit {
     }
 
 
-    openDialog() {
+    openDialog(nhom: any) {
         this.dialog.open(ThemNhomComponent, {}).afterClosed().subscribe(val => {
             if (val === "save") {
 
@@ -62,8 +63,14 @@ export class GiangvienNhomComponent implements OnInit {
         })
     }
 
-    editProduct(row) {
-
+    editProduct(row: any) {
+        this.dialog.open(ThemNhomComponent, {
+            data: row
+        }).afterClosed().subscribe(val => {
+            if (val === "update") {
+                // this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
+            }
+        })
     }
 
     deleteProduct(id) {

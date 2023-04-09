@@ -10,7 +10,7 @@
                         <h4 class="card-title"
                             style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH NHÓM
                             THEO ĐỀ TÀI CỦA GIẢNG VIÊN</h4>
-                        <button mat-raised-button color="warn" (click)="openDialog()" style="height: 40px">Tạo nhóm
+                        <button mat-raised-button color="warn" (click)="openDialog(null)" style="height: 40px">Tạo nhóm
                         </button>
                     </div>
                     <hr>
@@ -59,14 +59,12 @@
                             <ng-container matColumnDef="action" stickyEnd>
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
                                     style="width: 100px;text-align: center">TÙY CHỈNH</th>
-                                <td mat-cell *matCellDef="let row">
+                                <td mat-cell *matCellDef="let row" >
                                     <!--Row: data cua 1 dong-->
                                     <button mat-icon-button color="primary" (click)="editProduct(row)">
                                         <mat-icon>edit</mat-icon>
                                     </button>
-                                    <button mat-icon-button color="accent" (click)="deleteProduct(row.id)">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
+
                                 </td>
                             </ng-container>
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

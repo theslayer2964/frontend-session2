@@ -18,7 +18,7 @@ import {NotificationsComponent} from "../../../shared-component/notifications/no
   styleUrls: ['./sinhvien-chonnhom.component.css']
 })
 export class SinhvienChonnhomComponent implements OnInit {
-  displayedColumns: string[] = ['maNhom', 'maDeTai', 'sv1', 'sv2',"action"];
+  displayedColumns: string[] = ['maNhom', 'sv1', 'sv2',"action"];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -36,8 +36,12 @@ export class SinhvienChonnhomComponent implements OnInit {
   ngOnInit(): void {
     // this.getNhomSV()
     this.getAllHocKy();
-    this.nhom = this.userAuthService.getUserInfo().nhom ? true : false;
-    this.getNhomSVChuaDuyet();
+    this.nhom = this.userAuthService.getUserInfo().nhom;
+    // if(this.nhom != null) {
+    //   this.getNhomHienTai();
+    // } else{
+      this.getNhomSVChuaDuyet();
+    // }
   }
 
     applyFilter($event: KeyboardEvent) {
@@ -47,10 +51,11 @@ export class SinhvienChonnhomComponent implements OnInit {
   openDialog() {
     this.dialog.open(ThemNhomComponent, {}).afterClosed().subscribe(val => {
       if (val === "save") {
+        this.getNhomSVChuaDuyet();
       }
     })
   }
-
+  tempUser: any;
   dangKyNhom(row) {
     this.dialog.open(DangkyCosanComponent, {data: "save"}).afterClosed().subscribe(val => {
       if (val === "save") {
@@ -60,9 +65,13 @@ export class SinhvienChonnhomComponent implements OnInit {
             .subscribe({
           next: (res) => {
             new NotificationsComponent().showNotification('success', 'Thêm nhóm thành công');
+            this.tempUser = this.userAuthService.getUserInfo();
+            this.tempUser.nhom = res;
+            this.userAuthService.setUserInfo(this.tempUser);
+            this.nhom = this.userAuthService.getUserInfo().nhom;
           },
           error: () => {
-            new NotificationsComponent().showNotification('DANGER', 'Không thể thêm nhóm');
+            new NotificationsComponent().showNotification('danger', 'Không thể thêm nhóm');
           }
         })
       }
@@ -100,5 +109,12 @@ export class SinhvienChonnhomComponent implements OnInit {
         console.log(err)
       }
     })
+  }
+
+  private getNhomHienTai() {
+
+    this.dataSource = new MatTableDataSource([this.nhom]);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 }
