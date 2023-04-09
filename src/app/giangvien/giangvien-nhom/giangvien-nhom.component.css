@@ -12,7 +12,7 @@
   margin: 5px;
 }
 table {
-  width: 150%;
+  width: 110%;
 }
 
 .mat-mdc-form-field {
@@ -20,7 +20,7 @@ table {
   width: 100%;
 }
 .container {
-  width: 1500px;
+  width: 1200px;
   margin-bottom: 10px;
   padding-right: 0px;
   padding-left: 0px;

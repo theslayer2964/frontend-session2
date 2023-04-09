@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
+import {UserAuthService} from "../../authentication/_service/user-auth.service";
 
 @Component({
   selector: 'app-sinhvien-container',
@@ -8,21 +9,22 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class SinhvienContainerComponent implements OnInit {
 
-  constructor(private router: Router, private activeRouter: ActivatedRoute) { }
+  nhom: any;
+
+  haveNhom: any;
+  constructor(
+      private router: Router,
+      private userAuthService :UserAuthService
+              ) { }
 
   ngOnInit(): void {
+    this.nhom = this.userAuthService.getUserInfo().nhom;
+    this.haveNhom = this.nhom != null ? true :  false;
   }
 
     goToSVChonNhom(url: string) {
         if(url){
-          // this.activeRouter.queryParams.subscribe(query =>{
-          //   console.log("queryParams:" +JSON.stringify(query));
-          // }); //
-          // this.activeRouter.params.subscribe(params =>{
-          //   console.log("params:" + JSON.stringify(params));
-          // }) // {"id":"1234"}
-          console.log(url);
-          this.router.navigate([`${url}`]) // mất hêt param phía sau, localhost:4200
+          this.router.navigate([`${url}`])
         }
     }
 }

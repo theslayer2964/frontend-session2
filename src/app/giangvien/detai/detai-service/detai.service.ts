@@ -45,10 +45,4 @@ export class DetaiService {
             catchError(err => of([])));
     }
 
-    getNhomRoleGV(hocKy: any) {
-        return this.httpClient.post<any>(this.url, hocKy, {headers: this.httpHeadersJWT}).pipe(
-            tap(recieveDeTai => recieveDeTai),
-            catchError(err => of([])));
-        ;
-    }
 }

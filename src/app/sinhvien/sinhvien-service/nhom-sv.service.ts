@@ -9,7 +9,7 @@ import {Nhom} from "../Nhom.models";
   providedIn: 'root'
 })
 export class NhomSvService {
-  private url = "http://localhost:8080/api/sinh-vien/thong-tin-tong-sinh-vien/HK2 (2022-2023)";
+  private url = "http://localhost:8080/api/nhom/";
   token: string = this.userAuthService.getToken();
   private httpHeadersJWT = new HttpHeaders({
     Authorization: `Bearer ${(this.token)}`
@@ -24,8 +24,8 @@ export class NhomSvService {
   //       catchError(err => of([])));
   // }
 
-  getNhomSV(): Observable<Nhom[]> {
-    return this.httpClient.get<Nhom[]>(this.url).pipe(
+  getNhomSV(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.url).pipe(
         tap(recieveDeTai => recieveDeTai),
         catchError(err => of([])));
   }

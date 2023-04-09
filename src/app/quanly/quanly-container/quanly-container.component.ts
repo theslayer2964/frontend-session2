@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import * as url from "url";
 
 @Component({
   selector: 'app-quanly-container',
@@ -9,11 +7,12 @@ import * as url from "url";
 })
 export class QuanlyContainerComponent implements OnInit {
 
-  constructor(private router: Router, private activeRouter: ActivatedRoute ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
+<<<<<<< HEAD
     goToQLDetail(url: string) {
       this.router.navigate(["/quanly",url])
     }
@@ -21,4 +20,6 @@ export class QuanlyContainerComponent implements OnInit {
   goToQLich() {
     this.router.navigate(["/quanlylich"])
   }
+=======
+>>>>>>> c9dcca9f092e5e7a6ce0cbb23cbc0939bff3eb36
 }
