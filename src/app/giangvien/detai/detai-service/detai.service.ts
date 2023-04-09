@@ -8,7 +8,7 @@ import {UserAuthService} from "../../../authentication/_service/user-auth.servic
     providedIn: 'root'
 })
 export class DetaiService {
-    private url = "http://localhost:8080/api/giang-vien/";
+    private url = "http://localhost:8080/api/de-tai/";
     token: string = this.userAuthService.getToken();
     private httpHeadersJWT = new HttpHeaders({
         Authorization: `Bearer ${(this.token)}`

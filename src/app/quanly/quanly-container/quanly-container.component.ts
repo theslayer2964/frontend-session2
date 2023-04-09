@@ -18,4 +18,7 @@ export class QuanlyContainerComponent implements OnInit {
       this.router.navigate(["/quanly",url])
     }
 
+  goToQLich() {
+    this.router.navigate(["/quanlylich"])
+  }
 }

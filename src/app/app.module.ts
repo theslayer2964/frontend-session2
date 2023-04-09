@@ -20,7 +20,7 @@ import {FooterComponent} from "./shared-component/footer/footer.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatSelectChange, MatSelectModule} from "@angular/material/select";
+import {MatSelectModule} from "@angular/material/select";
 import {MatIconModule} from "@angular/material/icon";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatInputModule} from "@angular/material/input";
@@ -49,7 +49,7 @@ import {QuanlyContainerComponent} from './quanly/quanly-container/quanly-contain
 import {ThemLichQlComponent} from './dialog/them-lich-ql/them-lich-ql.component';
 import {ProfileComponent} from './shared-component/profile/profile.component';
 import {UserDataService} from "./shared-service/userData.service";
-import { QuanlyLich2Component } from './quanly/quanly-lich2/quanly-lich2.component';
+import { QuanlyLich2Component } from './quanly-lich/quanly-lich2/quanly-lich2.component';
 import {FullCalendarModule} from "@fullcalendar/angular";
 import { NotificationsComponent } from './shared-component/notifications/notifications.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
@@ -58,6 +58,9 @@ import { QuanlyDetaiComponent } from './quanly/quanly-detai/quanly-detai.compone
 import { CaidatContainerComponent } from './caidat/caidat-container/caidat-container.component';
 import { CaidatSidebarComponent } from './caidat/caidat-sidebar/caidat-sidebar.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { ThemLichComponent } from './dialog/them-lich/them-lich.component';
+import {QuanlyLichModule} from "./quanly-lich/quanly-lich.module";
+import {CatDatModule} from "./caidat/caidat.module";
 
 @NgModule({
     imports: [
@@ -92,7 +95,9 @@ import {MatSidenavModule} from "@angular/material/sidenav";
         MatChipsModule,
         RouterModule,
         MatDividerModule,
-        FullCalendarModule
+        FullCalendarModule,
+        QuanlyLichModule,
+        CatDatModule
     ],
     declarations: [
         AppComponent,
@@ -121,7 +126,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
         QuanlyNhomComponent,
         QuanlyDetaiComponent,
         CaidatContainerComponent,
-        CaidatSidebarComponent
+        CaidatSidebarComponent,
+        ThemLichComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

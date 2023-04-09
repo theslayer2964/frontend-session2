@@ -1,7 +1,7 @@
 <div class="container">
     <h1 mat-dialog-title>Thêm Lịch</h1>
     <div mat-dialog-content>
-        <form [formGroup]="schedularForm">
+        <form [formGroup]="schedularForm" [(ngModel)]="data">
             <mat-form-field appearance="outline">
                 <mat-label>Tiêu đề</mat-label>
                 <input formControlName="title" matInput placeholder="Placeholder">
@@ -50,6 +50,6 @@
     </div>
     <div mat-dialog-actions [align]="'end'">
         <button mat-raised-button color="warn" mat-dialog-close="'close'">Đóng</button>
-        <button style="margin-left: 8px" mat-raised-button color="primary" (click)="addSchedule()">Tạo lịch</button>
+        <button style="margin-left: 8px" mat-raised-button color="primary" [mat-dialog-close]="data">Tạo lịch</button>
     </div>
 </div>

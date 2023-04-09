@@ -1,12 +1,19 @@
 {
   "Event": [
     {
+      "id": "mot",
       "title": "Lịch học tuần",
-      "người thực hiên": "Giang vien",
-      "endAt": "2023-01-31T17:00:00.000Z",
-      "startAt": "2023-01-31T17:00:00.000Z",
-      "lession": "1",
-      "chú thích": "ABC XYZ"
+      "start": "2023-04-08T09:30:00+07:00",
+      "end": "2023-04-20T011:30:00+07:00",
+      "daysOfWeek": ["2","4","6"],
+      "backgroundColor": "red"
+    },
+    {
+      "id": "hai",
+      "title": "Lịch học tuần 2",
+      "start": "2023-04-08T06:30:00+07:00",
+      "end": "2023-04-08T07:30:00+07:00",
+      "backgroundColor": "blue"
     }
   ],
   "productList": [
