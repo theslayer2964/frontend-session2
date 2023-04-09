@@ -15,7 +15,9 @@ import {MatTreeModule} from "@angular/material/tree";
 import {MatIconModule} from "@angular/material/icon";
 import { QlLichComponent } from './ql-lich/ql-lich.component';
 import {BrowserModule} from "@angular/platform-browser";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+// import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {QlChitietlichComponent} from "./ql-chitietlich/ql-chitietlich.component";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   imports: [
@@ -29,9 +31,10 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     MatTreeModule,
     MatIconModule,
     BrowserModule,
-    NgbModule,
+    // NgbModule,
     FormsModule,
     RouterModule,
+    MatInputModule,
   ],
   declarations: [
     QuanlyLichContainerComponent,
@@ -39,7 +42,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     QlHockyComponent,
     QlKltnComponent,
     QlGiangvienComponent,
-    QlLichComponent
+    QlLichComponent,
+      QlChitietlichComponent
   ],
   bootstrap: []
 })
