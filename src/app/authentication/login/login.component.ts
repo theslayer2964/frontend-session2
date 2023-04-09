@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
             } else if (role === "ROLE_SINHVIEN") {
                 this.router.navigate(['/trangchuSV', this.loginForm.value.tenTaiKhoan])
             } else if (role === "ROLE_QUANLY") {
-                this.router.navigate(['/quanly', this.loginForm.value.tenTaiKhoan])
+                this.router.navigate(['/trangchuQL', this.loginForm.value.tenTaiKhoan])
             }
         }, error => {
             new NotificationsComponent().showNotification("danger","Tên tài khoản hoặc mật khẩu không chính xác");

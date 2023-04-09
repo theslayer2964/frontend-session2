@@ -58,6 +58,8 @@ import { QuanlyDetaiComponent } from './quanly/quanly-detai/quanly-detai.compone
 import { CaidatContainerComponent } from './caidat/caidat-container/caidat-container.component';
 import { CaidatSidebarComponent } from './caidat/caidat-sidebar/caidat-sidebar.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {ThemNhomComponent} from "./dialog/them-nhom/them-nhom.component";
+import { DangkyCosanComponent } from './dialog/dangky-cosan/dangky-cosan.component';
 
 @NgModule({
     imports: [
@@ -121,7 +123,9 @@ import {MatSidenavModule} from "@angular/material/sidenav";
         QuanlyNhomComponent,
         QuanlyDetaiComponent,
         CaidatContainerComponent,
-        CaidatSidebarComponent
+        CaidatSidebarComponent,
+        ThemNhomComponent,
+        DangkyCosanComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,
