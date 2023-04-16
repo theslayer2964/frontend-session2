@@ -58,6 +58,10 @@ import { QuanlyDetaiComponent } from './quanly/quanly-detai/quanly-detai.compone
 import { CaidatContainerComponent } from './caidat/caidat-container/caidat-container.component';
 import { CaidatSidebarComponent } from './caidat/caidat-sidebar/caidat-sidebar.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { ThemLichComponent } from './dialog/them-lich/them-lich.component';
+import {QuanlyLichModule} from "./quanly-lich/quanly-lich.module";
+import {CatDatModule} from "./caidat/caidat.module";
+
 import {ThemNhomComponent} from "./dialog/them-nhom/them-nhom.component";
 import { DangkyCosanComponent } from './dialog/dangky-cosan/dangky-cosan.component';
 import { DangKyDetaiComponent } from './dialog/dang-ky-detai/dang-ky-detai.component';
@@ -96,6 +100,8 @@ import { ChangepasswordComponent } from './authentication/changepassword/changep
         MatChipsModule,
         RouterModule,
         MatDividerModule,
+        QuanlyLichModule,
+        CatDatModule,
         FullCalendarModule
     ],
     declarations: [
@@ -120,11 +126,12 @@ import { ChangepasswordComponent } from './authentication/changepassword/changep
         QuanlyContainerComponent,
         ThemLichQlComponent,
         ProfileComponent,
-        QuanlyLich2Component,
         NotificationsComponent,
         QuanlyNhomComponent,
         QuanlyDetaiComponent,
         CaidatContainerComponent,
+        CaidatSidebarComponent,
+        ThemLichComponent,
         CaidatSidebarComponent,
         ThemNhomComponent,
         DangkyCosanComponent,
@@ -138,6 +145,8 @@ import { ChangepasswordComponent } from './authentication/changepassword/changep
     },
         UserService,
         UserDataService],
+    exports: [
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

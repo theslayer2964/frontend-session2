@@ -62,11 +62,14 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {roles: ['ROLE_QUANLY']}
     },
-    {path: 'quanlylich', component: QuanlyLichContainerComponent,
-        children: [{
+    {
+        path: 'quanlylich', component: QuanlyLichContainerComponent,
+        children: [
+            {
             path: '',
             loadChildren: () => import('./quanly-lich/quanly-lich.module').then(m => m.QuanlyLichModule)
-        }]},
+        }]
+    },
     {
         path: 'trangchuGV/:id',
         component: GiangvienContainerComponent,
@@ -91,12 +94,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {roles: ['ROLE_SINHVIEN']}
     },
-
-    {path: 'caidat', component: CaidatContainerComponent,
+    {
+        path: 'caidat', component: CaidatContainerComponent,
         children: [{
             path: '',
             loadChildren: () => import('./caidat/caidat.module').then(m => m.CatDatModule)
-        }]},
+        }]
+    },
     {path: 'login', component: LoginComponent},
     {path: 'forbidden', component: ForbiddenComponent},
     {path: '**', component: NotfoundComponent}

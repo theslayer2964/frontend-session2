@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {NestedTreeControl} from "@angular/cdk/tree";
 import {MatTreeNestedDataSource} from "@angular/material/tree";
 
 declare interface RouteInfo {
@@ -36,12 +35,10 @@ const TREE_DATA: FoodNode[] = [
 export class QuanlySidebarComponent implements OnInit {
   menuItems: any[];
 
-  treeControl = new NestedTreeControl<FoodNode>(node => node.children);
   dataSource = new MatTreeNestedDataSource<FoodNode>();
   constructor() {
     this.dataSource.data = TREE_DATA;
   }
-  hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
 
   ngOnInit(): void {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
