@@ -19,7 +19,6 @@ import {QlChitietlichComponent} from "./ql-chitietlich/ql-chitietlich.component"
 import {MatInputModule} from "@angular/material/input";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSelectModule} from "@angular/material/select";
-import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {QuanlyLich2Component} from "./quanly-lich2/quanly-lich2.component";
 import {FullCalendarModule} from "@fullcalendar/angular";
 
@@ -38,7 +37,6 @@ import {FullCalendarModule} from "@fullcalendar/angular";
         MatInputModule,
         MatTooltipModule,
         MatSelectModule,
-        BsDatepickerModule,
         FullCalendarModule
     ],
     declarations: [

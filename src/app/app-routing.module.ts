@@ -15,6 +15,7 @@ import {QuanlyDetaiComponent} from "./quanly/quanly-detai/quanly-detai.component
 import {CaidatContainerComponent} from "./caidat/caidat-container/caidat-container.component";
 import {QuanlyLich2Component} from "./quanly-lich/quanly-lich2/quanly-lich2.component";
 import {QuanlyLichContainerComponent} from "./quanly-lich/quanly-lich-container/quanly-lich-container.component";
+import {ChangepasswordComponent} from "./authentication/changepassword/changepassword.component";
 
 const routes: Routes = [
 

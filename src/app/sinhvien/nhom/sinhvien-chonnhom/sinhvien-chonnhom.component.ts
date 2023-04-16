@@ -8,113 +8,147 @@ import {UserAuthService} from "../../../authentication/_service/user-auth.servic
 import {HocKy} from "../../../shared-service/HocKy.models";
 import {HockyService} from "../../../shared-service/hocky.service";
 import {ThemNhomComponent} from "../../../dialog/them-nhom/them-nhom.component";
-import { NhomService } from '../../../shared-service/nhom.service';
+import {NhomService} from '../../../shared-service/nhom.service';
 import {DangkyCosanComponent} from "../../../dialog/dangky-cosan/dangky-cosan.component";
 import {NotificationsComponent} from "../../../shared-component/notifications/notifications.component";
 
 @Component({
-  selector: 'app-sinhvien-chonnhom',
-  templateUrl: './sinhvien-chonnhom.component.html',
-  styleUrls: ['./sinhvien-chonnhom.component.css']
+    selector: 'app-sinhvien-chonnhom',
+    templateUrl: './sinhvien-chonnhom.component.html',
+    styleUrls: ['./sinhvien-chonnhom.component.css']
 })
 export class SinhvienChonnhomComponent implements OnInit {
-  displayedColumns: string[] = ['maNhom', 'sv1', 'sv2',"action"];
-  dataSource!: MatTableDataSource<any>;
+    displayedColumns: string[] = ['maNhom', 'sv1', 'sv2', "action"];
+    dataSource!: MatTableDataSource<any>;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
 
-  dsHocKy: HocKy[];
-  nhom: any;
+    dsHocKy: HocKy[];
+    nhom: any;
 
-  // @ts-ignore
-  constructor(public dialog: MatDialog,
-              private nhomService: NhomService,
-              private hockyService: HockyService,
-              private userAuthService: UserAuthService) { }
+    // @ts-ignore
+    constructor(public dialog: MatDialog,
+                private nhomService: NhomService,
+                private hockyService: HockyService,
+                private userAuthService: UserAuthService) {
+    }
 
-  ngOnInit(): void {
-    // this.getNhomSV()
-    this.getAllHocKy();
-    this.nhom = this.userAuthService.getUserInfo().nhom;
-    // if(this.nhom != null) {
-    //   this.getNhomHienTai();
-    // } else{
-      this.getNhomSVChuaDuyet();
-    // }
-  }
+    ngOnInit(): void {
+        // this.getNhomSV()
+        this.getAllHocKy();
+        this.nhom = this.userAuthService.getUserInfo().nhom;
+        if (this.nhom != null) {
+            this.getNhomHienTai();
+        } else {
+            this.getNhomSVChuaDuyet();
+        }
+    }
 
     applyFilter($event: KeyboardEvent) {
 
     }
 
-  openDialog() {
-    this.dialog.open(ThemNhomComponent, {}).afterClosed().subscribe(val => {
-      if (val === "save") {
-        this.getNhomSVChuaDuyet();
-      }
-    })
-  }
-  tempUser: any;
-  dangKyNhom(row) {
-    this.dialog.open(DangkyCosanComponent, {data: "save"}).afterClosed().subscribe(val => {
-      if (val === "save") {
-        row.dsMaSinhVien.push(this.userAuthService.getUserInfo().maSinhVien);
-        console.log(row)
-        this.nhomService.dangKyNhom(row)
+    openDialog() {
+        this.dialog.open(ThemNhomComponent, {}).afterClosed().subscribe(val => {
+            if (val === "save") {
+                this.getNhomHienTai();
+            }
+        })
+    }
+
+    tempUser: any;
+
+    dangKyNhom(row) {
+        this.dialog.open(DangkyCosanComponent, {data: "save"}).afterClosed().subscribe(val => {
+            if (val === "save") {
+                row.dsMaSinhVien.push(this.userAuthService.getUserInfo().maSinhVien);
+                console.log(row)
+                this.nhomService.dangKyNhom(row)
+                    .subscribe({
+                        next: (res) => {
+                            new NotificationsComponent().showNotification('success', 'Thêm nhóm thành công');
+                            this.tempUser = this.userAuthService.getUserInfo();
+                            this.tempUser.nhom = res;
+                            this.userAuthService.setUserInfo(this.tempUser);
+                            this.nhom = this.userAuthService.getUserInfo().nhom;
+                        },
+                        error: () => {
+                            new NotificationsComponent().showNotification('danger', 'Không thể thêm nhóm');
+                        }
+                    })
+            }
+        })
+    }
+
+    private getNhomSVChuaDuyet() {
+        this.nhomService.getNhomChuaDuyet()
             .subscribe({
-          next: (res) => {
-            new NotificationsComponent().showNotification('success', 'Thêm nhóm thành công');
-            this.tempUser = this.userAuthService.getUserInfo();
-            this.tempUser.nhom = res;
-            this.userAuthService.setUserInfo(this.tempUser);
-            this.nhom = this.userAuthService.getUserInfo().nhom;
-          },
-          error: () => {
-            new NotificationsComponent().showNotification('danger', 'Không thể thêm nhóm');
-          }
+                next: (res) => {
+                    console.log("SV- CHONHOM: ", res)
+                    this.dataSource = new MatTableDataSource(res);
+                    this.dataSource.paginator = this.paginator;
+                    this.dataSource.sort = this.sort;
+                },
+                error: () => {
+                    console.log("Error")
+                }
+            })
+    }
+
+    private hocKyHienTai: any;
+
+    changeHocKy($event: MatSelectChange) {
+        this.hocKyHienTai = $event.value;
+        console.log($event.value)
+        // this.getNhomSVChuaDuyet($event.value);
+    }
+
+    private getAllHocKy() {
+        this.hockyService.getHocKy().subscribe({
+            next: (res) => {
+                this.dsHocKy = res;
+                console.log(this.dsHocKy)
+            }, error: (err) => {
+                console.log(err)
+            }
         })
-      }
-    })
-  }
+    }
 
-  private getNhomSVChuaDuyet() {
-    this.nhomService.getNhomChuaDuyet()
-        .subscribe({
-          next: (res) => {
-            console.log("SV- CHONHOM: ", res)
-            this.dataSource = new MatTableDataSource(res);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-          },
-          error: () => {
-            console.log("Error")
-          }
+    nhomSV: any;
+    dsNhomSinhVien: any;
+    trangThai: any;
+
+    deTai: any;
+
+    private getNhomHienTai() {
+        this.nhomService.getNhomSinhVien(this.nhom.maNhom).subscribe({
+            next: (res) => {
+                this.nhomSV = res;
+                this.dsNhomSinhVien = this.nhomSV.dsMSSinhVien;
+                this.nhom = this.nhomSV.nhom;
+                this.trangThai = this.nhomSV.trangThai;
+                this.deTai = this.nhomSV.deTai;
+                console.log(this.nhomSV);
+            }, error: (err) => {
+                console.log(err);
+            }
         })
-  }
-  private hocKyHienTai: any;
-
-  changeHocKy($event: MatSelectChange) {
-    this.hocKyHienTai = $event.value;
-    console.log($event.value)
-    // this.getNhomSVChuaDuyet($event.value);
-  }
-
-  private getAllHocKy() {
-    this.hockyService.getHocKy().subscribe({
-      next: (res) => {
-        this.dsHocKy = res;
-        console.log(this.dsHocKy)
-      }, error: (err) => {
-        console.log(err)
-      }
-    })
-  }
-
-  private getNhomHienTai() {
-
-    this.dataSource = new MatTableDataSource([this.nhom]);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+    }
+    sinhvien: any;
+    private roiNhom() {
+        this.nhomService.roiNhom({
+            dsMaSinhVien: [this.userAuthService.getUserInfo().maSinhVien],
+            maNhom: this.nhom.maNhom
+            }
+        ).subscribe({
+            next: (res) => {
+                this.sinhvien = res;
+                console.log(this.sinhvien);
+                this.userAuthService.setUserInfo(this.sinhvien);
+            }, error: (err) => {
+                console.log(err);
+            }
+        })
+    }
 }

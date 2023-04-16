@@ -20,7 +20,7 @@ import {FooterComponent} from "./shared-component/footer/footer.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatSelectModule} from "@angular/material/select";
+import {MatSelectChange, MatSelectModule} from "@angular/material/select";
 import {MatIconModule} from "@angular/material/icon";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatInputModule} from "@angular/material/input";
@@ -49,6 +49,8 @@ import {QuanlyContainerComponent} from './quanly/quanly-container/quanly-contain
 import {ThemLichQlComponent} from './dialog/them-lich-ql/them-lich-ql.component';
 import {ProfileComponent} from './shared-component/profile/profile.component';
 import {UserDataService} from "./shared-service/userData.service";
+import { QuanlyLich2Component } from './quanly/quanly-lich2/quanly-lich2.component';
+import {FullCalendarModule} from "@fullcalendar/angular";
 import { NotificationsComponent } from './shared-component/notifications/notifications.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { QuanlyNhomComponent } from './quanly/quanly-nhom/quanly-nhom.component';
@@ -62,6 +64,8 @@ import {CatDatModule} from "./caidat/caidat.module";
 
 import {ThemNhomComponent} from "./dialog/them-nhom/them-nhom.component";
 import { DangkyCosanComponent } from './dialog/dangky-cosan/dangky-cosan.component';
+import { DangKyDetaiComponent } from './dialog/dang-ky-detai/dang-ky-detai.component';
+import { ChangepasswordComponent } from './authentication/changepassword/changepassword.component';
 
 @NgModule({
     imports: [
@@ -98,6 +102,7 @@ import { DangkyCosanComponent } from './dialog/dangky-cosan/dangky-cosan.compone
         MatDividerModule,
         QuanlyLichModule,
         CatDatModule,
+        FullCalendarModule
     ],
     declarations: [
         AppComponent,
@@ -129,7 +134,9 @@ import { DangkyCosanComponent } from './dialog/dangky-cosan/dangky-cosan.compone
         ThemLichComponent,
         CaidatSidebarComponent,
         ThemNhomComponent,
-        DangkyCosanComponent
+        DangkyCosanComponent,
+        DangKyDetaiComponent,
+        ChangepasswordComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

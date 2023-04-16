@@ -11,6 +11,7 @@ import {NotificationsComponent} from "../../shared-component/notifications/notif
 import {Nhom} from "../../sinhvien/Nhom.models";
 import {NhomService} from "../../shared-service/nhom.service";
 import {catchError, of, tap} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-them-nhom',
@@ -29,7 +30,8 @@ export class ThemNhomComponent implements OnInit {
 
     maSinhVien1;
 
-    constructor(private formBuilder: FormBuilder,
+    constructor(private router: Router,
+        private formBuilder: FormBuilder,
                 private detaiService: DetaiService,
                 private hocKyService: HockyService,
                 private userAuthService: UserAuthService,
@@ -107,6 +109,7 @@ export class ThemNhomComponent implements OnInit {
 
     nhom: Nhom
     matKhau: string;
+    user: any;
     addNhom() {
         this.matKhau = this.formNhom.get('password').value;
         if (this.editData == null) {
@@ -119,22 +122,24 @@ export class ThemNhomComponent implements OnInit {
             if (this.maDeTaiHienTai == undefined) {
                 this.maDeTaiHienTai = null;
             }
-
+            console.log(this.userAuthService.getRoles()[0].roleName)
             if (this.formNhom.valid) {
                 this.nhomService.dangKyNhom({
                     dsMaSinhVien: this.dsMaSinhVien,
                     maDeTai: this.maDeTaiHienTai,
-                    password: this.matKhau
+                    password: this.matKhau,
+                    vaiTro: this.userAuthService.getRoles()[0].roleName
                 })
-                    // }).subscribe((res: any) => console.log("XXX", res), (error) => {
-                    //     console.log("YYY", error.trace)
-                    // });
                     .subscribe({
                         next: (res) => {
                             this.formNhom.reset();
                             this.dialogRef.close('save');
                             console.log("them nhom sinh vien", res);
                             new NotificationsComponent().showNotification('success', 'Thêm nhóm thành công');
+                            this.user = this.userAuthService.getUserInfo();
+                            this.user.nhom = res;
+                            this.userAuthService.setUserInfo(this.user);
+                            this.router.navigate(['/sv-chonNhom' ]);
                         },
                         error: (err) => {
                             console.log("them nhom sinh vien loi", err);

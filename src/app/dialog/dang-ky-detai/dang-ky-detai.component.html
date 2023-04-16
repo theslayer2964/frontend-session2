@@ -1,0 +1,33 @@
+<div class="main-content">
+    <div class="card" *ngIf="day==false">
+        <div class="card-header card-header-danger">
+            <h4 class="card-title">Đăng ký đề tài</h4>
+            <p class="card-category">Các sinh viên lưu ý đề tài sau khi đăng ký sẽ được quản lý bộ môn
+                duyệt</p>
+        </div>
+    </div>
+
+    <div class="card" *ngIf="day==true">
+        <h1 style="color: red">ĐỀ TÀI ĐÃ ĐỦ SINH VIÊN ĐĂNG KÝ. KHÔNG THỂ ĐĂNG KÝ THÊM</h1>
+    </div>
+    <mat-dialog-content class="mat-typography">
+        <h2 style="font-weight: bold">Tên Giảng Viên: {{giangVien.tenGiangVien}}</h2>
+
+        <h2>Tên đề tài:</h2>
+        <p>{{deTai.tenDeTai}}</p>
+        <h3>Mục Tiêu Đề Tài</h3>
+        <p>{{deTai.mucTieuDeTai}}</p>
+        <h3>Sản Phẩm Dự Kiến</h3>
+        <p>{{deTai.sanPhamDuKien}}</p>
+        <h3>Yêu Cầu Đầu Vào</h3>
+        <p>{{deTai.yeuCauDauVao}}</p>
+        <h3>Số Nhóm Thực Hiện: {{deTai.gioiHanSoNhomThucHien}}</h3>
+
+        <div mat-dialog-actions [align]="'end'">
+            <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
+            <button style="margin-left: 8px" mat-raised-button *ngIf="day==false"
+                   (click)="dangKyDeTai()" color="primary">{{actionBtn}}</button>
+        </div>
+
+    </mat-dialog-content>
+</div>
