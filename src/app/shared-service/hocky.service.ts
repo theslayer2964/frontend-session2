@@ -9,11 +9,7 @@ import {UserAuthService} from "../authentication/_service/user-auth.service";
   providedIn: 'root'
 })
 export class HockyService {
-<<<<<<< HEAD
-  private url = "http://localhost:8080/api/hoc-ky/lay-nam-hoc-ky";
-=======
   private url = "http://localhost:8080/api/hoc-ky/";
->>>>>>> c9dcca9f092e5e7a6ce0cbb23cbc0939bff3eb36
   token: string = this.userAuthService.getToken();
   private httpHeadersJWT = new HttpHeaders({
     Authorization: `Bearer ${(this.token)}`

@@ -18,6 +18,9 @@ export class UserService {
   public login(loginData: any) {
     return this.httpClient.post(this.theUrl + 'xac-thuc/dang-nhap', loginData, {headers: this.httpHeaders});
   }
+  public changePassword(changePasswordData: any) {
+    return this.httpClient.post(this.theUrl + 'xac-thuc/doi-mat-khau', changePasswordData, {headers: this.httpHeaders});
+  }
   public roleMatch(allowedRoles: any): boolean {
     let isMatch = false;
     const userRoles = this.userAuthService.getRoles()

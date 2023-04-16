@@ -12,14 +12,4 @@ export class QuanlyContainerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-<<<<<<< HEAD
-    goToQLDetail(url: string) {
-      this.router.navigate(["/quanly",url])
-    }
-
-  goToQLich() {
-    this.router.navigate(["/quanlylich"])
-  }
-=======
->>>>>>> c9dcca9f092e5e7a6ce0cbb23cbc0939bff3eb36
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, of, tap} from "rxjs";
 import {UserAuthService} from "../authentication/_service/user-auth.service";
@@ -17,7 +17,7 @@ export class NhomService {
     constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) {
     }
 
-    dangKyNhom(data: any): Observable<any>{
+    dangKyNhom(data: any): Observable<any> {
         return this.httpClient.post<any>(this.url + "dang-ky-nhom", data, {headers: this.httpHeadersJWT});
     }
 
@@ -26,15 +26,24 @@ export class NhomService {
         return this.httpClient.post<any>(this.url + "lay-ds-nhom", data, {headers: this.httpHeadersJWT}).pipe(
             tap(receiveNhom => receiveNhom),
             catchError(err => of([])));
-        ;
     }
 
     getNhomChuaDuyet() {
-        return this.httpClient.get<any>(this.url + "lay-ds-nhom/" + 0,  {headers: this.httpHeadersJWT}).pipe(
+        return this.httpClient.get<any>(this.url + "lay-ds-nhom/" + 0, {headers: this.httpHeadersJWT}).pipe(
             tap(receiveNhom => receiveNhom),
             catchError(err => of([])));
-        ;
     }
 
+    getNhomSinhVien(maNhom: string) {
+        return this.httpClient.get<any>(this.url + "lay-nhom/" + maNhom, {headers: this.httpHeadersJWT}).pipe(
+            tap(receiveNhom => receiveNhom),
+            catchError(err => of([])));
+    }
+
+    roiNhom(data: any) {
+        return this.httpClient.post<any>(this.url + "roi-nhom", data, {headers: this.httpHeadersJWT}).pipe(
+            tap(receiveNhom => receiveNhom),
+            catchError(err => of([])));
+    }
 
 }

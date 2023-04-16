@@ -3,6 +3,8 @@ import {UserService} from "../../authentication/_service/user.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {Router} from "@angular/router";
 import {UserDataService} from "../../shared-service/userData.service";
+import {MatDialog} from "@angular/material/dialog";
+import {ChangepasswordComponent} from "../../authentication/changepassword/changepassword.component";
 
 @Component({
     selector: 'app-shared',
@@ -13,7 +15,8 @@ export class SharedComponent implements OnInit {
     public defaultImage: any = './assets/image/logo_iuh.png'
 
     constructor(private userAuthService: UserAuthService, private router: Router, public userService: UserService,
-                public userDataService: UserDataService) {
+                public userDataService: UserDataService,
+                public dialog: MatDialog) {
     }
 
     public userInfo: any
@@ -44,5 +47,13 @@ export class SharedComponent implements OnInit {
     login() {
         console.log("LOGIN")
         this.router.navigate(['login'])
+    }
+
+    openDialog() {
+        this.dialog.open(ChangepasswordComponent, {}).afterClosed().subscribe(val => {
+            if (val === "save") {
+
+            }
+        })
     }
 }
