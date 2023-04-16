@@ -7,18 +7,24 @@ import {HockyService} from "../../shared-service/hocky.service";
 import {HocKy} from "../../shared-service/HocKy.models";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {ThemNhomComponent} from "../../dialog/them-nhom/them-nhom.component";
+import {UserAuthService} from "../../authentication/_service/user-auth.service";
+import {NhomService} from "../../shared-service/nhom.service";
+import {ThemDeTaiGvComponent} from "../../dialog/them-de-tai-gv/them-de-tai-gv.component";
 
 @Component({
     selector: 'app-giangvien-nhom',
     templateUrl: './giangvien-nhom.component.html',
-    styleUrls: ['./giangvien-nhom.component.scss']
+    styleUrls: ['./giangvien-nhom.component.css']
 })
 export class GiangvienNhomComponent implements OnInit {
-    displayedColumns2: string[] = ['maNhom', 'maDeTai', "sv1", "sv2", 'danhGia', "action"];
+    displayedColumns: string[] = ['maNhom', 'maDeTai', 'sv1', 'sv2', "danhGia","action"];
     dataSource!: MatTableDataSource<any>;
     dsHocKy: HocKy[];
 
-    constructor(public dialog: MatDialog, private detaiService: DetaiService, private hockyService: HockyService) {
+    constructor(public dialog: MatDialog, private nhomService: NhomService, private hockyService: HockyService,
+                private userAuthService: UserAuthService) {
+
     }
 
     private getAllHocKy() {
@@ -51,37 +57,58 @@ export class GiangvienNhomComponent implements OnInit {
 
 
     openDialog() {
+        this.dialog.open(ThemNhomComponent, {}).afterClosed().subscribe(val => {
+            if (val === "save") {
 
+            }
+        })
     }
 
-    editProduct(row) {
-
+    editProduct(row: any) {
+        this.dialog.open(ThemNhomComponent, {
+            data: row
+        }).afterClosed().subscribe(val => {
+            if (val === "update") {
+                // this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
+            }
+        })
     }
 
     deleteProduct(id) {
 
     }
-
     private hocKyHienTai: any;
+    private soHocKy: any;
 
     changeHocKy($event: MatSelectChange) {
-        this.hocKyHienTai = $event.value
-        console.log($event.value)
-        // this.getDSDeTaiTheoHK($event.value);
+        this.hocKyHienTai = $event.value.toString().slice(0, 3)
+        this.soHocKy = $event.value.toString().slice(2)
+        console.log('XXX:', this.hocKyHienTai, this.soHocKy);
+        this.getDsNhom(this.hocKyHienTai, this.soHocKy);
     }
 
-    private getDSDeTaiTheoHK(hocKy: any) {
-        this.detaiService.getDeTaiRoleGV(hocKy)
+    private getDsNhom(maHocKy: any, soHocKy: any) {
+        this.nhomService.getNhomRoleGV({
+            maGiangVien: this.userAuthService.getUserInfo().maGiangVien,
+            maHocKy: maHocKy,
+            soHocKy: soHocKy
+        })
             .subscribe({
                 next: (res) => {
-                    console.log("DS DE TAI:", res);
-                    this.dataSource = new MatTableDataSource(res);
-                    this.dataSource.paginator = this.paginator;
-                    this.dataSource.sort = this.sort;
+                    if (res) {
+                        console.log("GV _ Nhom:", res);
+                        this.dataSource = new MatTableDataSource(res);
+                        this.dataSource.paginator = this.paginator;
+                        this.dataSource.sort = this.sort;
+                    }
                 },
                 error: () => {
                     console.log("Error")
                 }
             })
     }
+
+    // Table
+
+
 }

@@ -49,8 +49,6 @@ import {QuanlyContainerComponent} from './quanly/quanly-container/quanly-contain
 import {ThemLichQlComponent} from './dialog/them-lich-ql/them-lich-ql.component';
 import {ProfileComponent} from './shared-component/profile/profile.component';
 import {UserDataService} from "./shared-service/userData.service";
-import { QuanlyLich2Component } from './quanly-lich/quanly-lich2/quanly-lich2.component';
-import {FullCalendarModule} from "@fullcalendar/angular";
 import { NotificationsComponent } from './shared-component/notifications/notifications.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { QuanlyNhomComponent } from './quanly/quanly-nhom/quanly-nhom.component';
@@ -61,8 +59,9 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import { ThemLichComponent } from './dialog/them-lich/them-lich.component';
 import {QuanlyLichModule} from "./quanly-lich/quanly-lich.module";
 import {CatDatModule} from "./caidat/caidat.module";
+
 import {ThemNhomComponent} from "./dialog/them-nhom/them-nhom.component";
-import {DangkyCosanComponent} from "./dialog/dangky-cosan/dangky-cosan.component";
+import { DangkyCosanComponent } from './dialog/dangky-cosan/dangky-cosan.component';
 
 @NgModule({
     imports: [
@@ -97,9 +96,8 @@ import {DangkyCosanComponent} from "./dialog/dangky-cosan/dangky-cosan.component
         MatChipsModule,
         RouterModule,
         MatDividerModule,
-        FullCalendarModule,
         QuanlyLichModule,
-        CatDatModule
+        CatDatModule,
     ],
     declarations: [
         AppComponent,
@@ -123,13 +121,13 @@ import {DangkyCosanComponent} from "./dialog/dangky-cosan/dangky-cosan.component
         QuanlyContainerComponent,
         ThemLichQlComponent,
         ProfileComponent,
-        QuanlyLich2Component,
         NotificationsComponent,
         QuanlyNhomComponent,
         QuanlyDetaiComponent,
         CaidatContainerComponent,
         CaidatSidebarComponent,
         ThemLichComponent,
+        CaidatSidebarComponent,
         ThemNhomComponent,
         DangkyCosanComponent
     ],
@@ -140,6 +138,8 @@ import {DangkyCosanComponent} from "./dialog/dangky-cosan/dangky-cosan.component
     },
         UserService,
         UserDataService],
+    exports: [
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

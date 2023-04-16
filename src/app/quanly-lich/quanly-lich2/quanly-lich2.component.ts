@@ -23,9 +23,9 @@ export class QuanlyLich2Component implements OnInit {
     }
 
     ngOnInit(): void {
-        this.lichService.getLich().pipe(take(1)).subscribe( res =>
-            this.data$ = res
-        );
+        // this.lichService.getLich().pipe(take(1)).subscribe( res =>
+        //     this.data$ = res
+        // );
     }
 
     data$: any[] = [];

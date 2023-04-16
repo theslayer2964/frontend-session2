@@ -9,7 +9,7 @@ import {UserAuthService} from "../authentication/_service/user-auth.service";
   providedIn: 'root'
 })
 export class HockyService {
-  private url = "http://localhost:8080/api/hoc-ky/lay-nam-hoc-ky";
+  private url = "http://localhost:8080/api/hoc-ky/";
   token: string = this.userAuthService.getToken();
   private httpHeadersJWT = new HttpHeaders({
     Authorization: `Bearer ${(this.token)}`
@@ -25,7 +25,7 @@ export class HockyService {
   }
 
   getHocKy(): Observable<HocKy[]> {
-    return this.httpClient.get<HocKy[]>(this.url,{headers: this.httpHeadersJWT})
+    return this.httpClient.get<HocKy[]>(this.url + "lay-nam-hoc-ky",{headers: this.httpHeadersJWT})
         .pipe(
         tap(recieveDeTai => recieveDeTai),
         catchError(err => of([])));
@@ -39,5 +39,12 @@ export class HockyService {
 
   deleteHocKy(id: any) {
     return this.httpClient.delete<any>(this.url + id, {headers: this.httpHeadersJWT});
+  }
+
+  getHocKyMoiNhat(): Observable<any> {
+    return this.httpClient.get<HocKy>(this.url + "lay-hoc-ky-moi-nhat",{headers: this.httpHeadersJWT})
+        .pipe(
+            tap(receiveHocKy => receiveHocKy),
+            catchError(err => of([])));
   }
 }

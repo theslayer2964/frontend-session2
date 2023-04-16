@@ -20,13 +20,12 @@ export class ThemDeTaiGvComponent implements OnInit {
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
       maDeTai: [''],
-      gioiHanSoNhomThucHien: ['', Validators.required],
+      gioiHanSoNhomThucHien: ['1', Validators.required],
       moTa: ['', Validators.required],
       mucTieuDeTai: ['', Validators.required],
       sanPhamDuKien: ['', Validators.required],
       tenDeTai: ['', Validators.required],
       yeuCauDauVao: ['', Validators.required],
-      trangThai: [''],
       maHocKy:['']
     })
     console.log(this.editData)

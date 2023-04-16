@@ -1,76 +1,71 @@
+<hr>
+<!---->
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-<!--            <mat-form-field class="rounded-0" style="width: 800px">-->
-<!--                <mat-label>&#45;&#45; Chọn học kỳ &#45;&#45;</mat-label>-->
-<!--                <mat-select (selectionChange)="changeHocKy($event)">-->
-<!--                    <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.namHoc">{{hocKy.namHoc}}</mat-option>-->
-<!--                </mat-select>-->
-<!--            </mat-form-field>-->
-            <div class="col-lg-12 col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-warning" style="display: flex;justify-content: space-between">
-                        <h4 class="card-title">DANH SÁCH NHÓM</h4>
-                        <!--                        <p class="card-category">New employees on 15th September, 2016</p>-->
-                        <button mat-raised-button color="warn" (click)="openDialog()" style="height: 40px">Tạo nhóm
-                        </button>
-                    </div>
-                    <div>
-                        <mat-form-field style="width: 500px">
-                            <mat-label>Filter</mat-label>
-                            <input matInput (keyup)="applyFilter($event)" placeholder="nhập từ khóa tìm kiếm..."
-                                   #input>
-                        </mat-form-field>
-                    </div>
-                    <div class="mat-elevation-z8">
-                        <table mat-table [dataSource]="dataSource" matSort>
+            <div *ngIf="nhom==null">
+                <div class="col-lg-6 col-md-12">
+                    <div class="card">
+                        <div class="card-header"
+                             style="display: flex;justify-content: space-between;background-color: #4da1e8">
+                            <h4 class="card-title"
+                                style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH NHÓM</h4>
+                            <button *ngIf="!nhom" mat-raised-button color="warn" (click)="openDialog()" style="height: 40px">Tạo nhóm
+                            </button>
+                        </div>
+                        <hr>
+                        <div>
+                            <mat-form-field style="width: 500px;margin-left: 20px">
+                                <mat-label>Tìm kiếm</mat-label>
+                                <input matInput (keyup)="applyFilter($event)" placeholder="nhập từ khóa tìm kiếm..."
+                                       #input>
+                            </mat-form-field>
+                        </div>
+                        <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;overflow: auto;">
+                            <table mat-table [dataSource]="dataSource" matSort>
+                                <ng-container matColumnDef="maNhom" >
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                        style="width: 120px;text-align: center" >MÃ NHÓM</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.maNhom}} </td>
+                                </ng-container>
 
-                            <!-- ID Column -->
-                            <ng-container matColumnDef="nhom">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nhóm</th>
-                                <td mat-cell *matCellDef="let row"> {{row.nhom}} </td>
-                            </ng-container>
 
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="sv1">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Sinh viên 1</th>
-                                <td mat-cell *matCellDef="let row"> {{row.sv1}}</td>
-                            </ng-container>
+                                <ng-container matColumnDef="sv1">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">SINH VIÊN 1</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.dsMaSinhVien[0]}}</td>
+                                </ng-container>
+                                <ng-container matColumnDef="sv2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">SINH VIÊN 2</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.dsMaSinhVien[1]}} </td>
+                                </ng-container>
 
-                            <!-- Name Column -->
-                            <ng-container matColumnDef="sv2">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Sinh viên 2</th>
-                                <td mat-cell *matCellDef="let row"> {{row.sv2}} </td>
-                            </ng-container>
+                                <!-- Fruit Column -->
 
-                            <!-- Fruit Column -->
-                            <ng-container matColumnDef="tinhTrang">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tình trạng</th>
-                                <td mat-cell *matCellDef="let row"> row.tinhTrang  </td>
-                            </ng-container>
-                            <ng-container matColumnDef="action">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cập nhật</th>
-                                <td mat-cell *matCellDef="let row">
-                                    <!--Row: data cua 1 dong-->
-                                    <button mat-icon-button color="primary" (click)="editProduct(row)">
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
-                                    <button mat-icon-button color="accent" (click)="deleteProduct(row.id)">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
-                                </td>
-                            </ng-container>
-                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                            <!-- Row shown when there is no matching data. -->
-                            <tr class="mat-row" *matNoDataRow>
-                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                            </tr>
-                        </table>
-                        <mat-paginator [pageSizeOptions]="[25, 10, 5, 100]"
-                                       aria-label="Select page of users"></mat-paginator>
+                                <ng-container matColumnDef="action" stickyEnd>
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                        style="width: 100px;text-align: center">TÙY CHỈNH</th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <!--Row: data cua 1 dong-->
+                                        <button mat-icon-button color="primary" (click)="dangKyNhom(row)" >
+                                            <mat-icon>note_add</mat-icon>
+                                        </button>
+
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                <tr class="mat-row" *matNoDataRow>
+                                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                                </tr>
+                            </table>
+                            <mat-paginator [pageSizeOptions]="[25, 10, 5, 100]"
+                                           aria-label="Select page of users"></mat-paginator>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div *ngIf="nhom!=null">
+                CO NHOM ROI
             </div>
         </div>
     </div>
