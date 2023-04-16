@@ -23,7 +23,8 @@
                             <div class="card-footer">
                                 <div class="stats" *ngIf="haveNhom == false">
                                     <i class="material-icons text-danger">warning</i>
-                                    <a (click)="goToSVChonNhom('sv-chonNhom')">Đăng ký</a>
+                                    <p *ngIf="validateNhom.invalid==true">Chưa Thể Đăng Ký Nhóm</p>
+                                    <a (click)="goToSVChonNhom('sv-chonNhom')" *ngIf="validateNhom.invalid==false">Đăng ký</a>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +44,8 @@
                             <div class="card-footer">
                                 <div class="stats">
                                     <i class="material-icons text-danger">warning</i>
-                                    <a (click)="goToSVChonNhom('sv-chonDeTai')">Đăng ký</a>
+                                    <p *ngIf="validateDeTai.invalid==true">Chưa Thể Đăng Ký Đề Tài</p>
+                                    <a (click)="goToSVChonNhom('sv-chonDeTai')" *ngIf="validateDeTai.invalid==false">Đăng ký</a>
                                 </div>
                             </div>
                         </div>
@@ -63,7 +65,8 @@
                             <div class="card-footer">
                                 <div class="stats">
                                     <i class="material-icons text-danger">warning</i>
-                                    <a (click)="goToSVChonNhom('sv-chonNhom')">Đăng ký</a>
+                                    <p *ngIf="validateNhom.invalid==true">Chưa Thể Đăng Ký Nhóm</p>
+                                    <a (click)="goToSVChonNhom('sv-chonNhom')" *ngIf="validateNhom.invalid==false">Đăng ký</a>
                                 </div>
                             </div>
                         </div>

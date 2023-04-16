@@ -43,7 +43,8 @@ export class DangKyDetaiComponent implements OnInit {
         }
         this.deTaiService.dangKyDeTai({
             maNhom: this.userAuthService.getUserInfo().nhom.maNhom,
-            maDeTai: this.deTai.maDeTai
+            maDeTai: this.deTai.maDeTai,
+            vaiTro: this.userAuthService.getRoles()[0].roleName
         }).subscribe({
             next: (res) => {
                 console.log(res);

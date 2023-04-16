@@ -10,7 +10,7 @@ import {UserAuthService} from "../../authentication/_service/user-auth.service";
   providedIn: 'root'
 })
 export class LichService {
-  private url = "http://localhost:8080/api/ke-hoach/lay-ke-hoach/";
+  private url = "http://localhost:8080/api/ke-hoach/";
   private urlQL = "http://localhost:8080/api/quan-ly/";
   token: string = this.userAuthService.getToken();
   private httpHeadersJWT = new HttpHeaders({
@@ -26,7 +26,7 @@ export class LichService {
           "maNguoiDung": maNguoiDung,
           "vaiTro": role
       }
-    return this.httpClient.post<any>(this.url,data,{headers: this.httpHeadersJWT})
+    return this.httpClient.post<any>(this.url + 'lay-ke-hoach/',data,{headers: this.httpHeadersJWT})
         .pipe(
             tap(res => {
               res = res;
@@ -37,5 +37,10 @@ export class LichService {
   updateLich(keHoach: any): Observable<any>{
       return this.httpClient.put<any>(this.urlQL + "cap-nhat-ke-hoach", keHoach,{headers: this.httpHeadersJWT})
           .pipe();
+  }
+
+  validateLich(data: any): Observable<any>{
+      return this.httpClient.post<any>(this.url + "lay-ke-hoach-theo-ten", data,{headers: this.httpHeadersJWT})
+            .pipe();
   }
 }

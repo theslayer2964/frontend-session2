@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatSelectChange} from "@angular/material/select";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
@@ -39,6 +39,7 @@ export class GiangvienNhomComponent implements OnInit {
 
     ngOnInit(): void {
         this.getAllHocKy();
+        console.log("PAREN TO CHILD:", this.validateNhom);
     }
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -109,6 +110,6 @@ export class GiangvienNhomComponent implements OnInit {
     }
 
     // Table
-
+    @Input() validateNhom:any;
 
 }
