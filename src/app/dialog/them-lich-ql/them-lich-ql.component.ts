@@ -10,7 +10,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 })
 export class ThemLichQlComponent implements OnInit {
   schedularForm!: FormGroup;
-
   constructor(private formBuilder: FormBuilder,
               private detaiService: DetaiService,
               private dialogRef: MatDialogRef<ThemLichQlComponent>,
