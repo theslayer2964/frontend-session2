@@ -11,6 +11,7 @@ import {ThemNhomComponent} from "../../../dialog/them-nhom/them-nhom.component";
 import {NhomService} from '../../../shared-service/nhom.service';
 import {DangkyCosanComponent} from "../../../dialog/dangky-cosan/dangky-cosan.component";
 import {NotificationsComponent} from "../../../shared-component/notifications/notifications.component";
+import {LichService} from "../../../shared-service/lich/lich.service";
 
 @Component({
     selector: 'app-sinhvien-chonnhom',
@@ -31,7 +32,8 @@ export class SinhvienChonnhomComponent implements OnInit {
     constructor(public dialog: MatDialog,
                 private nhomService: NhomService,
                 private hockyService: HockyService,
-                private userAuthService: UserAuthService) {
+                private userAuthService: UserAuthService,
+               ) {
     }
 
     ngOnInit(): void {
@@ -43,6 +45,7 @@ export class SinhvienChonnhomComponent implements OnInit {
         } else {
             this.getNhomSVChuaDuyet();
         }
+
     }
 
     applyFilter($event: KeyboardEvent) {
@@ -151,4 +154,6 @@ export class SinhvienChonnhomComponent implements OnInit {
             }
         })
     }
+
+
 }

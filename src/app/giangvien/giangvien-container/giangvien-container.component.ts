@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {LichService} from "../../shared-service/lich/lich.service";
+import {UserAuthService} from "../../authentication/_service/user-auth.service";
 
 @Component({
   selector: 'app-giangvien-container',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GiangvienContainerComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+      private lichService: LichService,
+      private userAuthService: UserAuthService,
+              ) { }
 
   ngOnInit(): void {
   }
+
 
 }
