@@ -59,6 +59,13 @@ export class ThemNhomComponent implements OnInit {
             this.actionBtn = "Update"
         }
         if (this.sinhVienRole == false) {
+            // this.hocKyService.getHocKyMoiNhat().subscribe({
+            //     next: (res) => {
+            //         this.hocKy = res;
+            //         console.log(this.hocKy);
+            //         this.getDeTaiDaDuyet(this.hocKy.maHocKy, this.hocKy.soHocKy);
+            //     }
+            // });
             this.hocKyService.getHocKyMoiNhat().subscribe({
                 next: (res) => {
                     this.hocKy = res;

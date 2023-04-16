@@ -2,8 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./shared-component/home/home.component";
 import {ForbiddenComponent} from "./authentication/forbidden/forbidden.component";
-import {AdminComponent} from "./authentication/admin/admin.component";
-import {UserComponent} from "./authentication/user/user.component";
 import {LoginComponent} from "./authentication/login/login.component";
 import {AuthGuard} from "./authentication/_auth/auth.guard";
 import {SinhvienContainerComponent} from "./sinhvien/sinhvien-container/sinhvien-container.component";
@@ -15,6 +13,8 @@ import {QuanlyContainerComponent} from "./quanly/quanly-container/quanly-contain
 import {QuanlyNhomComponent} from "./quanly/quanly-nhom/quanly-nhom.component";
 import {QuanlyDetaiComponent} from "./quanly/quanly-detai/quanly-detai.component";
 import {CaidatContainerComponent} from "./caidat/caidat-container/caidat-container.component";
+import {QuanlyLich2Component} from "./quanly-lich/quanly-lich2/quanly-lich2.component";
+import {QuanlyLichContainerComponent} from "./quanly-lich/quanly-lich-container/quanly-lich-container.component";
 
 const routes: Routes = [
 
@@ -44,6 +44,12 @@ const routes: Routes = [
         data: {roles: ['ROLE_QUANLY']}
     },
     {
+        path: 'quanly/lich',
+        component: QuanlyLich2Component,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_QUANLY']}
+    },
+    {
         path: 'quanly/:id',
         component: QuanlyContainerComponent,
         canActivate: [AuthGuard],
@@ -54,6 +60,14 @@ const routes: Routes = [
         component: QuanlyContainerComponent,
         canActivate: [AuthGuard],
         data: {roles: ['ROLE_QUANLY']}
+    },
+    {
+        path: 'quanlylich', component: QuanlyLichContainerComponent,
+        children: [
+            {
+            path: '',
+            loadChildren: () => import('./quanly-lich/quanly-lich.module').then(m => m.QuanlyLichModule)
+        }]
     },
     {
         path: 'trangchuGV/:id',
@@ -79,11 +93,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {roles: ['ROLE_SINHVIEN']}
     },
-    {path: 'caidat', component: CaidatContainerComponent,
+    {
+        path: 'caidat', component: CaidatContainerComponent,
         children: [{
             path: '',
             loadChildren: () => import('./caidat/caidat.module').then(m => m.CatDatModule)
-        }]},
+        }]
+    },
     {path: 'login', component: LoginComponent},
     {path: 'forbidden', component: ForbiddenComponent},
     {path: '**', component: NotfoundComponent}

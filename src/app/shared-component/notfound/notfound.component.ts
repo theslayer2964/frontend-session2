@@ -10,6 +10,7 @@ export class NotfoundComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("KO TIM RA")
   }
 
 }

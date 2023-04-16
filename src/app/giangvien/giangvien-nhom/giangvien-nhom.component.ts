@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSelectChange} from "@angular/material/select";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
+import {DetaiService} from "../detai/detai-service/detai.service";
 import {HockyService} from "../../shared-service/hocky.service";
 import {HocKy} from "../../shared-service/HocKy.models";
 import {MatPaginator} from "@angular/material/paginator";
@@ -55,7 +56,7 @@ export class GiangvienNhomComponent implements OnInit {
     }
 
 
-    openDialog(nhom: any) {
+    openDialog() {
         this.dialog.open(ThemNhomComponent, {}).afterClosed().subscribe(val => {
             if (val === "save") {
 

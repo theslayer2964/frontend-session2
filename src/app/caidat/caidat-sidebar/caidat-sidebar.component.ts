@@ -1,7 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthGuard} from "../../authentication/_auth/auth.guard";
-
-declare const $: any;
 
 declare interface RouteInfo {
     path: string;

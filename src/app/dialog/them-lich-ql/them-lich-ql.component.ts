@@ -14,7 +14,7 @@ export class ThemLichQlComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private detaiService: DetaiService,
               private dialogRef: MatDialogRef<ThemLichQlComponent>,
-              @Inject(MAT_DIALOG_DATA) public editData: any) { }
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     this.schedularForm = this.formBuilder.group({
@@ -26,7 +26,7 @@ export class ThemLichQlComponent implements OnInit {
       room: ['', Validators.required],
       comment: ['', Validators.required]
     })
-    console.log(this.editData)
+    console.log(this.data)
   }
   dsGV: string[] = ["Nguyễn Thị Hoàng Khánh"," Nguyễn Thị Hạnh"," Nguyễn Trọng Tiến", "Phạm Quảng Tri"];
     addSchedule() {
