@@ -5,7 +5,11 @@
       "title": "Lịch học tuần",
       "start": "2023-04-08T09:30:00+07:00",
       "end": "2023-04-20T011:30:00+07:00",
-      "daysOfWeek": ["2","4","6"],
+      "daysOfWeek": [
+        "2",
+        "4",
+        "6"
+      ],
       "backgroundColor": "red"
     },
     {
@@ -14,6 +18,15 @@
       "start": "2023-04-08T06:30:00+07:00",
       "end": "2023-04-08T07:30:00+07:00",
       "backgroundColor": "blue"
+    },
+    {
+      "headers": {
+        "normalizedNames": {},
+        "lazyUpdate": null,
+        "lazyInit": null,
+        "headers": {}
+      },
+      "id": "1D7PNxH"
     }
   ],
   "productList": [

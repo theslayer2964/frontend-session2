@@ -3,7 +3,8 @@ import {HockyService} from "../../shared-service/hocky.service";
 import {LichService} from "../../shared-service/lich/lich.service";
 import {HocKy} from "../../shared-service/HocKy.models";
 import {MatSelectChange} from "@angular/material/select";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {DatePipe} from "@angular/common";
 
 @Component({
     selector: 'app-ql-lich',
@@ -16,7 +17,8 @@ export class QlLichComponent implements OnInit {
     dsKeHoachGV: any;
     dsKeHoachSV: any;
 
-    constructor(private hocKyService: HockyService, private lichServer: LichService, private formBuilder: FormBuilder,) {
+    constructor(private hocKyService: HockyService, private lichServer: LichService,
+                private formBuilder: FormBuilder, private lichService: LichService) {
 
     }
 
@@ -31,8 +33,8 @@ export class QlLichComponent implements OnInit {
             // dsNgayThucHienKhoaLuan: [[]], // KO CAN
             vaiTro: [],
             // tinhTrang:[], // KO CAN
-            hocKy:[],
-            maNguoiDung:[]
+            hocKy: [],
+            maNguoiDung: []
         })
 
     }
@@ -67,26 +69,57 @@ export class QlLichComponent implements OnInit {
             }
         )
     }
+
     keHoach: any;
-    display:boolean = false;
+    display: boolean = false;
     keHoachGroup!: FormGroup;
+
     chinhSuaData(keHoach: any) {
         this.keHoach = keHoach
         this.display = true;
-        if(this.keHoach){
-            // this.keHoachGroup.controls['id'].setValue(this.keHoach.id);
-            // this.keHoachGroup.controls['tenKeHoach'].setValue(this.keHoach.tenKeHoach);
+        if (this.keHoach) {
+            this.keHoachGroup.controls['id'].setValue(this.keHoach.id);
+            this.keHoachGroup.controls['tenKeHoach'].setValue(this.keHoach.tenKeHoach);
             this.keHoachGroup.controls['chuThich'].setValue(this.keHoach.chuThich);
             // this.keHoachGroup.controls['hocKy'].setValue(this.keHoach.hocKy);
-            this.keHoachGroup.controls['thoiGianBatDau'].setValue(this.keHoach.thoiGianBatDau);
-            this.keHoachGroup.controls['thoiGianKetThuc'].setValue(this.keHoach.thoiGianKetThuc);
+            this.keHoachGroup.controls['thoiGianBatDau'].setValue(this.pipe.transform(this.keHoach.thoiGianBatDau, 'yyyy-MM-dd'));
+            this.keHoachGroup.controls['thoiGianKetThuc'].setValue(this.pipe.transform(this.keHoach.thoiGianKetThuc, 'yyyy-MM-dd'));
             // this.keHoachGroup.controls['tinhTrang'].setValue(this.keHoach.tinhTrang);
-            // this.keHoachGroup.controls['vaiTro'].setValue(this.keHoach.vaiTro);
-            // this.keHoachGroup.controls['maNguoiDung'].setValue(this.keHoach.maNguoiDung);
+            this.keHoachGroup.controls['vaiTro'].setValue(this.keHoach.vaiTro);
+            this.keHoachGroup.controls['maNguoiDung'].setValue(this.keHoach.maNguoiDung);
         }
     }
 
-    onUpdateKeHoach(keHoach: any) {
-        console.log("KE HOACH:", JSON.stringify(keHoach));
+    onUpdateKeHoach() {
+        const keHoachRequest = {
+            id: this.keHoachGroup.value.id,
+            tenKeHoach: this.keHoachGroup.value.tenKeHoach,
+            chuThich: this.keHoachGroup.value.chuThich,
+            thoiGianBatDau: this.keHoachGroup.value.thoiGianBatDau,
+            thoiGianKetThuc: this.keHoachGroup.value.thoiGianKetThuc,
+            hocKy: this.keHoach.hocKy,
+            maNguoiDung: null,
+            tinhTrang: 0,
+            vaiTro: "ROLE_QUANLY",
+        }
+        if(this.keHoach.vaiTro == "ROLE_SINHVIEN"){
+            this.lichService.updateLich(keHoachRequest).subscribe(res => {
+                this.dsKeHoachSV.filter(data => {
+                    if(data.id == res.id){
+                        data = res;
+                    }
+                })
+            });
+        }
+        if(this.keHoach.vaiTro == "ROLE_GIANGVIEN"){
+            this.lichService.updateLich(keHoachRequest).subscribe(res => {
+                this.dsKeHoachSV.filter(data => {
+                    if(data.id == res.id){
+                        data = res;
+                    }
+                })
+            });
+        }
     }
+    pipe = new DatePipe('en-US');
 }

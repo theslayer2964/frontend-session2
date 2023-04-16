@@ -23,12 +23,29 @@ export class QuanlyLich2Component implements OnInit {
     }
 
     ngOnInit(): void {
-        // this.lichService.getLich().pipe(take(1)).subscribe( res =>
+        this.lichService.getLichTheoHocKyVaMaGV("232",null,"ROLE_GIANGVIEN").pipe(take(1)).subscribe( res =>{
+            let a = [];
+                res.forEach(data => {
+                    a.push({
+                        id: data.id,
+                        start: "2023-04-08T09:30:00+07:00",
+                        end: "2023-04-10T09:30:00+07:00",
+                        title: data.tenKeHoach,
+                        allDay:true,
+                        backgroundColor:"red",
+                        daysOfWeek: data.dsNgayThucHienKhoaLuan
+                    })
+                })
+            this.data$ = a;
+            console.log("$",this.data$);
+            }
+        );
+        // this.lichService.fetchData().pipe(take(1)).subscribe( res =>
         //     this.data$ = res
         // );
     }
 
-    data$: any[] = [];
+    data$: any[] = [ ];
     calendarOptions: CalendarOptions = {
         plugins: [
             interactionPlugin,
