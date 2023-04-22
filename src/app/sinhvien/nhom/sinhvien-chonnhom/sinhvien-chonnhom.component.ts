@@ -143,7 +143,8 @@ export class SinhvienChonnhomComponent implements OnInit {
     private roiNhom() {
         this.nhomService.roiNhom({
             dsMaSinhVien: [this.userAuthService.getUserInfo().maSinhVien],
-            maNhom: this.nhom.maNhom
+            maNhom: this.nhom.maNhom,
+            vaiTro: this.userAuthService.getRoles()[0].roleName
             }
         ).subscribe({
             next: (res) => {
