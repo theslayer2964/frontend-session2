@@ -18,9 +18,8 @@
                         <mat-form-field style="width: 400px;margin-left: 20px">
                             <mat-label>-- Chọn tình trạng --</mat-label>
                             <mat-select (selectionChange)="changeTinhTrang($event)">
-                                <mat-option [value]="1">Chưa duyệt</mat-option>
-                                <mat-option [value]="2">Cần chỉnh sửa</mat-option>
-                                <mat-option [value]="3">Không chấp nhận</mat-option>
+                                <mat-option [value]="0">Chưa duyệt</mat-option>
+                                <mat-option [value]="1">Đã Duyệt</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>

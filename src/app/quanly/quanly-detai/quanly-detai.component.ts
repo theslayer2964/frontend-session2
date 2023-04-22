@@ -2,13 +2,14 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {HocKy} from "../../shared-service/HocKy.models";
 import {MatDialog} from "@angular/material/dialog";
-import {NhomService} from "../../shared-service/nhom.service";
 import {HockyService} from "../../shared-service/hocky.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {ThemNhomComponent} from "../../dialog/them-nhom/them-nhom.component";
 import {MatSelectChange} from "@angular/material/select";
+import {DetaiService} from "../../giangvien/detai/detai-service/detai.service";
+import {ThemDeTaiGvComponent} from "../../dialog/them-de-tai-gv/them-de-tai-gv.component";
+import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 
 @Component({
   selector: 'app-quanly-detai',
@@ -16,15 +17,20 @@ import {MatSelectChange} from "@angular/material/select";
   styleUrls: ['./quanly-detai.component.scss']
 })
 export class QuanlyDetaiComponent implements OnInit {
-  displayedColumns: string[] = ['maNhom', 'maDeTai', 'sv1', 'sv2', "danhGia","action"];
-  dataSource!: MatTableDataSource<any>;
-  dsHocKy: HocKy[];
+  private hocKyHienTai: any;
+  private soHocKy: any;
 
-  constructor(public dialog: MatDialog, private nhomService: NhomService, private hockyService: HockyService,
+  constructor(public dialog: MatDialog, private detaiService: DetaiService, private hockyService: HockyService,
               private userAuthService: UserAuthService) {
-
   }
 
+  ngOnInit(): void {
+    this.getAllHocKy();
+  }
+
+  dsHocKy: HocKy[];
+
+  // 1. STEP 1
   private getAllHocKy() {
     this.hockyService.getHocKy().subscribe({
       next: (res) => {
@@ -35,15 +41,30 @@ export class QuanlyDetaiComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.getAllHocKy();
-    console.log("PAREN TO CHILD:", this.validateNhom);
+  openDialog() {
+    this.dialog.open(ThemDeTaiGvComponent, {}).afterClosed().subscribe(val => {
+      if (val === "save") {
+        this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
+      }
+    })
   }
+
+  editProduct(row: any) {
+    this.dialog.open(ThemDeTaiGvComponent, {
+      data: row
+    }).afterClosed().subscribe(val => {
+      if (val === "update") {
+        this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
+      }
+    })
+  }
+
+  // Table
+  displayedColumns: string[] = ['maDeTai', "tenDeTai", 'gioiHanSoNhomThucHien', 'moTa', "mucTieuDeTai", "sanPhamDuKien", "trangThai", "yeuCauDauVao" ,"action"];
+  dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  impType: any;
-  selected: any;
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -54,31 +75,28 @@ export class QuanlyDetaiComponent implements OnInit {
     }
   }
 
-  editProduct(row: any) {
-    this.dialog.open(ThemNhomComponent, {
-      data: row
-    }).afterClosed().subscribe(val => {
-      if (val === "update") {
-        // this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
+  deleteProduct(id: any) {
+    this.detaiService.deleteDeTai(id).subscribe({
+      next: (res) => {
+        this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
+        new NotificationsComponent().showNotification('success', 'Xóa đề tài thành công');
+      },
+      error: () => {
+        new NotificationsComponent().showNotification('danger', 'Không thể xóa đề tài');
+        console.log("Error")
       }
     })
   }
-
-  deleteProduct(id) {
-
-  }
-  private hocKyHienTai: any;
-  private soHocKy: any;
 
   changeHocKy($event: MatSelectChange) {
     this.hocKyHienTai = $event.value.toString().slice(0, 3)
     this.soHocKy = $event.value.toString().slice(2)
     console.log('XXX:', this.hocKyHienTai, this.soHocKy);
-    this.getDsNhom(this.hocKyHienTai, this.soHocKy);
+    this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
   }
-
-  private getDsNhom(maHocKy: any, soHocKy: any) {
-    this.nhomService.getNhomRoleGV({
+  // STEP 2
+  private getDSDeTaiTheoHK(maHocKy: any, soHocKy: any) {
+    this.detaiService.getDeTaiRoleGV({
       maGiangVien: this.userAuthService.getUserInfo().maGiangVien,
       maHocKy: maHocKy,
       soHocKy: soHocKy
@@ -86,7 +104,8 @@ export class QuanlyDetaiComponent implements OnInit {
         .subscribe({
           next: (res) => {
             if (res) {
-              console.log("GV _ Nhom:", res);
+              console.log("GV _ DeTai:", res);
+              // table
               this.dataSource = new MatTableDataSource(res);
               this.dataSource.paginator = this.paginator;
               this.dataSource.sort = this.sort;
@@ -98,11 +117,13 @@ export class QuanlyDetaiComponent implements OnInit {
         })
   }
 
-  // Table
-  @Input() validateNhom:any;
+  @Input() validateDeTai;
 
   changeTinhTrang($event: MatSelectChange) {
-
+    
   }
 
+    downloadFileSV() {
+
+    }
 }

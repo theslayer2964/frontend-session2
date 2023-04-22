@@ -139,7 +139,6 @@ export class ThemNhomComponent implements OnInit {
                             this.user = this.userAuthService.getUserInfo();
                             this.user.nhom = res;
                             this.userAuthService.setUserInfo(this.user);
-                            this.router.navigate(['/trangchuSV']);
                             console.log("DIRECT SV CHON NHOM")
 
                         },

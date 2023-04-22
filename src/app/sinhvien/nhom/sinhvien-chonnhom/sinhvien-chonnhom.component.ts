@@ -68,6 +68,7 @@ export class SinhvienChonnhomComponent implements OnInit {
         this.dialog.open(DangkyCosanComponent, {data: "save"}).afterClosed().subscribe(val => {
             if (val === "save") {
                 row.dsMaSinhVien.push(this.userAuthService.getUserInfo().maSinhVien);
+                row.vaiTro = this.userAuthService.getRoles()[0].roleName
                 console.log(row)
                 this.nhomService.dangKyNhom(row)
                     .subscribe({
