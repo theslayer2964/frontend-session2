@@ -66,6 +66,8 @@ import {ThemNhomComponent} from "./dialog/them-nhom/them-nhom.component";
 import { DangkyCosanComponent } from './dialog/dangky-cosan/dangky-cosan.component';
 import { DangKyDetaiComponent } from './dialog/dang-ky-detai/dang-ky-detai.component';
 import { ChangepasswordComponent } from './authentication/changepassword/changepassword.component';
+import { QuanlySinhvienComponent } from './quanly/quanly-sinhvien/quanly-sinhvien.component';
+import { QuanlyGiangvienComponent } from './quanly/quanly-giangvien/quanly-giangvien.component';
 
 @NgModule({
     imports: [
@@ -136,7 +138,9 @@ import { ChangepasswordComponent } from './authentication/changepassword/changep
         ThemNhomComponent,
         DangkyCosanComponent,
         DangKyDetaiComponent,
-        ChangepasswordComponent
+        ChangepasswordComponent,
+        QuanlySinhvienComponent,
+        QuanlyGiangvienComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,
