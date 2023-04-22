@@ -12,6 +12,7 @@ import {NhomService} from '../../../shared-service/nhom.service';
 import {DangkyCosanComponent} from "../../../dialog/dangky-cosan/dangky-cosan.component";
 import {NotificationsComponent} from "../../../shared-component/notifications/notifications.component";
 import {LichService} from "../../../shared-service/lich/lich.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-sinhvien-chonnhom',
@@ -33,6 +34,7 @@ export class SinhvienChonnhomComponent implements OnInit {
                 private nhomService: NhomService,
                 private hockyService: HockyService,
                 private userAuthService: UserAuthService,
+                private router: Router
                ) {
     }
 
@@ -148,9 +150,14 @@ export class SinhvienChonnhomComponent implements OnInit {
             }
         ).subscribe({
             next: (res) => {
-                this.sinhvien = res;
+                this.sinhvien = this.userAuthService.getUserInfo();
+                this.sinhvien.nhom = res.nhom;
                 console.log(this.sinhvien);
                 this.userAuthService.setUserInfo(this.sinhvien);
+                this.nhom = null;
+                this.router.navigate(['/sv-chonNhom']);
+                console.log("SV - NHOM:", this.nhom);
+                console.log("SV - DIRECT")
             }, error: (err) => {
                 console.log(err);
             }

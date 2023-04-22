@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {RouterModule} from "@angular/router";
 import {QuanlyLichRouting} from "./quanly-lich.routing";
 import {QuanlyLichContainerComponent} from './quanly-lich-container/quanly-lich-container.component';

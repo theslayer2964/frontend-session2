@@ -47,6 +47,18 @@ const routes: Routes = [
         data: {roles: ['ROLE_QUANLY']}
     },
     {
+        path: 'quanly/sinhvien',
+        component: QuanlySinhvienComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_QUANLY']}
+    },
+    {
+        path: 'quanly/giangvien',
+        component: QuanlyGiangvienComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_QUANLY']}
+    },
+    {
         path: 'quanly/lich',
         component: QuanlyLich2Component,
         canActivate: [AuthGuard],
