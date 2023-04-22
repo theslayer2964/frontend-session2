@@ -7,7 +7,7 @@ import {EventInput} from "@fullcalendar/core";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class LichService {
   private url = "http://localhost:8080/api/ke-hoach/";
@@ -17,8 +17,8 @@ export class LichService {
     Authorization: `Bearer ${(this.token)}`
   })
 
-    constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) {
-    }
+  constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) {
+  }
 
   getLichTheoHocKyVaMaGV(maHocKy: string, maNguoiDung: string, role: string): Observable<any> {
       let data = {
@@ -34,27 +34,10 @@ export class LichService {
             catchError(err => of([])));
   }
 
-    updateLich(keHoach: any): Observable<any> {
-        console.log("SERVCIE:", keHoach);
-        return this.httpClient.put<any>(this.urlQL + "cap-nhat-ke-hoach", keHoach, {headers: this.httpHeadersJWT})
-            .pipe(
-                tap(res => {
-                    res = res;
-                }),
-                catchError(err => of([]))
-            );
-    }
-
-    fetchData() {
-        return this.httpClient.get<any>("http://localhost:4000/event", {headers: this.httpHeadersJWT})
-            .pipe(
-                tap(res => {
-                    console.log("res fecth:", res);
-                    res = res;
-                }),
-                catchError(err => of([]))
-            );
-    }
+  updateLich(keHoach: any): Observable<any>{
+      return this.httpClient.put<any>(this.urlQL + "cap-nhat-ke-hoach", keHoach,{headers: this.httpHeadersJWT})
+          .pipe();
+  }
 
   validateLich(data: any): Observable<any>{
       return this.httpClient.post<any>(this.url + "lay-ke-hoach-theo-ten", data,{headers: this.httpHeadersJWT})

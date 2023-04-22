@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-profile',

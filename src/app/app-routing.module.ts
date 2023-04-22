@@ -16,6 +16,8 @@ import {CaidatContainerComponent} from "./caidat/caidat-container/caidat-contain
 import {QuanlyLich2Component} from "./quanly-lich/quanly-lich2/quanly-lich2.component";
 import {QuanlyLichContainerComponent} from "./quanly-lich/quanly-lich-container/quanly-lich-container.component";
 import {ChangepasswordComponent} from "./authentication/changepassword/changepassword.component";
+import {QuanlySinhvienComponent} from "./quanly/quanly-sinhvien/quanly-sinhvien.component";
+import {QuanlyGiangvienComponent} from "./quanly/quanly-giangvien/quanly-giangvien.component";
 
 const routes: Routes = [
 
@@ -41,6 +43,18 @@ const routes: Routes = [
     {
         path: 'quanly/detai',
         component: QuanlyDetaiComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_QUANLY']}
+    },
+    {
+        path: 'quanly/sinhvien',
+        component: QuanlySinhvienComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_QUANLY']}
+    },
+    {
+        path: 'quanly/giangvien',
+        component: QuanlyGiangvienComponent,
         canActivate: [AuthGuard],
         data: {roles: ['ROLE_QUANLY']}
     },

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {ThemDeTaiGvComponent} from "../../../dialog/them-de-tai-gv/them-de-tai-gv.component";
 import {DetaiService} from "../detai-service/detai.service";
@@ -116,4 +116,6 @@ export class DetaiComponent implements OnInit {
                 }
             })
     }
+
+    @Input() validateDeTai;
 }
