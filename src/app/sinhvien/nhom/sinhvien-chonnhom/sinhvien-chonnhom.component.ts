@@ -66,6 +66,7 @@ export class SinhvienChonnhomComponent implements OnInit {
         this.dialog.open(DangkyCosanComponent, {data: "save"}).afterClosed().subscribe(val => {
             if (val === "save") {
                 row.dsMaSinhVien.push(this.userAuthService.getUserInfo().maSinhVien);
+                row.vaiTro = this.userAuthService.getRoles()[0].roleName
                 console.log(row)
                 this.nhomService.dangKyNhom(row)
                     .subscribe({
@@ -142,7 +143,8 @@ export class SinhvienChonnhomComponent implements OnInit {
     private roiNhom() {
         this.nhomService.roiNhom({
             dsMaSinhVien: [this.userAuthService.getUserInfo().maSinhVien],
-            maNhom: this.nhom.maNhom
+            maNhom: this.nhom.maNhom,
+            vaiTro: this.userAuthService.getRoles()[0].roleName
             }
         ).subscribe({
             next: (res) => {
