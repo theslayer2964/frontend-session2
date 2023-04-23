@@ -46,4 +46,9 @@ export class NhomService {
             catchError(err => of([])));
     }
 
+    getDSNhomDePhanCongGVPhanBien(formData: any){
+        return this.httpClient.post<any>(this.url + "lay-ds-nhom-phan-bien", formData, {headers: this.httpHeadersJWT}).pipe(
+            tap(receiveNhom => receiveNhom),
+            catchError(err => of([])));
+    }
 }
