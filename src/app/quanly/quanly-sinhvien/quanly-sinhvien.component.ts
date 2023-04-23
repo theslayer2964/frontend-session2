@@ -10,6 +10,8 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 import {MatSelectChange} from "@angular/material/select";
+import {ThemgvComponent} from "../../dialog/themgv/themgv.component";
+import {ThemSvComponent} from "../../dialog/them-sv/them-sv.component";
 import {DialogExcelQlSinhvienComponent} from "../../excel/dialog-excel-ql-sinhvien/dialog-excel-ql-sinhvien.component";
 
 @Component({
@@ -44,7 +46,11 @@ export class QuanlySinhvienComponent implements OnInit {
   }
 
   openDialog() {
-    /////////
+    this.dialog.open(ThemSvComponent, {}).afterClosed().subscribe(val => {
+      if (val === "save") {
+        this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
+      }
+    })
   }
 
   editProduct(row: any) {
@@ -75,6 +81,7 @@ export class QuanlySinhvienComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
 
   deleteProduct(id: any) {
     this.detaiService.deleteDeTai(id).subscribe({

@@ -75,6 +75,11 @@ import { DialogExcelQlGiangvienComponent } from './excel/dialog-excel-ql-giangvi
 import { SinhvienDiemComponent } from './sinhvien/sinhvien-diem/sinhvien-diem.component';
 import { SinhvienLichComponent } from './sinhvien/sinhvien-lich/sinhvien-lich.component';
 import { GiangvienChamdiemComponent } from './giangvien/giangvien-chamdiem/giangvien-chamdiem.component';
+import { ThemSvComponent } from './dialog/them-sv/them-sv.component';
+import { ThemgvComponent } from './dialog/themgv/themgv.component';
+import { QuanlyTieuchichamComponent } from './quanly/quanly-tieuchicham/quanly-tieuchicham.component';
+import { QuanlyPhieuchamComponent } from './quanly/quanly-phieucham/quanly-phieucham.component';
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
     imports: [
@@ -111,7 +116,8 @@ import { GiangvienChamdiemComponent } from './giangvien/giangvien-chamdiem/giang
         MatDividerModule,
         QuanlyLichModule,
         CatDatModule,
-        FullCalendarModule
+        FullCalendarModule,
+        MatListModule
     ],
     declarations: [
         AppComponent,
@@ -153,7 +159,11 @@ import { GiangvienChamdiemComponent } from './giangvien/giangvien-chamdiem/giang
         DialogExcelQlGiangvienComponent,
         SinhvienDiemComponent,
         SinhvienLichComponent,
-        GiangvienChamdiemComponent
+        GiangvienChamdiemComponent,
+        ThemSvComponent,
+        ThemgvComponent,
+        QuanlyTieuchichamComponent,
+        QuanlyPhieuchamComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

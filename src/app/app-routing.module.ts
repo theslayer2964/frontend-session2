@@ -20,6 +20,8 @@ import {QuanlySinhvienComponent} from "./quanly/quanly-sinhvien/quanly-sinhvien.
 import {QuanlyGiangvienComponent} from "./quanly/quanly-giangvien/quanly-giangvien.component";
 import {SinhvienDiemComponent} from "./sinhvien/sinhvien-diem/sinhvien-diem.component";
 import {SinhvienLichComponent} from "./sinhvien/sinhvien-lich/sinhvien-lich.component";
+import {QuanlyTieuchichamComponent} from "./quanly/quanly-tieuchicham/quanly-tieuchicham.component";
+import {QuanlyPhieuchamComponent} from "./quanly/quanly-phieucham/quanly-phieucham.component";
 
 const routes: Routes = [
 
@@ -75,6 +77,18 @@ const routes: Routes = [
     {
         path: 'quanly/giangvien',
         component: QuanlyGiangvienComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_QUANLY']}
+    },
+    {
+        path: 'quanly/tieuchicham',
+        component: QuanlyTieuchichamComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_QUANLY']}
+    },
+    {
+        path: 'quanly/phieucham',
+        component: QuanlyPhieuchamComponent,
         canActivate: [AuthGuard],
         data: {roles: ['ROLE_QUANLY']}
     },

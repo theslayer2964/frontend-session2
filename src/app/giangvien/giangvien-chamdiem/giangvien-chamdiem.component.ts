@@ -46,7 +46,7 @@ export class GiangvienChamdiemComponent implements OnInit {
   }
 
   // Table
-  displayedColumns: string[] = ['maDeTai', "tenDeTai", 'maNhom', 'tenNhom', "sinhVien1", "sinhVien2", "diem" ,"action"];
+  displayedColumns: string[] = ['maSV','tenSV','maDeTai', "tenDeTai", 'maNhom', 'tenNhom', "diem" ,"action"];
   dataSource!: MatTableDataSource<any>;
 
   editProduct(row) {

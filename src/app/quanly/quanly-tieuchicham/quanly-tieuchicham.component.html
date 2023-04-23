@@ -1,3 +1,5 @@
+<hr>
+<!--Table -->
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
@@ -6,15 +8,21 @@
                     <div class="card-header"
                          style="display: flex;justify-content: space-between;background-color: #4da1e8">
                         <h4 class="card-title"
-                            style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">ĐÁNH GIÁ</h4>
+                            style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH TIÊU
+                            CHÍ HIỆN CÓ</h4>
                         <mat-form-field>
                             <mat-label>Tùy chỉnh</mat-label>
                             <mat-select>
-                                <mat-option (click)="nhapDiemExcel()">Nhập điểm bằng Excel</mat-option>
-                                <mat-option (click)="xuatFileChamDiemMacDinh()">Xuất file nhập điểm mặc định</mat-option>
+                                <mat-option (click)="addTieuChiCham()">Thêm tiêu chí chấm điểm</mat-option>
+                                <mat-option (click)="nhapExcel()">Nhập bằng Excel</mat-option>
+                                <mat-option (click)="xuatFileChamDiemMacDinh()">Xuất file nhập tiêu chí mặc định
+                                </mat-option>
                                 <mat-option (click)="xuatFileExcel()">Xuất file excel</mat-option>
                             </mat-select>
                         </mat-form-field>
+                        <button mat-raised-button class="btn btn-primary" (click)="directPhieuCham()" style="height: 40px">
+                            Quay lại phiếu chấm
+                        </button>
                     </div>
                     <hr>
                     <div>
@@ -36,65 +44,42 @@
                     <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;overflow: auto;">
                         <table mat-table [dataSource]="dataSource" matSort>
                             <!-- ID Column -->
-                            <ng-container sticky matColumnDef="maSV">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center"> Mã SV
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.maSV}}"
-                                    matTooltipClass="example-tooltip-uppercase">
-                                    {{row.maSV}}
-                                </td>
-                            </ng-container>
-                            <ng-container matColumnDef="tenSV">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">
-                                    Tên SV
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenSV}}"
-                                    matTooltipClass="example-tooltip-uppercase">
-                                    {{row.tenSV}}
-                                </td>
-                            </ng-container>
-                            <ng-container matColumnDef="maDeTai" class="example-button">
+                            <ng-container matColumnDef="maChuanDauRa" sticky class="example-button">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    style="width: 100px;text-align: center"> MÃ ĐỀ TÀI
+                                    style="width: 100px;text-align: center"> MÃ TIÊU CHÍ
                                 </th>
-                                <td mat-cell *matCellDef="let row"> {{row.maDeTai}} </td>
+                                <td mat-cell *matCellDef="let row"> {{row.maChuanDauRa}} </td>
                             </ng-container>
                             <!-- Progress Column -->
-                            <ng-container matColumnDef="tenDeTai" style="margin-left: 60px">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="margin-left: 60px"> TÊN ĐỀ
-                                    TÀI
+                            <ng-container matColumnDef="tenChuanDauRa" style="margin-left: 60px">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="margin-left: 60px"> TÊN
+                                    TIÊU CHÍ
                                 </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenDeTai}}"
+                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenChuanDauRa}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    {{row.tenDeTai}}
+                                    {{row.tenChuanDauRa}}
                                 </td>
                             </ng-container>
                             <!-- Progress Column -->
-                            <ng-container matColumnDef="maNhom">
+                            <ng-container matColumnDef="diemToiDa">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    style="width: 100px;text-align: center"> MÃ NHÓM
+                                    style="width: 100px;text-align: center"> ĐIỂM TỐI ĐA
                                 </th>
-                                <td mat-cell *matCellDef="let row"> {{row.maNhom}}</td>
+                                <td mat-cell *matCellDef="let row"> {{row.diemToiDa}}</td>
                             </ng-container>
                             <!-- Progress Column -->
-                            <ng-container matColumnDef="tenNhom" style="width: 200px;">
+                            <ng-container matColumnDef="moTa" style="width: 200px;">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    style="margin-left: 40px;text-align: center"> TÊN NHÓM
+                                    style="margin-left: 40px;text-align: center"> MÔ TẢ
                                 </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenNhom}}"
+                                <td mat-cell *matCellDef="let row" matTooltip="{{row.moTa}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    {{row.tenNhom}}
-                                </td>
-                            </ng-container>
-                            <!-- Progress Column -->
-
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="diem">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center"> ĐIỂM
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.diem}}"
-                                    matTooltipClass="example-tooltip-uppercase">
-                                    {{row.sinhVien2}}
+                                    <div *ngIf="row.moTa.length < 20">
+                                        <p>{{row.moTa}}</p>
+                                    </div>
+                                    <div *ngIf="row.moTa.length >= 20">
+                                        <p>{{row.moTa.slice(0, 20)}}...</p>
+                                    </div>
                                 </td>
                             </ng-container>
                             <ng-container matColumnDef="action" stickyEnd>
@@ -105,6 +90,9 @@
                                     <!--Row: data cua 1 dong-->
                                     <button mat-icon-button color="primary" (click)="editProduct(row)">
                                         <mat-icon>edit</mat-icon>
+                                    </button>
+                                    <button mat-icon-button color="accent" (click)="deleteProduct(row.maChuanDauRa)">
+                                        <mat-icon>delete</mat-icon>
                                     </button>
                                 </td>
                             </ng-container>
@@ -123,3 +111,6 @@
         </div>
     </div>
 </div>
+
+
+
