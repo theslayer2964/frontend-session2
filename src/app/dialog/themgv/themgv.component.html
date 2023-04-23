@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Thêm giảng Viên</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="giangVienForm">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label  mat-header-cell *matHeaderCellDef>Mã giảng Viên</mat-label>
+                                        <input formControlName="maGiangVien" matInput placeholder="Mã giảng Viên">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-8">
+                                    <label>Email</label>
+                                    <mat-form-field class="example-full-width">
+                                        <input formControlName="email" matInput>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label  mat-header-cell *matHeaderCellDef>Ảnh đại diện</mat-label>
+                                        <input formControlName="anhDaiDien" matInput placeholder="Ảnh đại diện">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Số Điện thoại</label>
+                                    <mat-form-field class="example-full-width">
+                                        <input formControlName="soDienThoai" matInput>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label mat-header-cell *matHeaderCellDef>Tên giảng Viên</mat-label>
+                                        <input formControlName="tenGiangVien" matInput placeholder="Tên đề tài">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Ngày Sinh</mat-label>
+                                        <input formControlName="ngaySinh" matInput
+                                               placeholder="Placeholder" type="date" >
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Năm Công Tác</label>
+                                    <mat-form-field class="example-full-width">
+                                        <input formControlName="namCongTac" matInput>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-9">
+                                    <label>CMND/CCCD</label>
+                                    <mat-form-field class="example-full-width">
+                                        <input formControlName="cmnd" matInput>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Giới Tính</label>
+                                    <mat-form-field class="example-full-width">
+                                        <textarea formControlName="gioiTinh" matInput></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Học Vị</label>
+                                    <mat-form-field class="example-full-width">
+                                        <input formControlName="hocVi" matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Khoa</label>
+                                    <mat-form-field class="example-full-width">
+                                        <input formControlName="maKhoa" matInput />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div mat-dialog-actions [align]="'end'">
+                                <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
+                                <!--                                [disabled]="!productForm.valid"-->
+                                <button style="margin-left: 8px" mat-raised-button color="primary"
+
+                                        (click)="addGiangVien()">{{actionBtn}}</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

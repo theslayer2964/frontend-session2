@@ -10,6 +10,8 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 import {MatSelectChange} from "@angular/material/select";
+import {ThemSvComponent} from "../../dialog/them-sv/them-sv.component";
+import {ThemgvComponent} from "../../dialog/themgv/themgv.component";
 
 @Component({
   selector: 'app-quanly-giangvien',
@@ -43,7 +45,11 @@ export class QuanlyGiangvienComponent implements OnInit {
   }
 
   openDialog() {
-    /////////
+    this.dialog.open(ThemgvComponent, {}).afterClosed().subscribe(val => {
+      if (val === "save") {
+        this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
+      }
+    })
   }
 
   editProduct(row: any) {

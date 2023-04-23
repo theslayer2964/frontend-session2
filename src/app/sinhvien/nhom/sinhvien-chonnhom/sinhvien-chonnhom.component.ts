@@ -35,7 +35,7 @@ export class SinhvienChonnhomComponent implements OnInit {
                 private hockyService: HockyService,
                 private userAuthService: UserAuthService,
                 private router: Router
-               ) {
+    ) {
     }
 
     ngOnInit(): void {
@@ -141,12 +141,14 @@ export class SinhvienChonnhomComponent implements OnInit {
             }
         })
     }
+
     sinhvien: any;
+
     private roiNhom() {
         this.nhomService.roiNhom({
-            dsMaSinhVien: [this.userAuthService.getUserInfo().maSinhVien],
-            maNhom: this.nhom.maNhom,
-            vaiTro: this.userAuthService.getRoles()[0].roleName
+                dsMaSinhVien: [this.userAuthService.getUserInfo().maSinhVien],
+                maNhom: this.nhom.maNhom,
+                vaiTro: this.userAuthService.getRoles()[0].roleName
             }
         ).subscribe({
             next: (res) => {
@@ -163,6 +165,4 @@ export class SinhvienChonnhomComponent implements OnInit {
             }
         })
     }
-
-
 }
