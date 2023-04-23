@@ -2,9 +2,9 @@
 <script src="tab-nav.component.ts"></script>
 <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="end" style="margin-top: 80px">
   <mat-tab label="Hồ Sơ"><app-profile ></app-profile> </mat-tab>
-  <mat-tab label="Nhóm"><app-giangvien-nhom [validateNhom]="validateNhom"></app-giangvien-nhom></mat-tab>
   <mat-tab label="Đề tài"><app-detai [validateDeTai]="validateDeTai"></app-detai> </mat-tab>
+  <mat-tab label="Nhóm"><app-giangvien-nhom [validateNhom]="validateNhom"></app-giangvien-nhom></mat-tab>
+  <mat-tab label="Chấm điểm"><app-giangvien-chamdiem></app-giangvien-chamdiem></mat-tab>
   <mat-tab label="Phân công">Content 4</mat-tab>
-  <mat-tab label="Điểm">Content 5</mat-tab>
   <mat-tab label="Lịch">Content 6</mat-tab>
 </mat-tab-group>

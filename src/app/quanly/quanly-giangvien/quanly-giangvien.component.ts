@@ -12,6 +12,9 @@ import {NotificationsComponent} from "../../shared-component/notifications/notif
 import {MatSelectChange} from "@angular/material/select";
 import {ThemSvComponent} from "../../dialog/them-sv/them-sv.component";
 import {ThemgvComponent} from "../../dialog/themgv/themgv.component";
+import {
+  DialogExcelQlGiangvienComponent
+} from "../../excel/dialog-excel-ql-giangvien/dialog-excel-ql-giangvien.component";
 
 @Component({
   selector: 'app-quanly-giangvien',
@@ -134,4 +137,9 @@ export class QuanlyGiangvienComponent implements OnInit {
 
   }
 
+  openExcel() {
+    this.dialog.open(DialogExcelQlGiangvienComponent,{
+      width:"450px"
+    })
+  }
 }

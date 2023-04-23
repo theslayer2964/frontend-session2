@@ -69,8 +69,17 @@ import { ChangepasswordComponent } from './authentication/changepassword/changep
 import {ThemNhomTransferService} from "./transfer-data-service/them-nhom-transfer.service";
 import { QuanlyGiangvienComponent } from './quanly/quanly-giangvien/quanly-giangvien.component';
 import { QuanlySinhvienComponent } from './quanly/quanly-sinhvien/quanly-sinhvien.component';
+import { DialogDeTaiGVComponent } from './excel/dialog-de-tai-gv/dialog-de-tai-gv.component';
+import { DialogExcelQlSinhvienComponent } from './excel/dialog-excel-ql-sinhvien/dialog-excel-ql-sinhvien.component';
+import { DialogExcelQlGiangvienComponent } from './excel/dialog-excel-ql-giangvien/dialog-excel-ql-giangvien.component';
+import { SinhvienDiemComponent } from './sinhvien/sinhvien-diem/sinhvien-diem.component';
+import { SinhvienLichComponent } from './sinhvien/sinhvien-lich/sinhvien-lich.component';
+import { GiangvienChamdiemComponent } from './giangvien/giangvien-chamdiem/giangvien-chamdiem.component';
 import { ThemSvComponent } from './dialog/them-sv/them-sv.component';
 import { ThemgvComponent } from './dialog/themgv/themgv.component';
+import { QuanlyTieuchichamComponent } from './quanly/quanly-tieuchicham/quanly-tieuchicham.component';
+import { QuanlyPhieuchamComponent } from './quanly/quanly-phieucham/quanly-phieucham.component';
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
     imports: [
@@ -107,7 +116,8 @@ import { ThemgvComponent } from './dialog/themgv/themgv.component';
         MatDividerModule,
         QuanlyLichModule,
         CatDatModule,
-        FullCalendarModule
+        FullCalendarModule,
+        MatListModule
     ],
     declarations: [
         AppComponent,
@@ -144,8 +154,16 @@ import { ThemgvComponent } from './dialog/themgv/themgv.component';
         ChangepasswordComponent,
         QuanlyGiangvienComponent,
         QuanlySinhvienComponent,
+        DialogDeTaiGVComponent,
+        DialogExcelQlSinhvienComponent,
+        DialogExcelQlGiangvienComponent,
+        SinhvienDiemComponent,
+        SinhvienLichComponent,
+        GiangvienChamdiemComponent,
         ThemSvComponent,
-        ThemgvComponent
+        ThemgvComponent,
+        QuanlyTieuchichamComponent,
+        QuanlyPhieuchamComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

@@ -10,6 +10,7 @@ import {HocKy} from "../../../shared-service/HocKy.models";
 import {MatSelectChange} from "@angular/material/select";
 import {UserAuthService} from "../../../authentication/_service/user-auth.service";
 import {NotificationsComponent} from "../../../shared-component/notifications/notifications.component";
+import {DialogDeTaiGVComponent} from "../../../excel/dialog-de-tai-gv/dialog-de-tai-gv.component";
 
 @Component({
     selector: 'app-detai',
@@ -118,4 +119,11 @@ export class DetaiComponent implements OnInit {
     }
 
     @Input() validateDeTai;
+
+
+    openDialogExcel() {
+        this.dialog.open(DialogDeTaiGVComponent, {
+            width: '350px',
+        });
+    }
 }

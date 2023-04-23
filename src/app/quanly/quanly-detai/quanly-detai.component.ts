@@ -126,4 +126,5 @@ export class QuanlyDetaiComponent implements OnInit {
     downloadFileSV() {
 
     }
+
 }

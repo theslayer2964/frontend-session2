@@ -12,6 +12,7 @@ import {NotificationsComponent} from "../../shared-component/notifications/notif
 import {MatSelectChange} from "@angular/material/select";
 import {ThemgvComponent} from "../../dialog/themgv/themgv.component";
 import {ThemSvComponent} from "../../dialog/them-sv/them-sv.component";
+import {DialogExcelQlSinhvienComponent} from "../../excel/dialog-excel-ql-sinhvien/dialog-excel-ql-sinhvien.component";
 
 @Component({
   selector: 'app-quanly-sinhvien',
@@ -133,5 +134,11 @@ export class QuanlySinhvienComponent implements OnInit {
 
   downloadFileSV() {
 
+  }
+
+  openExcel() {
+    this.dialog.open(DialogExcelQlSinhvienComponent,{
+      width: "450px"
+    })
   }
 }

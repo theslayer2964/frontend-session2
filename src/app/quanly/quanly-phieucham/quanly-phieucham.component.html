@@ -8,12 +8,33 @@
                     <div class="card-header"
                          style="display: flex;justify-content: space-between;background-color: #4da1e8">
                         <h4 class="card-title"
-                            style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH HỌC KỲ</h4>
-                        <button mat-raised-button class="btn btn-primary" (click)="openDialog()" style="height: 40px">
-                            Thêm học kỳ mới
-                        </button>
+                            style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH PHIẾU CHẤM ĐIỂM</h4>
+                        <mat-form-field>
+                            <mat-label>Tùy chỉnh</mat-label>
+                            <mat-select>
+                                <mat-option (click)="directTieuChiCham()">Thêm tiêu chí chấm điểm</mat-option>
+                                <mat-option (click)="nhapDiemExcel()">Nhập điểm bằng Excel</mat-option>
+                                <mat-option (click)="xuatFileChamDiemMacDinh()">Xuất file nhập điểm mặc định</mat-option>
+                                <mat-option (click)="xuatFileExcel()">Xuất file excel</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
                     <hr>
+                    <div>
+                        <mat-form-field style="width: 500px;margin-left: 20px">
+                            <mat-label>-- Chọn học kỳ --</mat-label>
+                            <mat-select (selectionChange)="changeHocKy($event)">
+                                <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">HK{{hocKy.soHocKy}}
+                                    -20{{hocKy.maHocKy}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field style="width: 500px;margin-left: 20px">
+                            <mat-label>-- Chọn giảng viên --</mat-label>
+                            <mat-select (selectionChange)="changeGiangVien($event)">
+                                <mat-option *ngFor="let vaitro of dsVaiTro" [value]="vaitro.value">{{vaitro.viewValue}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                     <div>
                         <mat-form-field style="width: 500px;margin-left: 20px">
                             <mat-label>Tìm kiếm</mat-label>
@@ -24,34 +45,28 @@
                     <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;overflow: auto;">
                         <table mat-table [dataSource]="dataSource" matSort>
                             <!-- ID Column -->
-                            <ng-container matColumnDef="maHocKy" sticky class="example-button">
+                            <ng-container matColumnDef="maChuanDauRa" sticky class="example-button">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    style="width: 100px;text-align: center"> MÃ HỌC KỲ
+                                    style="width: 100px;text-align: center"> MÃ TIÊU CHÍ
                                 </th>
-                                <td mat-cell *matCellDef="let row"> {{row.maHocKy}} </td>
-                            </ng-container>
-                            <ng-container matColumnDef="soHocKy" sticky class="example-button">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    style="width: 100px;text-align: center"> HỌC KỲ
-                                </th>
-                                <td mat-cell *matCellDef="let row"> {{row.soHocKy}} </td>
+                                <td mat-cell *matCellDef="let row"> {{row.maChuanDauRa}} </td>
                             </ng-container>
                             <!-- Progress Column -->
-                            <ng-container matColumnDef="thoiGianBatDau">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    style="width: 100px;text-align: center"> THỜI GIAN BẮT ĐẦU
+                            <ng-container matColumnDef="tenChuanDauRa" style="margin-left: 60px">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="margin-left: 60px"> TÊN
+                                    TIÊU CHÍ
                                 </th>
-                                <td mat-cell *matCellDef="let row"> {{row.thoiGianBatDau}}</td>
-                            </ng-container>
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="thoiGianKetThuc" style="width: 200px;">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    style="margin-left: 40px;text-align: center"> THỜI GIAN KẾT THÚC
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.thoiGianKetThuc}}"
+                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenChuanDauRa}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    {{row.thoiGianKetThuc}}
+                                    {{row.tenChuanDauRa}}
                                 </td>
+                            </ng-container>
+                            <!-- Progress Column -->
+                            <ng-container matColumnDef="diemToiDa">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    style="width: 100px;text-align: center"> ĐIỂM TỐI ĐA
+                                </th>
+                                <td mat-cell *matCellDef="let row"> {{row.diemToiDa}}</td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="action" stickyEnd>
@@ -63,7 +78,7 @@
                                     <button mat-icon-button color="primary" (click)="editProduct(row)">
                                         <mat-icon>edit</mat-icon>
                                     </button>
-                                    <button mat-icon-button color="accent" (click)="deleteProduct(row.maHocKy)">
+                                    <button mat-icon-button color="accent" (click)="deleteProduct(row.maChuanDauRa)">
                                         <mat-icon>delete</mat-icon>
                                     </button>
                                 </td>
@@ -83,3 +98,5 @@
         </div>
     </div>
 </div>
+
+

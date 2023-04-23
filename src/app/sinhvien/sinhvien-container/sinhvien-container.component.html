@@ -16,16 +16,13 @@
                                 <div class="card-icon">
                                     <i class="material-icons">content_copy</i>
                                 </div>
-                                <h3 class="card-title">Lịch
+                                <h3 class="card-title">Lịch học
                                     <small></small>
                                 </h3>
                             </div>
                             <div class="card-footer">
-                                <div class="stats" *ngIf="haveNhom == false">
                                     <i class="material-icons text-danger">warning</i>
-                                    <p *ngIf="validateNhom.invalid==true">Chưa Thể Đăng Ký Nhóm</p>
-                                    <a (click)="goToSVChonNhom('sv-chonNhom')" *ngIf="validateNhom.invalid==false">Đăng ký</a>
-                                </div>
+                                    <a (click)="goToSVChonNhom('sv-lich')">Chi tiết</a>
                             </div>
                         </div>
                     </div>
@@ -77,13 +74,11 @@
                                 <div class="card-icon">
                                     <i class="material-icons">store</i>
                                 </div>
-                                <h3 class="card-title">Kết quả</h3>
+                                <h3 class="card-title">Kết quả học tập</h3>
                             </div>
                             <div class="card-footer">
-                                <div class="stats" *ngIf="haveNhom == true">
                                     <i class="material-icons">date_range</i>
-                                    <a (click)="goToSVChonNhom('sv-chonDeTai')">Đăng ký</a>
-                                </div>
+                                    <a (click)="goToSVChonNhom('sv-diem')">Chi tiết</a>
                             </div>
                         </div>
                     </div>
