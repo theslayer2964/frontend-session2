@@ -80,6 +80,12 @@ import { ThemgvComponent } from './dialog/themgv/themgv.component';
 import { QuanlyTieuchichamComponent } from './quanly/quanly-tieuchicham/quanly-tieuchicham.component';
 import { QuanlyPhieuchamComponent } from './quanly/quanly-phieucham/quanly-phieucham.component';
 import {MatListModule} from "@angular/material/list";
+import { QlPcContainerComponent } from './quanly/quanly-phancong/ql-pc-container/ql-pc-container.component';
+import { QlPcSidebarComponent } from './quanly/quanly-phancong/ql-pc-sidebar/ql-pc-sidebar.component';
+import { QlPcGvpbComponent } from './quanly/quanly-phancong/ql-pc-gvpb/ql-pc-gvpb.component';
+import { QlPcGvhdComponent } from './quanly/quanly-phancong/ql-pc-gvhd/ql-pc-gvhd.component';
+import {QuanlyPcGvModule} from "./quanly/quanly-phancong/quanly-pc-gv.module";
+import { QlThemgvpbComponent } from './dialog/ql-themgvpb/ql-themgvpb.component';
 
 @NgModule({
     imports: [
@@ -115,6 +121,7 @@ import {MatListModule} from "@angular/material/list";
         RouterModule,
         MatDividerModule,
         QuanlyLichModule,
+        QuanlyPcGvModule,
         CatDatModule,
         FullCalendarModule,
         MatListModule
@@ -163,7 +170,8 @@ import {MatListModule} from "@angular/material/list";
         ThemSvComponent,
         ThemgvComponent,
         QuanlyTieuchichamComponent,
-        QuanlyPhieuchamComponent
+        QuanlyPhieuchamComponent,
+        QlThemgvpbComponent,
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

@@ -1,0 +1,55 @@
+<div class="container">
+    <h2 mat-dialog-title>Thêm giảng viên phản biện</h2>
+    <mat-dialog-content class="mat-typography">
+        <table width="100%">
+            <tr>
+                <td><h3>Mã nhóm:</h3></td>
+                <td><p><b>XXX</b></p></td>
+            </tr><tr>
+                <td><h3>Tên nhóm:</h3></td>
+                <td><p><b>XXX</b></p></td>
+            </tr><tr>
+                <td><h3>Mã đề tài:</h3></td>
+                <td><p><b>XXX</b></p></td>
+            </tr><tr>
+                <td><h3>Tên đề tài::</h3></td>
+                <td><p><b>XXX</b></p></td>
+            </tr><tr>
+                <td><h3>Mã Sinh viên 1:</h3></td>
+                <td><p><b>XXX</b></p></td>
+            </tr><tr>
+                <td><h3>Mã Sinh viên 2:</h3></td>
+                <td><p><b>XXX</b></p></td>
+            </tr><tr>
+                <td><h3>Giảng viên hướng dẫn:</h3></td>
+                <td><p><b>XXX</b></p></td>
+            </tr>
+        </table>
+    </mat-dialog-content>
+    <form [formGroup]="nhomDKGVPB">
+        <div class="row">
+            <div class="col-md-9">
+                <mat-form-field class="example-full-width">
+                    <mat-label mat-header-cell *matHeaderCellDef>Tên đề tài</mat-label>
+                    <input formControlName="tenDeTai" matInput placeholder="Tên đề tài">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Giới hạn số nhóm thực hiện</mat-label>
+                    <input formControlName="gioiHanSoNhomThucHien" matInput
+                           placeholder="Placeholder" type="number">
+                </mat-form-field>
+            </div>
+        </div>
+        <div mat-dialog-actions [align]="'end'">
+            <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
+            <!--                                [disabled]="!productForm.valid"-->
+            <button style="margin-left: 8px" mat-raised-button color="primary"
+
+                    (click)="addCapNhatGVPB()">CẬP NHẬT
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+</div>

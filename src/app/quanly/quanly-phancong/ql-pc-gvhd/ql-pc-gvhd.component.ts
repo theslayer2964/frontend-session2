@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {MatSelectChange} from "@angular/material/select";
 import {MatDialog} from "@angular/material/dialog";
-import {DetaiService} from "../../giangvien/detai/detai-service/detai.service";
-import {HockyService} from "../../shared-service/hocky.service";
-import {UserAuthService} from "../../authentication/_service/user-auth.service";
-import {HocKy} from "../../shared-service/HocKy.models";
+import {DetaiService} from "../../../giangvien/detai/detai-service/detai.service";
+import {HockyService} from "../../../shared-service/hocky.service";
+import {UserAuthService} from "../../../authentication/_service/user-auth.service";
+import {HocKy} from "../../../shared-service/HocKy.models";
+import {MatSelectChange} from "@angular/material/select";
 import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
-  selector: 'app-ql-giangvien',
-  templateUrl: './ql-giangvien.component.html',
-  styleUrls: ['./ql-giangvien.component.scss']
+  selector: 'app-ql-pc-gvhd',
+  templateUrl: './ql-pc-gvhd.component.html',
+  styleUrls: ['./ql-pc-gvhd.component.scss']
 })
-export class QlGiangvienComponent implements OnInit {
+export class QlPcGvhdComponent implements OnInit {
   private hocKyHienTai: any;
   private soHocKy: any;
 
@@ -44,10 +44,11 @@ export class QlGiangvienComponent implements OnInit {
   }
 
   applyFilter($event: KeyboardEvent) {
-    
+
   }
 
   // Table
   displayedColumns: string[] = ["maNhom","tenNhom","maDeTai","tenDeTai","maSV1","tenSV1","maSV2","tenSV2","GVHD","GVPB1","GVPB2","action"];
   dataSource!: MatTableDataSource<any>;
+
 }
