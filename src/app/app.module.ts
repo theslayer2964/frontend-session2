@@ -69,6 +69,8 @@ import { ChangepasswordComponent } from './authentication/changepassword/changep
 import {ThemNhomTransferService} from "./transfer-data-service/them-nhom-transfer.service";
 import { QuanlyGiangvienComponent } from './quanly/quanly-giangvien/quanly-giangvien.component';
 import { QuanlySinhvienComponent } from './quanly/quanly-sinhvien/quanly-sinhvien.component';
+import { ThemSvComponent } from './dialog/them-sv/them-sv.component';
+import { ThemgvComponent } from './dialog/themgv/themgv.component';
 
 @NgModule({
     imports: [
@@ -141,7 +143,9 @@ import { QuanlySinhvienComponent } from './quanly/quanly-sinhvien/quanly-sinhvie
         DangKyDetaiComponent,
         ChangepasswordComponent,
         QuanlyGiangvienComponent,
-        QuanlySinhvienComponent
+        QuanlySinhvienComponent,
+        ThemSvComponent,
+        ThemgvComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

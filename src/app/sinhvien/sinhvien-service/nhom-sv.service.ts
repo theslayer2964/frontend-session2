@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, of, tap} from "rxjs";
 import {DeTai} from "../../giangvien/detai/DeTai.models";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
-import {Nhom} from "../Nhom.models";
 
 @Injectable({
   providedIn: 'root'
