@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Thêm danh sách Giảng viên</h4>
+                        <p class="card-category"></p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="excelForm">
+                            <label for="file-input">
+                                <img src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png"/>
+                            </label>
+                            <input class="file1" id="file-input" type="file" accept=".xlsx" formControlName="fileExcel" (change)="getFile($event)"> <br/>
+                            {{excelName}}
+                            <div mat-dialog-actions [align]="'end'">
+                                <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
+                                <button style="margin-left: 8px" mat-raised-button color="primary"
+
+                                        (click)="importFile()">Thêm danh sách</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

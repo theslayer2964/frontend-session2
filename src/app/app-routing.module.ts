@@ -18,6 +18,8 @@ import {QuanlyLichContainerComponent} from "./quanly-lich/quanly-lich-container/
 import {ChangepasswordComponent} from "./authentication/changepassword/changepassword.component";
 import {QuanlySinhvienComponent} from "./quanly/quanly-sinhvien/quanly-sinhvien.component";
 import {QuanlyGiangvienComponent} from "./quanly/quanly-giangvien/quanly-giangvien.component";
+import {SinhvienDiemComponent} from "./sinhvien/sinhvien-diem/sinhvien-diem.component";
+import {SinhvienLichComponent} from "./sinhvien/sinhvien-lich/sinhvien-lich.component";
 
 const routes: Routes = [
 
@@ -117,6 +119,18 @@ const routes: Routes = [
     {
         path: 'sv-chonDeTai',
         component: SinhvienDetaiComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_SINHVIEN']}
+    },
+    {
+        path: 'sv-diem',
+        component: SinhvienDiemComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_SINHVIEN']}
+    },
+    {
+        path: 'sv-lich',
+        component: SinhvienLichComponent,
         canActivate: [AuthGuard],
         data: {roles: ['ROLE_SINHVIEN']}
     },

@@ -69,6 +69,12 @@ import { ChangepasswordComponent } from './authentication/changepassword/changep
 import {ThemNhomTransferService} from "./transfer-data-service/them-nhom-transfer.service";
 import { QuanlyGiangvienComponent } from './quanly/quanly-giangvien/quanly-giangvien.component';
 import { QuanlySinhvienComponent } from './quanly/quanly-sinhvien/quanly-sinhvien.component';
+import { DialogDeTaiGVComponent } from './excel/dialog-de-tai-gv/dialog-de-tai-gv.component';
+import { DialogExcelQlSinhvienComponent } from './excel/dialog-excel-ql-sinhvien/dialog-excel-ql-sinhvien.component';
+import { DialogExcelQlGiangvienComponent } from './excel/dialog-excel-ql-giangvien/dialog-excel-ql-giangvien.component';
+import { SinhvienDiemComponent } from './sinhvien/sinhvien-diem/sinhvien-diem.component';
+import { SinhvienLichComponent } from './sinhvien/sinhvien-lich/sinhvien-lich.component';
+import { GiangvienChamdiemComponent } from './giangvien/giangvien-chamdiem/giangvien-chamdiem.component';
 
 @NgModule({
     imports: [
@@ -141,7 +147,13 @@ import { QuanlySinhvienComponent } from './quanly/quanly-sinhvien/quanly-sinhvie
         DangKyDetaiComponent,
         ChangepasswordComponent,
         QuanlyGiangvienComponent,
-        QuanlySinhvienComponent
+        QuanlySinhvienComponent,
+        DialogDeTaiGVComponent,
+        DialogExcelQlSinhvienComponent,
+        DialogExcelQlGiangvienComponent,
+        SinhvienDiemComponent,
+        SinhvienLichComponent,
+        GiangvienChamdiemComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

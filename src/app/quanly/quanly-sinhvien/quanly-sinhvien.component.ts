@@ -10,6 +10,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 import {MatSelectChange} from "@angular/material/select";
+import {DialogExcelQlSinhvienComponent} from "../../excel/dialog-excel-ql-sinhvien/dialog-excel-ql-sinhvien.component";
 
 @Component({
   selector: 'app-quanly-sinhvien',
@@ -126,5 +127,11 @@ export class QuanlySinhvienComponent implements OnInit {
 
   downloadFileSV() {
 
+  }
+
+  openExcel() {
+    this.dialog.open(DialogExcelQlSinhvienComponent,{
+      width: "450px"
+    })
   }
 }

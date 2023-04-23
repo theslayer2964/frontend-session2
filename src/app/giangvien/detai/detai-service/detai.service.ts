@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, of, tap} from "rxjs";
 import {DeTai} from "../DeTai.models";
 import {UserAuthService} from "../../../authentication/_service/user-auth.service";
+import {createI18nOptions} from "@angular-devkit/build-angular/src/utils/i18n-options";
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,7 @@ export class DetaiService {
     }
 
     maGV = this.userAuthService.getUserInfo().maGiangVien;
+
 
     postDeTai(data: any): Observable<any> {
         return this.httpClient.post<any>(this.url + 'them-de-tai/' + this.maGV, data, {headers: this.httpHeadersJWT}).pipe(
@@ -47,6 +49,17 @@ export class DetaiService {
 
     getNhomRoleGV(hocKy: any) {
         return this.httpClient.post<any>(this.url, hocKy, {headers: this.httpHeadersJWT}).pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+        ;
+    }
+    addDeTaiExcel(file: any, maGV: string) {
+        var formData = new FormData();
+        formData.append("file", file);
+        return this.httpClient.post<any>(this.url + "them-de-tai-excel/" + maGV, formData,{headers: {
+                'Accept':'application/json',
+                Authorization: `Bearer ${(this.token)}`
+            }} ).pipe(
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));
         ;

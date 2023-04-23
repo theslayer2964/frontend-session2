@@ -13,19 +13,19 @@
       </ul>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/admin"
+          <a class="nav-link active" aria-current="page" routerLink="/trangchuGV"
              *ngIf="userService.roleMatch(['ROLE_GIANGVIEN'])">Giảng viên</a>
         </li>
       </ul>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/user"
+          <a class="nav-link active" aria-current="page" routerLink="/trangchuSV"
              *ngIf="userService.roleMatch(['ROLE_SINHVIEN'])">Sinh viên</a>
         </li>
       </ul><ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" routerLink="/quanly"
-           *ngIf="userService.roleMatch(['ROLE_QUANLY'])">QUAN LY Dashboard</a>
+           *ngIf="userService.roleMatch(['ROLE_QUANLY'])">Quản lý</a>
       </li>
     </ul>
 
