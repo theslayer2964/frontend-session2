@@ -9,6 +9,8 @@ import {Nhom} from "../sinhvien/Nhom.models";
 })
 export class NhomService {
     private url = "http://localhost:8080/api/nhom/";
+
+    private urlQuanLy = "http://localhost:8080/api/quan-ly/";
     token: string = this.userAuthService.getToken();
     private httpHeadersJWT = new HttpHeaders({
         Authorization: `Bearer ${(this.token)}`
@@ -28,8 +30,11 @@ export class NhomService {
             catchError(err => of([])));
     }
 
-    getNhomChuaDuyet() {
-        return this.httpClient.get<any>(this.url + "lay-ds-nhom/" + 0, {headers: this.httpHeadersJWT}).pipe(
+    getNhomChuaDuyet(tinhTrang : any) {
+        if (tinhTrang == null) {
+            tinhTrang = 0;
+        }
+        return this.httpClient.get<any>(this.url + "lay-ds-nhom/" + tinhTrang, {headers: this.httpHeadersJWT}).pipe(
             tap(receiveNhom => receiveNhom),
             catchError(err => of([])));
     }
@@ -42,6 +47,12 @@ export class NhomService {
 
     roiNhom(data: any) {
         return this.httpClient.post<any>(this.url + "roi-nhom", data, {headers: this.httpHeadersJWT}).pipe(
+            tap(receiveNhom => receiveNhom),
+            catchError(err => of([])));
+    }
+
+    duyetNhom(data: any) {
+        return this.httpClient.post<any>(this.urlQuanLy + "duyet-nhom-theo-nam-hk", data, {headers: this.httpHeadersJWT}).pipe(
             tap(receiveNhom => receiveNhom),
             catchError(err => of([])));
     }

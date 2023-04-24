@@ -80,6 +80,7 @@ import { ThemgvComponent } from './dialog/themgv/themgv.component';
 import { QuanlyTieuchichamComponent } from './quanly/quanly-tieuchicham/quanly-tieuchicham.component';
 import { QuanlyPhieuchamComponent } from './quanly/quanly-phieucham/quanly-phieucham.component';
 import {MatListModule} from "@angular/material/list";
+import { ThemHockyComponent } from './dialog/them-hocky/them-hocky.component';
 
 @NgModule({
     imports: [
@@ -163,7 +164,8 @@ import {MatListModule} from "@angular/material/list";
         ThemSvComponent,
         ThemgvComponent,
         QuanlyTieuchichamComponent,
-        QuanlyPhieuchamComponent
+        QuanlyPhieuchamComponent,
+        ThemHockyComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

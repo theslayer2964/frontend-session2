@@ -13,6 +13,7 @@ import {MatSelectChange} from "@angular/material/select";
 import {ThemgvComponent} from "../../dialog/themgv/themgv.component";
 import {ThemSvComponent} from "../../dialog/them-sv/them-sv.component";
 import {DialogExcelQlSinhvienComponent} from "../../excel/dialog-excel-ql-sinhvien/dialog-excel-ql-sinhvien.component";
+import {SinhvienService} from "../../shared-service/sinhvien.service";
 
 @Component({
   selector: 'app-quanly-sinhvien',
@@ -23,12 +24,16 @@ export class QuanlySinhvienComponent implements OnInit {
   private hocKyHienTai: any;
   private soHocKy: any;
 
-  constructor(public dialog: MatDialog, private detaiService: DetaiService, private hockyService: HockyService,
+  constructor(public dialog: MatDialog,
+              private hockyService: HockyService,
+
+              private sinhVienService: SinhvienService,
               private userAuthService: UserAuthService) {
   }
 
   ngOnInit(): void {
     this.getAllHocKy();
+
   }
 
   dsHocKy: HocKy[];
@@ -47,20 +52,12 @@ export class QuanlySinhvienComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(ThemSvComponent, {}).afterClosed().subscribe(val => {
-      if (val === "save") {
-        this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
-      }
+
     })
   }
 
   editProduct(row: any) {
-    this.dialog.open(ThemDeTaiGvComponent, {
-      data: row
-    }).afterClosed().subscribe(val => {
-      if (val === "update") {
-        this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
-      }
-    })
+
   }
 
   // Table
@@ -84,16 +81,7 @@ export class QuanlySinhvienComponent implements OnInit {
 
 
   deleteProduct(id: any) {
-    this.detaiService.deleteDeTai(id).subscribe({
-      next: (res) => {
-        this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
-        new NotificationsComponent().showNotification('success', 'Xóa đề tài thành công');
-      },
-      error: () => {
-        new NotificationsComponent().showNotification('danger', 'Không thể xóa đề tài');
-        console.log("Error")
-      }
-    })
+
   }
 
   changeHocKy($event: MatSelectChange) {
@@ -101,12 +89,11 @@ export class QuanlySinhvienComponent implements OnInit {
     this.soHocKy = $event.value.toString().slice(2)
     console.log('XXX:', this.hocKyHienTai, this.soHocKy);
     // SET SV VAO``
-    this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
+    this.getDSSinhVien(this.hocKyHienTai, this.soHocKy);
   }
   // STEP 2
-  private getDSDeTaiTheoHK(maHocKy: any, soHocKy: any) {
-    this.detaiService.getDeTaiRoleGV({
-      maGiangVien: this.userAuthService.getUserInfo().maGiangVien,
+  private getDSSinhVien(maHocKy: any, soHocKy: any) {
+    this.sinhVienService.layDsSinhVien({
       maHocKy: maHocKy,
       soHocKy: soHocKy
     })

@@ -78,6 +78,7 @@ export class SinhvienChonnhomComponent implements OnInit {
                             this.tempUser.nhom = res;
                             this.userAuthService.setUserInfo(this.tempUser);
                             this.nhom = this.userAuthService.getUserInfo().nhom;
+                            this.router.navigate(["/trangchuSV"])
                         },
                         error: () => {
                             new NotificationsComponent().showNotification('danger', 'Không thể thêm nhóm');
@@ -87,8 +88,9 @@ export class SinhvienChonnhomComponent implements OnInit {
         })
     }
 
+    tinhTrang: any
     private getNhomSVChuaDuyet() {
-        this.nhomService.getNhomChuaDuyet()
+        this.nhomService.getNhomChuaDuyet(this.tinhTrang)
             .subscribe({
                 next: (res) => {
                     console.log("SV- CHONHOM: ", res)
@@ -157,9 +159,7 @@ export class SinhvienChonnhomComponent implements OnInit {
                 console.log(this.sinhvien);
                 this.userAuthService.setUserInfo(this.sinhvien);
                 this.nhom = null;
-                this.router.navigate(['/sv-chonNhom']);
-                console.log("SV - NHOM:", this.nhom);
-                console.log("SV - DIRECT")
+                this.router.navigate(["/trangchuSV"])
             }, error: (err) => {
                 console.log(err);
             }

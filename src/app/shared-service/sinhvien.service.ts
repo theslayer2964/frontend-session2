@@ -22,7 +22,7 @@ export class SinhvienService {
   addSinhVienExcel(file: any, maGV: string) {
     var formData = new FormData();
     formData.append("file", file);
-    return this.httpClient.post<any>(this.url + "them-de-tai-excel/" + maGV, formData,{headers: {
+    return this.httpClient.post<any>(this.urlQuanLy + "them-sinh-vien-excel/", formData,{headers: {
         'Accept':'application/json',
         Authorization: `Bearer ${(this.token)}`
       }} ).pipe(
@@ -41,6 +41,13 @@ export class SinhvienService {
 
   themGiangVien(data: any): Observable<any[]> {
     return this.httpClient.post<HocKy[]>(this.urlQuanLy + "them-giang-vien", data, {headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+  }
+
+  layDsSinhVien(data: any): Observable<any[]> {
+    return this.httpClient.post<HocKy[]>(this.urlQuanLy + "lay-ds-sinh-vien", data, {headers: this.httpHeadersJWT})
         .pipe(
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));

@@ -55,13 +55,20 @@ export class QuanlyNhomComponent implements OnInit {
   }
 
   editProduct(row: any) {
-    this.dialog.open(ThemNhomComponent, {
-      data: row
-    }).afterClosed().subscribe(val => {
-      if (val === "update") {
-        // this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
-      }
-    })
+   this.nhomService.duyetNhom({
+     ma: row.maNhom,
+     trangThai: 1,
+     maHocKy: this.hocKyHienTai
+   }).subscribe({
+     next: (res) => {
+       if (res) {
+         this.getDsNhom()
+       }
+     },
+     error: () => {
+       console.log("Error")
+     }
+   })
   }
 
   deleteProduct(id) {
@@ -73,20 +80,31 @@ export class QuanlyNhomComponent implements OnInit {
   changeHocKy($event: MatSelectChange) {
     this.hocKyHienTai = $event.value.toString().slice(0, 3)
     this.soHocKy = $event.value.toString().slice(2)
-    console.log('XXX:', this.hocKyHienTai, this.soHocKy);
-    this.getDsNhom(this.hocKyHienTai, this.soHocKy);
-  }
 
-  private getDsNhom(maHocKy: any, soHocKy: any) {
+    this.getDsNhom();
+  }
+  tinhTrang: any;
+  private getDsNhom() {
+    console.log('XXX:', this.hocKyHienTai, this.soHocKy);
     this.nhomService.getNhomRoleGV({
-      maGiangVien: this.userAuthService.getUserInfo().maGiangVien,
-      maHocKy: maHocKy,
-      soHocKy: soHocKy
+      maHocKy: this.hocKyHienTai,
+      soHocKy: this.soHocKy,
+      trangThai: this.tinhTrang
     })
         .subscribe({
           next: (res) => {
             if (res) {
-              console.log("GV _ Nhom:", res);
+              res.forEach( data => {
+                var temp;
+                temp = data.dsMaSinhVien;
+                console.log("TEMP:", temp)
+                delete data['npm it pdsMaSinhVien'];
+                data.sv1 = temp[0];
+                if(temp.length == 2 ){
+                data.sv2 = temp[1];
+                }
+              });
+              console.log("DATA REMAKE ne: ", res)
               this.dataSource = new MatTableDataSource(res);
               this.dataSource.paginator = this.paginator;
               this.dataSource.sort = this.sort;
@@ -102,6 +120,7 @@ export class QuanlyNhomComponent implements OnInit {
   @Input() validateNhom:any;
 
   changeTinhTrang($event: MatSelectChange) {
-
+    this.tinhTrang = $event.value
+    this.getDsNhom();
   }
 }
