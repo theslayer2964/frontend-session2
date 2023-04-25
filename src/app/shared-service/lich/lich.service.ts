@@ -20,7 +20,7 @@ export class LichService {
     constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) {
     }
 
-  getLichTheoHocKyVaMaGV(maHocKy: string, maNguoiDung: string, role: string): Observable<any> {
+  getLichTheoHocKyVaMaGV(maHocKy: any, maNguoiDung: string, role: string | null): Observable<any> {
       let data = {
           "maHocKy": maHocKy,
           "maNguoiDung": maNguoiDung,
