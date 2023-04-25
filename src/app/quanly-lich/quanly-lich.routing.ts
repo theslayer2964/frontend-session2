@@ -12,8 +12,6 @@ export const QuanlyLichRouting: Routes = [
         data: {roles: ['ROLE_QUANLY']}},
     {path: 'giangday', component: QlGiangvienComponent,canActivate: [AuthGuard],
         data: {roles: ['ROLE_QUANLY']}},
-    {path: 'giangday', component: QlGiangvienComponent,canActivate: [AuthGuard],
-        data: {roles: ['ROLE_QUANLY']}},
     {path: 'lichbieu',component: QlLichComponent,canActivate: [AuthGuard],
         data: {roles: ['ROLE_QUANLY']}}
 ]

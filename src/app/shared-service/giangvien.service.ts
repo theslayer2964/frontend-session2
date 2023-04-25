@@ -25,6 +25,20 @@ export class GiangvienService {
       }} ).pipe(
         tap(recieveDeTai => recieveDeTai),
         catchError(err => of([])));
+  }
+
+  getDSGV(){
+    return this.httpClient.get<any>(this.urlQuanLy + "lay-ds-giang-vien", {headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+  }
+
+  phanCongGV(formData: any){
+    return this.httpClient.post<any>(this.urlQuanLy + "them-phan-cong", formData,{headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
     ;
   }
 

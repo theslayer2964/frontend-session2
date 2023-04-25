@@ -1,47 +1,48 @@
 <div class="container">
     <h2 mat-dialog-title>Thêm giảng viên phản biện</h2>
-    <mat-dialog-content class="mat-typography">
-        <table width="100%">
-            <tr>
-                <td><h3>Mã nhóm:</h3></td>
-                <td><p><b>XXX</b></p></td>
-            </tr><tr>
-                <td><h3>Tên nhóm:</h3></td>
-                <td><p><b>XXX</b></p></td>
-            </tr><tr>
-                <td><h3>Mã đề tài:</h3></td>
-                <td><p><b>XXX</b></p></td>
-            </tr><tr>
-                <td><h3>Tên đề tài::</h3></td>
-                <td><p><b>XXX</b></p></td>
-            </tr><tr>
-                <td><h3>Mã Sinh viên 1:</h3></td>
-                <td><p><b>XXX</b></p></td>
-            </tr><tr>
-                <td><h3>Mã Sinh viên 2:</h3></td>
-                <td><p><b>XXX</b></p></td>
-            </tr><tr>
-                <td><h3>Giảng viên hướng dẫn:</h3></td>
-                <td><p><b>XXX</b></p></td>
-            </tr>
-        </table>
-    </mat-dialog-content>
+    <mat-divider></mat-divider>
     <form [formGroup]="nhomDKGVPB">
+        <mat-dialog-content class="mat-typography">
+            <table width="100%">
+                <tr>
+                    <td><p>Mã nhóm:</p></td>
+                    <td><h3><b>{{maNhomL}}</b></h3></td>
+                </tr>
+                <tr>
+                    <td><p>Tên nhóm:</p></td>
+                    <td><h3><b>{{tenNhomL}}</b></h3></td>
+                </tr>
+                <tr>
+                    <td><p>Mã đề tài:</p></td>
+                    <td><h3><b>{{maDeTaiL}}</b></h3></td>
+                </tr>
+                <tr>
+                    <td><p>Tên đề tài::</p></td>
+                    <td><h3><b>{{tenDeTaiL}}</b></h3></td>
+                </tr>
+                <tr>
+                    <td><p>Sinh viên 1:</p></td>
+                    <td><h3><b>{{maSV1L}} - {{tenSV1L}}</b></h3></td>
+                </tr>
+                <tr>
+                    <td><p>Sinh viên 2:</p></td>
+                    <td><h3><b>{{maSV2L}} - {{tenSV2L}}</b></h3></td>
+                </tr>
+                <tr>
+                    <td><p>Giảng viên hướng dẫn:</p></td>
+                    <td><h3><b>{{tenGiangVienHDL}}</b></h3></td>
+                </tr>
+            </table>
+        </mat-dialog-content>
         <div class="row">
-            <div class="col-md-9">
-                <mat-form-field class="example-full-width">
-                    <mat-label mat-header-cell *matHeaderCellDef>Tên đề tài</mat-label>
-                    <input formControlName="tenDeTai" matInput placeholder="Tên đề tài">
-                </mat-form-field>
-            </div>
-            <div class="col-md-3">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Giới hạn số nhóm thực hiện</mat-label>
-                    <input formControlName="gioiHanSoNhomThucHien" matInput
-                           placeholder="Placeholder" type="number">
-                </mat-form-field>
-            </div>
+            <mat-form-field appearance="fill">
+                <mat-label>Danh sách giảng viên</mat-label>
+                <mat-select [formControl]="toppings" multiple (selectionChange)="onDropdownList($event)">
+                    <mat-option *ngFor="let topping of toppingList" [value]="topping.maGV">{{topping.tenGV}}</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
+        <mat-divider></mat-divider>
         <div mat-dialog-actions [align]="'end'">
             <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
             <!--                                [disabled]="!productForm.valid"-->
