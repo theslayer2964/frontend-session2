@@ -6,6 +6,8 @@ import {Subject} from "rxjs";
 import {GiangvienService} from "../../shared-service/giangvien.service";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 import {MatSelectChange} from "@angular/material/select";
+import {HockyService} from "../../shared-service/hocky.service";
+import {ThemNhomTransferService} from "../../transfer-data-service/them-nhom-transfer.service";
 
 @Component({
     selector: 'app-ql-themgvpb',
@@ -20,7 +22,8 @@ export class QlThemgvpbComponent implements OnInit {
                 private nhomService: NhomService,
                 private dialogRef: MatDialogRef<QlThemgvpbComponent>,
                 @Inject(MAT_DIALOG_DATA) public editData: any,
-                private giangvienService: GiangvienService) {
+                private giangvienService: GiangvienService,
+                private hocKyServiceTransfer: ThemNhomTransferService) {
     }
 
     maNhomL: string;
@@ -36,7 +39,11 @@ export class QlThemgvpbComponent implements OnInit {
     GVPB1L: string;
     GVPB2L: string;
 
+    mahocKyHienTai: any;
     ngOnInit(): void {
+        this.hocKyServiceTransfer.hockyBehaviorSubject.subscribe(res => {
+            this.mahocKyHienTai = res;
+        })
         this.nhomDKGVPB = this.formBuilder.group({
             maNhom: [''],
             tenNhom: [''],
@@ -108,11 +115,11 @@ export class QlThemgvpbComponent implements OnInit {
             ngay: this.nhomDKGVPB.value.ngayCham,
             tietBatDau: this.nhomDKGVPB.value.tietBatDau,
             tietKetThuc: this.nhomDKGVPB.value.tietKetThuc,
-            phong: this.nhomDKGVPB.value.phong
+            phong: this.nhomDKGVPB.value.phong,
+            maHocKy: this.mahocKyHienTai
         };
         this.giangvienService.phanCongGV(data).subscribe(res => {
             this.dialogRef.close();
-
         })
     }
 // GV PB:
