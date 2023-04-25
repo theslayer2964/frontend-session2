@@ -107,6 +107,7 @@ export class QlThemgvpbComponent implements OnInit {
 
         this.giangvienService.phanCongGV(data).subscribe(res => {
             this.dialogRef.close();
+
         })
     }
 // GV PB:

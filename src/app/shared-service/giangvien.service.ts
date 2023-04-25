@@ -28,14 +28,14 @@ export class GiangvienService {
   }
 
   getDSGV(){
-    return this.httpClient.get<any>(this.url + "lay-ds-giang-vien", {headers: this.httpHeadersJWT})
+    return this.httpClient.get<any>(this.urlQuanLy + "lay-ds-giang-vien", {headers: this.httpHeadersJWT})
         .pipe(
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));
   }
 
   phanCongGV(formData: any){
-    return this.httpClient.post<any>(this.url + "them-phan-cong", formData,{headers: this.httpHeadersJWT})
+    return this.httpClient.post<any>(this.urlQuanLy + "them-phan-cong", formData,{headers: this.httpHeadersJWT})
         .pipe(
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));

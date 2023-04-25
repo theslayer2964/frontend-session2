@@ -92,9 +92,9 @@ export class QlPcGvpbComponent implements OnInit {
         this.dialog.open(QlThemgvpbComponent, {
             data: row
         }).afterClosed().subscribe(val => {
-            if (val === "Cập nhật") {
+            // if (val === "Cập nhật") {
                 this.nhomService.getDSNhomDePhanCongGVPhanBien({maHocKy: this.hocKyHienTai, soHocKy: this.soHocKy})
-            }
+            // }
         })
     }
 
