@@ -49,7 +49,6 @@ import {QuanlyContainerComponent} from './quanly/quanly-container/quanly-contain
 import {ThemLichQlComponent} from './dialog/them-lich-ql/them-lich-ql.component';
 import {ProfileComponent} from './shared-component/profile/profile.component';
 import {UserDataService} from "./shared-service/userData.service";
-import { QuanlyLich2Component } from './quanly/quanly-lich2/quanly-lich2.component';
 import {FullCalendarModule} from "@fullcalendar/angular";
 import { NotificationsComponent } from './shared-component/notifications/notifications.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
@@ -80,12 +79,10 @@ import { ThemgvComponent } from './dialog/themgv/themgv.component';
 import { QuanlyTieuchichamComponent } from './quanly/quanly-tieuchicham/quanly-tieuchicham.component';
 import { QuanlyPhieuchamComponent } from './quanly/quanly-phieucham/quanly-phieucham.component';
 import {MatListModule} from "@angular/material/list";
-import { QlPcContainerComponent } from './quanly/quanly-phancong/ql-pc-container/ql-pc-container.component';
-import { QlPcSidebarComponent } from './quanly/quanly-phancong/ql-pc-sidebar/ql-pc-sidebar.component';
-import { QlPcGvpbComponent } from './quanly/quanly-phancong/ql-pc-gvpb/ql-pc-gvpb.component';
-import { QlPcGvhdComponent } from './quanly/quanly-phancong/ql-pc-gvhd/ql-pc-gvhd.component';
 import {QuanlyPcGvModule} from "./quanly/quanly-phancong/quanly-pc-gv.module";
 import { QlThemgvpbComponent } from './dialog/ql-themgvpb/ql-themgvpb.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {GiangvienService} from "./shared-service/giangvien.service";
 
 @NgModule({
     imports: [
@@ -124,7 +121,8 @@ import { QlThemgvpbComponent } from './dialog/ql-themgvpb/ql-themgvpb.component'
         QuanlyPcGvModule,
         CatDatModule,
         FullCalendarModule,
-        MatListModule
+        MatListModule,
+        MatAutocompleteModule,
     ],
     declarations: [
         AppComponent,

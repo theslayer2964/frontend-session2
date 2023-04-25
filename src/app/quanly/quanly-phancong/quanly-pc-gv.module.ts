@@ -13,6 +13,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatIconModule} from "@angular/material/icon";
+import {MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import {MatIconModule} from "@angular/material/icon";
         MatSelectModule,
         MatTableModule,
         MatPaginatorModule,
-        MatIconModule
+        MatIconModule,
+        MatChipsModule
     ],
     declarations: [
         QlPcContainerComponent,

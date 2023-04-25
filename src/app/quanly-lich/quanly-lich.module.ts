@@ -23,6 +23,7 @@ import {QuanlyLich2Component} from "./quanly-lich2/quanly-lich2.component";
 import {FullCalendarModule} from "@fullcalendar/angular";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
     imports: [
@@ -41,7 +42,8 @@ import {MatTableModule} from "@angular/material/table";
         MatSelectModule,
         FullCalendarModule,
         MatPaginatorModule,
-        MatTableModule
+        MatTableModule,
+        MatTabsModule
     ],
     declarations: [
         QuanlyLichContainerComponent,

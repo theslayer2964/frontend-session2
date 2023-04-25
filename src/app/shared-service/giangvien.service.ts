@@ -7,7 +7,7 @@ import {UserAuthService} from "../authentication/_service/user-auth.service";
   providedIn: 'root'
 })
 export class GiangvienService {
-  private url = "http://localhost:8080/api/sinhvien/";
+  private url = "http://localhost:8080/api/quan-ly/";
   token: string = this.userAuthService.getToken();
   private httpHeadersJWT = new HttpHeaders({
     Authorization: `Bearer ${(this.token)}`
@@ -23,6 +23,19 @@ export class GiangvienService {
       }} ).pipe(
         tap(recieveDeTai => recieveDeTai),
         catchError(err => of([])));
-    ;
+  }
+
+  getDSGV(){
+    return this.httpClient.get<any>(this.url + "lay-ds-giang-vien", {headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+  }
+
+  phanCongGV(formData: any){
+    return this.httpClient.post<any>(this.url + "them-phan-cong", formData,{headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
   }
 }

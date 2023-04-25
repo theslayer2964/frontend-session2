@@ -8,7 +8,6 @@
                          style="display: flex;justify-content: space-between;background-color: #4da1e8">
                         <h4 class="card-title"
                             style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH NHÓM CÓ THỂ PHÂN CÔNG PHẢN BIỆN</h4>
-                    <button (click)="openDialog()"></button>
                     </div>
                     <hr>
                     <div>
@@ -105,7 +104,16 @@
                                                         matTooltipClass="example-tooltip-uppercase">
                                                         {{row.tenSV2}}
                                                     </td>
-                                                </ng-container><ng-container matColumnDef="tenGiangVienHD">
+                                                </ng-container>
+                                                <ng-container matColumnDef="maGiangVienHD">
+                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">MÃ GIẢNG VIÊN HƯỚNG DẪN
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let row" matTooltip="{{row.maGiangVienHD}}"
+                                                        matTooltipClass="example-tooltip-uppercase">
+                                                        {{row.maGiangVienHD}}
+                                                    </td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="tenGiangVienHD">
                                                     <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">GIẢNG VIÊN HƯỚNG DẪN
                                                     </th>
                                                     <td mat-cell *matCellDef="let row" matTooltip="{{row.tenGiangVienHD}}"
@@ -117,7 +125,7 @@
                                                     <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">GIẢNG VIÊN PHẢN BIỆN 1
                                                     </th>
                                                     <td mat-cell *matCellDef="let row" matTooltip="{{row.GVPB1}}"
-                                                        matTooltipClass="example-tooltip-uppercase">add
+                                                        matTooltipClass="example-tooltip-uppercase">
                                                         {{row.GVPB1}}
                                                     </td>
                                                 </ng-container>
@@ -156,6 +164,64 @@
                 </div>
             </div>
         </div>
+<!--        <div class="row">-->
+<!--            <div class="col-12">-->
+<!--                <table class="table table-striped table-bordered table-hover">-->
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                        <th>Sr No</th>-->
+<!--                        <th>Name</th>-->
+<!--                        <th>User Name</th>-->
+<!--                        <th>Email</th>-->
+<!--                        <th>Phone</th>-->
+<!--                        <th>website</th>-->
+<!--                        <th style="width: 15%;" class="text-center">Action</th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                    <tr *ngFor="let user of usersArray;let i= index">-->
+<!--                        <td>{{i+1}}</td>-->
+<!--                        <td>-->
+<!--                            <div *ngIf="user.isEdit">-->
+<!--                                <input type="text" [(ngModel)]="user.name" class="form-control"/>-->
+<!--                            </div>-->
+<!--                            <div *ngIf="!user.isEdit">-->
+<!--                                {{user.name}}-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                        <td>{{user.username}}</td>-->
+<!--                        <td>-->
+<!--                            <div *ngIf="user.isEdit">-->
+<!--                                <input type="text" [(ngModel)]="user.email" class="form-control"/>-->
+<!--                            </div>-->
+<!--                            <div *ngIf="!user.isEdit">-->
+<!--                                {{user.email}}-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <div *ngIf="user.isEdit">-->
+<!--                                <input type="text" [(ngModel)]="user.phone" class="form-control"/>-->
+<!--                            </div>-->
+<!--                            <div *ngIf="!user.isEdit">-->
+<!--                                {{user.phone}}-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                        <td>{{user.website}}</td>-->
+<!--                        <td style="width: 15%;" class="text-center">-->
+<!--                            <div *ngIf="user.isEdit">-->
+<!--                                <button class="btn btn-sm btn-success" (click)="onUpdate(user)">Update</button>-->
+<!--                                <button class="btn btn-sm btn-danger" (click)="onCancel(user)">Cancel</button>-->
+<!--                            </div>-->
+<!--                            <div *ngIf="!user.isEdit">-->
+<!--                                <button class="btn btn-sm btn-success" (click)="onEdit(user)">Edit</button>-->
+<!--                            </div>-->
+
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
 </div>
 

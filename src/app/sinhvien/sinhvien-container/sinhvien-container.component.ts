@@ -42,10 +42,10 @@ export class SinhvienContainerComponent implements OnInit {
             next: (res) => {
                 this.dsValidate = res;
                 for (const data of this.dsValidate) {
-                    if (data.tenKeHoach =='Đăng ký nhóm') {
+                    if (data.tenKeHoach =='Lịch đăng ký nhóm') {
                         this.validateNhom = data;
                     }
-                    if (data.tenKeHoach == 'Đăng ký đề tài') {
+                    if (data.tenKeHoach == 'Lịch đăng ký đề tài') {
                         this.validateDeTai = data;
                     }
 
