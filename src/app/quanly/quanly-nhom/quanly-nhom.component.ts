@@ -56,7 +56,7 @@ export class QuanlyNhomComponent implements OnInit {
 
   editProduct(row: any) {
    this.nhomService.duyetNhom({
-     ma: row.maNhom,
+     ma: row.nhom.maNhom,
      trangThai: 1,
      maHocKy: this.hocKyHienTai
    }).subscribe({
