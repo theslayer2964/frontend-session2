@@ -1,1 +1,16 @@
-<p>sinhvien-lich works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <h3><b>Lịch học, lịch thi theo tuần</b></h3>
+        <hr>
+        <div class="row">
+
+            <full-calendar *ngIf='calendarVisible' [options]='calendarOptions' [events]="data$">
+                <ng-template #eventContent let-arg>
+                    <b>{{ arg.timeText }}</b>
+                    <i>{{ arg.event.title }}</i>
+                </ng-template>
+            </full-calendar>
+        </div>
+    </div>
+</div>
+
