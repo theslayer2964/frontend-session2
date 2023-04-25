@@ -60,7 +60,7 @@ export class QuanlyTieuchichamComponent implements OnInit {
   addTieuChiCham() {
     this.dialog.open(ThemTieuChiChamdiemComponent, {}).afterClosed().subscribe(val => {
       if (val === "save") {
-
+          this.getAllTieuChiChamDiem();
       }
     })
   }
