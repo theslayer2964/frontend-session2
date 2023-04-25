@@ -34,7 +34,7 @@
                         <table mat-table [dataSource]="dataSource" matSort>
                             <ng-container matColumnDef="maNhom">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã nhóm</th>
-                                <td mat-cell *matCellDef="let row"> {{row.maNhom}} </td>
+                                <td mat-cell *matCellDef="let row"> {{row.nhom.maNhom}} </td>
                             </ng-container>
                             <ng-container matColumnDef="maDeTai">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã đề tài</th>
