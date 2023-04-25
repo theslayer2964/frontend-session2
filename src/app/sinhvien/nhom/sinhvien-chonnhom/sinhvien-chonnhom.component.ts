@@ -20,7 +20,7 @@ import {Router} from "@angular/router";
     styleUrls: ['./sinhvien-chonnhom.component.css']
 })
 export class SinhvienChonnhomComponent implements OnInit {
-    displayedColumns: string[] = ['maNhom', 'sv1', 'sv2', "action"];
+    displayedColumns: string[] = ['maNhom', 'tenNhom', 'sv1', 'tensv1', 'emailsv1','sv2', 'tensv2', 'emailsv2',"action"];
     dataSource!: MatTableDataSource<any>;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;

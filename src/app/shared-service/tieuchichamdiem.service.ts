@@ -10,6 +10,8 @@ import {HocKy} from "./HocKy.models";
 export class TieuchichamdiemService {
   private url = "http://localhost:8080/api/tieu-chi-cham-diem/";
 
+  private urlPhieuMau = "http://localhost:8080/api/phieu-mau/";
+
   private urlQuanLy = "http://localhost:8080/api/quan-ly/";
   token: string = this.userAuthService.getToken();
   private httpHeadersJWT = new HttpHeaders({
@@ -30,6 +32,11 @@ export class TieuchichamdiemService {
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));
   }
-
+  themPhieuChamMau(data: any): Observable<any[]> {
+    return this.httpClient.post<any[]>(this.urlPhieuMau + "them", data, {headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+  }
 
 }

@@ -7,6 +7,9 @@ import {HocKy} from "../../shared-service/HocKy.models";
 import {MatSelectChange} from "@angular/material/select";
 import {Router} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
+import {ThemPhieuChamMauComponent} from "../../dialog/them-phieu-cham-mau/them-phieu-cham-mau.component";
+import {DialogExcelQlSinhvienComponent} from "../../excel/dialog-excel-ql-sinhvien/dialog-excel-ql-sinhvien.component";
+import {TieuchichamdiemService} from "../../shared-service/tieuchichamdiem.service";
 
 interface GiangVien {
   value: string;
@@ -21,6 +24,7 @@ interface GiangVien {
 export class QuanlyPhieuchamComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private hockyService: HockyService,
+              private tieuChiChamDiem: TieuchichamdiemService,
               private userAuthService: UserAuthService, private router: Router) { }
   ngOnInit(): void {
     this.getAllHocKy();
@@ -58,8 +62,8 @@ export class QuanlyPhieuchamComponent implements OnInit {
 
   }
 
-  xuatFileChamDiemMacDinh() {
-
+  themPhieuChamDiem() {
+    this.dialog.open(ThemPhieuChamMauComponent,{})
   }
 
   xuatFileExcel() {
@@ -84,6 +88,8 @@ export class QuanlyPhieuchamComponent implements OnInit {
   editProduct(row) {
     
   }
+
+
 
   deleteProduct(maDeTai: any) {
     

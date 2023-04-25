@@ -88,6 +88,7 @@ import {QuanlyPcGvModule} from "./quanly/quanly-phancong/quanly-pc-gv.module";
 import { QlThemgvpbComponent } from './dialog/ql-themgvpb/ql-themgvpb.component';
 import { ThemHockyComponent } from './dialog/them-hocky/them-hocky.component';
 import { ThemTieuChiChamdiemComponent } from './dialog/them-tieu-chi-chamdiem/them-tieu-chi-chamdiem.component';
+import { ThemPhieuChamMauComponent } from './dialog/them-phieu-cham-mau/them-phieu-cham-mau.component';
 
 @NgModule({
     imports: [
@@ -176,7 +177,8 @@ import { ThemTieuChiChamdiemComponent } from './dialog/them-tieu-chi-chamdiem/th
         QlThemgvpbComponent,
         QuanlyPhieuchamComponent,
         ThemHockyComponent,
-        ThemTieuChiChamdiemComponent
+        ThemTieuChiChamdiemComponent,
+        ThemPhieuChamMauComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,
