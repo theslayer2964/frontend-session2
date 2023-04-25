@@ -10,6 +10,8 @@ import {createI18nOptions} from "@angular-devkit/build-angular/src/utils/i18n-op
 })
 export class DetaiService {
     private url = "http://localhost:8080/api/de-tai/";
+
+    private urlQuanLy = "http://localhost:8080/api/quan-ly/";
     token: string = this.userAuthService.getToken();
     private httpHeadersJWT = new HttpHeaders({
         Authorization: `Bearer ${(this.token)}`
@@ -45,6 +47,13 @@ export class DetaiService {
         return this.httpClient.delete<any>(this.url + "xoa-de-tai/" + id, {headers: this.httpHeadersJWT}).pipe(
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));
+    }
+
+    duyetDeTai(data: any): Observable<any> {
+        return this.httpClient.post<any>(this.urlQuanLy + 'duyet-de-tai' , data, {headers: this.httpHeadersJWT}).pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+        ;
     }
 
     getNhomRoleGV(hocKy: any) {

@@ -91,7 +91,6 @@ export class ThemNhomComponent implements OnInit {
     hocKy: HocKy;
 
     private getDeTaiDaDuyet(maHocKy: any, soHocKy: any) {
-        console.log("ma" + maHocKy + soHocKy);
         this.detaiService.getDeTaiRoleGV({
             maGiangVien: this.userAuthService.getUserInfo().maGiangVien,
             maHocKy: maHocKy,
@@ -113,7 +112,6 @@ export class ThemNhomComponent implements OnInit {
     addNhom() {
         this.matKhau = this.formNhom.get('password').value;
         if (this.editData == null) {
-            console.log("GV - THEm Nhom: ", this.maDeTaiHienTai);
             this.dsMaSinhVien.push(this.formNhom.get('maSoSv1').value)
             if (this.formNhom.get('maSoSv2') != null) {
                 this.dsMaSinhVien.push(this.formNhom.get('maSoSv2').value)
@@ -134,16 +132,14 @@ export class ThemNhomComponent implements OnInit {
                         next: (res) => {
                             this.formNhom.reset();
                             this.dialogRef.close('save');
-                            console.log("them nhom sinh vien", res);
                             new NotificationsComponent().showNotification('success', 'Thêm nhóm thành công');
                             this.user = this.userAuthService.getUserInfo();
                             this.user.nhom = res;
                             this.userAuthService.setUserInfo(this.user);
-                            console.log("DIRECT SV CHON NHOM")
+                            this.router.navigate(["/trangchuSV"])
 
                         },
                         error: (err) => {
-                            console.log("them nhom sinh vien loi", err);
                             new NotificationsComponent().showNotification('danger', 'Không thể thêm nhóm');
                         }
                     })

@@ -10,6 +10,7 @@
                         <h4 class="card-title"
                             style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH SINH VIÊN</h4>
                         <button mat-raised-button color="warn" (click)="openDialog()" style="height: 40px">Thêm danh sách Sinh viên</button>
+                        <button mat-raised-button color="warn" (click)="openExcel()" style="height: 40px">Thêm danh sách Sinh viên Excel</button>
                         <button mat-raised-button color="warn" (click)="downloadFileSV()" style="height: 40px">Xuất file mẫu</button>
                     </div>
                     <hr>
@@ -58,7 +59,7 @@
                                                     </ng-container>
                                                     <ng-container matColumnDef="ngaySinh">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày sinh</th>
-                                                        <td mat-cell *matCellDef="let row"> {{row.ngaySinh}}</td>
+                                                        <td mat-cell *matCellDef="let row"> {{row.ngaySinh | date: 'dd/MM/yyyy'}}</td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="noiSinh">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nơi sinh</th>

@@ -62,33 +62,19 @@ export class SinhvienChonnhomComponent implements OnInit {
         })
     }
 
-    tempUser: any;
+
 
     dangKyNhom(row) {
-        this.dialog.open(DangkyCosanComponent, {data: "save"}).afterClosed().subscribe(val => {
+        this.dialog.open(DangkyCosanComponent, {data: row}).afterClosed().subscribe(val => {
             if (val === "save") {
-                row.dsMaSinhVien.push(this.userAuthService.getUserInfo().maSinhVien);
-                row.vaiTro = this.userAuthService.getRoles()[0].roleName
-                console.log(row)
-                this.nhomService.dangKyNhom(row)
-                    .subscribe({
-                        next: (res) => {
-                            new NotificationsComponent().showNotification('success', 'Thêm nhóm thành công');
-                            this.tempUser = this.userAuthService.getUserInfo();
-                            this.tempUser.nhom = res;
-                            this.userAuthService.setUserInfo(this.tempUser);
-                            this.nhom = this.userAuthService.getUserInfo().nhom;
-                        },
-                        error: () => {
-                            new NotificationsComponent().showNotification('danger', 'Không thể thêm nhóm');
-                        }
-                    })
+                this.router.navigate(["/trangchuSV"])
             }
         })
     }
 
+    tinhTrang: any
     private getNhomSVChuaDuyet() {
-        this.nhomService.getNhomChuaDuyet()
+        this.nhomService.getNhomChuaDuyet(this.tinhTrang)
             .subscribe({
                 next: (res) => {
                     console.log("SV- CHONHOM: ", res)
@@ -157,9 +143,7 @@ export class SinhvienChonnhomComponent implements OnInit {
                 console.log(this.sinhvien);
                 this.userAuthService.setUserInfo(this.sinhvien);
                 this.nhom = null;
-                this.router.navigate(['/sv-chonNhom']);
-                console.log("SV - NHOM:", this.nhom);
-                console.log("SV - DIRECT")
+                this.router.navigate(["/trangchuSV"])
             }, error: (err) => {
                 console.log(err);
             }

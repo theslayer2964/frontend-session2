@@ -15,6 +15,7 @@ import {ThemgvComponent} from "../../dialog/themgv/themgv.component";
 import {
   DialogExcelQlGiangvienComponent
 } from "../../excel/dialog-excel-ql-giangvien/dialog-excel-ql-giangvien.component";
+import {GiangvienService} from "../../shared-service/giangvien.service";
 
 @Component({
   selector: 'app-quanly-giangvien',
@@ -25,22 +26,25 @@ export class QuanlyGiangvienComponent implements OnInit {
   private hocKyHienTai: any;
   private soHocKy: any;
 
-  constructor(public dialog: MatDialog, private detaiService: DetaiService, private hockyService: HockyService,
+  constructor(public dialog: MatDialog, private giangVienService: GiangvienService,
               private userAuthService: UserAuthService) {
   }
 
   ngOnInit(): void {
-    this.getAllHocKy();
+    this.getAllGiangVien();
   }
 
   dsHocKy: HocKy[];
 
   // 1. STEP 1
-  private getAllHocKy() {
-    this.hockyService.getHocKy().subscribe({
+  private getAllGiangVien() {
+    this.giangVienService.getGiangVien().subscribe({
       next: (res) => {
         console.log("QL- SV- HK:" , res);
         this.dsHocKy = res;
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }, error: (err) => {
         console.log(err)
       }
@@ -50,25 +54,24 @@ export class QuanlyGiangvienComponent implements OnInit {
   openDialog() {
     this.dialog.open(ThemgvComponent, {}).afterClosed().subscribe(val => {
       if (val === "save") {
-        this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
       }
     })
   }
 
   editProduct(row: any) {
-    this.dialog.open(ThemDeTaiGvComponent, {
+    this.dialog.open(ThemgvComponent, {
       data: row
     }).afterClosed().subscribe(val => {
       if (val === "update") {
-        this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
+
       }
     })
   }
 
   // Table
   displayedColumns: string[] = [
-    "maGiangVien","anhDaiDien","cmnd","email","gioiTinh","hocVi","namCongTac","ngaySinh",
-    "soDienThoai","tenGiangVien","maKhoa","action"
+    "maGiangVien","anhDaiDien", "tenGiangVien","cmnd","email","gioiTinh","hocVi","namCongTac","ngaySinh",
+    "soDienThoai","maKhoa","action"
   ];
   dataSource!: MatTableDataSource<any>;
 
@@ -85,16 +88,7 @@ export class QuanlyGiangvienComponent implements OnInit {
   }
 
   deleteProduct(id: any) {
-    this.detaiService.deleteDeTai(id).subscribe({
-      next: (res) => {
-        this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
-        new NotificationsComponent().showNotification('success', 'Xóa đề tài thành công');
-      },
-      error: () => {
-        new NotificationsComponent().showNotification('danger', 'Không thể xóa đề tài');
-        console.log("Error")
-      }
-    })
+
   }
 
   changeHocKy($event: MatSelectChange) {
@@ -102,30 +96,9 @@ export class QuanlyGiangvienComponent implements OnInit {
     this.soHocKy = $event.value.toString().slice(2)
     console.log('XXX:', this.hocKyHienTai, this.soHocKy);
     // SET SV VAO``
-    this.getDSDeTaiTheoHK(this.hocKyHienTai, this.soHocKy);
+
   }
   // STEP 2
-  private getDSDeTaiTheoHK(maHocKy: any, soHocKy: any) {
-    this.detaiService.getDeTaiRoleGV({
-      maGiangVien: this.userAuthService.getUserInfo().maGiangVien,
-      maHocKy: maHocKy,
-      soHocKy: soHocKy
-    })
-        .subscribe({
-          next: (res) => {
-            if (res) {
-              console.log("GV _ DeTai:", res);
-              // table
-              this.dataSource = new MatTableDataSource(res);
-              this.dataSource.paginator = this.paginator;
-              this.dataSource.sort = this.sort;
-            }
-          },
-          error: () => {
-            console.log("Error")
-          }
-        })
-  }
 
   @Input() validateDeTai;
 
