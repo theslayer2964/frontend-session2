@@ -52,9 +52,14 @@ export class NhomService {
     }
 
     duyetNhom(data: any) {
-        return this.httpClient.post<any>(this.urlQuanLy + "duyet-nhom-theo-nam-hk", data, {headers: this.httpHeadersJWT}).pipe(
+        return this.httpClient.post<any>(this.urlQuanLy + "duyet-nhom", data, {headers: this.httpHeadersJWT}).pipe(
             tap(receiveNhom => receiveNhom),
             catchError(err => of([])));
     }
 
+    getDSNhomDePhanCongGVPhanBien(formData: any){
+        return this.httpClient.post<any>(this.url + "lay-ds-nhom-phan-bien", formData, {headers: this.httpHeadersJWT}).pipe(
+            tap(receiveNhom => receiveNhom),
+            catchError(err => of([])));
+    }
 }

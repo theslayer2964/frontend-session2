@@ -22,6 +22,9 @@ import {SinhvienDiemComponent} from "./sinhvien/sinhvien-diem/sinhvien-diem.comp
 import {SinhvienLichComponent} from "./sinhvien/sinhvien-lich/sinhvien-lich.component";
 import {QuanlyTieuchichamComponent} from "./quanly/quanly-tieuchicham/quanly-tieuchicham.component";
 import {QuanlyPhieuchamComponent} from "./quanly/quanly-phieucham/quanly-phieucham.component";
+import {QlPcContainerComponent} from "./quanly/quanly-phancong/ql-pc-container/ql-pc-container.component";
+import {QlPcGvpbComponent} from "./quanly/quanly-phancong/ql-pc-gvpb/ql-pc-gvpb.component";
+import {QlPcGvhdComponent} from "./quanly/quanly-phancong/ql-pc-gvhd/ql-pc-gvhd.component";
 
 const routes: Routes = [
 
@@ -86,6 +89,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {roles: ['ROLE_QUANLY']}
     },
+    // {
+    //     path: 'quanly/phancong',
+    //     component: QlPcContainerComponent,
+    //     canActivate: [AuthGuard],
+    //     data: {roles: ['ROLE_QUANLY']}
+    // },
     {
         path: 'quanly/phieucham',
         component: QuanlyPhieuchamComponent,
@@ -111,6 +120,14 @@ const routes: Routes = [
             path: '',
             loadChildren: () => import('./quanly-lich/quanly-lich.module').then(m => m.QuanlyLichModule)
         }]
+    },
+    {
+        path: 'quanlypc', component: QlPcContainerComponent,
+        children: [
+            {
+                path: '',
+                loadChildren: () => import('./quanly/quanly-phancong/quanly-pc-gv.module').then(m => m.QuanlyPcGvModule)
+            }]
     },
     {
         path: 'trangchuGV/:id',

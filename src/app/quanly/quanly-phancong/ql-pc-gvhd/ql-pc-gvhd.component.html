@@ -1,0 +1,159 @@
+<!--Table -->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header"
+                         style="display: flex;justify-content: space-between;background-color: #4da1e8">
+                        <h4 class="card-title"
+                            style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH NHÓM RA HỘI ĐỒNG</h4>
+                    </div>
+                    <hr>
+                    <div>
+                        <mat-form-field style="width: 500px;margin-left: 20px">
+                            <mat-label>-- Chọn học kỳ --</mat-label>
+                            <mat-select (selectionChange)="changeHocKy($event)">
+                                <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">HK{{hocKy.soHocKy}}
+                                    -20{{hocKy.maHocKy}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field style="width: 500px;margin-left: 20px">
+                            <mat-label>Tìm kiếm</mat-label>
+                            <input matInput (keyup)="applyFilter($event)" placeholder="nhập từ khóa tìm kiếm..."
+                                   #input>
+                        </mat-form-field>
+                    </div>
+                    <!--                    <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;overflow: auto;">-->
+                    <!--                        <table mat-table [dataSource]="dataSource" matSort>-->
+                    <!--                            &lt;!&ndash; ID Column &ndash;&gt;-->
+                    <!--                            <ng-container matColumnDef="maDeTai" sticky class="example-button">-->
+                    <!--                                <th mat-header-cell *matHeaderCellDef mat-sort-header-->
+                    <!--                                    style="width: 100px;text-align: center"> MÃ ĐỀ TÀI-->
+                    <!--                                </th>-->
+                    <!--                                <td mat-cell *matCellDef="let row"> {{row.maDeTai}} </td>-->
+                    <!--                            </ng-container>-->
+                    <!--                            &lt;!&ndash; Progress Column &ndash;&gt;-->
+                    <!--                            <ng-container matColumnDef="tenDeTai" style="margin-left: 60px">-->
+                    <!--                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="margin-left: 60px"> TÊN ĐỀ-->
+                    <!--                                    TÀI-->
+                    <!--                                </th>-->
+                    <!--                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenDeTai}}"-->
+                    <!--                                    matTooltipClass="example-tooltip-uppercase">-->
+                    <!--                                    <div *ngIf="row.tenDeTai.length < 20">-->
+                    <!--                                        <p>{{row.tenDeTai}}</p>-->
+                    <!--                                    </div>-->
+                    <!--                                    <div *ngIf="row.tenDeTai.length >= 20">-->
+                    <!--                                        <p>{{row.tenDeTai.slice(0, 20)}}...</p>-->
+                    <!--                                    </div>-->
+                    <!--                                </td>-->
+                    <!--                            </ng-container>-->
+                    <!--                            &lt;!&ndash; Progress Column &ndash;&gt;-->
+                    <!--                            <ng-container matColumnDef="gioiHanSoNhomThucHien">-->
+                    <!--                                <th mat-header-cell *matHeaderCellDef mat-sort-header-->
+                    <!--                                    style="width: 100px;text-align: center"> SỐ NHÓM TỐI ĐA-->
+                    <!--                                </th>-->
+                    <!--                                <td mat-cell *matCellDef="let row"> {{row.gioiHanSoNhomThucHien}}</td>-->
+                    <!--                            </ng-container>-->
+                    <!--                            &lt;!&ndash; Progress Column &ndash;&gt;-->
+                    <!--                            <ng-container matColumnDef="moTa" style="width: 200px;">-->
+                    <!--                                <th mat-header-cell *matHeaderCellDef mat-sort-header-->
+                    <!--                                    style="margin-left: 40px;text-align: center"> MÔ TẢ-->
+                    <!--                                </th>-->
+                    <!--                                <td mat-cell *matCellDef="let row" matTooltip="{{row.moTa}}"-->
+                    <!--                                    matTooltipClass="example-tooltip-uppercase">-->
+                    <!--                                    <div *ngIf="row.moTa.length < 20">-->
+                    <!--                                        <p>{{row.moTa}}</p>-->
+                    <!--                                    </div>-->
+                    <!--                                    <div *ngIf="row.moTa.length >= 20">-->
+                    <!--                                        <p>{{row.moTa.slice(0, 20)}}...</p>-->
+                    <!--                                    </div>-->
+                    <!--                                </td>-->
+                    <!--                            </ng-container>-->
+                    <!--                            &lt;!&ndash; Progress Column &ndash;&gt;-->
+                    <!--                            <ng-container matColumnDef="mucTieuDeTai">-->
+                    <!--                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center"> MỤC-->
+                    <!--                                    TIÊU ĐỀ TÀI-->
+                    <!--                                </th>-->
+                    <!--                                <td mat-cell *matCellDef="let row" matTooltip="{{row.mucTieuDeTai}}"-->
+                    <!--                                    matTooltipClass="example-tooltip-uppercase">-->
+                    <!--                                    <div *ngIf="row.mucTieuDeTai.length < 20">-->
+                    <!--                                        <p>{{row.mucTieuDeTai}}</p>-->
+                    <!--                                    </div>-->
+                    <!--                                    <div *ngIf="row.mucTieuDeTai.length >= 20">-->
+                    <!--                                        <p>{{row.mucTieuDeTai.slice(0, 20)}}...</p>-->
+                    <!--                                    </div>-->
+                    <!--                                </td>-->
+                    <!--                            </ng-container>-->
+                    <!--                            &lt;!&ndash; Progress Column &ndash;&gt;-->
+                    <!--                            <ng-container matColumnDef="sanPhamDuKien">-->
+                    <!--                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center"> SẢN-->
+                    <!--                                    PHẨM DỰ KIẾN-->
+                    <!--                                </th>-->
+                    <!--                                <td mat-cell *matCellDef="let row" matTooltip="{{row.sanPhamDuKien}}"-->
+                    <!--                                    matTooltipClass="example-tooltip-uppercase">-->
+                    <!--                                    <div *ngIf="row.sanPhamDuKien.length < 20">-->
+                    <!--                                        <p>{{row.sanPhamDuKien}}</p>-->
+                    <!--                                    </div>-->
+                    <!--                                    <div *ngIf="row.sanPhamDuKien.length >= 20">-->
+                    <!--                                        <p>{{row.sanPhamDuKien.slice(0, 20)}}...</p>-->
+                    <!--                                    </div>-->
+                    <!--                                </td>-->
+                    <!--                            </ng-container>-->
+                    <!--                            &lt;!&ndash; Progress Column &ndash;&gt;-->
+                    <!--                            <ng-container matColumnDef="trangThai">-->
+                    <!--                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center"> TRẠNG-->
+                    <!--                                    THÁI-->
+                    <!--                                </th>-->
+                    <!--                                <td mat-cell *matCellDef="let row">-->
+                    <!--                                    <p *ngIf="row.trangThai==0" style="color: #00acc1">Chờ duyệt</p>-->
+                    <!--                                    <p *ngIf="row.trangThai==1" style="color: red">Chưa đạt</p>-->
+                    <!--                                    <p *ngIf="row.trangThai==2" style="color: #00c853">Được chấp nhận</p>-->
+                    <!--                                </td>-->
+                    <!--                            </ng-container>-->
+                    <!--                            &lt;!&ndash; Progress Column &ndash;&gt;-->
+                    <!--                            <ng-container matColumnDef="yeuCauDauVao">-->
+                    <!--                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center"> YÊU-->
+                    <!--                                    CẦU ĐẦU VÀO-->
+                    <!--                                </th>-->
+                    <!--                                <td mat-cell *matCellDef="let row" matTooltip="{{row.yeuCauDauVao}}"-->
+                    <!--                                    matTooltipClass="example-tooltip-uppercase">-->
+                    <!--                                    <div *ngIf="row.yeuCauDauVao.length < 20">-->
+                    <!--                                        <p>{{row.yeuCauDauVao}}</p>-->
+                    <!--                                    </div>-->
+                    <!--                                    <div *ngIf="row.yeuCauDauVao.length >= 20">-->
+                    <!--                                        <p>{{row.yeuCauDauVao.slice(0, 20)}}...</p>-->
+                    <!--                                    </div>-->
+                    <!--                                </td>-->
+                    <!--                            </ng-container>-->
+                    <!--                            <ng-container matColumnDef="action" stickyEnd>-->
+                    <!--                                <th mat-header-cell *matHeaderCellDef mat-sort-header-->
+                    <!--                                    style="width: 100px;text-align: center"> TÙY CHỈNH-->
+                    <!--                                </th>-->
+                    <!--                                <td mat-cell *matCellDef="let row">-->
+                    <!--                                    &lt;!&ndash;Row: data cua 1 dong&ndash;&gt;-->
+                    <!--                                    <button mat-icon-button color="primary" (click)="editProduct(row)">-->
+                    <!--                                        <mat-icon>edit</mat-icon>-->
+                    <!--                                    </button>-->
+                    <!--                                    <button mat-icon-button color="accent" (click)="deleteProduct(row.maDeTai)">-->
+                    <!--                                        <mat-icon>delete</mat-icon>-->
+                    <!--                                    </button>-->
+                    <!--                                </td>-->
+                    <!--                            </ng-container>-->
+                    <!--                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+                    <!--                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+                    <!--                            &lt;!&ndash; Row shown when there is no matching data. &ndash;&gt;-->
+                    <!--                            <tr class="mat-row" *matNoDataRow>-->
+                    <!--                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>-->
+                    <!--                            </tr>-->
+                    <!--                        </table>-->
+                    <!--                        <mat-paginator [pageSizeOptions]="[25, 10, 5, 100]"-->
+                    <!--                                       aria-label="Select page of users"></mat-paginator>-->
+                    <!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

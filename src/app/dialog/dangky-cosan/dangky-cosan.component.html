@@ -1,8 +1,15 @@
-<h3 class="">Bạn có muốn đăng ký nhóm cùng sinh viên này không?</h3>
-
+<h3 class="">Hãy nhập mật khẩu nhóm để có thể đăng ký nhóm này?</h3>
+<div>
+    <form [formGroup]="dangKyNhomForm">
+    <mat-form-field class="example-full-width">
+        <mat-label mat-header-cell *matHeaderCellDef>Mật khẩu nhóm</mat-label>
+        <input formControlName="matKhau" matInput placeholder="Mật khẩu nhóm">
+    </mat-form-field>
+    </form>
+</div>
 <div>
     <button mat-raised-button color="warn" mat-dialog-close="'close'">Không</button>
-    <button style="margin-left: 8px" mat-raised-button color="primary"  [mat-dialog-close]="data">{{actionBtn}}</button>
+    <button style="margin-left: 8px" mat-raised-button color="primary"  (click)="dangKyNhomHienTai()">{{actionBtn}}</button>
 </div>
 <div class="clearfix"></div>
 

@@ -80,7 +80,14 @@ import { ThemgvComponent } from './dialog/themgv/themgv.component';
 import { QuanlyTieuchichamComponent } from './quanly/quanly-tieuchicham/quanly-tieuchicham.component';
 import { QuanlyPhieuchamComponent } from './quanly/quanly-phieucham/quanly-phieucham.component';
 import {MatListModule} from "@angular/material/list";
+import { QlPcContainerComponent } from './quanly/quanly-phancong/ql-pc-container/ql-pc-container.component';
+import { QlPcSidebarComponent } from './quanly/quanly-phancong/ql-pc-sidebar/ql-pc-sidebar.component';
+import { QlPcGvpbComponent } from './quanly/quanly-phancong/ql-pc-gvpb/ql-pc-gvpb.component';
+import { QlPcGvhdComponent } from './quanly/quanly-phancong/ql-pc-gvhd/ql-pc-gvhd.component';
+import {QuanlyPcGvModule} from "./quanly/quanly-phancong/quanly-pc-gv.module";
+import { QlThemgvpbComponent } from './dialog/ql-themgvpb/ql-themgvpb.component';
 import { ThemHockyComponent } from './dialog/them-hocky/them-hocky.component';
+import { ThemTieuChiChamdiemComponent } from './dialog/them-tieu-chi-chamdiem/them-tieu-chi-chamdiem.component';
 
 @NgModule({
     imports: [
@@ -116,6 +123,7 @@ import { ThemHockyComponent } from './dialog/them-hocky/them-hocky.component';
         RouterModule,
         MatDividerModule,
         QuanlyLichModule,
+        QuanlyPcGvModule,
         CatDatModule,
         FullCalendarModule,
         MatListModule
@@ -165,7 +173,10 @@ import { ThemHockyComponent } from './dialog/them-hocky/them-hocky.component';
         ThemgvComponent,
         QuanlyTieuchichamComponent,
         QuanlyPhieuchamComponent,
-        ThemHockyComponent
+        QlThemgvpbComponent,
+        QuanlyPhieuchamComponent,
+        ThemHockyComponent,
+        ThemTieuChiChamdiemComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

@@ -62,28 +62,12 @@ export class SinhvienChonnhomComponent implements OnInit {
         })
     }
 
-    tempUser: any;
+
 
     dangKyNhom(row) {
-        this.dialog.open(DangkyCosanComponent, {data: "save"}).afterClosed().subscribe(val => {
+        this.dialog.open(DangkyCosanComponent, {data: row}).afterClosed().subscribe(val => {
             if (val === "save") {
-                row.dsMaSinhVien.push(this.userAuthService.getUserInfo().maSinhVien);
-                row.vaiTro = this.userAuthService.getRoles()[0].roleName
-                console.log(row)
-                this.nhomService.dangKyNhom(row)
-                    .subscribe({
-                        next: (res) => {
-                            new NotificationsComponent().showNotification('success', 'Thêm nhóm thành công');
-                            this.tempUser = this.userAuthService.getUserInfo();
-                            this.tempUser.nhom = res;
-                            this.userAuthService.setUserInfo(this.tempUser);
-                            this.nhom = this.userAuthService.getUserInfo().nhom;
-                            this.router.navigate(["/trangchuSV"])
-                        },
-                        error: () => {
-                            new NotificationsComponent().showNotification('danger', 'Không thể thêm nhóm');
-                        }
-                    })
+                this.router.navigate(["/trangchuSV"])
             }
         })
     }

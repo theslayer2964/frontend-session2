@@ -19,6 +19,7 @@ export class QlHockyComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getAllHocKy()
     }
 
     // Table
@@ -30,6 +31,22 @@ export class QlHockyComponent implements OnInit {
         this.dialog.open(ThemHockyComponent, {}).afterClosed().subscribe(val => {
             if (val === "save") {
 
+            }
+        })
+    }
+
+    getAllHocKy() {
+        this.hockyService.getHocKy().subscribe({
+            next: (res) => {
+                if (res) {
+                    console.log("DATA REMAKE ne: ", res)
+                    this.dataSource = new MatTableDataSource(res);
+                    this.dataSource.paginator = this.paginator;
+                    this.dataSource.sort = this.sort;
+                }
+            },
+            error: () => {
+                console.log("Error")
             }
         })
     }
