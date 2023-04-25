@@ -27,15 +27,6 @@
                     <hr>
                     <div>
                         <mat-form-field style="width: 500px;margin-left: 20px">
-                            <mat-label>-- Chọn học kỳ --</mat-label>
-                            <mat-select (selectionChange)="changeHocKy($event)">
-                                <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">HK{{hocKy.soHocKy}}
-                                    -20{{hocKy.maHocKy}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div>
-                        <mat-form-field style="width: 500px;margin-left: 20px">
                             <mat-label>Tìm kiếm</mat-label>
                             <input matInput (keyup)="applyFilter($event)" placeholder="nhập từ khóa tìm kiếm..."
                                    #input>
@@ -44,7 +35,7 @@
                     <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;overflow: auto;">
                         <table mat-table [dataSource]="dataSource" matSort>
                             <!-- ID Column -->
-                            <ng-container matColumnDef="maChuanDauRa" sticky class="example-button">
+                            <ng-container matColumnDef="maChuanDauRa" class="example-button">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
                                     style="width: 100px;text-align: center"> MÃ TIÊU CHÍ
                                 </th>
@@ -67,22 +58,8 @@
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.diemToiDa}}</td>
                             </ng-container>
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="moTa" style="width: 200px;">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    style="margin-left: 40px;text-align: center"> MÔ TẢ
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.moTa}}"
-                                    matTooltipClass="example-tooltip-uppercase">
-                                    <div *ngIf="row.moTa.length < 20">
-                                        <p>{{row.moTa}}</p>
-                                    </div>
-                                    <div *ngIf="row.moTa.length >= 20">
-                                        <p>{{row.moTa.slice(0, 20)}}...</p>
-                                    </div>
-                                </td>
-                            </ng-container>
-                            <ng-container matColumnDef="action" stickyEnd>
+
+                            <ng-container matColumnDef="action">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
                                     style="width: 100px;text-align: center"> TÙY CHỈNH
                                 </th>

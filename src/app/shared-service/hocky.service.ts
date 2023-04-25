@@ -19,7 +19,7 @@ export class HockyService {
   }
 
   postHocKy(data: any): Observable<any>{
-    return this.httpClient.post<any>(this.url, data, {headers: this.httpHeadersJWT}).pipe(
+    return this.httpClient.post<any>(this.url + "them", data, {headers: this.httpHeadersJWT}).pipe(
         tap(recieveDeTai => recieveDeTai),
         catchError(err => of([])));;
   }

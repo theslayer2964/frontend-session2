@@ -16,15 +16,7 @@
                         <button mat-raised-button color="warn" (click)="downloadFileSV()" style="height: 40px">Xuất file mẫu</button>
                     </div>
                     <hr>
-                    <div>
-                        <mat-form-field style="width: 500px;margin-left: 20px">
-                            <mat-label>-- Chọn học kỳ --</mat-label>
-                            <mat-select (selectionChange)="changeHocKy($event)">
-                                <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">HK{{hocKy.soHocKy}}
-                                    -20{{hocKy.maHocKy}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
+
                     <div>
                         <mat-form-field style="width: 500px;margin-left: 20px">
                             <mat-label>Tìm kiếm</mat-label>
@@ -41,6 +33,10 @@
                             <ng-container matColumnDef="anhDaiDien">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Ảnh đại diện</th>
                                 <td mat-cell *matCellDef="let row"> {{row.anhDaiDien}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="tenGiangVien">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên giảng viên</th>
+                                <td mat-cell *matCellDef="let row"> {{row.tenGiangVien}}</td>
                             </ng-container>
                             <ng-container matColumnDef="cmnd">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>CMND/CCCD</th>
@@ -65,16 +61,13 @@
                             </ng-container>
                             <ng-container matColumnDef="ngaySinh">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày sinh</th>
-                                <td mat-cell *matCellDef="let row"> {{row.ngaySinh}}</td>
+                                <td mat-cell *matCellDef="let row"> {{row.ngaySinh | date: 'dd/MM/yyyy'}}</td>
                             </ng-container>
                             <ng-container matColumnDef="soDienThoai">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Số điện thoại</th>
                                 <td mat-cell *matCellDef="let row"> {{row.soDienThoai}}</td>
                             </ng-container>
-                            <ng-container matColumnDef="tenGiangVien">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên giảng viên</th>
-                                <td mat-cell *matCellDef="let row"> {{row.tenGiangVien}}</td>
-                            </ng-container>
+
                             <ng-container matColumnDef="maKhoa">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã khoa</th>
                                 <td mat-cell *matCellDef="let row"> {{row.maKhoa}}</td>

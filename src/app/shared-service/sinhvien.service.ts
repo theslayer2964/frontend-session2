@@ -8,8 +8,10 @@ import {HocKy} from "./HocKy.models";
   providedIn: 'root'
 })
 export class SinhvienService {
-  private url = "http://localhost:8080/api/sinhvien/";
+  private urlSinhVien = "http://localhost:8080/api/sinh-vien/";
   private urlQuanLy = "http://localhost:8080/api/quan-ly/";
+
+  private  urlGiangVien = "http://localhost:8080/api/giang-vien/";
   token: string = this.userAuthService.getToken();
   private httpHeadersJWT = new HttpHeaders({
     Authorization: `Bearer ${(this.token)}`
@@ -22,7 +24,7 @@ export class SinhvienService {
   addSinhVienExcel(file: any, maGV: string) {
     var formData = new FormData();
     formData.append("file", file);
-    return this.httpClient.post<any>(this.url + "them-de-tai-excel/" + maGV, formData,{headers: {
+    return this.httpClient.post<any>(this.urlSinhVien + "them-sinh-vien-excel/", formData,{headers: {
         'Accept':'application/json',
         Authorization: `Bearer ${(this.token)}`
       }} ).pipe(
@@ -33,14 +35,21 @@ export class SinhvienService {
 
 
   themSinhVien(data: any): Observable<any[]> {
-    return this.httpClient.post<HocKy[]>(this.urlQuanLy + "them-sinh-vien", data, {headers: this.httpHeadersJWT})
+    return this.httpClient.post<HocKy[]>(this.urlSinhVien + "them-sinh-vien", data, {headers: this.httpHeadersJWT})
         .pipe(
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));
   }
 
   themGiangVien(data: any): Observable<any[]> {
-    return this.httpClient.post<HocKy[]>(this.urlQuanLy + "them-giang-vien", data, {headers: this.httpHeadersJWT})
+    return this.httpClient.post<HocKy[]>(this.urlGiangVien + "them-giang-vien", data, {headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+  }
+
+  layDsSinhVien(data: any): Observable<any[]> {
+    return this.httpClient.post<HocKy[]>(this.urlQuanLy + "lay-ds-sinh-vien", data, {headers: this.httpHeadersJWT})
         .pipe(
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));

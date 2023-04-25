@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Thêm Tiêu Chí Chấm Điểm</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="sinhVienForm">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label  mat-header-cell *matHeaderCellDef>Tên Phiếu Chấm</mat-label>
+                                        <input formControlName="tenPhieuCham" matInput placeholder="Tên Phiếu Chấm">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label  mat-header-cell *matHeaderCellDef>Tiêu chí chấm điểm</mat-label>
+                                        <input formControlName="tieuChiChamDiem" matInput placeholder="Tiêu chí chấm điểm" >
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div mat-dialog-actions [align]="'end'">
+                                <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
+                                <!--                                [disabled]="!productForm.valid"-->
+                                <button style="margin-left: 8px" mat-raised-button color="primary"
+
+                                        (click)="addSinhVien()">{{actionBtn}}</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

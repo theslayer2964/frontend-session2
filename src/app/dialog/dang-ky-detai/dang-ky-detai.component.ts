@@ -4,6 +4,7 @@ import {DetaiSvService} from "../../sinhvien/sinhvien-service/detai-sv.service";
 import {UserService} from "../../authentication/_service/user.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-dang-ky-detai',
@@ -18,6 +19,7 @@ export class DangKyDetaiComponent implements OnInit {
     actionBtn: string = 'Đăng ký';
 
     constructor(
+        private router: Router,
         public dialogRef: MatDialogRef<DangKyDetaiComponent>,
         @Inject(MAT_DIALOG_DATA) private data: any,
         private deTaiService: DetaiSvService,
@@ -48,8 +50,12 @@ export class DangKyDetaiComponent implements OnInit {
         }).subscribe({
             next: (res) => {
                 console.log(res);
-                this.dialogRef.close();
+                var user = this.userAuthService.getUserInfo();
                 new NotificationsComponent().showNotification('success', 'Thêm nhóm thành công');
+                this.dialogRef.close();
+                user.nhom = res;
+                this.userAuthService.setUserInfo(user);
+                this.router.navigate(["/trangchuSV"])
             }
         })
     }

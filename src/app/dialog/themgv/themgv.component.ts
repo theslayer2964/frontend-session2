@@ -52,34 +52,34 @@ export class ThemgvComponent implements OnInit {
               }
             })
       }
-    } else {
-      // console.log('UPDATE NGHE: ' + JSON.stringify(this.s.value))
-      //   const dtoForm = {
-      //     maDeTai:this.productForm.value.maDeTai,
-      //     tenDeTai: this.productForm.value.tenDeTai,
-      //     mucTieuDeTai: this.productForm.value.mucTieuDeTai,
-      //     sanPhamDuKien: this.productForm.value.sanPhamDuKien,
-      //     moTa: this.productForm.value.moTa,
-      //     yeuCauDauVao: this.productForm.value.yeuCauDauVao,
-      //     gioiHanSoNhomThucHien: this.productForm.value.gioiHanSoNhomThucHien,
-      //     maGiangVien:this.productForm.value.maGiangVien,
-      //     hocKy: {
-      //       maHocKy: this.productForm.value.maHocKy
-      //     }
-      //   };
-      //   this.detaiService.updateDeTai(dtoForm, this.editData.id)
-      //       .subscribe({
-      //         next: (res) => {
-      //           this.productForm.reset();
-      //           this.dialogRef.close('update');
-      //           new NotificationsComponent().showNotification('success', 'Cập nhật đề tài thành công');
-      //         },
-      //         error: () => {
-      //           new NotificationsComponent().showNotification('danger', 'Không thể cập nhật đề tài');
-      //         }
-      //       })
-      //   this.editData = null;
-      // }
+  //   } else {
+  //     console.log('UPDATE NGHE: ' + JSON.stringify(this.s.value))
+  //       const dtoForm = {
+  //         maDeTai:this.productForm.value.maGiangVien,
+  //         tenDeTai: this.productForm.value.email,
+  //         anhDaiDien: this.productForm.value.anhDaiDien,
+  //         soDienThoai: this.productForm.value.soDienThoai,
+  //         moTa: this.productForm.value.moTa,
+  //         yeuCauDauVao: this.productForm.value.yeuCauDauVao,
+  //         gioiHanSoNhomThucHien: this.productForm.value.gioiHanSoNhomThucHien,
+  //         maGiangVien:this.productForm.value.maGiangVien,
+  //         hocKy: {
+  //           maHocKy: this.productForm.value.maHocKy
+  //         }
+  //       };
+  //       this.detaiService.updateDeTai(dtoForm, this.editData.id)
+  //           .subscribe({
+  //             next: (res) => {
+  //               this.productForm.reset();
+  //               this.dialogRef.close('update');
+  //               new NotificationsComponent().showNotification('success', 'Cập nhật đề tài thành công');
+  //             },
+  //             error: () => {
+  //               new NotificationsComponent().showNotification('danger', 'Không thể cập nhật đề tài');
+  //             }
+  //           })
+  //       this.editData = null;
+  //     }
     }
   }
 

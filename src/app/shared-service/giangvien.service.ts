@@ -7,7 +7,9 @@ import {UserAuthService} from "../authentication/_service/user-auth.service";
   providedIn: 'root'
 })
 export class GiangvienService {
-  private url = "http://localhost:8080/api/quan-ly/";
+  private url = "http://localhost:8080/api/giang-vien/";
+
+  private urlQuanLy = "http://localhost:8080/api/quan-ly/";
   token: string = this.userAuthService.getToken();
   private httpHeadersJWT = new HttpHeaders({
     Authorization: `Bearer ${(this.token)}`
@@ -17,7 +19,7 @@ export class GiangvienService {
   addGiangVienExcel(file: any, maQL: string) {
     var formData = new FormData();
     formData.append("file", file);
-    return this.httpClient.post<any>(this.url + "them-giang-vien-excel/" + maQL, formData,{headers: {
+    return this.httpClient.post<any>(this.urlQuanLy + "them-giang-vien-excel/", formData,{headers: {
         'Accept':'application/json',
         Authorization: `Bearer ${(this.token)}`
       }} ).pipe(
@@ -36,6 +38,13 @@ export class GiangvienService {
     return this.httpClient.post<any>(this.url + "them-phan-cong", formData,{headers: this.httpHeadersJWT})
         .pipe(
             tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+    ;
+  }
+
+  getGiangVien() {
+        return this.httpClient.get<any>(this.urlQuanLy + "lay-ds-giang-vien" , {headers: this.httpHeadersJWT}).pipe(
+            tap(receiveNhom => receiveNhom),
             catchError(err => of([])));
   }
 }
