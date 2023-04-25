@@ -1,11 +1,8 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {NhomService} from "../../shared-service/nhom.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {COMMA, ENTER} from "@angular/cdk/keycodes";
-import {map, Observable, startWith, Subject} from "rxjs";
-import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
-import {MatChipInputEvent} from "@angular/material/chips";
+import {Subject} from "rxjs";
 import {GiangvienService} from "../../shared-service/giangvien.service";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 import {MatSelectChange} from "@angular/material/select";
@@ -52,7 +49,11 @@ export class QlThemgvpbComponent implements OnInit {
             tenGiangVienHD: [''],
             GVPB1: [''],
             GVPB2: [''],
-            maGiangVienHD: ['']
+            maGiangVienHD: [''],
+            ngayCham: [''],
+            phong: [''],
+            tietBatDau:[''],
+            tietKetThuc:['']
         })
         if (this.editData) {
             this.maNhomL = this.editData.maNhom;
@@ -65,15 +66,16 @@ export class QlThemgvpbComponent implements OnInit {
             this.tenSV2L = this.editData.tenSV2;
             this.tenGiangVienHDL = this.editData.tenGiangVienHD;
             this.maGiangVienHDL = this.editData.maGiangVienHD;
-            // this.editData.GVPB1;
-            // this.editData.GVPB2;
+            // this.nhomDKGVPB.controls['phong'].setValue(this.editData.phong);
+            // this.nhomDKGVPB.controls['thoiGianBatDau'].setValue(this.editData.thoiGianBatDau);
+            // this.nhomDKGVPB.controls['tietBatDau'].setValue(this.editData.tietBatDau);
+            // this.nhomDKGVPB.controls['tietKetThuc'].setValue(this.editData.tietKetThuc);
             this.actionBtn = "Cập nhật"
         }
         this.getDSGiangVien();
     }
     dsGV: [];
 
-    dsMaGV: any;
     dsTenGV: any = [];
     destroy$ = new Subject();
 
@@ -102,9 +104,12 @@ export class QlThemgvpbComponent implements OnInit {
             dsMaGiangVienPB: this.dsGVPB,
             viTriPhanCong: "Phan Bien",
             chamCong: false,
-            maNhom: this.maNhomL
+            maNhom: this.maNhomL,
+            ngay: this.nhomDKGVPB.value.ngayCham,
+            tietBatDau: this.nhomDKGVPB.value.tietBatDau,
+            tietKetThuc: this.nhomDKGVPB.value.tietKetThuc,
+            phong: this.nhomDKGVPB.value.phong
         };
-
         this.giangvienService.phanCongGV(data).subscribe(res => {
             this.dialogRef.close();
 
