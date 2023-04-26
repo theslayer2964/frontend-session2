@@ -10,6 +10,7 @@ import {QlThemgvpbComponent} from "../../../dialog/ql-themgvpb/ql-themgvpb.compo
 import {NhomService} from "../../../shared-service/nhom.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {ThemNhomTransferService} from "../../../transfer-data-service/them-nhom-transfer.service";
 
 @Component({
     selector: 'app-ql-pc-gvpb',
@@ -21,7 +22,7 @@ export class QlPcGvpbComponent implements OnInit {
     private soHocKy: any;
 
     constructor(public dialog: MatDialog, private detaiService: DetaiService, private hockyService: HockyService,
-                private userAuthService: UserAuthService, private nhomService: NhomService) {
+                private userAuthService: UserAuthService, private nhomService: NhomService, private hockyTransferData: ThemNhomTransferService) {
     }
 
     ngOnInit(): void {
@@ -48,6 +49,7 @@ export class QlPcGvpbComponent implements OnInit {
         this.hocKyHienTai = $event.value.toString().slice(0, 3);
         this.soHocKy = $event.value.toString().slice(2);
         console.log('XXX:', this.hocKyHienTai, this.soHocKy);
+        this.hockyTransferData.sendHocKy($event.value)
         this.nhomService.getDSNhomDePhanCongGVPhanBien({maHocKy: this.hocKyHienTai, soHocKy: this.soHocKy})
             .subscribe(res => {
                 this.dataSource = new MatTableDataSource(this.mappingData(res));

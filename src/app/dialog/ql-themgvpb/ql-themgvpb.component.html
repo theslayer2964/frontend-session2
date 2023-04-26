@@ -40,7 +40,7 @@
                     <mat-label>Danh sách giảng viên</mat-label>
                     <mat-select [formControl]="toppings" multiple (selectionChange)="onDropdownList($event)">
                         <mat-option *ngFor="let topping of toppingList"
-                                    value="topping.maGV">{{topping.tenGV}}</mat-option>
+                                    value="{{topping.maGV}}">{{topping.tenGV}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
