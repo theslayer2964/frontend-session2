@@ -39,10 +39,10 @@ export class ThemHockyComponent implements OnInit {
                         this.giangVienForm.reset();
                         this.dialogRef.close('save');
                         console.log("QL - THEm HocKy:", this.giangVienForm.value);
-                        new NotificationsComponent().showNotification('success', 'Thêm đề tài thành công');
+                        new NotificationsComponent().showNotification('success', 'Thêm học ky thành công');
                     },
                     error: () => {
-                        new NotificationsComponent().showNotification('DANGER', 'Không thể thêm đề tài');
+                        new NotificationsComponent().showNotification('DANGER', 'Không thể thêm học ky');
                     }
                 })
         }

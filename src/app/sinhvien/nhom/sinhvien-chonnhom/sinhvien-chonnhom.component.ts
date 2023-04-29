@@ -73,14 +73,19 @@ export class SinhvienChonnhomComponent implements OnInit {
     }
 
     tinhTrang: any
+    dsSinhVien: any = [];
     private getNhomSVChuaDuyet() {
         this.nhomService.getNhomChuaDuyet(this.tinhTrang)
             .subscribe({
                 next: (res) => {
-                    console.log("SV- CHONHOM: ", res)
+                    res.forEach(data => {
+                        this.dsSinhVien.push(data.sinhViens)
+                    })
+                    console.log(this.dsSinhVien)
                     this.dataSource = new MatTableDataSource(res);
                     this.dataSource.paginator = this.paginator;
                     this.dataSource.sort = this.sort;
+                    console.log( res)
                 },
                 error: () => {
                     console.log("Error")

@@ -1,9 +1,16 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TieuchichamdiemService} from "../../shared-service/tieuchichamdiem.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
+import {MatSelectChange} from "@angular/material/select";
+import {Subject} from "rxjs";
+import {MatTableDataSource} from "@angular/material/table";
 
+interface GiangVien {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-them-phieu-cham-mau',
   templateUrl: './them-phieu-cham-mau.component.html',
@@ -22,33 +29,23 @@ export class ThemPhieuChamMauComponent implements OnInit {
   actionBtn: string = "Save"
 
   ngOnInit(): void {
+    this.getAllTieuChiChamDiem()
     this.sinhVienForm = this.formBuilder.group({
       tenPhieuCham: ['', Validators.required],
-      tieuChiChamDiem: ['', Validators.required],
     })
     console.log(this.editData)
-    // if (this.editData) {
-    //     this.sinhVienForm.controls['maSinhVien'].setValue(this.editData.maSinhVien);
-    //     this.sinhVienForm.controls['anhDaiDien'].setValue(this.editData.gioiHanSoNhomThucHien);
-    //     this.sinhVienForm.controls['tenSinhVien'].setValue(this.editData.moTa);
-    //     this.sinhVienForm.controls['ngaySinh'].setValue(this.editData.mucTieuDeTai);
-    //     this.sinhVienForm.controls['namNhapHoc'].setValue(this.editData.sanPhamDuKien);
-    //     this.sinhVienForm.controls['gioiTinh'].setValue(this.editData.tenDeTai);
-    //     this.sinhVienForm.controls['maLopDanhNghia'].setValue(this.editData.yeuCauDauVao);
-    //     this.sinhVienForm.controls['maLopHocPhan'].setValue(this.editData.hocKy.maHocKy);
-    //     this.actionBtn = "Update"
-    // }
   }
+  dsTieuChi: any = [];
 
   addSinhVien() {
-    if (this.editData == null) {
-      if (this.sinhVienForm.valid) {
+
+      if (this.sinhVienForm.valid && this.dsMaTieuChi.length > 0) {
         console.log("GV - THEm DETAI:", this.sinhVienForm.value);
         this.tieuChiChamDiem.themPhieuChamMau({
-          tenPhieuCham: "aaa",
-          tieuChiChamDiems: [ 1]
-        })
-            .subscribe({
+          tenPhieuCham: this.sinhVienForm.get('tenPhieuCham').value,
+          tieuChiChamDiems: this.dsMaTieuChi,
+          vaiTroDung: this.giangVien
+        }).subscribe({
               next: (res) => {
                 this.sinhVienForm.reset();
                 this.dialogRef.close('save');
@@ -56,47 +53,42 @@ export class ThemPhieuChamMauComponent implements OnInit {
                 new NotificationsComponent().showNotification('success', 'Thêm phiếu thành công');
               },
               error: () => {
-                new NotificationsComponent().showNotification('DANGER', 'Không thể thêm đề tài');
+                new NotificationsComponent().showNotification('danger', 'Không thể thêm phiếu');
               }
             })
       }
-    } else {
-      // console.log('UPDATE NGHE: ' + JSON.stringify(this.s.value))
-      //   const dtoForm = {
-      //     maDeTai:this.productForm.value.maDeTai,
-      //     tenDeTai: this.productForm.value.tenDeTai,
-      //     mucTieuDeTai: this.productForm.value.mucTieuDeTai,
-      //     sanPhamDuKien: this.productForm.value.sanPhamDuKien,
-      //     moTa: this.productForm.value.moTa,
-      //     yeuCauDauVao: this.productForm.value.yeuCauDauVao,
-      //     gioiHanSoNhomThucHien: this.productForm.value.gioiHanSoNhomThucHien,
-      //     maGiangVien:this.productForm.value.maGiangVien,
-      //     hocKy: {
-      //       maHocKy: this.productForm.value.maHocKy
-      //     }
-      //   };
-      //   this.detaiService.updateDeTai(dtoForm, this.editData.id)
-      //       .subscribe({
-      //         next: (res) => {
-      //           this.productForm.reset();
-      //           this.dialogRef.close('update');
-      //           new NotificationsComponent().showNotification('success', 'Cập nhật đề tài thành công');
-      //         },
-      //         error: () => {
-      //           new NotificationsComponent().showNotification('danger', 'Không thể cập nhật đề tài');
-      //         }
-      //       })
-      //   this.editData = null;
-      // }
+      else {
+        new NotificationsComponent().showNotification('danger', 'Xin hãy nhập đủ thông tin');
+      }
     }
-  }
+  dsVaiTro: GiangVien[] = [
+    {value: "HD", viewValue:"Giảng viên hướng dẫn" },
+    {value: "PB", viewValue:"Giảng viên phản biện" },
+    {value: "CT", viewValue:"Chủ tịch hội đồng" },
+    {value: "TK", viewValue:"Thư ký hướng dẫn" },
+  ];
   private getAllTieuChiChamDiem() {
     this.tieuChiChamDiem.layHetTieuChi().subscribe({
       next: (res) => {
-
+        this.dsTieuChi = res;
+        this.toppingList = this.dsTieuChi
       }, error: (err) => {
         console.log(err)
       }
     })
   }
+  toppings = new FormControl('');
+  toppingList: any[] = this.dsTieuChi
+  dsMaTieuChi = [];
+  onDropdownList($event: MatSelectChange) {
+    this.dsMaTieuChi = $event.value;
+    console.log("DS GUI VE:", this.dsMaTieuChi);
+
+  }
+  giangVien :any;
+
+  changeGiangVien($event: MatSelectChange) {
+    this.giangVien = $event.value;
+  }
+
 }

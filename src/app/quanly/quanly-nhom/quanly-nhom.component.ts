@@ -9,6 +9,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {ThemNhomComponent} from "../../dialog/them-nhom/them-nhom.component";
 import {MatSelectChange} from "@angular/material/select";
+import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 
 @Component({
   selector: 'app-quanly-nhom',
@@ -63,10 +64,12 @@ export class QuanlyNhomComponent implements OnInit {
      next: (res) => {
        if (res) {
          this.getDsNhom()
+         new NotificationsComponent().showNotification('success', 'Duyệt nhóm thành công');
        }
      },
      error: () => {
        console.log("Error")
+       new NotificationsComponent().showNotification('success', 'Duyệt nhóm thất bại');
      }
    })
   }
