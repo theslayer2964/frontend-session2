@@ -97,7 +97,7 @@ export class QlLichComponent implements OnInit {
             chuThich: this.keHoachGroup.value.chuThich,
             thoiGianBatDau: this.keHoachGroup.value.thoiGianBatDau,
             thoiGianKetThuc: this.keHoachGroup.value.thoiGianKetThuc,
-            hocKy: this.keHoach.hocKy,
+            maHocKy: this.keHoach.hocKy.maHocKy,
             maNguoiDung: null,
             tinhTrang: 0,
             vaiTro: "ROLE_QUANLY",
