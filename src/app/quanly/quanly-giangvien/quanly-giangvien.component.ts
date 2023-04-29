@@ -112,7 +112,7 @@ export class QuanlyGiangvienComponent implements OnInit {
 
   openExcel() {
     this.dialog.open(DialogExcelQlGiangvienComponent,{
-      width:"450px"
+      width:"650px"
     })
   }
 }
