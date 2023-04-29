@@ -37,6 +37,7 @@ export class DangkyCosanComponent implements OnInit {
     this.data.dsMaSinhVien.push(this.userAuthService.getUserInfo().maSinhVien);
     this.data.vaiTro = this.userAuthService.getRoles()[0].roleName
     this.data.password = this.dangKyNhomForm.get('matKhau').value
+    this.data.maNhom = this.data.nhom.maNhom
     console.log( this.data)
     this.nhomService.dangKyNhom(this.data)
         .subscribe({

@@ -35,7 +35,7 @@
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header
                                         style="width: 120px;text-align: center">TÊN NHÓM
                                     </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.nhom.tenNhom}} </td>
+                                     <td mat-cell *matCellDef="let row"> {{row.nhom.tenNhom}} </td>
                                 </ng-container>
 
                                 <ng-container matColumnDef="sv1">
@@ -48,7 +48,7 @@
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">
                                         TÊN SINH VIÊN 1
                                     </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.sinhViens[0].tenSinhVien}}</td>
+                                    <td mat-cell *matCellDef="let row" > {{row.sinhViens[0].tenSinhVien }}</td>
                                 </ng-container>
                                 <ng-container matColumnDef="emailsv1">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">
@@ -60,19 +60,21 @@
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">
                                         SINH VIÊN 2
                                     </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.dsMaSinhVien[1]}}</td>
+                                    <td mat-cell *matCellDef="let row " > {{row.dsMaSinhVien[1]}}</td>
                                 </ng-container>
                                 <ng-container matColumnDef="tensv2">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">
                                         TÊN SINH VIÊN 2
                                     </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.sinhViens[1].tenSinhVien}}</td>
+                                    <td mat-cell *matCellDef="let row">
+                                        <span *ngIf="dsSinhVien.length > 2"> {{row.sinhViens[1].tenSinhVien}}</span></td>
                                 </ng-container>
                                 <ng-container matColumnDef="emailsv2">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">
                                         Email SINH VIÊN 2
                                     </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.sinhViens[1].email}}</td>
+                                    <td mat-cell *matCellDef="let row">
+                                        <span *ngIf="dsSinhVien.length > 2">{{row.sinhViens[1].email}}</span></td>
                                 </ng-container>
 
 
@@ -112,8 +114,7 @@
             <div class="col-md-12">
                 <mat-label style="font-weight: bold">Trạng thái nhóm:</mat-label>
                 <mat-label *ngIf="trangThai==0" style="color: #00acc1"> Chờ duyệt</mat-label>
-                <mat-label *ngIf="trangThai==1" style="color: red"> Chưa đạt</mat-label>
-                <mat-label *ngIf="trangThai==2" style="color: #00c853"> Được chấp nhận</mat-label>
+                <mat-label *ngIf="trangThai==1" style="color: #4da1e8"> Được chấp nhận</mat-label>
             </div>
         </div>
 

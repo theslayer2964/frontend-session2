@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {DetaiService} from "../../giangvien/detai/detai-service/detai.service";
 import {HockyService} from "../../shared-service/hocky.service";
@@ -10,6 +10,8 @@ import {MatTableDataSource} from "@angular/material/table";
 import {ThemPhieuChamMauComponent} from "../../dialog/them-phieu-cham-mau/them-phieu-cham-mau.component";
 import {DialogExcelQlSinhvienComponent} from "../../excel/dialog-excel-ql-sinhvien/dialog-excel-ql-sinhvien.component";
 import {TieuchichamdiemService} from "../../shared-service/tieuchichamdiem.service";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
 
 interface GiangVien {
   value: string;
@@ -32,11 +34,15 @@ export class QuanlyPhieuchamComponent implements OnInit {
 
   dsHocKy: HocKy[];
 
-  // 1. STEP 1
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   private getAllHocKy() {
-    this.hockyService.getHocKy().subscribe({
+    this.tieuChiChamDiem.layHetTieuChi().subscribe({
       next: (res) => {
-        this.dsHocKy = res;
+        console.log(res)
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }, error: (err) => {
         console.log(err)
       }
@@ -80,9 +86,19 @@ export class QuanlyPhieuchamComponent implements OnInit {
 
     changeGiangVien($event: MatSelectChange) {
       console.log("Giá tri dc chon:", $event.value);
+      this.tieuChiChamDiem.layHetPhieuChamMau($event.value).subscribe({
+        next: (res) => {
+          var tieuChis = res[0].tieuChiChamDiems
+          this.dataSource = new MatTableDataSource(tieuChis);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }, error: (err) => {
+          console.log(err)
+        }
+      })
     }
   // Table
-  displayedColumns: string[] = ["maChuanDauRa","tenChuanDauRa","diemToiDa" ,"action"];
+  displayedColumns: string[] = ["maTieuChiCham","tenTieuChiCham","diemToiDa" ,"action"];
   dataSource!: MatTableDataSource<any>;
 
   editProduct(row) {
