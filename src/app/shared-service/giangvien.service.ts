@@ -19,7 +19,7 @@ export class GiangvienService {
   addGiangVienExcel(file: any, maQL: string) {
     var formData = new FormData();
     formData.append("file", file);
-    return this.httpClient.post<any>(this.urlQuanLy + "them-giang-vien-excel/", formData,{headers: {
+    return this.httpClient.post<any>(this.url + "them-giang-vien-excel/", formData,{headers: {
         'Accept':'application/json',
         Authorization: `Bearer ${(this.token)}`
       }} ).pipe(
