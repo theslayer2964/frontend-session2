@@ -18,7 +18,7 @@ import {SinhvienService} from "../../shared-service/sinhvien.service";
 @Component({
   selector: 'app-quanly-sinhvien',
   templateUrl: './quanly-sinhvien.component.html',
-  styleUrls: ['./quanly-sinhvien.component.scss']
+  styleUrls: ['./quanly-sinhvien.component.css']
 })
 export class QuanlySinhvienComponent implements OnInit {
   private hocKyHienTai: any;

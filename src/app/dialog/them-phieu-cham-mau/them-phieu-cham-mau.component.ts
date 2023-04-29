@@ -6,6 +6,7 @@ import {NotificationsComponent} from "../../shared-component/notifications/notif
 import {MatSelectChange} from "@angular/material/select";
 import {Subject} from "rxjs";
 import {MatTableDataSource} from "@angular/material/table";
+import {HockyService} from "../../shared-service/hocky.service";
 
 interface GiangVien {
   value: string;
@@ -21,6 +22,7 @@ export class ThemPhieuChamMauComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
 
               private tieuChiChamDiem: TieuchichamdiemService,
+              private hocKyService: HockyService,
               private dialogRef: MatDialogRef<ThemPhieuChamMauComponent>,
               @Inject(MAT_DIALOG_DATA) public editData: any) {
   }
@@ -44,7 +46,8 @@ export class ThemPhieuChamMauComponent implements OnInit {
         this.tieuChiChamDiem.themPhieuChamMau({
           tenPhieuCham: this.sinhVienForm.get('tenPhieuCham').value,
           tieuChiChamDiems: this.dsMaTieuChi,
-          vaiTroDung: this.giangVien
+          vaiTroDung: this.giangVien,
+          maHocKy: this.hocKy.maHocKy
         }).subscribe({
               next: (res) => {
                 this.sinhVienForm.reset();
@@ -72,6 +75,17 @@ export class ThemPhieuChamMauComponent implements OnInit {
       next: (res) => {
         this.dsTieuChi = res;
         this.toppingList = this.dsTieuChi
+      }, error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
+  hocKy: any;
+  private getHocKyMoiNhat() {
+    this.hocKyService.getHocKyMoiNhat().subscribe({
+      next: (res) => {
+        this.hocKy = res;
       }, error: (err) => {
         console.log(err)
       }
