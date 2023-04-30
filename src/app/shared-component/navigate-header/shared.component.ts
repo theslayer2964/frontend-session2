@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {UserDataService} from "../../shared-service/userData.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ChangepasswordComponent} from "../../authentication/changepassword/changepassword.component";
+import {ThongbaoComponent} from "../../dialog/thongbao/thongbao.component";
 
 @Component({
     selector: 'app-shared',
@@ -55,5 +56,21 @@ export class SharedComponent implements OnInit {
 
             }
         })
+    }
+
+    hidden = false;
+    listData: any = [
+        {tinnhan:"Yeu cau ket ban", id:1, read:true, createdAt:"20/1/2022", sender:"19473331", reciver:""},
+        {tinnhan:"Huy ket ban", id:2,read:false, createdAt:"20/1/2022", sender:"19473331"}
+    ];
+
+    showThongBao(item: any) {
+        this.dialog.open(ThongbaoComponent, {
+            data:item,
+            width:"850px"
+        })
+        //     .afterClosed().subscribe(val => {
+        //     this.router.
+        // })
     }
 }

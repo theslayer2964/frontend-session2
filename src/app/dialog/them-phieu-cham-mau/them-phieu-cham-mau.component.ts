@@ -32,6 +32,7 @@ export class ThemPhieuChamMauComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllTieuChiChamDiem()
+    this.getHocKyMoiNhat()
     this.sinhVienForm = this.formBuilder.group({
       tenPhieuCham: ['', Validators.required],
     })

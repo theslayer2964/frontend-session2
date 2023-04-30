@@ -17,9 +17,6 @@ export class SinhvienService {
     Authorization: `Bearer ${(this.token)}`
   })
   constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) { }
-  // getDSSinhVien(data: any): Observable<any>{
-  //   return this.httpClient.get
-  // }
 
   addSinhVienExcel(file: any, maGV: string) {
     var formData = new FormData();

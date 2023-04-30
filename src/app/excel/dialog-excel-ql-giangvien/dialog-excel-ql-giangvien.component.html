@@ -9,11 +9,16 @@
                     </div>
                     <div class="card-body">
                         <form [formGroup]="excelForm">
+                            File đính kèm
                             <label for="file-input">
-                                <img src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png"/>
+                                <img src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png" style="width: 50px; height: 50px"/>
                             </label>
-                            <input class="file1" id="file-input" type="file" accept=".xlsx" formControlName="fileExcel" (change)="getFile($event)"> <br/>
-                            {{excelName}}
+                            <input class="file1" id="file-input" type="file" accept=".xlsx" formControlName="fileExcel" (change)="getFile($event)">
+                            <b>{{excelName}}</b>
+                            <p>File phải nhỏ hơn <b>5 MB</b>.</p>
+                            <p>Định dạng file: <b>XLSX</b>.</p>
+                            <p>Quý thầy cô vui lòng thêm dữ liệu trước ngày .... Dữ liệu được thêm sau ngày này có thể không được chấp nhận.</p>
+                            <p>Quý thầy cô lưu ý thêm file đúng định dạng file mẫu đã được cung cấp nếu không dữ liệu sẽ không chính xác.</p>
                             <div mat-dialog-actions [align]="'end'">
                                 <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
                                 <button style="margin-left: 8px" mat-raised-button color="primary"

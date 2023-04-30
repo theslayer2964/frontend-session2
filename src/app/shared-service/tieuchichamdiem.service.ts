@@ -40,7 +40,13 @@ export class TieuchichamdiemService {
   }
 
   layHetPhieuChamMau(data: any): Observable<any[]> {
-    return this.httpClient.get<any[]>(this.urlPhieuMau + "lay-het/" + data, {headers: this.httpHeadersJWT})
+    return this.httpClient.post<any[]>(this.urlPhieuMau + "lay-het/" + data, {headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+  }
+  layPhieuChamMau(data: any) {
+    return this.httpClient.post<any[]>(this.urlPhieuMau + "lay/" + data, {headers: this.httpHeadersJWT})
         .pipe(
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));

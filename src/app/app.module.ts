@@ -88,6 +88,9 @@ import { ThemTieuChiChamdiemComponent } from './dialog/them-tieu-chi-chamdiem/th
 import { ThemPhieuChamMauComponent } from './dialog/them-phieu-cham-mau/them-phieu-cham-mau.component';
 import { DuyetdetaiComponent } from './dialog/duyetdetai/duyetdetai.component';
 import { LoiNhanComponent } from './dialog/loi-nhan/loi-nhan.component';
+import { ThongbaoComponent } from './dialog/thongbao/thongbao.component';
+import { GiangvienPhancongComponent } from './giangvien/giangvien-phancong/giangvien-phancong.component';
+import { GvChamdiemComponent } from './dialog/gv-chamdiem/gv-chamdiem.component';
 
 @NgModule({
     imports: [
@@ -180,7 +183,10 @@ import { LoiNhanComponent } from './dialog/loi-nhan/loi-nhan.component';
         ThemTieuChiChamdiemComponent,
         ThemPhieuChamMauComponent,
         DuyetdetaiComponent,
-        LoiNhanComponent
+        LoiNhanComponent,
+        ThongbaoComponent,
+        GiangvienPhancongComponent,
+        GvChamdiemComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

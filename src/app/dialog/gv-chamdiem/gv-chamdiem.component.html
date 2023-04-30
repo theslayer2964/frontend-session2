@@ -1,0 +1,110 @@
+<h2 mat-dialog-title>PHIẾU ĐÁNH GIÁ KHÓA LUẬN TỐT NGHIỆP</h2>
+<mat-dialog-content class="mat-typography">
+        <table width="100%">
+            <tr>
+                <td  style="width: 150px"><p>Đề tài:</p></td>
+                <td><h3><b>{{editData.maDeTai}} - {{editData.tenDeTai}}</b></h3></td>
+            </tr>
+            <tr >
+                <td style="width: 150px"><p>Sinh viên 1:</p></td>
+                <td><h3><b>{{editData.sinhVien[0].maSinhVien}} - {{editData.sinhVien[0].tenSinhVien}}</b></h3></td>
+            </tr>
+            <tr *ngIf="editData.sinhVien[1]!=null" >
+                <td style="width: 150px"><p>Sinh viên 2:</p></td>
+                <td><h3><b>
+                    {{editData.sinhVien[1].maSinhVien}} - {{editData.sinhVien[1].tenSinhVien}}</b></h3></td>
+            </tr>
+        </table>
+    <div class="row">
+        <div class="col-6" style="padding-right: 0px">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="text-uppercase table-dark">
+                    <th scope="col">STT</th>
+                    <th scope="col">Tiêu chí chấm</th>
+                    <th scope="col">Điểm tối đa</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let phieu of pheuChamMau">
+                        <td>{{phieu.maChuanDauRa}}</td>
+                        <td>{{phieu.tenChuanDauRa}}</td>
+                        <td>{{phieu.diemToiDa}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6" style="padding-left: 0px">
+            <form *ngIf="editData.sinhVien.length==2">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr class="text-uppercase table-dark">
+                        <th scope="col">{{editData.sinhVien[0].maSinhVien}}</th>
+                        <th scope="col">{{editData.sinhVien[1].maSinhVien}}</th>
+                        <th scope="col">Ý kiến đánh giá</th>
+                    </tr>
+                    </thead>
+                    <tbody [formGroup]="employeeForm">
+                    <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
+                        <tr [formGroupName]="i">
+                            <td>
+                                <input type="number" class="form-control" formControlName="diemSV1"
+                                       placeholder="điểm SV1">
+                                <div class="text-danger" *ngIf="getFormControls.controls[i].get('diemSV1')?.touched">
+                                    <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['required']">Required</span>
+                                    <!--                                <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['minlength']">3 Chars-->
+                                    <!--                  Required</span>-->
+                                </div>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" formControlName="diemSV2"
+                                       placeholder="Điểm SV2">
+                                <div class="text-danger" *ngIf="getFormControls.controls[i].get('diemSV2')?.touched">
+                                    <span *ngIf="getFormControls.controls[i].get('diemSV2')?.errors?.['required']">Required</span>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="ykien" placeholder="ý kiến giáo viên">
+                            </td>
+                        </tr>
+                    </ng-container>
+                    </tbody>
+                </table>
+            </form>
+            <form *ngIf="editData.sinhVien.length==1">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr class="text-uppercase table-dark">
+                        <th scope="col">{{editData.sinhVien[0].maSinhVien}}</th>
+                        <th scope="col">Ý kiến đánh giá</th>
+                    </tr>
+                    </thead>
+                    <tbody [formGroup]="employeeForm">
+                    <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
+                        <tr [formGroupName]="i">
+                            <td>
+                                <input type="number" class="form-control" formControlName="diemSV1"
+                                       placeholder="điểm SV1">
+                                <div class="text-danger" *ngIf="getFormControls.controls[i].get('diemSV1')?.touched">
+                                    <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['required']">Required</span>
+                                    <!--                                <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['minlength']">3 Chars-->
+                                    <!--                  Required</span>-->
+                                </div>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="ykien" placeholder="ý kiến giáo viên">
+                            </td>
+                        </tr>
+                    </ng-container>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Xóa</button>
+        <button class="btn btn-success" mat-button [mat-dialog-close]="true" cdkFocusInitial  [disabled]="employeeForm.invalid"
+                (click)="onSaveForm()">Chấm điểm</button>
+</mat-dialog-actions>

@@ -105,7 +105,6 @@ export class DetaiComponent implements OnInit {
             .subscribe({
                 next: (res) => {
                     if (res) {
-                        console.log("GV _ DeTai:", res);
                         // table
                         this.dataSource = new MatTableDataSource(res);
                         this.dataSource.paginator = this.paginator;
