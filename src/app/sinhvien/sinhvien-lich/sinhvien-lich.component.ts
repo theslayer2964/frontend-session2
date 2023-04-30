@@ -93,8 +93,16 @@ export class SinhvienLichComponent implements OnInit {
                         }
 
                     })
-                    this.data$ = a;
-                    console.log("MAP:",this.data$);
+                    // this.data$ = a;
+                    this.data$ = [{
+                        groupId:'999',
+                        title:'lala',
+                        start:'2023-04-25T16:00:00'
+                    },{
+                        title: 'Meeting',
+                        start:'2023-04-25T06:00:00',
+                        end: '2023-04-25T07:00:00'
+                    }]
                 })
             });
 
@@ -104,6 +112,7 @@ export class SinhvienLichComponent implements OnInit {
 
     data$: any[] = [];
     calendarOptions: CalendarOptions = {
+        locale: 'vi',
         plugins: [
             interactionPlugin,
             dayGridPlugin,
@@ -113,9 +122,8 @@ export class SinhvienLichComponent implements OnInit {
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-        },
-        initialView: 'dayGridMonth',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'},
+        initialView: 'timeGridWeek',
         weekends: true,
         editable: true,
         selectable: true,
@@ -123,7 +131,7 @@ export class SinhvienLichComponent implements OnInit {
         dayMaxEvents: true,
         select: this.handleDateSelect.bind(this),
         eventClick: this.handleEventClick.bind(this),
-        eventsSet: this.handleEvents.bind(this)
+        eventsSet: this.handleEvents.bind(this),
         /* you can update a remote database when these fire:
         eventAdd:
         eventChange:
@@ -148,6 +156,7 @@ export class SinhvienLichComponent implements OnInit {
         calendarApi.unselect(); // clear date selection
 
         if (title) {
+            console.log("INFO:",selectInfo);
             calendarApi.addEvent({
                 id: createEventId(),
                 title,

@@ -18,7 +18,7 @@ import {ThemDeTaiGvComponent} from "../../dialog/them-de-tai-gv/them-de-tai-gv.c
     styleUrls: ['./giangvien-nhom.component.css']
 })
 export class GiangvienNhomComponent implements OnInit {
-    displayedColumns: string[] = ['maNhom', 'maDeTai', 'sv1', 'sv2', "danhGia","action"];
+    displayedColumns: string[] = ['maNhom', 'maDeTai', 'sv1', 'sv2',"action"];
     dataSource!: MatTableDataSource<any>;
     dsHocKy: HocKy[];
 

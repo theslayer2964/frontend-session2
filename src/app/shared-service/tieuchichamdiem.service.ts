@@ -45,5 +45,11 @@ export class TieuchichamdiemService {
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));
   }
+  layPhieuChamMau(data: any) {
+    return this.httpClient.post<any[]>(this.urlPhieuMau + "lay/" + data, {headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+  }
 
 }

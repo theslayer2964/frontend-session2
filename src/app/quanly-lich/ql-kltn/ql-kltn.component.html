@@ -1,213 +1,77 @@
-<div class="main-content">
-    <div class="container-fluid">
-        <hr>
-        <div class="row">
-            <div>
-                <mat-form-field style="width: 100%;margin-left: 20px">
-                    <mat-label>-- Chọn học kỳ --</mat-label>
-                    <mat-select (selectionChange)="changeHocKy($event)">
-                        <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">HK{{hocKy.soHocKy}}
-                            -20{{hocKy.maHocKy}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-tabs card-header-primary">
-                        <div class="nav-tabs-navigation">
-                            <div class="nav-tabs-wrapper">
-                                <span class="nav-tabs-title">Lịch chấm:</span>
-                                <ul class="nav nav-tabs" data-tabs="tabs">
-                                    <li class="nav-item">
-                                        <a mat-button class="nav-link active" href="#profile" data-toggle="tab">
-                                            <i class="material-icons">bug_report</i> Phản biện
-                                            <div class="ripple-container"></div>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a mat-button class="nav-link" href="#messages" data-toggle="tab">
-                                            <i class="material-icons">code</i> Hội đồng
-                                            <div class="ripple-container"></div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="profile">
-                                <table class="table">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" value="" checked>
-                                                    <span class="form-check-sign">
-                                                          <span class="check"></span>
-                                                      </span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                        <td class="td-actions text-right">
-                                            <button mat-raised-button type="button" matTooltip="Edit Task"
-                                                    [matTooltipPosition]="'above'"
-                                                    class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                                <i class="material-icons">edit</i>
-                                            </button>
-                                            <button mat-raised-button type="button" matTooltip="Remove"
-                                                    [matTooltipPosition]="'above'"
-                                                    class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                                <i class="material-icons">close</i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" value="">
-                                                    <span class="form-check-sign">
-                                                          <span class="check"></span>
-                                                      </span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                        <td class="td-actions text-right">
-                                            <button mat-raised-button type="button" matTooltip="Edit Task"
-                                                    [matTooltipPosition]="'above'"
-                                                    class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                                <i class="material-icons">edit</i>
-                                            </button>
-                                            <button mat-raised-button type="button" matTooltip="Remove"
-                                                    [matTooltipPosition]="'above'"
-                                                    class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                                <i class="material-icons">close</i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" value="">
-                                                    <span class="form-check-sign">
-                                                          <span class="check"></span>
-                                                      </span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>Flooded: One year later, assessing what was lost and what was found when a
-                                            ravaging rain swept through metro Detroit
-                                        </td>
-                                        <td class="td-actions text-right">
-                                            <button mat-raised-button type="button" matTooltip="Edit Task"
-                                                    [matTooltipPosition]="'above'"
-                                                    class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                                <i class="material-icons">edit</i>
-                                            </button>
-                                            <button mat-raised-button type="button" matTooltip="Remove"
-                                                    [matTooltipPosition]="'above'"
-                                                    class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                                <i class="material-icons">close</i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" value="" checked>
-                                                    <span class="form-check-sign">
-                                                          <span class="check"></span>
-                                                      </span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                        <td class="td-actions text-right">
-                                            <button mat-raised-button type="button" matTooltip="Edit Task"
-                                                    [matTooltipPosition]="'above'"
-                                                    class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                                <i class="material-icons">edit</i>
-                                            </button>
-                                            <button mat-raised-button type="button" matTooltip="Remove"
-                                                    [matTooltipPosition]="'above'"
-                                                    class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                                <i class="material-icons">close</i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane" id="messages">
-                                <table class="table">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" value="" checked>
-                                                    <span class="form-check-sign">
-                                                          <span class="check"></span>
-                                                      </span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>Flooded: One year later, assessing what was lost and what was found when a
-                                            ravaging rain swept through metro Detroit
-                                        </td>
-                                        <td class="td-actions text-right">
-                                            <button mat-raised-button type="button" matTooltip="Edit Task"
-                                                    [matTooltipPosition]="'above'"
-                                                    class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                                <i class="material-icons">edit</i>
-                                            </button>
-                                            <button mat-raised-button type="button" matTooltip="Remove"
-                                                    [matTooltipPosition]="'above'"
-                                                    class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                                <i class="material-icons">close</i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" value="">
-                                                    <span class="form-check-sign">
-                                                          <span class="check"></span>
-                                                      </span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                        <td class="td-actions text-right">
-                                            <button mat-raised-button type="button" matTooltip="Edit Task"
-                                                    [matTooltipPosition]="'above'"
-                                                    class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                                <i class="material-icons">edit</i>
-                                            </button>
-                                            <button mat-raised-button type="button" matTooltip="Remove"
-                                                    [matTooltipPosition]="'above'"
-                                                    class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                                <i class="material-icons">close</i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<hr>
+<hr>
+<div class="row">
+    <div class="col-6"></div>
+    <div class="col-6 text-end">
+        <button class="btn btn-sm btn-success" (click)="addRow()">Add Employee</button>
     </div>
+</div>
+<div class="pt-2">
+    <form>
+        <table class="table table-bordered">
+            <thead>
+            <tr class="text-uppercase table-dark">
+                <th scope="col">
+                    <input type="checkbox" name="isCheckAll" [(ngModel)]="isCheckAll" (ngModelChange)="checkAll($event)" />
+                </th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">City</th>
+                <th scope="col">State</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody [formGroup]="employeeForm">
+            <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
+                <tr [formGroupName]="i">
+                    <td scope="row" class="align-middle">
+                        <input type="checkbox" formControlName="ischecked" />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="firstname" placeholder="Enter First">
+                        <div class="text-danger" *ngIf="getFormControls.controls[i].get('firstname')?.touched">
+                            <span *ngIf="getFormControls.controls[i].get('firstname')?.errors?.['required']">Required</span>
+                            <span *ngIf="getFormControls.controls[i].get('firstname')?.errors?.['minlength']">3 Chars
+                  Required</span>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="lastname" placeholder="Enter Last">
+                        <div class="text-danger" *ngIf="getFormControls.controls[i].get('lastname')?.touched">
+                            <span *ngIf="getFormControls.controls[i].get('lastname')?.errors?.['required']">Required</span>
+                        </div>
+                    </td>
+                    <td>
+                        <select formControlName="status" (change)="onStatusChange($event,i)" class="form-control">
+                            <option value="">Select Status</option>
+                            <option value="active">Active</option>
+                            <option value="deactive">De-Active</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="city" placeholder="Enter City">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="state" placeholder="Enter state">
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" (click)="removeEmployee(i)">Remove</button>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-container>
+                <tr>
+                    <td colspan="7">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <button class="btn btn-success" [disabled]="employeeForm.invalid" (click)="onSaveForm()">Save Bulk Employee</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-container>
+            </tbody>
+        </table>
+    </form>
 </div>
