@@ -30,14 +30,14 @@ export class ThemDeTaiGvComponent implements OnInit {
     })
     console.log(this.editData)
     if (this.editData) {
-      this.productForm.controls['maDeTai'].setValue(this.editData.maDeTai);
-      this.productForm.controls['gioiHanSoNhomThucHien'].setValue(this.editData.gioiHanSoNhomThucHien);
-      this.productForm.controls['moTa'].setValue(this.editData.moTa);
-      this.productForm.controls['mucTieuDeTai'].setValue(this.editData.mucTieuDeTai);
-      this.productForm.controls['sanPhamDuKien'].setValue(this.editData.sanPhamDuKien);
-      this.productForm.controls['tenDeTai'].setValue(this.editData.tenDeTai);
-      this.productForm.controls['yeuCauDauVao'].setValue(this.editData.yeuCauDauVao);
-      this.productForm.controls['maHocKy'].setValue(this.editData.hocKy.maHocKy);
+      // this.productForm.controls['maDeTai'].setValue(this.editData.maDeTai);
+      // this.productForm.controls['gioiHanSoNhomThucHien'].setValue(this.editData.gioiHanSoNhomThucHien);
+      // this.productForm.controls['moTa'].setValue(this.editData.moTa);
+      // this.productForm.controls['mucTieuDeTai'].setValue(this.editData.mucTieuDeTai);
+      // this.productForm.controls['sanPhamDuKien'].setValue(this.editData.sanPhamDuKien);
+      // this.productForm.controls['tenDeTai'].setValue(this.editData.tenDeTai);
+      // this.productForm.controls['yeuCauDauVao'].setValue(this.editData.yeuCauDauVao);
+      // this.productForm.controls['maHocKy'].setValue(this.editData.hocKy.maHocKy);
       this.actionBtn = "Update"
     }
   }

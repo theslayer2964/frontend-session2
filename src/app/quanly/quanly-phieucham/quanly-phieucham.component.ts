@@ -29,25 +29,13 @@ export class QuanlyPhieuchamComponent implements OnInit {
               private tieuChiChamDiem: TieuchichamdiemService,
               private userAuthService: UserAuthService, private router: Router) { }
   ngOnInit(): void {
-    this.getAllHocKy();
   }
 
   dsHocKy: HocKy[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  private getAllHocKy() {
-    this.tieuChiChamDiem.layHetTieuChi().subscribe({
-      next: (res) => {
-        console.log(res)
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }, error: (err) => {
-        console.log(err)
-      }
-    })
-  }
+
   private hocKyHienTai: any;
   private soHocKy: any;
   dsVaiTro: GiangVien[] = [
@@ -88,10 +76,14 @@ export class QuanlyPhieuchamComponent implements OnInit {
       console.log("Giá tri dc chon:", $event.value);
       this.tieuChiChamDiem.layHetPhieuChamMau($event.value).subscribe({
         next: (res) => {
-          var tieuChis = res[0].tieuChiChamDiems
-          this.dataSource = new MatTableDataSource(tieuChis);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
+          if(res.length > 0){
+            var tieuChis = res[0].tieuChiChamDiems
+            this.dataSource = new MatTableDataSource(tieuChis);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          }
+          else
+            this.dataSource = new MatTableDataSource(null);
         }, error: (err) => {
           console.log(err)
         }
