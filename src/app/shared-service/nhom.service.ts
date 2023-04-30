@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {catchError, Observable, of, tap} from "rxjs";
 import {UserAuthService} from "../authentication/_service/user-auth.service";
-import {Nhom} from "../sinhvien/Nhom.models";
 
 @Injectable({
     providedIn: 'root'
@@ -61,5 +60,12 @@ export class NhomService {
         return this.httpClient.post<any>(this.url + "lay-ds-nhom-phan-bien", formData, {headers: this.httpHeadersJWT}).pipe(
             tap(receiveNhom => receiveNhom),
             catchError(err => of([])));
+    }
+
+    getDsNhomTrongHocKy(): any{
+
+        return this.httpClient.get<any>(this.urlQuanLy + "xuat-ds-nhom" , {
+            headers: this.httpHeadersJWT,
+            responseType: 'arraybuffer' as 'json'});
     }
 }

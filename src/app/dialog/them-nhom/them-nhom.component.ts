@@ -47,6 +47,7 @@ export class ThemNhomComponent implements OnInit {
         }
         this.formNhom = this.formBuilder.group({
             maSoSv1: ['', Validators.required],
+            maSoSv2: [''],
             password: ['', Validators.required],
 
         })

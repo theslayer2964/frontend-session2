@@ -126,4 +126,14 @@ export class QuanlyNhomComponent implements OnInit {
     this.tinhTrang = $event.value
     this.getDsNhom();
   }
+
+  blob: Blob;
+  downloadFileSV() {
+    this.nhomService.getDsNhomTrongHocKy().subscribe(response => {
+      console.log(response)
+      let blob = new Blob([response], { type: 'application/vnd.ms-excel' });
+      var downloadURL = URL.createObjectURL(blob);
+      window.open(downloadURL);
+    });
+  }
 }

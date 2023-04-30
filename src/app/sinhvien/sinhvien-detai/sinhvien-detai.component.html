@@ -21,39 +21,39 @@
                         <table mat-table [dataSource]="dataSource" matSort>
 
                             <ng-container matColumnDef="giangVien" sticky>
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Giảng Viên</th>
+                                <th mat-header-cell *matHeaderCellDef  >Giảng Viên</th>
                                 <td mat-cell style="font-weight: bold" *matCellDef="let row"> {{row.giangVien.tenGiangVien}} </td>
                             </ng-container>
 
 
                             <ng-container matColumnDef="tenDeTai">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên Đề Tài</th>
+                                <th mat-header-cell *matHeaderCellDef  >Tên Đề Tài</th>
                                 <td mat-cell *matCellDef="let row"> {{row.deTai.tenDeTai}} </td>
                             </ng-container>
 
                             <!-- Progress Column -->
                             <ng-container matColumnDef="mucTieuDeTai">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Mục Tiêu Đề Tài</th>
+                                <th mat-header-cell *matHeaderCellDef  >Mục Tiêu Đề Tài</th>
                                 <td mat-cell *matCellDef="let row"> {{row.deTai.mucTieuDeTai}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="sanPhamDuKien">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Sản Phẩm Dự Kiến</th>
+                                <th mat-header-cell *matHeaderCellDef  >Sản Phẩm Dự Kiến</th>
                                 <td mat-cell *matCellDef="let row"> {{row.deTai.sanPhamDuKien}} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="yeuCauDauVao">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Yêu Cầu Đầu Vào</th>
+                                <th mat-header-cell *matHeaderCellDef  >Yêu Cầu Đầu Vào</th>
                                 <td mat-cell *matCellDef="let row"> {{row.deTai.yeuCauDauVao}} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="soNhomThucHien">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Số Nhóm Thực Hiện</th>
+                                <th mat-header-cell *matHeaderCellDef  >Số Nhóm Thực Hiện</th>
                                 <td mat-cell *matCellDef="let row"> {{row.deTai.gioiHanSoNhomThucHien}} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="action" stickyEnd>
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Đăng ký</th>
+                                <th mat-header-cell *matHeaderCellDef  >Đăng ký</th>
                                 <td mat-cell *matCellDef="let row">
                                     <!--Row: data cua 1 dong-->
                                     <button mat-icon-button color="primary" (click)="dangDT(row)">

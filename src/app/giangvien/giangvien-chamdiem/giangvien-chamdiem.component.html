@@ -37,7 +37,7 @@
                         <table mat-table [dataSource]="dataSource" matSort>
                             <!-- ID Column -->
                             <ng-container sticky matColumnDef="maSV">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center"> Mã SV
+                                <th mat-header-cell *matHeaderCellDef   style="text-align: center"> Mã SV
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.maSV}}"
                                     matTooltipClass="example-tooltip-uppercase">
@@ -45,7 +45,7 @@
                                 </td>
                             </ng-container>
                             <ng-container matColumnDef="tenSV">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">
+                                <th mat-header-cell *matHeaderCellDef   style="text-align: center">
                                     Tên SV
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.tenSV}}"
@@ -54,14 +54,14 @@
                                 </td>
                             </ng-container>
                             <ng-container matColumnDef="maDeTai" class="example-button">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                <th mat-header-cell *matHeaderCellDef
                                     style="width: 100px;text-align: center"> MÃ ĐỀ TÀI
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.maDeTai}} </td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="tenDeTai" style="margin-left: 60px">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="margin-left: 60px"> TÊN ĐỀ
+                                <th mat-header-cell *matHeaderCellDef   style="margin-left: 60px"> TÊN ĐỀ
                                     TÀI
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.tenDeTai}}"
@@ -71,14 +71,14 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="maNhom">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                <th mat-header-cell *matHeaderCellDef
                                     style="width: 100px;text-align: center"> MÃ NHÓM
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.maNhom}}</td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="tenNhom" style="width: 200px;">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                <th mat-header-cell *matHeaderCellDef
                                     style="margin-left: 40px;text-align: center"> TÊN NHÓM
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.tenNhom}}"
@@ -90,7 +90,7 @@
 
                             <!-- Progress Column -->
                             <ng-container matColumnDef="diem">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center"> ĐIỂM
+                                <th mat-header-cell *matHeaderCellDef   style="text-align: center"> ĐIỂM
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.diem}}"
                                     matTooltipClass="example-tooltip-uppercase">
@@ -98,7 +98,7 @@
                                 </td>
                             </ng-container>
                             <ng-container matColumnDef="action" stickyEnd>
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                <th mat-header-cell *matHeaderCellDef
                                     style="width: 100px;text-align: center"> TÙY CHỈNH
                                 </th>
                                 <td mat-cell *matCellDef="let row">

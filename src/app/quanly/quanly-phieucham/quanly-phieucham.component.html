@@ -37,19 +37,19 @@
                         <table mat-table [dataSource]="dataSource" matSort>
                             <!-- ID Column -->
                             <ng-container matColumnDef="maTieuChiCham" class="example-button" >
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 150px"> MÃ PHIẾU
+                                <th mat-header-cell *matHeaderCellDef   style="width: 150px"> MÃ PHIẾU
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.maChuanDauRa}} </td>
                             </ng-container>
                             <ng-container matColumnDef="tenTieuChiCham"  class="example-button">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                <th mat-header-cell *matHeaderCellDef
                                     style="width: 550px"   > TÊN CHUẨN ĐẦU RA
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.tenChuanDauRa}} </td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="diemToiDa" style="margin-left: 60px">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header style="margin-left: 60px"> ĐIỂM TỐI ĐA
+                                <th mat-header-cell *matHeaderCellDef   style="margin-left: 60px"> ĐIỂM TỐI ĐA
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.diemToiDa}}"
                                     matTooltipClass="example-tooltip-uppercase">
@@ -58,7 +58,7 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="action" >
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                <th mat-header-cell *matHeaderCellDef
                                     style="width: 100px;text-align: center"> TÙY CHỈNH
                                 </th>
                                 <td mat-cell *matCellDef="let row">

@@ -26,34 +26,34 @@
                         <table mat-table [dataSource]="dataSource" matSort>
                             <!-- ID Column -->
                             <ng-container matColumnDef="maHocKy" sticky class="example-button">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                <th mat-header-cell *matHeaderCellDef
                                     > MÃ HỌC KỲ
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.maHocKy}} </td>
                             </ng-container>
                             <ng-container matColumnDef="soHocKy" sticky class="example-button">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                <th mat-header-cell *matHeaderCellDef
                                    > HỌC KỲ
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.soHocKy}} </td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="thoiGianBatDau">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                <th mat-header-cell *matHeaderCellDef
                                    > THỜI GIAN BẮT ĐẦU
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.thoiGianBatDau | date: 'dd/MM/yyyy'}}</td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="thoiGianKetThuc">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                <th mat-header-cell *matHeaderCellDef
                                     > THỜI GIAN KẾT THÚC
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.thoiGianKetThuc | date: 'dd/MM/yyyy'}}</td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="action" stickyEnd>
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                <th mat-header-cell *matHeaderCellDef
                                     style="width: 100px;text-align: center"> TÙY CHỈNH
                                 </th>
                                 <td mat-cell *matCellDef="let row">

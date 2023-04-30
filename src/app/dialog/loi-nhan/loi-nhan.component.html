@@ -1,0 +1,18 @@
+<h3 class="">Hãy nhập mật khẩu nhóm để có thể đăng ký nhóm này?</h3>
+<div>
+
+
+        <mat-label mat-header-cell *matHeaderCellDef>Bạn Có Muốn Đánh giá Đề Tài Này Chưa Đạt?</mat-label>
+        <textarea [(ngModel)]="data" placeholder="Lời Nhắn Cho Đề Tài Này"></textarea>
+
+
+</div>
+<div>
+    <button mat-raised-button color="warn" mat-dialog-close="'close'">Không</button>
+    <button style="margin-left: 8px" mat-raised-button color="primary" [mat-dialog-close]="data"
+            cdkFocusInitial>Có
+    </button>
+</div>
+<div class="clearfix"></div>
+
+
