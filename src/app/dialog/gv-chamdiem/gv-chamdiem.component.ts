@@ -46,7 +46,7 @@ export class GvChamdiemComponent implements OnInit {
                 this.addRow();
             })
         })
-        console.log("TRUYEN DATA:", this.editData);
+        console.log("TRUYEN DATA:", this.pheuChamMau);
     }
 
     createFormGroup(): FormGroup {
@@ -80,6 +80,7 @@ export class GvChamdiemComponent implements OnInit {
         var data = {
             bangDiem: this.employeeForm.value.tableRows,
             sinhVien: this.editData.sinhVien,
+            tenTieuChi: this.vaitro,
             maDeTai: this.editData.maDeTai,
             maGiangVien: this.userAuthService.getUserInfo().maGiangVien
         }

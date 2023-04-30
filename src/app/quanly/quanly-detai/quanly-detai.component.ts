@@ -10,18 +10,21 @@ import {MatSelectChange} from "@angular/material/select";
 import {DetaiService} from "../../giangvien/detai/detai-service/detai.service";
 import {ThemDeTaiGvComponent} from "../../dialog/them-de-tai-gv/them-de-tai-gv.component";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
+import {DangKyDetaiComponent} from "../../dialog/dang-ky-detai/dang-ky-detai.component";
+import {DuyetdetaiComponent} from "../../dialog/duyetdetai/duyetdetai.component";
 
 @Component({
     selector: 'app-quanly-detai',
     templateUrl: './quanly-detai.component.html',
-    styleUrls: ['./quanly-detai.component.scss']
+    styleUrls: ['./quanly-detai.component.css']
 })
 export class QuanlyDetaiComponent implements OnInit {
     private hocKyHienTai: any;
     private soHocKy: any;
 
-    constructor(public dialog: MatDialog, private detaiService: DetaiService, private hockyService: HockyService,
-                private userAuthService: UserAuthService,) {
+    constructor(public dialog: MatDialog,
+                private detaiService: DetaiService,
+                private hockyService: HockyService,) {
     }
 
     ngOnInit(): void {
@@ -50,22 +53,6 @@ export class QuanlyDetaiComponent implements OnInit {
         })
     }
 
-    editProduct(row: any) {
-        this.detaiService.duyetDeTai({
-            ma: row.maDeTai,
-            trangThai: 2
-        }).subscribe({
-            next: (res) => {
-                this.getDSDeTaiTheoHK();
-                new NotificationsComponent().showNotification('success', 'Đề tài đã duyệt thành công');
-            },
-            error: () => {
-                new NotificationsComponent().showNotification('danger', 'Không duyệt đề tài này');
-                console.log("Error")
-            }
-        })
-    }
-
     // Table
     displayedColumns: string[] = ['maDeTai', "tenDeTai", 'gioiHanSoNhomThucHien', 'moTa', "mucTieuDeTai", "sanPhamDuKien", "trangThai", "yeuCauDauVao", "action"];
     dataSource!: MatTableDataSource<any>;
@@ -80,22 +67,6 @@ export class QuanlyDetaiComponent implements OnInit {
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
-    }
-
-    deleteProduct(row: any) {
-        this.detaiService.duyetDeTai({
-            ma: row.maDeTai,
-            trangThai: 2
-        }).subscribe({
-            next: (res) => {
-                this.getDSDeTaiTheoHK();
-                new NotificationsComponent().showNotification('success', 'Đề tài đã duyệt thành công');
-            },
-            error: () => {
-                new NotificationsComponent().showNotification('danger', 'Không duyệt đề tài này');
-                console.log("Error")
-            }
-        })
     }
 
     changeHocKy($event: MatSelectChange) {
@@ -138,6 +109,13 @@ export class QuanlyDetaiComponent implements OnInit {
 
     downloadFileSV() {
 
+    }
+    duyetDT(row) {
+        this.dialog.open(DuyetdetaiComponent, {data: {row}})
+            .afterClosed().subscribe(
+            rs => {
+                this.getDSDeTaiTheoHK();
+            });
     }
 
 }
