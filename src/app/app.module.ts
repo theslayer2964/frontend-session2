@@ -91,6 +91,8 @@ import { LoiNhanComponent } from './dialog/loi-nhan/loi-nhan.component';
 import { ThongbaoComponent } from './dialog/thongbao/thongbao.component';
 import { GiangvienPhancongComponent } from './giangvien/giangvien-phancong/giangvien-phancong.component';
 import { GvChamdiemComponent } from './dialog/gv-chamdiem/gv-chamdiem.component';
+import { QlXepTKBComponent } from './dialog/ql-xep-tkb/ql-xep-tkb.component';
+import { QlXepTKBHDComponent } from './dialog/ql-xep-tkb-hd/ql-xep-tkb-hd.component';
 
 @NgModule({
     imports: [
@@ -186,7 +188,9 @@ import { GvChamdiemComponent } from './dialog/gv-chamdiem/gv-chamdiem.component'
         LoiNhanComponent,
         ThongbaoComponent,
         GiangvienPhancongComponent,
-        GvChamdiemComponent
+        GvChamdiemComponent,
+        QlXepTKBComponent,
+        QlXepTKBHDComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

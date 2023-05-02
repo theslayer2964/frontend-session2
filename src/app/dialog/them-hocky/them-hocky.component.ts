@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {SinhvienService} from "../../shared-service/sinhvien.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HockyService} from "../../shared-service/hocky.service";
@@ -24,9 +24,10 @@ export class ThemHockyComponent implements OnInit {
 
     ngOnInit(): void {
         this.giangVienForm = this.formBuilder.group({
-            thoiGianBatDau: ['', Validators.required],
-            thoiGianKetThuc: ['', Validators.required]
-        })
+                thoiGianBatDau: ['', Validators.required],
+                thoiGianKetThuc: ['', Validators.required]
+            });
+            this.giangVienForm.setValidators(this.comparisonValidator())
     }
 
     addHocKy() {
@@ -44,8 +45,30 @@ export class ThemHockyComponent implements OnInit {
                     error: () => {
                         new NotificationsComponent().showNotification('DANGER', 'Không thể thêm học ky');
                     }
-                })
+                });
         }
 
     }
+
+    public comparisonValidator() : ValidatorFn{
+        return (group: FormGroup): ValidationErrors => {
+            const control1 = group.controls['thoiGianBatDau'].value;
+            const control2 = group.controls['thoiGianKetThuc'].value;
+            console.log("BD -KT:", new Date(control1).valueOf(), " - ",new Date(control2).valueOf());
+            console.log("RANGE:",control1 - control2);
+            if(this.giangVienForm.controls["thoiGianBatDau"] && this.giangVienForm.controls["thoiGianKetThuc"]){
+
+            }
+
+            if (control1.value !== control2.value) {
+                control2.setErrors({notEquivalent: true});
+            } else {
+
+
+                // control2.setErrors(null);
+            }
+            return;
+        };
+    }
+
 }

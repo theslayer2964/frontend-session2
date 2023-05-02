@@ -10,8 +10,9 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   {path:'/quanlylich/hocky', title: 'Học kỳ', icon: 'dashboard', class:''},
   {path:'/quanlylich/lichbieu', title: 'Lịch biểu', icon: 'dashboard', class:''},
+  {path:'/quanlylich/giangday', title: 'Thời khóa biểu', icon: 'dashboard', class:''},
+  {path:'/quanlylich/xepnhom', title: 'Chia nhóm', icon: 'dashboard', class:''},
   {path:'/quanlylich/monhoc', title: 'Khóa luận tốt nghiệp', icon: 'dashboard', class:''},
-  {path:'/quanlylich/giangday', title: 'Giảng viên', icon: 'dashboard', class:''},
 ]
 
 interface FoodNode {
