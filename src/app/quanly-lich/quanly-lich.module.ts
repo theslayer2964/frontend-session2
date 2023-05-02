@@ -24,6 +24,7 @@ import {FullCalendarModule} from "@fullcalendar/angular";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
 import {MatTabsModule} from "@angular/material/tabs";
+import { QlTkbChianhomComponent } from './ql-tkb-chianhom/ql-tkb-chianhom.component';
 
 @NgModule({
     imports: [
@@ -53,7 +54,8 @@ import {MatTabsModule} from "@angular/material/tabs";
         QlGiangvienComponent,
         QlLichComponent,
         QlChitietlichComponent,
-        QuanlyLich2Component
+        QuanlyLich2Component,
+        QlTkbChianhomComponent
     ],
     bootstrap: []
 })
