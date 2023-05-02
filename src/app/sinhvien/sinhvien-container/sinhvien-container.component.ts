@@ -23,8 +23,9 @@ export class SinhvienContainerComponent implements OnInit {
 
     ngOnInit(): void {
         this.nhom = this.userAuthService.getUserInfo().nhom;
-        this.haveNhom = this.nhom != null ? true : false;
         this.validateLich();
+        this.haveNhom = this.nhom != null ? true : false;
+
     }
 
     goToSVChonNhom(url: string) {
@@ -50,9 +51,7 @@ export class SinhvienContainerComponent implements OnInit {
                     }
 
                 }
-                console.log(this.validateDeTai);
-                console.log(this.validateNhom);
-                console.log(this.dsValidate);
+                console.log(this.validateDeTai.invalid);
 
             }, error: (err) => {
                 console.log(err);

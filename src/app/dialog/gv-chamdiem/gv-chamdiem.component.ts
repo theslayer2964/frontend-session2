@@ -7,6 +7,8 @@ import {TieuchichamdiemService} from "../../shared-service/tieuchichamdiem.servi
 import {Subject} from "rxjs";
 import {QuanlyService} from "../../quanly/quanly-service/quanly.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
+import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
+import {DialogRef} from "@angular/cdk/dialog";
 
 @Component({
     selector: 'app-gv-chamdiem',
@@ -20,6 +22,7 @@ export class GvChamdiemComponent implements OnInit {
                 public gvChamdiemTransfer: GvDialogchamdiemService,
                 public tieuchichamdiemService: TieuchichamdiemService,
                 @Inject(MAT_DIALOG_DATA) public editData: any,
+                private dialogRef: DialogRef,
                 public quanlyService: QuanlyService,
                 public userAuthService: UserAuthService) {
         this.employeeForm = this.fb.group({
@@ -76,15 +79,23 @@ export class GvChamdiemComponent implements OnInit {
     onSaveForm() {
         const formValue = this.employeeForm.value;
 
-        console.log(formValue);
         var data = {
             bangDiem: this.employeeForm.value.tableRows,
             sinhVien: this.editData.sinhVien,
-            tenTieuChi: this.vaitro,
+            tenPhieu: this.vaitro,
             maDeTai: this.editData.maDeTai,
             maGiangVien: this.userAuthService.getUserInfo().maGiangVien
         }
-        console.log("BANG DIEM NGHE:", data);
-        // this.quanlyService.chamDiem(data)
+        this.quanlyService.chamDiem(data).subscribe({
+            next: (res) => {
+                console.log(res)
+                this.dialogRef.close();
+                new NotificationsComponent().showNotification('success', 'Chấm Điểm Sinh Viên Thành Công');
+            },
+                error: (err) => {
+                console.log(err)
+                new NotificationsComponent().showNotification('danger', 'Không Chấm Điểm Sinh Viên ');
+            }
+        })
     }
 }
