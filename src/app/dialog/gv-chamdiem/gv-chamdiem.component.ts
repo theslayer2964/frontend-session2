@@ -80,30 +80,30 @@ export class GvChamdiemComponent implements OnInit {
         const formValue = this.employeeForm.value;
         console.log(formValue);
         console.log(this.pheuChamMau)
-        if (this.editData.sinhVien.length == 2){
-            for (let i = 0; i <= this.pheuChamMau.length - 1 ; i++){
-                if(this.pheuChamMau[i].diemToiDa < formValue.tableRows[i].diemSV1){
+        if (this.editData.sinhVien.length == 2) {
+            for (let i = 0; i <= this.pheuChamMau.length - 1; i++) {
+                if (this.pheuChamMau[i].diemToiDa < formValue.tableRows[i].diemSV1) {
                     new NotificationsComponent().showNotification
-                    ("danger","Sinh viên 1: " + this.pheuChamMau[i].maChuanDauRa + " - " +
-                    this.pheuChamMau[i].tenChuanDauRa + " điểm số không được vượt quá " + this.pheuChamMau[i].diemToiDa);
-                }
-                if(this.pheuChamMau[i].diemToiDa < formValue.tableRows[i].diemSV2){
-                    new NotificationsComponent().showNotification
-                    ("danger","Sinh viên 2: " + this.pheuChamMau[i].maChuanDauRa + " - " +
+                    ("danger", "Sinh viên 1: " + this.pheuChamMau[i].maChuanDauRa + " - " +
                         this.pheuChamMau[i].tenChuanDauRa + " điểm số không được vượt quá " + this.pheuChamMau[i].diemToiDa);
+                        return;
+                }
+                if (this.pheuChamMau[i].diemToiDa < formValue.tableRows[i].diemSV2) {
+                    new NotificationsComponent().showNotification
+                    ("danger", "Sinh viên 2: " + this.pheuChamMau[i].maChuanDauRa + " - " +
+                        this.pheuChamMau[i].tenChuanDauRa + " điểm số không được vượt quá " + this.pheuChamMau[i].diemToiDa);
+                    return;
                 }
             }
-            return;
-        }
-        else{
-            for (let i = 0; i <= this.pheuChamMau.length - 1 ; i++){
-                if(this.pheuChamMau[i].diemToiDa < formValue.tableRows[i].diemSV1){
+        } else {
+            for (let i = 0; i <= this.pheuChamMau.length - 1; i++) {
+                if (this.pheuChamMau[i].diemToiDa < formValue.tableRows[i].diemSV1) {
                     new NotificationsComponent().showNotification
-                    ("danger","Sinh viên 1: " + this.pheuChamMau[i].maChuanDauRa + " - " +
+                    ("danger", "Sinh viên 1: " + this.pheuChamMau[i].maChuanDauRa + " - " +
                         this.pheuChamMau[i].tenChuanDauRa + " điểm số không được vượt quá " + this.pheuChamMau[i].diemToiDa);
+                    return;
                 }
             }
-            return;
         }
         var data = {
             bangDiem: this.employeeForm.value.tableRows,
@@ -118,7 +118,7 @@ export class GvChamdiemComponent implements OnInit {
                 this.dialogRef.close();
                 new NotificationsComponent().showNotification('success', 'Chấm Điểm Sinh Viên Thành Công');
             },
-                error: (err) => {
+            error: (err) => {
                 console.log(err)
                 new NotificationsComponent().showNotification('danger', 'Không Chấm Điểm Sinh Viên ');
             }

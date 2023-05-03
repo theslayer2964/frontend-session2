@@ -12,7 +12,7 @@ import {request} from "express";
     styleUrls: ['./them-hocky.component.scss']
 })
 export class ThemHockyComponent implements OnInit {
-
+    private static MUOITAMTUAN = 10886400000;
     giangVienForm!: FormGroup;
     actionBtn: string = "Save"
 
@@ -26,8 +26,8 @@ export class ThemHockyComponent implements OnInit {
         this.giangVienForm = this.formBuilder.group({
                 thoiGianBatDau: ['', Validators.required],
                 thoiGianKetThuc: ['', Validators.required]
-            });
-            this.giangVienForm.setValidators(this.comparisonValidator())
+            },{validators: this.comparisonValidator()});
+            // this.giangVienForm.setValidators(this.comparisonValidator())
     }
 
     addHocKy() {
@@ -54,18 +54,12 @@ export class ThemHockyComponent implements OnInit {
         return (group: FormGroup): ValidationErrors => {
             const control1 = group.controls['thoiGianBatDau'].value;
             const control2 = group.controls['thoiGianKetThuc'].value;
-            console.log("BD -KT:", new Date(control1).valueOf(), " - ",new Date(control2).valueOf());
-            console.log("RANGE:",control1 - control2);
-            if(this.giangVienForm.controls["thoiGianBatDau"] && this.giangVienForm.controls["thoiGianKetThuc"]){
-
-            }
-
-            if (control1.value !== control2.value) {
-                control2.setErrors({notEquivalent: true});
-            } else {
-
-
-                // control2.setErrors(null);
+            const bd = new Date(control1).valueOf();
+            const kt = new Date(control2).valueOf();
+            if(control2 && control1){
+                if(kt - bd >= ThemHockyComponent.MUOITAMTUAN){
+                    return { dates: "Học kỳ không thể vượt quá 18 tuần" }
+                }
             }
             return;
         };

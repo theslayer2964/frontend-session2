@@ -30,216 +30,155 @@
                         </div>
                     </div>
                     <!--                    PHAN BIEN-->
-                    <div *ngIf="showBangData==0" class="mat-elevation-z8"
-                         style="width: 100%;max-width: 100%;overflow: auto;">
-
-                        <table mat-table [dataSource]="dataSourcePB" matSort>
-                            <!-- ID Column -->
-                            <ng-container matColumnDef="maLich" sticky class="example-button">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> MÃ LỊCH
-                                </th>
-                                <td mat-cell *matCellDef="let row"> {{row.maLich}} </td>
-                            </ng-container>
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="tenLich" style="margin-left: 60px">
-                                <th mat-header-cell *matHeaderCellDef style="margin-left: 60px"> TÊN LỊCH
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenLich}}"
-                                    matTooltipClass="example-tooltip-uppercase"> {{row.tenLich}}
-                                </td>
-                            </ng-container><!-- Progress Column -->
-                            <ng-container matColumnDef="ngay" style="margin-left: 60px">
-                                <th mat-header-cell *matHeaderCellDef style="margin-left: 60px"> NGÀY CHẤM
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.ngay}}"
-                                    matTooltipClass="example-tooltip-uppercase"> {{row.ngay}}
-                                </td>
-                            </ng-container>
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="tiet">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> TIẾT
-                                </th>
-                                <td mat-cell *matCellDef="let row"> {{row.tiet}}</td>
-                            </ng-container>
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="gvpb1" style="width: 200px;">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="margin-left: 40px;text-align: center"> GV PB 1
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.gvpb1}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.gvpb1}}</td>
-                            </ng-container>
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="gvpb2">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">GV PB 2
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.gvpb2}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.gvpb2}}</td>
-                            </ng-container> <!-- Progress Column -->
-                            <ng-container matColumnDef="maNhom">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">MÃ NHÓM
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.maNhom}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.maNhom}}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="tenNhom">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">TÊN NHÓM
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenNhom}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.tenNhom}}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="maDeTai">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">MÃ ĐỀ TÀI
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.maDeTai}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.maDeTai}}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="tenDeTai">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">TÊN ĐỀ TÀI
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenDeTai}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.tenDeTai}}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="phong">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">PHONG
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.phong}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.phong}}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="action" stickyEnd>
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> CHỈNH SỬA
-                                </th>
-                                <td mat-cell *matCellDef="let row">
-                                    <!--Row: data cua 1 dong-->
-                                    <button mat-icon-button color="primary" (click)="editLichPB(row)">
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
-                                    <button mat-icon-button color="accent" (click)="deleteLichPB(row.maLich)">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
-                                </td>
-                            </ng-container>
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnsPB"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnsPB;"></tr>
-                            <!-- Row shown when there is no matching data. -->
-                            <tr class="mat-row" *matNoDataRow>
-                                <td class="mat-cell" colspan="4">Chưa có dữ liệu</td>
-                            </tr>
-                        </table>
-                        <mat-paginator [pageSizeOptions]="[25, 10, 5, 100]"
-                                       aria-label="Select page of users"></mat-paginator>
+                    <div class="row" *ngIf="showBangData==0">
+                        <h3>PHẢN BIỆN</h3>
+                        <div class="col-lg-12 col-md-12">
+                            <form>
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr class="text-uppercase table-dark">
+                                        <th scope="col">Ngày</th>
+                                        <th scope="col">Tiết</th>
+                                        <th scope="col">Phòng</th>
+                                        <th scope="col">Nhóm</th>
+                                        <th scope="col">Tùy chọn</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody [formGroup]="chiaNhomPB">
+                                    <ng-container formArrayName="tableRows"
+                                                  *ngFor="let group of getFormControls.controls; let i=index">
+                                        <tr [formGroupName]="i">
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="ngay"
+                                                       placeholder="Enter First">
+                                                <div class="text-danger"
+                                                     *ngIf="getFormControls.controls[i].get('ngay')?.touched">
+                                                    <span *ngIf="getFormControls.controls[i].get('ngay')?.errors?.['required']">Required</span>
+                                                    <span *ngIf="getFormControls.controls[i].get('ngay')?.errors?.['minlength']">3 Chars Required</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="tiet"
+                                                       placeholder="Enter Last">
+                                                <div class="text-danger"
+                                                     *ngIf="getFormControls.controls[i].get('tiet')?.touched">
+                                                    <span *ngIf="getFormControls.controls[i].get('tiet')?.errors?.['required']">Required</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="phong"
+                                                       placeholder="phong...">
+                                            </td>
+                                            <td>
+<!--                                                <mat-form-field style="width: 300px;margin-left: 20px">-->
+<!--                                                    <mat-label>&#45;&#45; Chọn nhóm đề tài &#45;&#45;</mat-label>-->
+<!--                                                    <mat-select>-->
+<!--                                                        <mat-option *ngFor="let nhom of dsNhomDePhanCong" formControlName="nhom"-->
+<!--                                                                    [value]="nhom.maNhom">{{nhom.tenNhom}}</mat-option>-->
+<!--                                                    </mat-select>-->
+<!--                                                </mat-form-field>-->
+                                                <select formControlName="nhom"  class="form-control" >
+                                                    <option value="{{nhom.maNhom}}" *ngFor="let nhom of dsNhomDePhanCong">{{nhom.tenNhom}}</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger" (click)="removeEmployee(i)">Remove
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                    <ng-container>
+                                        <tr>
+                                            <td colspan="7">
+                                                <div class="row">
+                                                    <div class="col-12 text-center">
+                                                        <button class="btn btn-success"
+                                                                [disabled]="chiaNhomPB.invalid"
+                                                                (click)="onSaveForm()">Lưu
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
                     </div>
-                    <!--                    HỘI ĐỒNG-->
-                    <div *ngIf="showBangData==1" class="mat-elevation-z8"
-                         style="width: 100%;max-width: 100%;overflow: auto;">
 
-                        <table mat-table [dataSource]="dataSourceHD" matSort>
-                            <!-- ID Column -->
-                            <ng-container matColumnDef="maLich" sticky class="example-button">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> MÃ LỊCH
-                                </th>
-                                <td mat-cell *matCellDef="let row"> {{row.maLich}} </td>
-                            </ng-container>
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="tenLich" style="margin-left: 60px">
-                                <th mat-header-cell *matHeaderCellDef style="margin-left: 60px"> TÊN LỊCH
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenLich}}"
-                                    matTooltipClass="example-tooltip-uppercase"> {{row.tenLich}}
-                                </td>
-                            </ng-container><!-- Progress Column -->
-                            <ng-container matColumnDef="ngay" style="margin-left: 60px">
-                                <th mat-header-cell *matHeaderCellDef style="margin-left: 60px"> NGÀY CHẤM
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.ngay}}"
-                                    matTooltipClass="example-tooltip-uppercase"> {{row.ngay}}
-                                </td>
-                            </ng-container>
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="tiet">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> TIẾT
-                                </th>
-                                <td mat-cell *matCellDef="let row"> {{row.tiet}}</td>
-                            </ng-container>
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="chutichhd" style="width: 200px;">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="margin-left: 40px;text-align: center"> CHỦ TỊCH HỘI ĐỒNG / GV CHẤM POSTER 1
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.chutichhd}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.chutichhd}}</td>
-                            </ng-container>
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="tv3">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">THÀNH VIÊN 3
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tv3}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.tv3}}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="thukyHD">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">THƯ KÝ HD/ GV CHẤM POSTER 2
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.thukyHD}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.thukyHD}}</td>
-                            </ng-container> <!-- Progress Column -->
-                            <ng-container matColumnDef="maNhom">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">MÃ NHÓM
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.maNhom}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.maNhom}}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="tenNhom">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">TÊN NHÓM
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenNhom}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.tenNhom}}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="maDeTai">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">MÃ ĐỀ TÀI
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.maDeTai}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.maDeTai}}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="tenDeTai">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">TÊN ĐỀ TÀI
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenDeTai}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.tenDeTai}}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="phong">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">PHONG
-                                </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.phong}}"
-                                    matTooltipClass="example-tooltip-uppercase">{{row.phong}}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="action" stickyEnd>
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> CHỈNH SỬA
-                                </th>
-                                <td mat-cell *matCellDef="let row">
-                                    <!--Row: data cua 1 dong-->
-                                    <button mat-icon-button color="primary" (click)="editLichPB(row)">
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
-                                    <button mat-icon-button color="accent" (click)="deleteLichPB(row.maLich)">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
-                                </td>
-                            </ng-container>
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnsHD"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnsHD;"></tr>
-                            <!-- Row shown when there is no matching data. -->
-                            <tr class="mat-row" *matNoDataRow>
-                                <td class="mat-cell" colspan="4">Chưa có dữ liệu</td>
-                            </tr>
-                        </table>
-                        <mat-paginator [pageSizeOptions]="[25, 10, 5, 100]"
-                                       aria-label="Select page of users"></mat-paginator>
+                    <!--                    HỘI ĐỒNG-->
+                    <div class="row" *ngIf="showBangData==1">
+                        <h3>HỘI ĐỒNG</h3>
+                        <div class="col-lg-12 col-md-12">
+                            <form>
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr class="text-uppercase table-dark">
+                                        <th scope="col">Ngày</th>
+                                        <th scope="col">Tiết</th>
+                                        <th scope="col">Phòng</th>
+                                        <th scope="col">Nhóm</th>
+                                        <th scope="col">Tùy chọn</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody [formGroup]="chiaNhomHD">
+                                    <ng-container formArrayName="tableRowsHD"
+                                                  *ngFor="let group of getFormControlsHD.controls; let i=index">
+                                        <tr [formGroupName]="i">
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="ngay"
+                                                       placeholder="Enter First">
+                                                <div class="text-danger"
+                                                     *ngIf="getFormControlsHD.controls[i].get('ngay')?.touched">
+                                                    <span *ngIf="getFormControlsHD.controls[i].get('ngay')?.errors?.['required']">Required</span>
+                                                    <span *ngIf="getFormControlsHD.controls[i].get('ngay')?.errors?.['minlength']">3 Chars Required</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="tiet"
+                                                       placeholder="Enter Last">
+                                                <div class="text-danger"
+                                                     *ngIf="getFormControlsHD.controls[i].get('tiet')?.touched">
+                                                    <span *ngIf="getFormControlsHD.controls[i].get('tiet')?.errors?.['required']">Required</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="phong"
+                                                       placeholder="phong...">
+                                            </td>
+                                            <td>
+                                                <select formControlName="nhom" (change)="onStatusChangeHD($event,i)"
+                                                        class="form-control">
+                                                    <option value="">Select Status</option>
+                                                    <option value="active">Active</option>
+                                                    <option value="deactive">De-Active</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger" (click)="removeEmployeeHD(i)">Remove
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                    <ng-container>
+                                        <tr>
+                                            <td colspan="7">
+                                                <div class="row">
+                                                    <div class="col-12 text-center">
+                                                        <button class="btn btn-success"
+                                                                [disabled]="chiaNhomHD.invalid"
+                                                                (click)="onSaveFormHD()">Lưu
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

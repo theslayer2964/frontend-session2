@@ -25,6 +25,11 @@
                                     </mat-form-field>
                                 </div>
                             </div>
+                            <div class="row">
+                                <h5 style="color: red" *ngIf="giangVienForm.errors">
+                                    {{giangVienForm.errors?.dates | json}}
+                                </h5>
+                            </div>
                             <div mat-dialog-actions [align]="'end'">
                                 <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
                                 <!--                                [disabled]="!productForm.valid"-->
