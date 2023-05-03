@@ -68,7 +68,9 @@ export class GiangvienChamdiemComponent implements OnInit {
     this.dialog.open(GvChamdiemComponent, {
       data: row,
       width:"1150px"
-    })
+    }).afterClosed().subscribe(res => {
+      this.getDSTheoVaiTro();
+    });
   }
 
   nhapDiemExcel() {
@@ -96,14 +98,18 @@ export class GiangvienChamdiemComponent implements OnInit {
     console.log("VAI TRO:", this.vaitro);
     this.gvDialogChamDiemTransfer.sendVaiTro(this.vaitro);
     if(this.hocKyChon!=null && this.vaitro!=null){
-      this.giangvienService.getDSSVTheoHKVaVaiTro(this.hocKyChon, this.vaitro, this.maGiangVien).subscribe(res => {
-        this.dsSV = res;
-        console.log("RES", res);
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      })
+      this.getDSTheoVaiTro();
     }
+  }
+
+  getDSTheoVaiTro(){
+    this.giangvienService.getDSSVTheoHKVaVaiTro(this.hocKyChon, this.vaitro, this.maGiangVien).subscribe(res => {
+      this.dsSV = res;
+      console.log("RES", res);
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
   }
 
 }

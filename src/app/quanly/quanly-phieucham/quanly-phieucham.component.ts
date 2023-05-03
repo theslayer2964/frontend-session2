@@ -57,7 +57,9 @@ export class QuanlyPhieuchamComponent implements OnInit {
   }
 
   themPhieuChamDiem() {
-    this.dialog.open(ThemPhieuChamMauComponent,{})
+    this.dialog.open(ThemPhieuChamMauComponent,{
+      width:"1000px"
+    })
   }
 
   xuatFileExcel() {

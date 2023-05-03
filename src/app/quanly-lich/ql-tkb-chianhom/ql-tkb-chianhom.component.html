@@ -50,7 +50,7 @@
                                         <tr [formGroupName]="i">
                                             <td>
                                                 <input type="text" class="form-control" formControlName="ngay"
-                                                       placeholder="Enter First" >
+                                                       placeholder="Enter First">
                                                 <div class="text-danger"
                                                      *ngIf="getFormControls.controls[i].get('ngay')?.touched">
                                                     <span *ngIf="getFormControls.controls[i].get('ngay')?.errors?.['required']">Required</span>
@@ -59,7 +59,7 @@
                                             </td>
                                             <td>
                                                 <input type="text" class="form-control" formControlName="tiet"
-                                                       placeholder="Enter Last" >
+                                                       placeholder="Enter Last">
                                                 <div class="text-danger"
                                                      *ngIf="getFormControls.controls[i].get('tiet')?.touched">
                                                     <span *ngIf="getFormControls.controls[i].get('tiet')?.errors?.['required']">Required</span>
@@ -67,14 +67,18 @@
                                             </td>
                                             <td>
                                                 <input type="text" class="form-control" formControlName="phong"
-                                                       placeholder="phong..." >
+                                                       placeholder="phong...">
                                             </td>
                                             <td>
-                                                <select formControlName="nhom" (change)="onStatusChange($event,i)"
-                                                        class="form-control">
-                                                    <option value="">Select Status</option>
-                                                    <option value="active">Active</option>
-                                                    <option value="deactive">De-Active</option>
+<!--                                                <mat-form-field style="width: 300px;margin-left: 20px">-->
+<!--                                                    <mat-label>&#45;&#45; Chọn nhóm đề tài &#45;&#45;</mat-label>-->
+<!--                                                    <mat-select>-->
+<!--                                                        <mat-option *ngFor="let nhom of dsNhomDePhanCong" formControlName="nhom"-->
+<!--                                                                    [value]="nhom.maNhom">{{nhom.tenNhom}}</mat-option>-->
+<!--                                                    </mat-select>-->
+<!--                                                </mat-form-field>-->
+                                                <select formControlName="nhom"  class="form-control" >
+                                                    <option value="{{nhom.maNhom}}" *ngFor="let nhom of dsNhomDePhanCong">{{nhom.tenNhom}}</option>
                                                 </select>
                                             </td>
                                             <td>
@@ -124,7 +128,7 @@
                                         <tr [formGroupName]="i">
                                             <td>
                                                 <input type="text" class="form-control" formControlName="ngay"
-                                                       placeholder="Enter First" >
+                                                       placeholder="Enter First">
                                                 <div class="text-danger"
                                                      *ngIf="getFormControlsHD.controls[i].get('ngay')?.touched">
                                                     <span *ngIf="getFormControlsHD.controls[i].get('ngay')?.errors?.['required']">Required</span>
@@ -133,7 +137,7 @@
                                             </td>
                                             <td>
                                                 <input type="text" class="form-control" formControlName="tiet"
-                                                       placeholder="Enter Last" >
+                                                       placeholder="Enter Last">
                                                 <div class="text-danger"
                                                      *ngIf="getFormControlsHD.controls[i].get('tiet')?.touched">
                                                     <span *ngIf="getFormControlsHD.controls[i].get('tiet')?.errors?.['required']">Required</span>
@@ -141,7 +145,7 @@
                                             </td>
                                             <td>
                                                 <input type="text" class="form-control" formControlName="phong"
-                                                       placeholder="phong..." >
+                                                       placeholder="phong...">
                                             </td>
                                             <td>
                                                 <select formControlName="nhom" (change)="onStatusChangeHD($event,i)"

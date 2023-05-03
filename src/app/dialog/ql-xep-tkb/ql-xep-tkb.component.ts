@@ -6,6 +6,7 @@ import {Subject} from "rxjs";
 import {GiangvienService} from "../../shared-service/giangvien.service";
 import {MatSelectChange} from "@angular/material/select";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
+import {LichService} from "../../shared-service/lich/lich.service";
 
 @Component({
   selector: 'app-ql-xep-tkb',
@@ -19,20 +20,23 @@ export class QlXepTKBComponent implements OnInit {
               private dialogRef: MatDialogRef<QlXepTKBComponent>,
               @Inject(MAT_DIALOG_DATA) public editData: any,
               public giangvienService: GiangvienService,
-              public themLichTransfer: ThemLichTransferService) { }
+              public themLichTransfer: ThemLichTransferService,
+              public lichService: LichService) { }
 
   mahocKyHienTai: any;
   ngOnInit(): void {
     this.themLichTransfer.hockyBehaviorSubject.subscribe(res => {
       this.mahocKyHienTai = res;
     })
-    this.getDSGiangVien();
+    this.lichService.tachNgay().subscribe(res => {
+      this.dsNgay = res;
+      console.log("DS nGay", this.dsNgay);
+    })
     this.nhomDKGVPB= this.formBuilder.group({
-      dsGV:['',Validators.required],
-      ngayCham: ['', Validators.required],
+      dsMaGiangVienPB:['',Validators.required],
+      ngay: ['', Validators.required],
       phong: ['', Validators.required],
-      tietBatDau:['', Validators.required],
-      tietKetThuc:['', Validators.required]
+      tiet:['', Validators.required]
     });
 
     if(this.editData){
@@ -44,23 +48,41 @@ export class QlXepTKBComponent implements OnInit {
       this.actionBtn = "Cập nhật"
     }
   }
-
-  dsTenGV: any = [];
-  destroy$ = new Subject();
-  private getDSGiangVien() {
-    this.giangvienService.getDSGV().subscribe(res => {
-
-      this.dsTenGV = res;
-      this.destroy$.next(this.dsTenGV);
-    })
-    this.destroy$.subscribe(res => {
-      this.toppingList = res;
-    })
+  showPhong = false;
+  dsNgay: any;
+  ngayDcChon:any;
+  changeNgay($event: MatSelectChange) {
+    this.ngayDcChon = $event.value;
+    if(this.ngayDcChon && this.tietDcChon){
+      this.lichService.tachPhong(this.ngayDcChon, this.tietDcChon).subscribe(res => {
+        this.dsPhong = res;
+      this.showPhong = true;
+      })
+    }
   }
-  toppingList: any;
-  dsGVPB = [];
+  tietDcChon:any;
+  changeTiet($event: MatSelectChange) {
+    this.tietDcChon = $event.value
+    if(this.ngayDcChon && this.tietDcChon){
+      this.lichService.tachPhong(this.ngayDcChon, this.tietDcChon).subscribe(res => {
+        this.dsPhong = res;
+      this.showPhong = true;
+      })
+    }
+  }
+  dsPhong: any;
+  dsGV : any;
+  changePhong($event: MatSelectChange) {
+    if($event.value){
+      this.lichService.tachGiangVien(this.ngayDcChon, this.tietDcChon, $event.value).subscribe( res => {
+          this.dsGV = res;
+          this.showGV = true;
+      }
+      )
+    }
+  }
+  showGV = false;
   onDropdownList($event: MatSelectChange) {
-    this.dsGVPB = $event.value;
     if($event.value.length > 2){
       new NotificationsComponent().showNotification("danger","Yêu cầu chỉ 2 giảng viên phản biện")
     }
@@ -68,13 +90,10 @@ export class QlXepTKBComponent implements OnInit {
 
   addTKBPB() {
     console.log("LICH ne:", this.nhomDKGVPB.value);
-  }
 
-  chonPhong() {
-    this.getDSGVRanhVaoNgayGio("PB",null,null,null,null);
-  }
-
-  getDSGVRanhVaoNgayGio(loaiLich: any,ngayCham: any, tietBatDau:any, tietKetThuc:any, phong: any){
-    /////............
+    this.lichService.xepLichGiangVienPB(this.nhomDKGVPB.value).subscribe(res => {
+      this.dialogRef.close();
+      new NotificationsComponent().showNotification("success","Xếp lịch thành công")
+    })
   }
 }

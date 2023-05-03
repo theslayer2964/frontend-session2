@@ -9,6 +9,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {QlXepTKBComponent} from "../../dialog/ql-xep-tkb/ql-xep-tkb.component";
 import {QlXepTKBHDComponent} from "../../dialog/ql-xep-tkb-hd/ql-xep-tkb-hd.component";
 import {ThemLichTransferService} from "../../transfer-data-service/them-lich-transfer.service";
+import {LichService} from "../../shared-service/lich/lich.service";
 
 @Component({
     selector: 'app-ql-giangvien',
@@ -20,7 +21,8 @@ export class QlGiangvienComponent implements OnInit {
     private soHocKy: any;
 
     constructor(public dialog: MatDialog, private detaiService: DetaiService, private hockyService: HockyService,
-                private userAuthService: UserAuthService, private themLichTransfer: ThemLichTransferService) {
+                private userAuthService: UserAuthService, private themLichTransfer: ThemLichTransferService,
+                private lichService: LichService) {
     }
 
     ngOnInit(): void {
@@ -55,28 +57,40 @@ export class QlGiangvienComponent implements OnInit {
     changeLoaiLich($event: MatSelectChange) {
         this.showBangData = $event.value
         if (this.showBangData == 0) {
-            this.getDSLichTheoHK(this.hocKyHienTai, "PB");
+            this.getDSLichTheoHKPB(this.hocKyHienTai, "PB");
         } else if (this.showBangData == 1) {
-            this.getDSLichTheoHK(this.hocKyHienTai, "HD");
+            this.getDSLichTheoHKHD(this.hocKyHienTai, "HD");
         }
     }
 
-    private getDSLichTheoHK(maHocKy: any, loaiLich: any) {
-
+    private getDSLichTheoHKPB(maHocKy: any, loaiLich: any) {
+        this.lichService.layTKBcuaGV(maHocKy, loaiLich).subscribe((res:any) => {
+            this.dataSourcePB = new MatTableDataSource(res);
+            // this.dataSourcePB.paginator = this.paginator;
+            // this.dataSourcePB.sort = this.sort;
+        })
+    }private getDSLichTheoHKHD(maHocKy: any, loaiLich: any) {
+        this.lichService.layTKBcuaGV(maHocKy, loaiLich).subscribe((res:any) => {
+            this.dataSourceHD = new MatTableDataSource(res);
+            // this.dataSourceHD.paginator = this.paginator;
+            // this.dataSourceHD.sort = this.sort;
+        })
     }
 
     addThoiKhoaBieuPB() {
         this.dialog.open(QlXepTKBComponent, {}).afterClosed().subscribe(val => {
             if (val == "save") {
-                this.getDSLichTheoHK(this.hocKyHienTai, "PB");
+                this.getDSLichTheoHKPB(this.hocKyHienTai, "PB");
             }
         })
     }
 
     addThoiKhoaBieuHD() {
-        this.dialog.open(QlXepTKBHDComponent, {}).afterClosed().subscribe(val => {
+        this.dialog.open(QlXepTKBHDComponent, {
+            width: "1000px"
+        }).afterClosed().subscribe(val => {
             if (val == "save") {
-                this.getDSLichTheoHK(this.hocKyHienTai, "HD");
+                this.getDSLichTheoHKHD(this.hocKyHienTai, "HD");
             }
         })
     }

@@ -23,10 +23,12 @@
                                         <input formControlName="thoiGianKetThuc" matInput
                                                placeholder="Thời gian kết thúc" type="date" >
                                     </mat-form-field>
-                                    <p *ngIf="giangVienForm.get('thoiGianKetThuc').errors!=null">
-                                    Errors: {{giangVienForm.get('thoiGianKetThuc').errors | json}}
-                                    </p>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <h5 style="color: red" *ngIf="giangVienForm.errors">
+                                    {{giangVienForm.errors?.dates | json}}
+                                </h5>
                             </div>
                             <div mat-dialog-actions [align]="'end'">
                                 <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>

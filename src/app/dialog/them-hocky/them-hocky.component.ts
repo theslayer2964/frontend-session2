@@ -26,7 +26,7 @@ export class ThemHockyComponent implements OnInit {
         this.giangVienForm = this.formBuilder.group({
                 thoiGianBatDau: ['', Validators.required],
                 thoiGianKetThuc: ['', Validators.required]
-            });
+            },{validators: this.comparisonValidator()});
             // this.giangVienForm.setValidators(this.comparisonValidator())
     }
 
@@ -50,30 +50,19 @@ export class ThemHockyComponent implements OnInit {
 
     }
 
-    // public comparisonValidator() : ValidatorFn{
-    //     return (group: FormGroup): ValidationErrors => {
-    //         const control1 = group.controls['thoiGianBatDau'].value;
-    //         const control2 = group.controls['thoiGianKetThuc'].value;
-    //         console.log("BD -KT:", new Date(control1).valueOf(), " - ",new Date(control2).valueOf());
-    //         const bd = new Date(control1).valueOf();
-    //         const kt = new Date(control2).valueOf();
-    //         console.log("RANGE:" , bd - kt );
-    //         if(control2 && control1){
-    //             if(kt - bd >= ThemHockyComponent.MUOITAMTUAN){
-    //                 console.log("DO DO DO")
-    //                 control2.setErrors({notEquivalent: "Thời gian của 1 học kỳ không vượt quá 18 tuần"});
-    //             }
-    //         }
-    //         //
-    //         // if (control1.value !== control2.value) {
-    //         //     control2.setErrors({notEquivalent: true});
-    //         // } else {
-    //         //
-    //         //
-    //         //     // control2.setErrors(null);
-    //         // }
-    //         return;
-    //     };
-    // }
+    public comparisonValidator() : ValidatorFn{
+        return (group: FormGroup): ValidationErrors => {
+            const control1 = group.controls['thoiGianBatDau'].value;
+            const control2 = group.controls['thoiGianKetThuc'].value;
+            const bd = new Date(control1).valueOf();
+            const kt = new Date(control2).valueOf();
+            if(control2 && control1){
+                if(kt - bd >= ThemHockyComponent.MUOITAMTUAN){
+                    return { dates: "Học kỳ không thể vượt quá 18 tuần" }
+                }
+            }
+            return;
+        };
+    }
 
 }
