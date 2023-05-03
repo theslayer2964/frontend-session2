@@ -23,6 +23,9 @@
                                         <input formControlName="thoiGianKetThuc" matInput
                                                placeholder="Thời gian kết thúc" type="date" >
                                     </mat-form-field>
+                                    <p *ngIf="giangVienForm.get('thoiGianKetThuc').errors!=null">
+                                    Errors: {{giangVienForm.get('thoiGianKetThuc').errors | json}}
+                                    </p>
                                 </div>
                             </div>
                             <div mat-dialog-actions [align]="'end'">

@@ -5,6 +5,7 @@ import {HockyService} from "../../shared-service/hocky.service";
 import {MatDialog} from "@angular/material/dialog";
 import {XepNhomLichTransferService} from "../../transfer-data-service/xep-nhom-lich-transfer.service";
 import {MatTableDataSource} from "@angular/material/table";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-ql-tkb-chianhom',
@@ -15,10 +16,24 @@ export class QlTkbChianhomComponent implements OnInit {
   private hocKyHienTai: any;
   private soHocKy: any;
   constructor(public dialog: MatDialog, private hockyService: HockyService,
-              public xepLichNhomTransferService: XepNhomLichTransferService) { }
+              public xepLichNhomTransferService: XepNhomLichTransferService,
+              private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.getAllHocKy();
+    this.chiaNhomPB = this.fb.group({
+      tableRows: this.fb.array([], [Validators.required])
+    });
+    this.addRow();
+    this.addRow();
+    this.addRow();
+    this.setValue();
+    this.chiaNhomHD = this.fb.group({
+      tableRowsHD: this.fb.array([], [Validators.required])
+    });
+    this.addRowHD();
+    this.addRowHD();
+    this.addRowHD();
   }
 
   dsHocKy: HocKy[];
@@ -40,9 +55,6 @@ export class QlTkbChianhomComponent implements OnInit {
     this.xepLichNhomTransferService.sendHocKy($event.value)
   }
 
-  applyFilter($event: KeyboardEvent) {
-
-  }
   showBangData: any;
 
   changeLoaiLich($event: MatSelectChange) {
@@ -57,19 +69,116 @@ export class QlTkbChianhomComponent implements OnInit {
   private getDSLichTheoHK(maHocKy: any, loaiLich: any) {
 
   }
-  // Table PHAN BIEN
-  displayedColumnsPB: string[] = ["maLich", "tenLich", "ngay", "tiet", "gvpb1", "gvpb2","maNhom","tenNhom","maDeTai","tenDeTai", "phong", "action"];
-  dataSourcePB!: MatTableDataSource<any>;
-
-
-  deleteLichPB(maDeTai: any) {
-
+  // TABLE PHAN BIEN:
+  public chiaNhomPB: FormGroup;
+  createFormGroup(): FormGroup {
+    return this.fb.group({
+      ngay: ['', [Validators.required, Validators.minLength(3)]],
+      tiet: ['', [Validators.required]],
+      nhom: [''],
+      phong: ['']
+    });
   }
 
-  editLichPB(row) {
-
+  get getFormControls() {
+    const control = this.chiaNhomPB.get('tableRows') as FormArray;
+    return control;
   }
+
+  addRow() {
+    const control = this.chiaNhomPB.get('tableRows') as FormArray;
+    control.push(this.createFormGroup());
+  }
+
+  onStatusChange(event: any, index: number) {
+    debugger
+    if (event.target.value == 'deactive') {
+      const control = this.chiaNhomPB.get('tableRows') as FormArray;
+      control.controls[index].get('state')?.disable();
+      control.controls[index].get('city')?.disable();
+    } else {
+      const control = this.chiaNhomPB.get('tableRows') as FormArray;
+      control.controls[index].get('state')?.enable();
+      control.controls[index].get('city')?.enable();
+    }
+  }
+
+  removeEmployee(index: number) {
+    const control = this.chiaNhomPB.get('tableRows') as FormArray;
+    control.removeAt(index);
+  }
+
+  onSaveForm() {
+    const formValue = this.chiaNhomPB.value;
+    console.log("ON SAVE:", formValue);
+  }
+  setValue(){
+    var data = {
+      tableRows: [
+        {
+          ngay: 'lala',
+          tiet: 'meoem',
+          nhom: '',
+          phong: 'xxx'
+        },
+        {
+          ngay: 'lala',
+          tiet: 'meoem',
+          nhom: 'deactive',
+          phong: 'xxx'
+        },
+        {
+          ngay: 'lala3',
+          tiet: 'meoem3',
+          nhom: 'active',
+          phong: 'xxx3'
+        }
+      ]
+    }
+    this.chiaNhomPB.patchValue(data);
+  }
+
   // Table HOI DONG
-  displayedColumnsHD: string[] = ["maLich", "tenLich", "ngay", "tiet","chutichhd","tv3","thukyHD","maNhom","tenNhom","maDeTai","tenDeTai", "phong", "action"];
-  dataSourceHD!: MatTableDataSource<any>;
+  public chiaNhomHD: FormGroup;
+  createFormGroupHD(): FormGroup {
+    return this.fb.group({
+      ngay: ['', [Validators.required, Validators.minLength(3)]],
+      tiet: ['', [Validators.required]],
+      nhom: [''],
+      phong: ['']
+    });
+  }
+
+  get getFormControlsHD() {
+    const control = this.chiaNhomHD.get('tableRowsHD') as FormArray;
+    return control;
+  }
+
+  addRowHD() {
+    const control = this.chiaNhomHD.get('tableRowsHD') as FormArray;
+    control.push(this.createFormGroupHD());
+  }
+
+  onStatusChangeHD(event: any, index: number) {
+    debugger
+    if (event.target.value == 'deactive') {
+      const control = this.chiaNhomHD.get('tableRowsHD') as FormArray;
+      control.controls[index].get('state')?.disable();
+      control.controls[index].get('city')?.disable();
+    } else {
+      const control = this.chiaNhomHD.get('tableRowsHD') as FormArray;
+      control.controls[index].get('state')?.enable();
+      control.controls[index].get('city')?.enable();
+    }
+  }
+
+  removeEmployeeHD(index: number) {
+    const control = this.chiaNhomHD.get('tableRowsHD') as FormArray;
+    control.removeAt(index);
+  }
+
+  onSaveFormHD() {
+    const formValue = this.chiaNhomHD.value;
+    console.log("ON SAVE HD:", formValue);
+  }
 }

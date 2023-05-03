@@ -18,13 +18,25 @@
                         </mat-form-field>
                     </div>
                     <hr>
-                    <div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <mat-form-field style="width: 400px;margin-left: 20px">
+                                <mat-label>-- Chọn học kỳ --</mat-label>
+                                <mat-select (selectionChange)="changeHocKy($event)">
+                                    <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">
+                                        HK{{hocKy.soHocKy}}
+                                        -20{{hocKy.maHocKy}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    <div class="col-lg-6 col-md-6">
                         <mat-form-field style="width: 500px;margin-left: 20px">
-                            <mat-label>-- Chọn để có thấy phiếu mẫu của từng loại giảng viên --</mat-label>
+                            <mat-label>-- Phiếu mẫu của từng loại giảng viên --</mat-label>
                             <mat-select (selectionChange)="changeGiangVien($event)">
                                 <mat-option *ngFor="let vaitro of dsVaiTro" [value]="vaitro.value">{{vaitro.viewValue}}</mat-option>
                             </mat-select>
                         </mat-form-field>
+                    </div>
                     </div>
                     <div>
                         <mat-form-field style="width: 500px;margin-left: 20px">
