@@ -8,7 +8,6 @@ import {Subject} from "rxjs";
 import {QuanlyService} from "../../quanly/quanly-service/quanly.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
-import {DialogRef} from "@angular/cdk/dialog";
 
 @Component({
     selector: 'app-gv-chamdiem',
@@ -21,8 +20,8 @@ export class GvChamdiemComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 public gvChamdiemTransfer: GvDialogchamdiemService,
                 public tieuchichamdiemService: TieuchichamdiemService,
+                public dialogRef: MatDialogRef<GvChamdiemComponent>,
                 @Inject(MAT_DIALOG_DATA) public editData: any,
-                private dialogRef: DialogRef,
                 public quanlyService: QuanlyService,
                 public userAuthService: UserAuthService) {
         this.employeeForm = this.fb.group({
@@ -50,13 +49,14 @@ export class GvChamdiemComponent implements OnInit {
             })
         })
         console.log("TRUYEN DATA:", this.pheuChamMau);
+
     }
 
     createFormGroup(): FormGroup {
         if (this.editData.sinhVien.length == 2)
             return this.fb.group({
-                diemSV1: ['', [Validators.required]],
-                diemSV2: ['', [Validators.required]],
+                diemSV1: ['', [Validators.required, Validators.min(0), Validators.max(10)]],
+                diemSV2: ['', [Validators.required, Validators.min(0)]],
                 ykien: ['']
             });
         else
@@ -78,7 +78,33 @@ export class GvChamdiemComponent implements OnInit {
 
     onSaveForm() {
         const formValue = this.employeeForm.value;
-
+        console.log(formValue);
+        console.log(this.pheuChamMau)
+        if (this.editData.sinhVien.length == 2){
+            for (let i = 0; i <= this.pheuChamMau.length - 1 ; i++){
+                if(this.pheuChamMau[i].diemToiDa < formValue.tableRows[i].diemSV1){
+                    new NotificationsComponent().showNotification
+                    ("danger","Sinh viên 1: " + this.pheuChamMau[i].maChuanDauRa + " - " +
+                    this.pheuChamMau[i].tenChuanDauRa + " điểm số không được vượt quá " + this.pheuChamMau[i].diemToiDa);
+                }
+                if(this.pheuChamMau[i].diemToiDa < formValue.tableRows[i].diemSV2){
+                    new NotificationsComponent().showNotification
+                    ("danger","Sinh viên 2: " + this.pheuChamMau[i].maChuanDauRa + " - " +
+                        this.pheuChamMau[i].tenChuanDauRa + " điểm số không được vượt quá " + this.pheuChamMau[i].diemToiDa);
+                }
+            }
+            return;
+        }
+        else{
+            for (let i = 0; i <= this.pheuChamMau.length - 1 ; i++){
+                if(this.pheuChamMau[i].diemToiDa < formValue.tableRows[i].diemSV1){
+                    new NotificationsComponent().showNotification
+                    ("danger","Sinh viên 1: " + this.pheuChamMau[i].maChuanDauRa + " - " +
+                        this.pheuChamMau[i].tenChuanDauRa + " điểm số không được vượt quá " + this.pheuChamMau[i].diemToiDa);
+                }
+            }
+            return;
+        }
         var data = {
             bangDiem: this.employeeForm.value.tableRows,
             sinhVien: this.editData.sinhVien,
@@ -97,5 +123,8 @@ export class GvChamdiemComponent implements OnInit {
                 new NotificationsComponent().showNotification('danger', 'Không Chấm Điểm Sinh Viên ');
             }
         })
+        this.dialogRef.close();
+        console.log("BANG DIEM NGHE:", data);
+        // this.quanlyService.chamDiem(data)
     }
 }

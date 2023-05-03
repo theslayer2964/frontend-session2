@@ -51,16 +51,18 @@
                                 <input type="number" class="form-control" formControlName="diemSV1"
                                        placeholder="điểm SV1">
                                 <div class="text-danger" *ngIf="getFormControls.controls[i].get('diemSV1')?.touched">
-                                    <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['required']">Required</span>
-                                    <!--                                <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['minlength']">3 Chars-->
-                                    <!--                  Required</span>-->
+                                    <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['required']">Bắt buộc </span>
+                                    <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['min']">Điểm >= 0</span>
+                                    <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['max']">Điểm < 10></span>
                                 </div>
                             </td>
                             <td>
                                 <input type="number" class="form-control" formControlName="diemSV2"
                                        placeholder="Điểm SV2">
                                 <div class="text-danger" *ngIf="getFormControls.controls[i].get('diemSV2')?.touched">
-                                    <span *ngIf="getFormControls.controls[i].get('diemSV2')?.errors?.['required']">Required</span>
+                                    <span *ngIf="getFormControls.controls[i].get('diemSV2')?.errors?.['required']">Bắt buộc </span>
+                                    <span *ngIf="getFormControls.controls[i].get('diemSV2')?.errors?.['min']">Điểm >= 0</span>
+                                    <span *ngIf="getFormControls.controls[i].get('diemSV2')?.errors?.['max']">Điểm < 10</span>
                                 </div>
                             </td>
                             <td>
@@ -86,9 +88,9 @@
                                 <input type="number" class="form-control" formControlName="diemSV1"
                                        placeholder="điểm SV1">
                                 <div class="text-danger" *ngIf="getFormControls.controls[i].get('diemSV1')?.touched">
-                                    <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['required']">Required</span>
-                                    <!--                                <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['minlength']">3 Chars-->
-                                    <!--                  Required</span>-->
+                                    <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['required']">Bắt buộc </span>
+                                    <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['min']">Điểm >= 0</span>
+                                    <span *ngIf="getFormControls.controls[i].get('diemSV1')?.errors?.['max']">Điểm < 10></span>
                                 </div>
                             </td>
                             <td>
@@ -105,6 +107,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Xóa</button>
-        <button class="btn btn-success" mat-button [mat-dialog-close]="true" cdkFocusInitial  [disabled]="employeeForm.invalid"
+        <button class="btn btn-success" mat-button cdkFocusInitial [disabled]="employeeForm.invalid"
                 (click)="onSaveForm()">Chấm điểm</button>
 </mat-dialog-actions>

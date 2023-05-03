@@ -5,14 +5,7 @@
                 <div class="card">
                     <hr>
                     <div class="card-header card-header-warning" style="display: flex;justify-content: space-between">
-                        <h4 class="card-title">Xếp thời khóa biểu cho giảng viên</h4>
-                        <mat-form-field style="width: 400px;margin-left: 20px">
-                            <mat-label>Tùy chọn</mat-label>
-                            <mat-select>
-                                <mat-option (click)="addThoiKhoaBieuPB()">Thêm TKB chấm phản biện</mat-option>
-                                <mat-option (click)="addThoiKhoaBieuHD()">Thêm TKB chấm hội đồng</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                        <h4 class="card-title">Xếp thời khóa biểu cho các nhóm đề tài</h4>
                     </div>
                     <hr>
                     <div class="row">
@@ -70,6 +63,7 @@
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.tiet}}</td>
                             </ng-container>
+                            <!-- Progress Column -->
                             <ng-container matColumnDef="gvpb1" style="width: 200px;">
                                 <th mat-header-cell *matHeaderCellDef
                                     style="margin-left: 40px;text-align: center"> GV PB 1
@@ -84,6 +78,30 @@
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.gvpb2}}"
                                     matTooltipClass="example-tooltip-uppercase">{{row.gvpb2}}</td>
                             </ng-container> <!-- Progress Column -->
+                            <ng-container matColumnDef="maNhom">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center">MÃ NHÓM
+                                </th>
+                                <td mat-cell *matCellDef="let row" matTooltip="{{row.maNhom}}"
+                                    matTooltipClass="example-tooltip-uppercase">{{row.maNhom}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="tenNhom">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center">TÊN NHÓM
+                                </th>
+                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenNhom}}"
+                                    matTooltipClass="example-tooltip-uppercase">{{row.tenNhom}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="maDeTai">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center">MÃ ĐỀ TÀI
+                                </th>
+                                <td mat-cell *matCellDef="let row" matTooltip="{{row.maDeTai}}"
+                                    matTooltipClass="example-tooltip-uppercase">{{row.maDeTai}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="tenDeTai">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center">TÊN ĐỀ TÀI
+                                </th>
+                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenDeTai}}"
+                                    matTooltipClass="example-tooltip-uppercase">{{row.tenDeTai}}</td>
+                            </ng-container>
                             <ng-container matColumnDef="phong">
                                 <th mat-header-cell *matHeaderCellDef style="text-align: center">PHONG
                                 </th>
@@ -114,7 +132,7 @@
                         <mat-paginator [pageSizeOptions]="[25, 10, 5, 100]"
                                        aria-label="Select page of users"></mat-paginator>
                     </div>
-                    <!--                    HOI DONG-->
+                    <!--                    HỘI ĐỒNG-->
                     <div *ngIf="showBangData==1" class="mat-elevation-z8"
                          style="width: 100%;max-width: 100%;overflow: auto;">
 
@@ -149,23 +167,49 @@
                                 <td mat-cell *matCellDef="let row"> {{row.tiet}}</td>
                             </ng-container>
                             <!-- Progress Column -->
-                            <ng-container matColumnDef="chutichhd">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">CHỦ TỊCH HỘI ĐỒNG/ GV CHẤM POSTER 1
+                            <ng-container matColumnDef="chutichhd" style="width: 200px;">
+                                <th mat-header-cell *matHeaderCellDef
+                                    style="margin-left: 40px;text-align: center"> CHỦ TỊCH HỘI ĐỒNG / GV CHẤM POSTER 1
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.chutichhd}}"
                                     matTooltipClass="example-tooltip-uppercase">{{row.chutichhd}}</td>
                             </ng-container>
+                            <!-- Progress Column -->
                             <ng-container matColumnDef="tv3">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">THÀNH VIÊN THỨ 3
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center">THÀNH VIÊN 3
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.tv3}}"
                                     matTooltipClass="example-tooltip-uppercase">{{row.tv3}}</td>
                             </ng-container>
                             <ng-container matColumnDef="thukyHD">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">THƯ KÝ HĐ/ GV CHẤM POSTER 2
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center">THƯ KÝ HD/ GV CHẤM POSTER 2
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.thukyHD}}"
                                     matTooltipClass="example-tooltip-uppercase">{{row.thukyHD}}</td>
+                            </ng-container> <!-- Progress Column -->
+                            <ng-container matColumnDef="maNhom">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center">MÃ NHÓM
+                                </th>
+                                <td mat-cell *matCellDef="let row" matTooltip="{{row.maNhom}}"
+                                    matTooltipClass="example-tooltip-uppercase">{{row.maNhom}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="tenNhom">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center">TÊN NHÓM
+                                </th>
+                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenNhom}}"
+                                    matTooltipClass="example-tooltip-uppercase">{{row.tenNhom}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="maDeTai">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center">MÃ ĐỀ TÀI
+                                </th>
+                                <td mat-cell *matCellDef="let row" matTooltip="{{row.maDeTai}}"
+                                    matTooltipClass="example-tooltip-uppercase">{{row.maDeTai}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="tenDeTai">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center">TÊN ĐỀ TÀI
+                                </th>
+                                <td mat-cell *matCellDef="let row" matTooltip="{{row.tenDeTai}}"
+                                    matTooltipClass="example-tooltip-uppercase">{{row.tenDeTai}}</td>
                             </ng-container>
                             <ng-container matColumnDef="phong">
                                 <th mat-header-cell *matHeaderCellDef style="text-align: center">PHONG
@@ -202,4 +246,5 @@
         </div>
     </div>
 </div>
+
 
