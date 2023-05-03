@@ -88,7 +88,7 @@ export class SharedComponent implements OnInit {
         if (maNguoiDung != "") {
             this.tinNhanService.layTinNhan(maNguoiDung)
                 .subscribe(res => {
-                    console.log(res)
+                    console.log("TIN NHẮN:",res);
                     res.forEach(data => {
                         this.listData.push({
                             tinnhan: data.noiDung,
