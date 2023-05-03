@@ -48,12 +48,18 @@ export class QlPcGvpbComponent implements OnInit {
     changeHocKy($event: MatSelectChange) {
         this.hocKyHienTai = $event.value.toString().slice(0, 3);
         this.soHocKy = $event.value.toString().slice(2);
+        console.log('XXX:', this.hocKyHienTai, this.soHocKy);
         this.hockyTransferData.sendHocKy($event.value)
         this.getDSNhomDeTaiPhanCOngPhanBien();
     }
 
     private getDSNhomDeTaiPhanCOngPhanBien(){
         this.nhomService.getDSNhomDePhanCongGVPhanBien({maHocKy: this.hocKyHienTai, soHocKy: this.soHocKy})
+        this.nhomService.getDSNhomDePhanCongGVPhanBien({
+            maHocKy: this.hocKyHienTai,
+            soHocKy: this.soHocKy,
+            maGiangVien: 'HD'
+        })
             .subscribe(res => {
                 this.dataSource = new MatTableDataSource(this.mappingData(res));
                 this.dataSource.paginator = this.paginator;

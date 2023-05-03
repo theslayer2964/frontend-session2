@@ -6,6 +6,7 @@ import {UserDataService} from "../../shared-service/userData.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ChangepasswordComponent} from "../../authentication/changepassword/changepassword.component";
 import {ThongbaoComponent} from "../../dialog/thongbao/thongbao.component";
+import {TinnhanService} from "../../shared-service/tinnnhan.service";
 
 @Component({
     selector: 'app-shared',
@@ -17,7 +18,8 @@ export class SharedComponent implements OnInit {
 
     constructor(private userAuthService: UserAuthService, private router: Router, public userService: UserService,
                 public userDataService: UserDataService,
-                public dialog: MatDialog) {
+                public dialog: MatDialog,
+                private tinNhanService: TinnhanService) {
     }
 
     public userInfo: any
@@ -33,6 +35,7 @@ export class SharedComponent implements OnInit {
                 this.userInfo = data;
             }
         })
+        this.loadThongBao();
     }
 
     public isLoggedIn() {
@@ -72,5 +75,31 @@ export class SharedComponent implements OnInit {
         //     .afterClosed().subscribe(val => {
         //     this.router.
         // })
+    }
+
+    loadThongBao() {
+        let roleName = this.userAuthService.getRoles()[0].roleName;
+        let maNguoiDung = "";
+        if (roleName == 'ROLE_GIANGVIEN' ||  roleName == 'ROLE_QUANLY') {
+            maNguoiDung = this.userAuthService.getUserInfo().maGiangVien
+        } else {
+            maNguoiDung = this.userAuthService.getUserInfo().maSinhVien
+        }
+        if (maNguoiDung != "") {
+            this.tinNhanService.layTinNhan(maNguoiDung)
+                .subscribe(res => {
+                    console.log(res)
+                    res.forEach(data => {
+                        this.listData.push({
+                            tinnhan: data.noiDung,
+                            id: data.id,
+                            sender: data.nguoiGui.maGiangVien,
+                            createdAt: new Date(data.createdAt),
+                            read: data.trangThai
+                        });
+                    })
+                })
+        }
+
     }
 }

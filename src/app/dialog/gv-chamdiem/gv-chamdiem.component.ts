@@ -108,10 +108,21 @@ export class GvChamdiemComponent implements OnInit {
         var data = {
             bangDiem: this.employeeForm.value.tableRows,
             sinhVien: this.editData.sinhVien,
-            tenTieuChi: this.vaitro,
+            tenPhieu: this.vaitro,
             maDeTai: this.editData.maDeTai,
             maGiangVien: this.userAuthService.getUserInfo().maGiangVien
         }
+        this.quanlyService.chamDiem(data).subscribe({
+            next: (res) => {
+                console.log(res)
+                this.dialogRef.close();
+                new NotificationsComponent().showNotification('success', 'Chấm Điểm Sinh Viên Thành Công');
+            },
+                error: (err) => {
+                console.log(err)
+                new NotificationsComponent().showNotification('danger', 'Không Chấm Điểm Sinh Viên ');
+            }
+        })
         this.dialogRef.close();
         console.log("BANG DIEM NGHE:", data);
         // this.quanlyService.chamDiem(data)
