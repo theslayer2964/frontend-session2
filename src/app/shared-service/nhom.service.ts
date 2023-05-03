@@ -63,9 +63,16 @@ export class NhomService {
     }
 
     getDsNhomTrongHocKy(): any{
-
+        let headers = this.httpHeadersJWT;
+        headers = headers.set('Content-Type', 'application/json; charset=urtf8');
+        headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
         return this.httpClient.get<any>(this.urlQuanLy + "xuat-ds-nhom" , {
-            headers: this.httpHeadersJWT,
-            responseType: 'arraybuffer' as 'json'});
+            headers});
+    }
+
+    dangKyNhomCoSan(data: any) {
+        return this.httpClient.post<any>(this.url + "dang-ky-co-san", data, {headers: this.httpHeadersJWT}).pipe(
+            tap(receiveNhom => receiveNhom),
+            catchError(err => of([])));
     }
 }

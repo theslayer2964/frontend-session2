@@ -127,11 +127,10 @@ export class QuanlyNhomComponent implements OnInit {
     this.getDsNhom();
   }
 
-  blob: Blob;
   downloadFileSV() {
     this.nhomService.getDsNhomTrongHocKy().subscribe(response => {
       console.log(response)
-      let blob = new Blob([response], { type: 'application/vnd.ms-excel' });
+      let blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;' });
       var downloadURL = URL.createObjectURL(blob);
       window.open(downloadURL);
     });

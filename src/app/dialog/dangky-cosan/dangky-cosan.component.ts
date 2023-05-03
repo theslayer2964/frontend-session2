@@ -26,32 +26,28 @@ export class DangkyCosanComponent implements OnInit {
   dangKyNhomForm!: FormGroup;
   ngOnInit(): void {
     this.dangKyNhomForm = this.formBuilder.group({
-      matKhau: ['', Validators.required],
+      tinNhan: ['', Validators.required],
     })
   }
 
   tempUser: any;
   nhom: any;
   dangKyNhomHienTai() {
-
+    this.data.dsMaSinhVien = [];
     this.data.dsMaSinhVien.push(this.userAuthService.getUserInfo().maSinhVien);
     this.data.vaiTro = this.userAuthService.getRoles()[0].roleName
-    this.data.password = this.dangKyNhomForm.get('matKhau').value
+    this.data.password = this.dangKyNhomForm.get('tinNhan').value
     this.data.maNhom = this.data.nhom.maNhom
     console.log( this.data)
-    this.nhomService.dangKyNhom(this.data)
+    this.nhomService.dangKyNhomCoSan(this.data)
         .subscribe({
           next: (res) => {
-            new NotificationsComponent().showNotification('success', 'Thêm nhóm thành công');
-            this.tempUser = this.userAuthService.getUserInfo();
-            this.tempUser.nhom = res;
-            this.userAuthService.setUserInfo(this.tempUser);
-            this.nhom = this.userAuthService.getUserInfo().nhom;
+            new NotificationsComponent().showNotification('success', 'Gửi lời xin tham gia nhóm thành công');
             this.dangKyNhomForm.reset();
             this.dialogRef.close('save');
           },
           error: () => {
-            new NotificationsComponent().showNotification('danger', 'Không thể đăng ký nhóm');
+            new NotificationsComponent().showNotification('danger', 'Không gửi lời xin tham gia nhóm');
           }
         })
   }
