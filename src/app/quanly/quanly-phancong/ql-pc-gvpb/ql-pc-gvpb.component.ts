@@ -54,11 +54,11 @@ export class QlPcGvpbComponent implements OnInit {
     }
 
     private getDSNhomDeTaiPhanCOngPhanBien(){
-        this.nhomService.getDSNhomDePhanCongGVPhanBien({maHocKy: this.hocKyHienTai, soHocKy: this.soHocKy})
+        // this.nhomService.getDSNhomDePhanCongGVPhanBien({maHocKy: this.hocKyHienTai, soHocKy: this.soHocKy})
         this.nhomService.getDSNhomDePhanCongGVPhanBien({
             maHocKy: this.hocKyHienTai,
             soHocKy: this.soHocKy,
-            maGiangVien: 'HD'
+            vaiTro: 'PB'
         })
             .subscribe(res => {
                 this.dataSource = new MatTableDataSource(this.mappingData(res));
