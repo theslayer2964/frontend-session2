@@ -12,7 +12,7 @@
   margin: 5px;
 }
 table {
-  width: 110%;
+  width: 150%;
 }
 
 .mat-mdc-form-field {
@@ -20,7 +20,7 @@ table {
   width: 100%;
 }
 .container {
-  width: 1200px;
+  width: 1500px;
   margin-bottom: 10px;
   padding-right: 0px;
   padding-left: 0px;
@@ -34,12 +34,3 @@ th{
 tr.mat-row:nth-child(even){
   background-color: #c6e0f3;
 }
-
-/*.example-button {*/
-/*  margin-top: 16px;*/
-/*}*/
-
-/*.example-tooltip-uppercase {*/
-/*  text-transform: uppercase;*/
-/*}*/
-
