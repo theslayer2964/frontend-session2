@@ -69,9 +69,10 @@ export class QlTkbChianhomComponent implements OnInit {
         this.showBangData = $event.value
         if (this.showBangData == 0) {
             this.getDSLichTheoHK(this.hocKyHienTai, "PB");
-            this.getDSNhomDeTaiPhanCOngPhanBien();
+            this.getDSNhomDeTaiPhanCOngPhanBien("PB");
         } else if (this.showBangData == 1) {
             this.getDSLichTheoHK(this.hocKyHienTai, "HD");
+            this.getDSNhomDeTaiPhanCOngPhanBien("HD");
         }
     }
 
@@ -128,11 +129,11 @@ export class QlTkbChianhomComponent implements OnInit {
 
     dsNhomDePhanCong: any;
 
-    private getDSNhomDeTaiPhanCOngPhanBien() {
+    private getDSNhomDeTaiPhanCOngPhanBien(loaiLich: string) {
         this.nhomService.getDSNhomDePhanCongGVPhanBien({
             maHocKy: this.hocKyHienTai,
             soHocKy: this.soHocKy,
-            maGiangVien: 'HD'
+            vaiTro: loaiLich
         })
             .subscribe(res => {
                 this.dsNhomDePhanCong = res;
