@@ -9,11 +9,14 @@
                          style="display: flex;justify-content: space-between;background-color: #4da1e8">
                         <h4 class="card-title"
                             style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH GIẢNG VIÊN</h4>
-                        <button mat-raised-button color="warn" (click)="openDialog()" style="height: 40px">Thêm danh sách giảng viên</button>
-                        <button mat-raised-button color="warn" (click)="openExcel()" style="height: 40px">
-                            <mat-icon> vertical_align_bottom</mat-icon>
-                        </button>
-                        <button mat-raised-button color="warn" (click)="downloadFileSV()" style="height: 40px">Xuất file mẫu</button>
+                        <mat-form-field>
+                            <mat-label>Tùy chỉnh</mat-label>
+                            <mat-select>
+                                <mat-option (click)="openDialog()">Thêm danh sách giảng viên</mat-option>
+                                <mat-option (click)="openExcel()">Thêm danh sách bằng Excel</mat-option>
+                                <mat-option (click)="downloadFileSV()">Xuất file mẫu</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
                     <hr>
 

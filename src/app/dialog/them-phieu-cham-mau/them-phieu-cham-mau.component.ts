@@ -83,8 +83,7 @@ export class ThemPhieuChamMauComponent implements OnInit {
     private getAllTieuChiChamDiem() {
         this.tieuChiChamDiem.layHetTieuChi().subscribe(res => {
                 this.dsTieuChi = res;
-                this.toppingList = this.dsTieuChi
-                console.log("LAY HET TIEU CHI:", this.dsTieuChi );
+                console.log("LAY HET TIEU CHI:", this.dsTieuChi);
                 this.destroy$.next(res);
             }
         )
@@ -102,15 +101,7 @@ export class ThemPhieuChamMauComponent implements OnInit {
         })
     }
 
-    toppings = new FormControl('');
-    toppingList: any[] = this.dsTieuChi
     dsMaTieuChi = [];
-
-    onDropdownList($event: MatSelectChange) {
-        this.dsMaTieuChi = $event.value;
-        console.log("DS GUI VE:", this.dsMaTieuChi);
-
-    }
 
     giangVien: any;
 
@@ -148,24 +139,47 @@ export class ThemPhieuChamMauComponent implements OnInit {
 
     onSaveForm() {
         const formValue = this.sinhVienForm.value;
-        console.log("THEM DE TAI:", formValue);
+        console.log("THEM DE TAI:", formValue.tableRows);
         var tongDiem = 0;
         formValue.tableRows.filter(tieuchi => {
-            if(tieuchi.ischecked){
+            if (tieuchi.ischecked) {
                 tongDiem += tieuchi.diemToiDa;
+                this.dsMaTieuChi.push(tieuchi.maChuanDauRa)
             }
         })
-        if(tongDiem!=10){
-            new NotificationsComponent().showNotification("warning","Tổng điểm tất cả các tiêu chí phải là 10đ");
+        if (tongDiem != 10) {
+            new NotificationsComponent().showNotification("warning", "Tổng điểm tất cả các tiêu chí phải là 10đ");
             return;
-        }
-        else{
-            new NotificationsComponent().showNotification("success","Xử lý típ đi.....");
+        } else {
+            if (this.sinhVienForm.valid && this.giangVien != null) {
+                this.tieuChiChamDiem.themPhieuChamMau({
+                    tenPhieuCham: this.sinhVienForm.get('tenPhieuCham').value,
+                    tieuChiChamDiems: this.dsMaTieuChi,
+                    vaiTroDung: this.giangVien,
+                    maHocKy: this.hocKy.maHocKy
+                }).subscribe({
+                    next: (res) => {
+                        this.sinhVienForm.reset();
+                        this.dialogRef.close('save');
+                        console.log("GV - THEm DETAI:", res);
+                        new NotificationsComponent().showNotification('success', 'Thêm phiếu thành công');
+                    },
+                    error: () => {
+                        new NotificationsComponent().showNotification('danger', 'Không thể thêm phiếu');
+                    }
+                })
+            } else {
+                new NotificationsComponent().showNotification("danger", "Điền Đủ thông tin.....");
+            }
+
 
         }
     }
 
-    setValue(res: any) {
+    setValue(res
+                 :
+                 any
+    ) {
         var data = {
             tableRows: res
         }

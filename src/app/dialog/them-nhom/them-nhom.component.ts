@@ -48,7 +48,6 @@ export class ThemNhomComponent implements OnInit {
         this.formNhom = this.formBuilder.group({
             maSoSv1: ['', Validators.required],
             maSoSv2: [''],
-            password: ['', Validators.required],
 
         })
         console.log(this.editData)
@@ -126,7 +125,6 @@ export class ThemNhomComponent implements OnInit {
                 this.nhomService.dangKyNhom({
                     dsMaSinhVien: this.dsMaSinhVien,
                     maDeTai: this.maDeTaiHienTai,
-                    password: this.matKhau,
                     vaiTro: this.userAuthService.getRoles()[0].roleName
                 })
                     .subscribe({

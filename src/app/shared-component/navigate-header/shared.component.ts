@@ -62,16 +62,14 @@ export class SharedComponent implements OnInit {
     }
 
     hidden = false;
-    listData: any = [
-        {tinnhan:"Yeu cau ket ban", id:1, read:true, createdAt:"20/1/2022", sender:"19473331", reciver:""},
-        {tinnhan:"Huy ket ban", id:2,read:false, createdAt:"20/1/2022", sender:"19473331"}
-    ];
+    listData: any = [];
 
     showThongBao(item: any) {
         this.dialog.open(ThongbaoComponent, {
             data:item,
             width:"850px"
         })
+        this.tinNhanService
         //     .afterClosed().subscribe(val => {
         //     this.router.
         // })
@@ -82,24 +80,38 @@ export class SharedComponent implements OnInit {
         let maNguoiDung = "";
         if (roleName == 'ROLE_GIANGVIEN' ||  roleName == 'ROLE_QUANLY') {
             maNguoiDung = this.userAuthService.getUserInfo().maGiangVien
-        } else {
-            maNguoiDung = this.userAuthService.getUserInfo().maSinhVien
-        }
-        if (maNguoiDung != "") {
             this.tinNhanService.layTinNhan(maNguoiDung)
                 .subscribe(res => {
                     console.log("TIN NHẮN:",res);
                     res.forEach(data => {
                         this.listData.push({
-                            tinnhan: data.noiDung,
+                            tinnhan: "Có Đề Tài bạn cần sửa",
                             id: data.id,
                             sender: data.nguoiGui.maGiangVien,
                             createdAt: new Date(data.createdAt),
-                            read: data.trangThai
+                            read: data.trangThai,
+                            info: data
+                        });
+                    })
+                })
+        } else {
+            maNguoiDung = this.userAuthService.getUserInfo().maSinhVien
+            this.tinNhanService.layTinNhan(maNguoiDung)
+                .subscribe(res => {
+                    console.log("TIN NHẮN:",res);
+                    res.forEach(data => {
+                        this.listData.push({
+                            tinnhan: "Có người muốn tham gia nhóm của bạn",
+                            id: data.id,
+                            sender: data.nguoiGui.maSinhVien,
+                            createdAt: new Date(data.createdAt),
+                            read: data.trangThai,
+                            info: data
                         });
                     })
                 })
         }
+
 
     }
 }
