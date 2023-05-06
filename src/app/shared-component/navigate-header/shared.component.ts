@@ -15,6 +15,7 @@ import {TinnhanService} from "../../shared-service/tinnnhan.service";
 })
 export class SharedComponent implements OnInit {
     public defaultImage: any = './assets/image/logo_iuh.png'
+    thongbaoMoi: number;
 
     constructor(private userAuthService: UserAuthService, private router: Router, public userService: UserService,
                 public userDataService: UserDataService,
@@ -125,7 +126,7 @@ export class SharedComponent implements OnInit {
             maNguoiDung = this.userAuthService.getUserInfo().maGiangVien
             this.tinNhanService.layTinNhanChuaDoc(maNguoiDung)
                 .subscribe(res => {
-                    this.soLuongTinNhanChuaDoc = res.length
+                    this.thongbaoMoi = res.length
                 })
         } else {
             maNguoiDung = this.userAuthService.getUserInfo().maSinhVien
@@ -133,7 +134,7 @@ export class SharedComponent implements OnInit {
                 .subscribe(res => {
                     console.log("TIN NHẮN:",res);
                     if (res.length > 0) {
-                        this.soLuongTinNhanChuaDoc = res.length
+                        this.thongbaoMoi = res.length
                     }
 
                 })

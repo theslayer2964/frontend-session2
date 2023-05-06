@@ -7,7 +7,7 @@ import {catchError, of, tap} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class QuanlyService {
+export class PhieuChamService {
   private urlPhieuCham = "http://localhost:8080/api/phieu-cham/";
 
   token: string = this.userAuthService.getToken();

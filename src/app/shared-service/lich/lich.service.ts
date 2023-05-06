@@ -69,6 +69,14 @@ export class LichService {
                 catchError(err => of([])));
     }
 
+    tachNgayHD() {
+        return this.httpClient.get(this.url + "tach-ke-hoach-hd", {headers: this.httpHeadersJWT})
+            .pipe(tap(res => {
+                    res = res;
+                }),
+                catchError(err => of([])));
+    }
+
     tachPhong(ngay: any, tiet: any) {
         return this.httpClient.post(this.url + "lay-phong",{
             ngay,tiet
@@ -88,6 +96,14 @@ export class LichService {
     }
     xepLichGiangVienPB(data: any){
         return this.httpClient.post(this.url + "tao-kehoach-giangvien-pb", data, {headers: this.httpHeadersJWT})
+            .pipe(tap(res => {
+                    res = res;
+                }),
+                catchError(err => of([])));
+    }
+
+    xepLichGiangVienHD(data: any){
+        return this.httpClient.post(this.url + "tao-kehoach-giangvien-hd", data, {headers: this.httpHeadersJWT})
             .pipe(tap(res => {
                     res = res;
                 }),

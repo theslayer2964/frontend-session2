@@ -5,7 +5,7 @@ import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GvDialogchamdiemService} from "../../transfer-data-service/gv-dialogchamdiem.service";
 import {TieuchichamdiemService} from "../../shared-service/tieuchichamdiem.service";
 import {Subject} from "rxjs";
-import {QuanlyService} from "../../quanly/quanly-service/quanly.service";
+import {PhieuChamService} from "../../quanly/quanly-service/phieu-cham.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 
@@ -22,7 +22,7 @@ export class GvChamdiemComponent implements OnInit {
                 public tieuchichamdiemService: TieuchichamdiemService,
                 public dialogRef: MatDialogRef<GvChamdiemComponent>,
                 @Inject(MAT_DIALOG_DATA) public editData: any,
-                public quanlyService: QuanlyService,
+                public phieuChamService: PhieuChamService,
                 public userAuthService: UserAuthService) {
         this.employeeForm = this.fb.group({
             tableRows: this.fb.array([], [Validators.required])
@@ -112,7 +112,7 @@ export class GvChamdiemComponent implements OnInit {
             maDeTai: this.editData.maDeTai,
             maGiangVien: this.userAuthService.getUserInfo().maGiangVien
         }
-        this.quanlyService.chamDiem(data).subscribe({
+        this.phieuChamService.chamDiem(data).subscribe({
             next: (res) => {
                 console.log(res)
                 this.dialogRef.close();
@@ -125,6 +125,5 @@ export class GvChamdiemComponent implements OnInit {
         })
         this.dialogRef.close();
         console.log("BANG DIEM NGHE:", data);
-        // this.quanlyService.chamDiem(data)
     }
 }

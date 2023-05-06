@@ -8,6 +8,8 @@ import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LichService} from "../../shared-service/lich/lich.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {NhomService} from "../../shared-service/nhom.service";
+import {QuanlyLichService} from "../../shared-service/quanly-lich.service";
+import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 
 @Component({
     selector: 'app-ql-tkb-chianhom',
@@ -20,7 +22,8 @@ export class QlTkbChianhomComponent implements OnInit {
 
     constructor(public dialog: MatDialog, private hockyService: HockyService,
                 public xepLichNhomTransferService: XepNhomLichTransferService,
-                private fb: FormBuilder, private lichService: LichService, private nhomService: NhomService) {
+                private fb: FormBuilder, private lichService: LichService, private nhomService: NhomService,
+                private quanLyService: QuanlyLichService) {
     }
 
     ngOnInit(): void {
@@ -62,15 +65,17 @@ export class QlTkbChianhomComponent implements OnInit {
     }
 
     showBangData: any;
-
+    viTriPhanCong: any;
     changeLoaiLich($event: MatSelectChange) {
         this.showBangData = $event.value
         if (this.showBangData == 0) {
             this.getDSLichTheoHK(this.hocKyHienTai, "PB");
             this.getDSNhomDeTaiPhanCOngPhanBien("PB");
+            this.viTriPhanCong = "phan bien"
         } else if (this.showBangData == 1) {
             this.getDSLichTheoHK(this.hocKyHienTai, "HD");
             this.getDSNhomDeTaiPhanCOngPhanBien("HD");
+            this.viTriPhanCong = "hoi dong";
         }
     }
 
@@ -114,8 +119,33 @@ export class QlTkbChianhomComponent implements OnInit {
     }
 
     onSaveForm() {
-        const formValue = this.chiaNhomPB.value;
-        console.log("ON SAVE:", formValue);
+        const formValue = this.chiaNhomPB.value.tableRows;
+        console.log("ON SAVE PB 1:", formValue);
+        // console.log("ON SAVE PB 1 - DS GV:", this.dsMaGVPB);
+        let dataList = [];
+        for (let i = 0; i <formValue.length; i++ ){
+            if(formValue[i].nhom.length > 0){
+                dataList.push({
+                    viTriPhanCong: this.viTriPhanCong,
+                    chamCong: false,
+                    dsMaGiangVienPB: [this.dsMaGVPB[i].dsGiangVienPB[0].maGiangVien,this.dsMaGVPB[i].dsGiangVienPB[1].maGiangVien],
+                    ngay: new Date(formValue[i].ngay),
+                    tiet: formValue[i].tiet,
+                    phong: formValue[i].phong,
+                    maNhom: formValue[i].nhom,
+                    maHocKy: this.hocKyHienTai
+                })
+            }
+        }
+        console.log("ON SAVE PB 2:", dataList);
+        this.quanLyService.themDSPhanCong(
+            dataList
+        ).subscribe(res => {
+            new NotificationsComponent().showNotification('success', 'Phân công phản biên thành công');
+        }, error => {
+            console.log(error)
+            new NotificationsComponent().showNotification('danger', "Không cho phép giang viên hướng dẫn chấm phản biện");
+        })
     }
 
     setValue(res) {
@@ -182,6 +212,21 @@ export class QlTkbChianhomComponent implements OnInit {
     onSaveFormHD() {
         const formValue = this.chiaNhomHD.value;
         console.log("ON SAVE HD:", formValue);
+        let dataList;
+        formValue.forEach(lich => {
+            dataList.push({
+                viTriPhanCong: this.viTriPhanCong,
+                chamCong: false,
+                dsMaGiangVienPB: [this.dsMaGVPB.dsGiangVienPB[0].maGiangVien,this.dsMaGVPB.dsGiangVienPB[1].maGiangVien],
+                ngay: formValue.ngay,
+                tiet: formValue.tiet,
+                phong: formValue.phong,
+                maHocKy: this.hocKyHienTai
+            })
+        })
+        this.quanLyService.themDSPhanCong({
+
+        })
     }
 
 

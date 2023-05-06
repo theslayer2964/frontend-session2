@@ -64,7 +64,6 @@ export class GiangvienChamdiemComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
 
   editProduct(row) {
-    console.log("EDIT NE");
     this.dialog.open(GvChamdiemComponent, {
       data: row,
       width:"1150px"
