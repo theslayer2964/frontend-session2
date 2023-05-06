@@ -17,9 +17,6 @@ export class QuanlyLichService {
   constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) { }
 
   themDSPhanCong(data: any): Observable<any[]> {
-    return this.httpClient.post<any>(this.url + "them-ds-phan-cong", data, {headers: this.httpHeadersJWT})
-        .pipe(
-            tap(recieveDeTai => recieveDeTai),
-            catchError(err => of([])));
+    return this.httpClient.post<any>(this.url + "them-ds-phan-cong", data, {headers: this.httpHeadersJWT});
   }
 }

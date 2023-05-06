@@ -34,7 +34,7 @@ export class SinhvienLichComponent implements OnInit {
         if (role.roleName == "ROLE_GIANGVIEN") {
             let maGV = this.userAuthService.getUserInfo().maGiangVien;
             this.destroy$.subscribe(hocky => {
-                this.lichService.getLichTheoHocKyVaMaGV(hocky, maGV, null).subscribe(res => {
+                    this.lichService.getLichTheoHocKyVaMaGV(hocky, maGV, "ROLE_GIANGVIEN").subscribe(res => {
                     let a = [];
                     res.forEach(data => {
                         if (data.dsNgayThucHienKhoaLuan.length <= 0) {
@@ -46,17 +46,18 @@ export class SinhvienLichComponent implements OnInit {
                                 allDay:true,
                                 backgroundColor:"green"
                             })
-                        } else {
-                            a.push({
-                                id: data.id,
-                                start: new Date(data.thoiGianBatDau).toISOString().replace(/T.*$/, ''),
-                                end: new Date(data.thoiGianKetThuc).toISOString().replace(/T.*$/, ''),
-                                title: data.tenKeHoach,
-                                allDay:true,
-                                backgroundColor:"green",
-                                daysOfWeek: data.dsNgayThucHienKhoaLuan
-                            })
                         }
+                        // else {
+                        //     a.push({
+                        //         id: data.id,
+                        //         start: new Date(data.thoiGianBatDau).toISOString().replace(/T.*$/, ''),
+                        //         end: new Date(data.thoiGianKetThuc).toISOString().replace(/T.*$/, ''),
+                        //         title: data.tenKeHoach,
+                        //         allDay:true,
+                        //         backgroundColor:"green",
+                        //         daysOfWeek: data.dsNgayThucHienKhoaLuan
+                        //     })
+                        // }
 
                     })
                     this.data$ = a;
@@ -68,7 +69,7 @@ export class SinhvienLichComponent implements OnInit {
             console.log("TUI NE");
             let maSV = this.userAuthService.getUserInfo().maSinhVien;
             this.destroy$.subscribe(hocky => {
-                this.lichService.getLichTheoHocKyVaMaGV(hocky, maSV, null).subscribe(res => {
+                this.lichService.getLichTheoHocKyVaMaGV(hocky, maSV, "ROLE_SINHVIEN").subscribe(res => {
                     let a = [];
                     res.forEach(data => {
                         if (data.dsNgayThucHienKhoaLuan.length <= 0) {
@@ -80,17 +81,18 @@ export class SinhvienLichComponent implements OnInit {
                                 allDay:true,
                                 backgroundColor:"green"
                             })
-                        } else {
-                            a.push({
-                                id: data.id,
-                                start: new Date(data.thoiGianBatDau).toISOString().replace(/T.*$/, ''),
-                                end: new Date(data.thoiGianKetThuc).toISOString().replace(/T.*$/, ''),
-                                title: data.tenKeHoach,
-                                allDay:true,
-                                backgroundColor:"green",
-                                daysOfWeek: data.dsNgayThucHienKhoaLuan
-                            })
                         }
+                        // else {
+                        //     a.push({
+                        //         id: data.id,
+                        //         start: new Date(data.thoiGianBatDau).toISOString().replace(/T.*$/, ''),
+                        //         end: new Date(data.thoiGianKetThuc).toISOString().replace(/T.*$/, ''),
+                        //         title: data.tenKeHoach,
+                        //         allDay:true,
+                        //         backgroundColor:"green",
+                        //         daysOfWeek: data.dsNgayThucHienKhoaLuan
+                        //     })
+                        // }
 
                     })
                     // this.data$ = a;
