@@ -8,6 +8,7 @@ import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LichService} from "../../shared-service/lich/lich.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {NhomService} from "../../shared-service/nhom.service";
+import {QuanlyLichService} from "../../shared-service/quanly-lich.service";
 
 @Component({
     selector: 'app-ql-tkb-chianhom',
@@ -20,7 +21,8 @@ export class QlTkbChianhomComponent implements OnInit {
 
     constructor(public dialog: MatDialog, private hockyService: HockyService,
                 public xepLichNhomTransferService: XepNhomLichTransferService,
-                private fb: FormBuilder, private lichService: LichService, private nhomService: NhomService) {
+                private fb: FormBuilder, private lichService: LichService, private nhomService: NhomService,
+                private quanLyService: QuanlyLichService) {
     }
 
     ngOnInit(): void {

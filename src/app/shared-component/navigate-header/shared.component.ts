@@ -15,6 +15,7 @@ import {TinnhanService} from "../../shared-service/tinnnhan.service";
 })
 export class SharedComponent implements OnInit {
     public defaultImage: any = './assets/image/logo_iuh.png'
+    thongbaoMoi: number;
 
     constructor(private userAuthService: UserAuthService, private router: Router, public userService: UserService,
                 public userDataService: UserDataService,
@@ -36,6 +37,7 @@ export class SharedComponent implements OnInit {
             }
         })
         this.loadThongBao();
+        this.thongbaoMoi = 5;
     }
 
     public isLoggedIn() {
