@@ -64,13 +64,13 @@ export class QlGiangvienComponent implements OnInit {
     }
 
     private getDSLichTheoHKPB(maHocKy: any, loaiLich: any) {
-        this.lichService.layTKBcuaGV(maHocKy, loaiLich).subscribe((res:any) => {
+        this.lichService.layTKBPhanBien(maHocKy, loaiLich).subscribe((res:any) => {
             this.dataSourcePB = new MatTableDataSource(res);
             // this.dataSourcePB.paginator = this.paginator;
             // this.dataSourcePB.sort = this.sort;
         })
     }private getDSLichTheoHKHD(maHocKy: any, loaiLich: any) {
-        this.lichService.layTKBcuaGV(maHocKy, loaiLich).subscribe((res:any) => {
+        this.lichService.layTKBPhanBien(maHocKy, loaiLich).subscribe((res:any) => {
             this.dataSourceHD = new MatTableDataSource(res);
             // this.dataSourceHD.paginator = this.paginator;
             // this.dataSourceHD.sort = this.sort;

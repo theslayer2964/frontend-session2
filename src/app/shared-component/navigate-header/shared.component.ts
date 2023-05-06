@@ -30,14 +30,14 @@ export class SharedComponent implements OnInit {
             this.userInfo = this.userAuthService.getUserInfo();
             console.log("INFO: ", this.userInfo);
         }
-        this.userDataService.userBehaviorSubject.subscribe(data => {
-            if (data) {
-                console.log("LAN 1")
-                this.userInfo = data;
-            }
-        })
-        this.loadThongBao();
-        this.thongbaoMoi = 5;
+            this.userDataService.userBehaviorSubject.subscribe(data => {
+                if (data) {
+                    console.log("LAN 1")
+                    this.userInfo = data;
+                }
+                this.loadThongBao();
+                this.thongbaoMoi = 1;
+            })
     }
 
     public isLoggedIn() {

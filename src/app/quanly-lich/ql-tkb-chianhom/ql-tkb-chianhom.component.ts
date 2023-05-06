@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HocKy} from "../../shared-service/HocKy.models";
 import {MatSelectChange} from "@angular/material/select";
 import {HockyService} from "../../shared-service/hocky.service";
@@ -10,6 +10,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {NhomService} from "../../shared-service/nhom.service";
 import {QuanlyLichService} from "../../shared-service/quanly-lich.service";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
+import {map, Subject, take, takeUntil} from "rxjs";
 
 @Component({
     selector: 'app-ql-tkb-chianhom',
@@ -31,18 +32,19 @@ export class QlTkbChianhomComponent implements OnInit {
         this.chiaNhomPB = this.fb.group({
             tableRows: this.fb.array([], [Validators.required])
         });
-        this.addRow();
-        this.addRow();
-        this.addRow();
-        this.addRow();
-        // this.setValue(res);
+        this.trandata.pipe(take(1)).subscribe((res:any) => {
+            res.forEach(() => this.addRow());
+        })
         this.chiaNhomHD = this.fb.group({
             tableRowsHD: this.fb.array([], [Validators.required])
         });
-        this.addRowHD();
-        this.addRowHD();
-        this.addRowHD();
-        this.addRowHD();
+        this.trandataHD.pipe(take(1)).subscribe((res:any) => {
+            res.forEach(() => this.addRowHD());
+        })
+        // this.addRowHD();
+        // this.addRowHD();
+        // this.addRowHD();
+        // this.addRowHD();
     }
 
     dsHocKy: HocKy[];
@@ -71,23 +73,38 @@ export class QlTkbChianhomComponent implements OnInit {
         if (this.showBangData == 0) {
             this.getDSLichTheoHK(this.hocKyHienTai, "PB");
             this.getDSNhomDeTaiPhanCOngPhanBien("PB");
-            this.viTriPhanCong = "phan bien"
+            this.viTriPhanCong = "phan bien";
         } else if (this.showBangData == 1) {
-            this.getDSLichTheoHK(this.hocKyHienTai, "HD");
+            this.getDSLichTheoHKHD(this.hocKyHienTai, "HD");
             this.getDSNhomDeTaiPhanCOngPhanBien("HD");
             this.viTriPhanCong = "hoi dong";
         }
     }
 
-    dsMaGVPB: any = [];
-
+    dsTKBPhanBien: any = [];
+    // destroyPB$ = new Subject<void>();
+    trandata = new Subject();
     private getDSLichTheoHK(maHocKy: any, loaiLich: any) {
-        this.lichService.layTKBcuaGV(maHocKy, loaiLich).subscribe((res: []) => {
-            res.forEach(data => {
-                this.dsMaGVPB.push(data)
-            })
-            this.setValue(res);
-
+        this.lichService.layTKBPhanBien(maHocKy, loaiLich).subscribe((res: []) => {
+            this.dsTKBPhanBien = res;
+            this.trandata.next(res);
+            if(loaiLich == "PB"){
+            this.setValuePB(res); //////////////
+            }
+            // if(loaiLich == "HD"){
+            //     this.setValueHD(res);
+            // }
+        })
+    }
+    trandataHD = new Subject();
+    dsTKBPhanBienHD: any = [];
+    private getDSLichTheoHKHD(maHocKy: any, loaiLich: any) {
+        this.lichService.layTKBPhanBien(maHocKy, loaiLich).subscribe((res: []) => {
+            this.dsTKBPhanBienHD = res;
+            this.trandataHD.next(res);
+            if(loaiLich == "HD"){
+                this.setValueHD(res);
+            }
         })
     }
 
@@ -128,7 +145,7 @@ export class QlTkbChianhomComponent implements OnInit {
                 dataList.push({
                     viTriPhanCong: this.viTriPhanCong,
                     chamCong: false,
-                    dsMaGiangVienPB: [this.dsMaGVPB[i].dsGiangVienPB[0].maGiangVien,this.dsMaGVPB[i].dsGiangVienPB[1].maGiangVien],
+                    dsMaGiangVienPB: [this.dsTKBPhanBien[i].dsGiangVienPB[0].maGiangVien,this.dsTKBPhanBien[i].dsGiangVienPB[1].maGiangVien],
                     ngay: new Date(formValue[i].ngay),
                     tiet: formValue[i].tiet,
                     phong: formValue[i].phong,
@@ -148,11 +165,18 @@ export class QlTkbChianhomComponent implements OnInit {
         })
     }
 
-    setValue(res) {
+    setValuePB(res) {
         var data = {
             tableRows: res
         }
         this.chiaNhomPB.patchValue(data);
+    }
+    setValueHD(res) {
+        console.log("HOI DONG:", res);
+        var data = {
+            tableRowsHD: res
+        }
+        this.chiaNhomHD.patchValue(data);
     }
 
     dsNhomDePhanCong: any;
@@ -191,18 +215,7 @@ export class QlTkbChianhomComponent implements OnInit {
         control.push(this.createFormGroupHD());
     }
 
-    onStatusChangeHD(event: any, index: number) {
-        debugger
-        if (event.target.value == 'deactive') {
-            const control = this.chiaNhomHD.get('tableRowsHD') as FormArray;
-            control.controls[index].get('state')?.disable();
-            control.controls[index].get('city')?.disable();
-        } else {
-            const control = this.chiaNhomHD.get('tableRowsHD') as FormArray;
-            control.controls[index].get('state')?.enable();
-            control.controls[index].get('city')?.enable();
-        }
-    }
+
 
     removeEmployeeHD(index: number) {
         const control = this.chiaNhomHD.get('tableRowsHD') as FormArray;
@@ -210,22 +223,32 @@ export class QlTkbChianhomComponent implements OnInit {
     }
 
     onSaveFormHD() {
-        const formValue = this.chiaNhomHD.value;
-        console.log("ON SAVE HD:", formValue);
-        let dataList;
-        formValue.forEach(lich => {
-            dataList.push({
-                viTriPhanCong: this.viTriPhanCong,
-                chamCong: false,
-                dsMaGiangVienPB: [this.dsMaGVPB.dsGiangVienPB[0].maGiangVien,this.dsMaGVPB.dsGiangVienPB[1].maGiangVien],
-                ngay: formValue.ngay,
-                tiet: formValue.tiet,
-                phong: formValue.phong,
-                maHocKy: this.hocKyHienTai
-            })
-        })
-        this.quanLyService.themDSPhanCong({
-
+        const formValue = this.chiaNhomHD.value.tableRowsHD;
+        console.log("ON SAVE HD 1:", formValue);
+        let dataList = [];
+        for (let i = 0; i <formValue.length; i++ ){
+            if(formValue[i].nhom.length > 0){
+                dataList.push({
+                    viTriPhanCong: this.viTriPhanCong,
+                    chamCong: false,
+                    dsMaGiangVienPB: [this.dsTKBPhanBienHD[i].dsGiangVienPB[0].maGiangVien,this.dsTKBPhanBienHD[i].dsGiangVienPB[1].maGiangVien,
+                        this.dsTKBPhanBienHD[i].dsGiangVienPB[2].maGiangVien],
+                    ngay: new Date(formValue[i].ngay),
+                    tiet: formValue[i].tiet,
+                    phong: formValue[i].phong,
+                    maNhom: formValue[i].nhom,
+                    maHocKy: this.hocKyHienTai
+                })
+            }
+        }
+        console.log("ON SAVE HD 2:", dataList);
+        this.quanLyService.themDSPhanCong(
+            dataList
+        ).subscribe(res => {
+            new NotificationsComponent().showNotification('success', 'Phân công hội đồng thành công');
+        }, error => {
+            console.log(error)
+            new NotificationsComponent().showNotification('danger', "Không cho phép giảng viên hướng dẫn chấm hội đồng");
         })
     }
 

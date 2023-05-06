@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
             this.userAuthService.setUserInfo(res.user.user)
             this.userDataService.sendUserData(res.user.user);
             const role = res.user.roles[0].roleName;
-            console.log("LOGIN - 1")
             if (role === "ROLE_GIANGVIEN") {
                 this.router.navigate(['/trangchuGV', this.loginForm.value.tenTaiKhoan])
             } else if (role === "ROLE_SINHVIEN") {
