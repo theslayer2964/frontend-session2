@@ -73,4 +73,12 @@ export class DetaiService {
             catchError(err => of([])));
         ;
     }
+
+    // xuatDSDeTai() {
+    //     let headers = this.httpHeadersJWT;
+    //     headers = headers.set('Content-Type', 'application/json; charset=urtf8');
+    //     headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
+    //     return this.httpClient.get<any>(this.urlQuanLy + "xuat-ds-de-tai" , {
+    //         headers});
+    // }
 }

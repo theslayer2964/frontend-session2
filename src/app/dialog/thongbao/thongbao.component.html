@@ -1,15 +1,26 @@
-<h2 mat-dialog-title>Thông báo</h2>
-<mat-dialog-content class="mat-typography">
-    <h3>Sinh viên:</h3>
-    <table width="100%">
-        <tr>
-            <td><p>Mã nhóm:</p></td>
-<!--            <td><h3><b>{{maNhomL}}</b></h3></td>-->
-        </tr>
-    </table>
-    <h5>Muốn xin tham gia vào nhóm của bạn</h5>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="choPhepThamGiaNhom()">Đồng ý</button>
-</mat-dialog-actions>
+<div *ngIf="editData.info.nguoiGui.maSinhVien != null">
+    <h2 mat-dialog-title>Có Sinh Viên muốn xin tham gia vào nhóm của bạn</h2>
+    <mat-dialog-content class="mat-typography">
+
+        <h4>Tên Sinh viên: {{editData.info.nguoiGui.tenSinhVien}}</h4>
+        <h4>Số Điện Thoại: {{editData.info.nguoiGui.dienThoai}}</h4>
+        <h4>Email: {{editData.info.nguoiGui.email}}</h4>
+        <p>Lời Nhắn: {{editData.info.noiDung}}</p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="choPhepThamGiaNhom()">Đồng ý</button>
+    </mat-dialog-actions>
+</div>
+
+<div *ngIf="editData.info.nguoiGui.maGiangVien != null">
+    <h2 mat-dialog-title>Có Sinh Viên muốn xin tham gia vào nhóm của bạn</h2>
+    <mat-dialog-content class="mat-typography">
+
+        <p>Lời Nhắn: {{editData.info.noiDung}}</p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="choPhepThamGiaNhom()">Đồng ý</button>
+    </mat-dialog-actions>
+</div>

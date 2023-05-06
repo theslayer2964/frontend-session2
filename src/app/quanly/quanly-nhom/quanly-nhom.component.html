@@ -31,8 +31,8 @@
                                    #input>
                         </mat-form-field>
                     </div>
-                    <div class="mat-elevation-z8">
-                        <table mat-table [dataSource]="dataSource" matSort>
+                    <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;overflow: auto;">
+                        <table mat-table [dataSource]="dataSource" matSort >
                             <ng-container matColumnDef="maNhom">
                                 <th mat-header-cell *matHeaderCellDef  >Mã nhóm</th>
                                 <td mat-cell *matCellDef="let row"> {{row.nhom.maNhom}} </td>
