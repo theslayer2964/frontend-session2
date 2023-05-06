@@ -36,6 +36,7 @@ export class SharedComponent implements OnInit {
             }
         })
         this.loadThongBao();
+        this.loadThongBaoChuaDoc();
     }
 
     public isLoggedIn() {
@@ -65,16 +66,20 @@ export class SharedComponent implements OnInit {
     listData: any = [];
 
     showThongBao(item: any) {
-        this.dialog.open(ThongbaoComponent, {
-            data:item,
-            width:"850px"
-        })
-        this.tinNhanService
+
+        item.trangThai = 1;
+        this.tinNhanService.docTinNhan(item).subscribe(res => {
+            this.dialog.open(ThongbaoComponent, {
+                data:item,
+                width:"850px"
+            })
+        });
         //     .afterClosed().subscribe(val => {
         //     this.router.
         // })
     }
 
+    soLuongTinNhanChuaDoc: any;
     loadThongBao() {
         let roleName = this.userAuthService.getRoles()[0].roleName;
         let maNguoiDung = "";
@@ -111,7 +116,27 @@ export class SharedComponent implements OnInit {
                     })
                 })
         }
+    }
 
+    loadThongBaoChuaDoc() {
+        let roleName = this.userAuthService.getRoles()[0].roleName;
+        let maNguoiDung = "";
+        if (roleName == 'ROLE_GIANGVIEN' ||  roleName == 'ROLE_QUANLY') {
+            maNguoiDung = this.userAuthService.getUserInfo().maGiangVien
+            this.tinNhanService.layTinNhanChuaDoc(maNguoiDung)
+                .subscribe(res => {
+                    this.soLuongTinNhanChuaDoc = res.length
+                })
+        } else {
+            maNguoiDung = this.userAuthService.getUserInfo().maSinhVien
+            this.tinNhanService.layTinNhanChuaDoc(maNguoiDung)
+                .subscribe(res => {
+                    console.log("TIN NHẮN:",res);
+                    if (res.length > 0) {
+                        this.soLuongTinNhanChuaDoc = res.length
+                    }
 
+                })
+        }
     }
 }

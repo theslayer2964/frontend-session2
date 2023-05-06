@@ -24,7 +24,14 @@ export class TinnhanService {
   }
 
   docTinNhan(data: any): Observable<any[]> {
-    return this.httpClient.post<any[]>(this.url + "da-doc-tin-nhan", data, {headers: this.httpHeadersJWT})
+    return this.httpClient.put<any[]>(this.url + "da-doc-tin-nhan", data, {headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+  }
+
+  layTinNhanChuaDoc(data: any): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.url + "lay-tin-nhan-chua-doc/" + data, {headers: this.httpHeadersJWT})
         .pipe(
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));
