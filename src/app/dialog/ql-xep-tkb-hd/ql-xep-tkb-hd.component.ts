@@ -28,7 +28,7 @@ export class QlXepTKBHDComponent implements OnInit {
     this.themLichTransfer.hockyBehaviorSubject.subscribe(res => {
       this.mahocKyHienTai = res;
     })
-    this.lichService.tachNgay().subscribe(res => {
+    this.lichService.tachNgayHD().subscribe(res => {
       this.dsNgay = res;
       console.log("DS nGay", this.dsNgay);
     })
@@ -90,7 +90,7 @@ export class QlXepTKBHDComponent implements OnInit {
 
   addTKBPB() {
     console.log("LICH ne:", this.nhomDKGVHD.value);
-    this.lichService.xepLichGiangVienPB(this.nhomDKGVHD.value).subscribe(res => {
+    this.lichService.xepLichGiangVienHD(this.nhomDKGVHD.value).subscribe(res => {
       this.dialogRef.close();
       new NotificationsComponent().showNotification("success","Xếp lịch thành công")
     })
