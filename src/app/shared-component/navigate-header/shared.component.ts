@@ -30,14 +30,14 @@ export class SharedComponent implements OnInit {
             this.userInfo = this.userAuthService.getUserInfo();
             console.log("INFO: ", this.userInfo);
         }
-            this.userDataService.userBehaviorSubject.subscribe(data => {
-                if (data) {
-                    console.log("LAN 1")
-                    this.userInfo = data;
-                }
-                this.loadThongBao();
-                this.thongbaoMoi = 1;
-            })
+        this.userDataService.userBehaviorSubject.subscribe(data => {
+            if (data) {
+                console.log("LAN 1")
+                this.userInfo = data;
+            }
+        })
+        this.loadThongBao();
+        this.loadThongBaoChuaDoc();
     }
 
     public isLoggedIn() {
@@ -67,16 +67,20 @@ export class SharedComponent implements OnInit {
     listData: any = [];
 
     showThongBao(item: any) {
-        this.dialog.open(ThongbaoComponent, {
-            data:item,
-            width:"850px"
-        })
-        this.tinNhanService
+
+        item.trangThai = 1;
+        this.tinNhanService.docTinNhan(item).subscribe(res => {
+            this.dialog.open(ThongbaoComponent, {
+                data:item,
+                width:"850px"
+            })
+        });
         //     .afterClosed().subscribe(val => {
         //     this.router.
         // })
     }
 
+    soLuongTinNhanChuaDoc: any;
     loadThongBao() {
         let roleName = this.userAuthService.getRoles()[0].roleName;
         let maNguoiDung = "";
@@ -113,7 +117,27 @@ export class SharedComponent implements OnInit {
                     })
                 })
         }
+    }
 
+    loadThongBaoChuaDoc() {
+        let roleName = this.userAuthService.getRoles()[0].roleName;
+        let maNguoiDung = "";
+        if (roleName == 'ROLE_GIANGVIEN' ||  roleName == 'ROLE_QUANLY') {
+            maNguoiDung = this.userAuthService.getUserInfo().maGiangVien
+            this.tinNhanService.layTinNhanChuaDoc(maNguoiDung)
+                .subscribe(res => {
+                    this.thongbaoMoi = res.length
+                })
+        } else {
+            maNguoiDung = this.userAuthService.getUserInfo().maSinhVien
+            this.tinNhanService.layTinNhanChuaDoc(maNguoiDung)
+                .subscribe(res => {
+                    console.log("TIN NHẮN:",res);
+                    if (res.length > 0) {
+                        this.thongbaoMoi = res.length
+                    }
 
+                })
+        }
     }
 }
