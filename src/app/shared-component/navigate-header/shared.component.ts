@@ -15,7 +15,7 @@ import {TinnhanService} from "../../shared-service/tinnnhan.service";
 })
 export class SharedComponent implements OnInit {
     public defaultImage: any = './assets/image/logo_iuh.png'
-    thongbaoMoi: number;
+    thongbaoMoi: number = 0;
 
     constructor(private userAuthService: UserAuthService, private router: Router, public userService: UserService,
                 public userDataService: UserDataService,
@@ -79,8 +79,6 @@ export class SharedComponent implements OnInit {
         //     this.router.
         // })
     }
-
-    soLuongTinNhanChuaDoc: any;
     loadThongBao() {
         let roleName = this.userAuthService.getRoles()[0].roleName;
         let maNguoiDung = "";

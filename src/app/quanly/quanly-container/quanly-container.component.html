@@ -7,12 +7,13 @@
                         <div class="card-icon">
                             <i class="fa fa-twitter"></i>
                         </div>
-                        <p class="card-category">Cài đặt</p>
-                        <h3 class="card-title">Thời gian biểu</h3>
+                        <p class="card-category">Lớp học phần</p>
+                        <h3 class="card-title">Lớp học phần</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">update</i> Chi tiết
+                            <i class="material-icons">update</i>
+                            <button (click)="goToQLDetail('lophocphan')" style="border: none;background-color: #fff ">Chi tiết nhóm</button>
                         </div>
                     </div>
                 </div>
@@ -138,6 +139,25 @@
                         <div class="stats">
                             <i class="material-icons">date_range</i>
                             <button (click)="goToQLDetail('phieucham')" style="border: none;background-color: #fff ">Chi tiết</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="fa fa-twitter"></i>
+                        </div>
+                        <p class="card-category">Kết quả học tập</p>
+                        <h3 class="card-title">Kết quả học tập</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i>
+                            <button (click)="goToQLDetail('ketqua-hoctap')" style="border: none;background-color: #fff ">Chi tiết</button>
                         </div>
                     </div>
                 </div>

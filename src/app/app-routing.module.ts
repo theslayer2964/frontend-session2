@@ -15,7 +15,6 @@ import {QuanlyDetaiComponent} from "./quanly/quanly-detai/quanly-detai.component
 import {CaidatContainerComponent} from "./caidat/caidat-container/caidat-container.component";
 import {QuanlyLich2Component} from "./quanly-lich/quanly-lich2/quanly-lich2.component";
 import {QuanlyLichContainerComponent} from "./quanly-lich/quanly-lich-container/quanly-lich-container.component";
-import {ChangepasswordComponent} from "./authentication/changepassword/changepassword.component";
 import {QuanlySinhvienComponent} from "./quanly/quanly-sinhvien/quanly-sinhvien.component";
 import {QuanlyGiangvienComponent} from "./quanly/quanly-giangvien/quanly-giangvien.component";
 import {SinhvienDiemComponent} from "./sinhvien/sinhvien-diem/sinhvien-diem.component";
@@ -23,8 +22,8 @@ import {SinhvienLichComponent} from "./sinhvien/sinhvien-lich/sinhvien-lich.comp
 import {QuanlyTieuchichamComponent} from "./quanly/quanly-tieuchicham/quanly-tieuchicham.component";
 import {QuanlyPhieuchamComponent} from "./quanly/quanly-phieucham/quanly-phieucham.component";
 import {QlPcContainerComponent} from "./quanly/quanly-phancong/ql-pc-container/ql-pc-container.component";
-import {QlPcGvpbComponent} from "./quanly/quanly-phancong/ql-pc-gvpb/ql-pc-gvpb.component";
-import {QlPcGvhdComponent} from "./quanly/quanly-phancong/ql-pc-gvhd/ql-pc-gvhd.component";
+import {QuanlyLophocphanComponent} from "./quanly/quanly-lophocphan/quanly-lophocphan.component";
+import {QuanlyKetquahoctapComponent} from "./quanly/quanly-ketquahoctap/quanly-ketquahoctap.component";
 
 const routes: Routes = [
 
@@ -89,15 +88,21 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {roles: ['ROLE_QUANLY']}
     },
-    // {
-    //     path: 'quanly/phancong',
-    //     component: QlPcContainerComponent,
-    //     canActivate: [AuthGuard],
-    //     data: {roles: ['ROLE_QUANLY']}
-    // },
     {
         path: 'quanly/phieucham',
         component: QuanlyPhieuchamComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_QUANLY']}
+    },
+    {
+        path: 'quanly/lophocphan',
+        component: QuanlyLophocphanComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_QUANLY']}
+    },
+    {
+        path: 'quanly/ketqua-hoctap',
+        component: QuanlyKetquahoctapComponent,
         canActivate: [AuthGuard],
         data: {roles: ['ROLE_QUANLY']}
     },
@@ -163,7 +168,7 @@ const routes: Routes = [
         path: 'sv-lich',
         component: SinhvienLichComponent,
         canActivate: [AuthGuard],
-        data: {roles: ['ROLE_SINHVIEN']}
+        data: {roles: ['ROLE_SINHVIEN','ROLE_GIANGVIEN']}
     },
     {
         path: 'caidat', component: CaidatContainerComponent,

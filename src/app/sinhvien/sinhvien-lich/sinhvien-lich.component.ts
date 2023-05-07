@@ -110,8 +110,6 @@ export class SinhvienLichComponent implements OnInit {
 
         }
     }
-
-
     data$: any[] = [];
     calendarOptions: CalendarOptions = {
         locale: 'vi',
@@ -134,11 +132,7 @@ export class SinhvienLichComponent implements OnInit {
         select: this.handleDateSelect.bind(this),
         eventClick: this.handleEventClick.bind(this),
         eventsSet: this.handleEvents.bind(this),
-        /* you can update a remote database when these fire:
-        eventAdd:
-        eventChange:
-        eventRemove:
-        */
+
     };
     currentEvents: EventApi[] = [];
 
