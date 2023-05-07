@@ -5,6 +5,10 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSelectChange} from "@angular/material/select";
+import {PhieuChamService} from "../../quanly/quanly-service/phieu-cham.service";
+import {UserAuthService} from "../../authentication/_service/user-auth.service";
+import {MatAccordion} from "@angular/material/expansion";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-giangvien-phancong',
@@ -13,12 +17,21 @@ import {MatSelectChange} from "@angular/material/select";
 })
 export class GiangvienPhancongComponent implements OnInit {
 
-  constructor(private hockyService: HockyService) { }
-  displayedColumns: string[] = ['maSV', 'hoten', 'email', 'maDeTai',"GVHD","tenDeTai","diem","action"];
+  constructor(private hockyService: HockyService, private phieuchamService: PhieuChamService,
+              private userAuthService: UserAuthService,private formBuilder: FormBuilder) { }
+  displayedColumns: string[] = ['maSV', 'tenSV', 'maNhom',"tenNhom", 'maDeTai',"gvhd","tenDeTai","diem","action"];
   dataSource!: MatTableDataSource<any>;
 
   ngOnInit(): void {
     this.getAllHocKy();
+    this.getDsSvCuaGV(this.userAuthService.getUserInfo().maGiangVien);
+
+    this.luaChonGroup = this.formBuilder.group({
+      hocKy: ['', Validators.required],
+      dotCham: [''],
+      ppcham: [''],
+      vaitro: ['']
+    })
   }
 
   dsHocKy: HocKy[];
@@ -57,11 +70,58 @@ export class GiangvienPhancongComponent implements OnInit {
 
   }
 
-  changeVaiTro($event: MatSelectChange) {
+  editProduct(row) {
     
   }
 
-  editProduct(row) {
-    
+  private getDsSvCuaGV(maGV: any){
+    this.phieuchamService.layDsSvDaCham(maGV).subscribe({
+      next:(res:[]) =>{
+        console.log("GV- CHAM DIEM:", res);
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    })
+  }
+  // FORM BUILDER:
+  luaChonGroup: FormGroup;
+  showThongTinHD: boolean = false;
+  changeDotChamDiem($event: MatSelectChange) {
+    if($event.value == "HoiDong"){
+      this.showThongTinHD = true;
+    }
+    else{
+      this.showThongTinHD = false;
+      this.luaChonGroup.controls['ppcham'].setValue(['']);
+      this.luaChonGroup.controls['vaitro'].setValue(['']);
+    }
+  }
+  phuongPhapList: any[] = [{value:'chamPoster',viewValue:"Poster"},{value: 'chamHoiDong', viewValue: "Được Hội Đồng"}];
+  dsVaiTro: any[] = [
+    {value: "CT", viewValue:"Chủ tịch hội đồng" },
+    {value: "TK", viewValue:"Thư ký hướng dẫn" },
+    {value: "TV3", viewValue:"Thành viên thứ 3" },
+  ];
+
+  @ViewChild(MatAccordion) accordion: MatAccordion;
+
+  fileterChange() {
+    this.accordion.closeAll();
+    console.log(this.luaChonGroup.value);
+    // TH1: ko co hocKy -> cho HK moi nhat
+    // TH2: dotcham -> HD, PB -> load
+    // TH3: dotcham -> HoiDong
+    // 3.1 ppcham -> POSTER
+    //              -> Ra hoidong
+    //              -> chon ca 2
+    //              -> khong chon ca 2  -> ra:['']
+    //            -> Nếu thấy rối quá thì bỏ chỉ cho ngta chọn 1 thôi thì nói tao sửa lại
+    // 3.2 vaitro -> chon 1:CT, TK, TV3
+    //            -> chon 2:...
+    //            -> chon 3:...
+    //            -> khong chon -> ra: ['']
+    //            -> Nếu thấy rối quá thì bỏ chỉ cho ngta chọn 1 thôi thì nói tao sửa lại
+
   }
 }

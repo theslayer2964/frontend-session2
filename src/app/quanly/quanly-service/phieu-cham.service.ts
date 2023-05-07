@@ -23,4 +23,11 @@ export class PhieuChamService {
             catchError(err => of([])));
   }
 
+  layDsSvDaCham(maGV: string){
+    return this.httpClient.get<any>(this.urlPhieuCham + "lay/"+ maGV, {headers: this.httpHeadersJWT})
+        .pipe(
+            tap(res => res),
+            catchError(err => of([])));
+  }
+
 }
