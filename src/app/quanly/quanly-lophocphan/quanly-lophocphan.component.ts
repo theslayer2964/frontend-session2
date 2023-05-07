@@ -4,20 +4,18 @@ import {HocKy} from "../../shared-service/HocKy.models";
 import {MatDialog} from "@angular/material/dialog";
 import {NhomService} from "../../shared-service/nhom.service";
 import {HockyService} from "../../shared-service/hocky.service";
-import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {ThemNhomComponent} from "../../dialog/them-nhom/them-nhom.component";
-import {MatSelectChange} from "@angular/material/select";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
+import {MatSelectChange} from "@angular/material/select";
 
 @Component({
-  selector: 'app-quanly-nhom',
-  templateUrl: './quanly-nhom.component.html',
-  styleUrls: ['./quanly-nhom.component.scss']
+  selector: 'app-quanly-lophocphan',
+  templateUrl: './quanly-lophocphan.component.html',
+  styleUrls: ['./quanly-lophocphan.component.scss']
 })
-export class QuanlyNhomComponent implements OnInit {
-  displayedColumns: string[] = ['maNhom', 'maDeTai', 'sv1', 'sv2', "danhGia","action"];
+export class QuanlyLophocphanComponent implements OnInit {
+  displayedColumns: string[] = ['stt', 'maSV', 'hodem', 'ten',"gioitinh","ngaysinh","sdt", "nhom","action"];
   dataSource!: MatTableDataSource<any>;
   dsHocKy: HocKy[];
 
@@ -55,22 +53,22 @@ export class QuanlyNhomComponent implements OnInit {
   }
 
   editProduct(row: any) {
-   this.nhomService.duyetNhom({
-     ma: row.nhom.maNhom,
-     trangThai: 1,
-     maHocKy: this.hocKyHienTai
-   }).subscribe({
-     next: (res) => {
-       if (res) {
-         this.getDsNhom()
-         new NotificationsComponent().showNotification('success', 'Duyệt nhóm thành công');
-       }
-     },
-     error: () => {
-       console.log("Error")
-       new NotificationsComponent().showNotification('success', 'Duyệt nhóm thất bại');
-     }
-   })
+    // this.nhomService.duyetNhom({
+    //   ma: row.nhom.maNhom,
+    //   trangThai: 1,
+    //   maHocKy: this.hocKyHienTai
+    // }).subscribe({
+    //   next: (res) => {
+    //     if (res) {
+    //       this.getDsNhom()
+    //       new NotificationsComponent().showNotification('success', 'Duyệt nhóm thành công');
+    //     }
+    //   },
+    //   error: () => {
+    //     console.log("Error")
+    //     new NotificationsComponent().showNotification('success', 'Duyệt nhóm thất bại');
+    //   }
+    // })
   }
 
   deleteProduct(id) {
@@ -83,7 +81,7 @@ export class QuanlyNhomComponent implements OnInit {
     this.hocKyHienTai = $event.value.toString().slice(0, 3)
     this.soHocKy = $event.value.toString().slice(2)
 
-    this.getDsNhom();
+    // this.getDsNhom();
   }
   tinhTrang: any;
   private getDsNhom() {
@@ -103,7 +101,7 @@ export class QuanlyNhomComponent implements OnInit {
                 delete data['npm it pdsMaSinhVien'];
                 data.sv1 = temp[0];
                 if(temp.length == 2 ){
-                data.sv2 = temp[1];
+                  data.sv2 = temp[1];
                 }
               });
               console.log("DATA REMAKE ne: ", res)
@@ -121,17 +119,9 @@ export class QuanlyNhomComponent implements OnInit {
   // Table
   @Input() validateNhom:any;
 
-  changeTinhTrang($event: MatSelectChange) {
-    this.tinhTrang = $event.value
-    this.getDsNhom();
-  }
 
   downloadFileSV() {
-    this.nhomService.getDsNhomTrongHocKy().subscribe(response => {
-      console.log(response)
-      let blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;' });
-      var downloadURL = URL.createObjectURL(blob);
-      window.open(downloadURL);
-    });
+    console.log("XU LY TIP TUC...")
   }
+
 }

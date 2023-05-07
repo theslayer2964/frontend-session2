@@ -29,9 +29,10 @@
                        *ngIf="userService.roleMatch(['ROLE_QUANLY'])">Quản lý</a>
                 </li>
             </ul>
-            <div class="dropdown" style="margin-right: 60px">
+            <div *ngIf="isLoggedIn()" class="dropdown" style="margin-right: 60px">
                 <a id="dLabel" role="button" data-toggle="dropdown" data-target="#">
-                    <mat-icon style="color: #4da1e8" matBadge="{{thongbaoMoi}}" matBadgeColor="warn">notifications_none</mat-icon>
+                    <mat-icon *ngIf="thongbaoMoi>0" style="color: #4da1e8" matBadge="{{thongbaoMoi}}" matBadgeColor="warn">notifications_none</mat-icon>
+                    <mat-icon *ngIf="thongbaoMoi==0" style="color: #4da1e8" matBadgeColor="warn">notifications_none</mat-icon>
                 </a>
                 <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
                     <div class="notification-heading"><h4 class="menu-title">Thông báo</h4>
@@ -49,11 +50,11 @@
                     <div class="notification-footer"><h4 class="menu-title">Xem tất cả<i class="glyphicon glyphicon-circle-arrow-right"></i></h4></div>
                 </ul>
 
-            </div>
+            </div >
+            <mat-icon *ngIf="isLoggedIn()" matBadge="8" matBadgeColor="accent" matBadgeSize="small"
+                      style="color: #4da1e8; margin-right: 20px; font-size: 25px">sms
+            </mat-icon>
             <div style="display: flex; align-items: center;" class="pe-4">
-                <mat-icon matBadge="8" matBadgeColor="accent" matBadgeSize="small"
-                          style="color: #4da1e8; margin-right: 20px; font-size: 25px">sms
-                </mat-icon>
                 <button *ngIf="!isLoggedIn()" (click)="login()" style="border: none;background-color: #fff ">Đăng nhập
                 </button>
                 <div class="nav-item dropdown avatarName" style="display: flex; align-items: center"

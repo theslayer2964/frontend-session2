@@ -15,7 +15,7 @@ import {TinnhanService} from "../../shared-service/tinnnhan.service";
 })
 export class SharedComponent implements OnInit {
     public defaultImage: any = './assets/image/logo_iuh.png'
-    thongbaoMoi: number;
+    thongbaoMoi: number = 0;
 
     constructor(private userAuthService: UserAuthService, private router: Router, public userService: UserService,
                 public userDataService: UserDataService,
@@ -35,9 +35,10 @@ export class SharedComponent implements OnInit {
                 console.log("LAN 1")
                 this.userInfo = data;
             }
+            this.loadThongBao();
+            this.loadThongBaoChuaDoc();
         })
-        this.loadThongBao();
-        this.loadThongBaoChuaDoc();
+
     }
 
     public isLoggedIn() {
@@ -88,7 +89,7 @@ export class SharedComponent implements OnInit {
             maNguoiDung = this.userAuthService.getUserInfo().maGiangVien
             this.tinNhanService.layTinNhan(maNguoiDung)
                 .subscribe(res => {
-                    console.log("TIN NHẮN:",res);
+                    console.log("TIN NHẮN ĐÃ ĐỌC:",res);
                     res.forEach(data => {
                         this.listData.push({
                             tinnhan: "Có Đề Tài bạn cần sửa",

@@ -110,7 +110,7 @@ export class LichService {
                 catchError(err => of([])));
     }
 
-    layTKBcuaGV(maHocKy: any, lich: any){
+    layTKBPhanBien(maHocKy: any, lich: any){
         return this.httpClient.post(this.url + "lay-lich-hocky-pb", {
             maHocKy, lich
         }, {headers: this.httpHeadersJWT})

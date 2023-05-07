@@ -32,6 +32,7 @@ export class SinhvienLichComponent implements OnInit {
             this.destroy$.next(maHocKy);
         });
         if (role.roleName == "ROLE_GIANGVIEN") {
+            console.log("GV _ LICH _ TUI NE");
             let maGV = this.userAuthService.getUserInfo().maGiangVien;
             this.destroy$.subscribe(hocky => {
                     this.lichService.getLichTheoHocKyVaMaGV(hocky, maGV, "ROLE_GIANGVIEN").subscribe(res => {
@@ -58,7 +59,6 @@ export class SinhvienLichComponent implements OnInit {
                         //         daysOfWeek: data.dsNgayThucHienKhoaLuan
                         //     })
                         // }
-
                     })
                     this.data$ = a;
                     console.log("MAP:",this.data$);
@@ -110,8 +110,6 @@ export class SinhvienLichComponent implements OnInit {
 
         }
     }
-
-
     data$: any[] = [];
     calendarOptions: CalendarOptions = {
         locale: 'vi',
@@ -134,11 +132,7 @@ export class SinhvienLichComponent implements OnInit {
         select: this.handleDateSelect.bind(this),
         eventClick: this.handleEventClick.bind(this),
         eventsSet: this.handleEvents.bind(this),
-        /* you can update a remote database when these fire:
-        eventAdd:
-        eventChange:
-        eventRemove:
-        */
+
     };
     currentEvents: EventApi[] = [];
 

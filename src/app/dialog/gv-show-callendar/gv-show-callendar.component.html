@@ -1,0 +1,18 @@
+
+<h2 mat-dialog-title>Lịch học, lịch thi theo tuần</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <full-calendar *ngIf='calendarVisible' [options]='calendarOptions' [events]="data$">
+                <ng-template #eventContent let-arg>
+                    <b>{{ arg.timeText }}</b>
+                    <i>{{ arg.event.title }}</i>
+                </ng-template>
+            </full-calendar>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+<!--    <button mat-button mat-dialog-close>Cancel</button>-->
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Đóng</button>
+</mat-dialog-actions>
