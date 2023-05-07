@@ -115,12 +115,12 @@ export class GiangvienPhancongComponent implements OnInit {
     // 3.1 ppcham -> POSTER
     //              -> Ra hoidong
     //              -> chon ca 2
-    //              -> khong chon ca 2  -> ra:['']
+    //              -> khong chon ca 2  -> ra: pp:'' vaitro:''
     //            -> Nếu thấy rối quá thì bỏ chỉ cho ngta chọn 1 thôi thì nói tao sửa lại
     // 3.2 vaitro -> chon 1:CT, TK, TV3
     //            -> chon 2:...
     //            -> chon 3:...
-    //            -> khong chon -> ra: ['']
+    //            -> khong chon -> ra: ''
     //            -> Nếu thấy rối quá thì bỏ chỉ cho ngta chọn 1 thôi thì nói tao sửa lại
 
   }
