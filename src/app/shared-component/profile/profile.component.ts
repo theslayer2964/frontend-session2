@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {DatePipe} from "@angular/common";
+import {MatDialog} from "@angular/material/dialog";
+import {QlXepTKBHDComponent} from "../../dialog/ql-xep-tkb-hd/ql-xep-tkb-hd.component";
+import {GvShowCallendarComponent} from "../../dialog/gv-show-callendar/gv-show-callendar.component";
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +12,7 @@ import {DatePipe} from "@angular/common";
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private userAuthService: UserAuthService) { }
+  constructor(private userAuthService: UserAuthService,public dialog: MatDialog) { }
   role:string;
   info:any;
   ngOnInit(): void {
@@ -18,4 +21,9 @@ export class ProfileComponent implements OnInit {
     this.info = this.userAuthService.getUserInfo();
   }
 
+  openCallendar() {
+    this.dialog.open(GvShowCallendarComponent, {
+      width: "1000px"
+    })
+  }
 }

@@ -1,0 +1,127 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-warning" style="display: flex;justify-content: space-between">
+                        <h4 class="card-title">KẾT QUẢ KHÓA LUẬN TỐT NGHIỆP</h4>
+                        <button mat-raised-button color="warn" (click)="downloadFileSV()" style="height: 40px">Xuất file mẫu</button>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <mat-form-field style="width: 400px;margin-left: 20px">
+                            <mat-label>-- Chọn học kỳ --</mat-label>
+                            <mat-select (selectionChange)="changeHocKy($event)">
+                                <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">HK{{hocKy.soHocKy}}
+                                    -20{{hocKy.maHocKy}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field style="width: 500px;margin-left: 20px">
+                            <mat-label>Filter</mat-label>
+                            <input matInput (keyup)="applyFilter($event)" placeholder="nhập từ khóa tìm kiếm..."
+                                   #input>
+                        </mat-form-field>
+                    </div>
+                    <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;overflow: auto;">
+                        <table mat-table [dataSource]="dataSource" matSort >
+                            <ng-container matColumnDef="sttnhom">
+                                <th mat-header-cell *matHeaderCellDef  >STT Nhóm</th>
+                                <td mat-cell *matCellDef="let row"> {{row.sttnhom}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="maSV">
+                                <th mat-header-cell *matHeaderCellDef>Mã SV</th>
+                                <td mat-cell *matCellDef="let row"> {{row.maSV}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="hoten">
+                                <th mat-header-cell *matHeaderCellDef  >Họ tên</th>
+                                <td mat-cell *matCellDef="let row"> {{row.hoten}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="madetai">
+                                <th mat-header-cell *matHeaderCellDef  >Mã đề tài</th>
+                                <td mat-cell *matCellDef="let row"> {{row.madetai}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="tendetai">
+                                <th mat-header-cell *matHeaderCellDef  >Tên đề tài</th>
+                                <td mat-cell *matCellDef="let row"> {{row.tendetai}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="gvhd">
+                                <th mat-header-cell *matHeaderCellDef>Người hướng dẫn</th>
+                                <td mat-cell *matCellDef="let row"> {{row.gvhd}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="duocraPB">
+                                <th mat-header-cell *matHeaderCellDef  >Được ra PB</th>
+                                <td mat-cell *matCellDef="let row"> {{row.duocraPB}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="diemGVHD">
+                                <th mat-header-cell *matHeaderCellDef>GVHD</th>
+                                <td mat-cell *matCellDef="let row"> {{row.diemGVHD}} </td>
+                            </ng-container>
+                             <ng-container matColumnDef="pb1">
+                                <th mat-header-cell *matHeaderCellDef  >PB1</th>
+                                <td mat-cell *matCellDef="let row"> {{row.pb1}} </td>
+                            </ng-container>
+                             <ng-container matColumnDef="pb2">
+                                <th mat-header-cell *matHeaderCellDef  >PB2</th>
+                                <td mat-cell *matCellDef="let row"> {{row.pb2}} </td>
+                            </ng-container>
+                             <ng-container matColumnDef="tbbm">
+                                <th mat-header-cell *matHeaderCellDef  >TBBM</th>
+                                <td mat-cell *matCellDef="let row"> {{row.tbbm}} </td>
+                            </ng-container>
+                             <ng-container matColumnDef="tvhd1">
+                                <th mat-header-cell *matHeaderCellDef>TVHD1</th>
+                                <td mat-cell *matCellDef="let row"> {{row.tvhd1}} </td>
+                            </ng-container>
+                             <ng-container matColumnDef="tvhd2">
+                                <th mat-header-cell *matHeaderCellDef>TVHD2</th>
+                                <td mat-cell *matCellDef="let row"> {{row.tvhd2}} </td>
+                            </ng-container>
+                             <ng-container matColumnDef="tbtvhd">
+                                <th mat-header-cell *matHeaderCellDef  >TBTVHD</th>
+                                <td mat-cell *matCellDef="let row"> {{row.tbtvhd}} </td>
+                            </ng-container>
+                             <ng-container matColumnDef="ketqua">
+                                <th mat-header-cell *matHeaderCellDef  >Kết quả</th>
+                                <td mat-cell *matCellDef="let row"> {{row.ketqua}} </td>
+                            </ng-container>
+                             <ng-container matColumnDef="diembao">
+                                <th mat-header-cell *matHeaderCellDef  >Điểm báo</th>
+                                <td mat-cell *matCellDef="let row"> {{row.diembao}} </td>
+                            </ng-container>
+                             <ng-container matColumnDef="diemTK">
+                                <th mat-header-cell *matHeaderCellDef  >Điểm TK</th>
+                                <td mat-cell *matCellDef="let row"> {{row.diemTK}} </td>
+                            </ng-container>
+                             <ng-container matColumnDef="hoidong">
+                                <th mat-header-cell *matHeaderCellDef  >Hội đồng</th>
+                                <td mat-cell *matCellDef="let row"> {{row.hoidong}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef  >action</th>
+                                <td mat-cell *matCellDef="let row">
+                                    <!--Row: data cua 1 dong-->
+                                    <button mat-icon-button color="primary" (click)="editProduct(row)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            <tr class="mat-row" *matNoDataRow>
+                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                            </tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[25, 10, 5, 100]"
+                                       aria-label="Select page of users"></mat-paginator>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

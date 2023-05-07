@@ -93,6 +93,10 @@ import { GiangvienPhancongComponent } from './giangvien/giangvien-phancong/giang
 import { GvChamdiemComponent } from './dialog/gv-chamdiem/gv-chamdiem.component';
 import { QlXepTKBComponent } from './dialog/ql-xep-tkb/ql-xep-tkb.component';
 import { QlXepTKBHDComponent } from './dialog/ql-xep-tkb-hd/ql-xep-tkb-hd.component';
+import { GiangvienLichComponent } from './giangvien/giangvien-lich/giangvien-lich.component';
+import { GvShowCallendarComponent } from './dialog/gv-show-callendar/gv-show-callendar.component';
+import { QuanlyLophocphanComponent } from './quanly/quanly-lophocphan/quanly-lophocphan.component';
+import { QuanlyKetquahoctapComponent } from './quanly/quanly-ketquahoctap/quanly-ketquahoctap.component';
 
 @NgModule({
     imports: [
@@ -190,7 +194,11 @@ import { QlXepTKBHDComponent } from './dialog/ql-xep-tkb-hd/ql-xep-tkb-hd.compon
         GiangvienPhancongComponent,
         GvChamdiemComponent,
         QlXepTKBComponent,
-        QlXepTKBHDComponent
+        QlXepTKBHDComponent,
+        GiangvienLichComponent,
+        GvShowCallendarComponent,
+        QuanlyLophocphanComponent,
+        QuanlyKetquahoctapComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,
