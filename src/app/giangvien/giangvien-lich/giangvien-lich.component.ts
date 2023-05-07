@@ -13,8 +13,4 @@ export class GiangvienLichComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
-  // direct(url: string) {
-  //   this.router.navigate('',{outlet:});
-  // }
 }

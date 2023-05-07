@@ -6,44 +6,91 @@
                     <div class="card-header"
                          style="display: flex;justify-content: space-between;background-color: #4da1e8">
                         <h4 class="card-title"
-                            style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">ĐÁNH GIÁ SINH VIÊN</h4>
+                            style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">ĐÁNH GIÁ CÁC NHÓM ĐỀ TÀI</h4>
                         <mat-form-field>
                             <mat-label>Tùy chỉnh</mat-label>
                             <mat-select>
                                 <mat-option (click)="nhapDiemExcel()">Nhập điểm bằng Excel</mat-option>
-                                <mat-option (click)="xuatFileChamDiemMacDinh()">Xuất file nhập điểm mặc định</mat-option>
+                                <mat-option (click)="xuatFileChamDiemMacDinh()">Xuất file nhập điểm mặc định
+                                </mat-option>
                                 <mat-option (click)="xuatFileExcel()">Xuất file excel</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <mat-form-field style="width: 500px;margin-left: 20px">
-                                <mat-label>-- Chọn học kỳ --</mat-label>
-                                <mat-select (selectionChange)="changeHocKy($event)">
-                                    <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">HK{{hocKy.soHocKy}}
-                                        -20{{hocKy.maHocKy}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <mat-form-field style="width: 500px;margin-left: 20px">
-                                <mat-label>-- Chọn vai trò --</mat-label>
-                                <mat-select (selectionChange)="changeVaiTro($event)">
-                                    <mat-option *ngFor="let hocKy of dsVaiTro" [value]="hocKy.value">{{hocKy.viewValue}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                    </div>
+                        <div class="col-lg-1 col-md-1"></div>
+                        <div class="col-lg-10">
+                            <form [formGroup]="luaChonGroup">
+                                <mat-accordion class="example-headers-align">
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                <h5><b>Lọc</b></h5>
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                <h5><b>Đánh giá nhóm đề tài theo các tiêu chí</b></h5>
+                                                <mat-icon>date_range</mat-icon>
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
 
-                    <div>
-                        <mat-form-field style="width: 500px;margin-left: 20px">
-                            <mat-label>Tìm kiếm</mat-label>
-                            <input matInput (keyup)="applyFilter($event)" placeholder="nhập từ khóa tìm kiếm..."
-                                   #input>
-                        </mat-form-field>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3">
+                                                <mat-form-field>
+                                                    <mat-label>-- Chọn học kỳ --</mat-label>
+                                                    <mat-select formControlName="hocKy" (selectionChange)="changeHocKy($event)">
+                                                        <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">
+                                                            HK{{hocKy.soHocKy}}
+                                                            -20{{hocKy.maHocKy}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+                                                <mat-form-field>
+                                                    <mat-label>-- Chọn đợt chấm điểm --</mat-label>
+                                                    <mat-select formControlName="dotCham"
+                                                                (selectionChange)="changeDotChamDiem($event)">
+                                                        <mat-option value="HD">Hướng dẫn</mat-option>
+                                                        <mat-option value="PB">Phản biện</mat-option>
+                                                        <mat-option value="HoiDong">Hội đồng</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3" *ngIf="showThongTinHD==true">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>-- Chọn phương pháp chấm --</mat-label>
+                                                    <mat-select formControlName="ppcham" multiple>
+                                                        <mat-option *ngFor="let topping of phuongPhapList" [value]="topping.value">{{topping.viewValue}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3" *ngIf="showThongTinHD==true">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>-- Chọn vai trò của bạn --</mat-label>
+                                                    <mat-select formControlName="vaitro" multiple>
+                                                        <mat-option *ngFor="let topping of dsVaiTro" [value]="topping.value">{{topping.viewValue}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <mat-action-row>
+                                            <button mat-button color="warn" (click)="accordion.closeAll()">Đóng</button>
+                                            <button mat-button color="primary" (click)="fileterChange()">Tìm kiếm</button>
+                                        </mat-action-row>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+
+                            </form>
+                        </div>
                     </div>
+                    <hr>
+<!--                    <div>-->
+<!--                        <mat-form-field style="width: 500px;margin-left: 20px">-->
+<!--                            <mat-label>Tìm kiếm</mat-label>-->
+<!--                            <input matInput (keyup)="applyFilter($event)" placeholder="nhập từ khóa tìm kiếm..."-->
+<!--                                   #input>-->
+<!--                        </mat-form-field>-->
+<!--                    </div>-->
                     <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;overflow: auto;">
                         <table mat-table [dataSource]="dataSource" matSort>
                             <ng-container matColumnDef="maNhom">
@@ -70,19 +117,25 @@
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên Sinh viên 1</th>
                                 <td mat-cell *matCellDef="let row"> {{row.sinhVien[0].tenSinhVien}}</td>
                             </ng-container>
-                                <ng-container matColumnDef="maSV2">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã Sinh viên 2</th>
-                                    <td mat-cell *matCellDef="let row">
-                                        <p *ngIf="row.sinhVien[1]!=null">{{row.sinhVien[1].maSinhVien}}</p>
+                            <ng-container matColumnDef="maSV2">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã Sinh viên 2</th>
+                                <td mat-cell *matCellDef="let row">
+                                    <p *ngIf="row.sinhVien[1]!=null">{{row.sinhVien[1].maSinhVien}}</p>
 
-                                    </td>
-                                </ng-container>
-                                <ng-container matColumnDef="tenSV2">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên Sinh viên 2</th>
-                                    <td mat-cell *matCellDef="let row">
-                                        <p *ngIf="row.sinhVien[1]!=null">{{row.sinhVien[1].tenSinhVien}}</p>
-                                    </td>
-                                </ng-container>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="tenSV2">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên Sinh viên 2</th>
+                                <td mat-cell *matCellDef="let row">
+                                    <p *ngIf="row.sinhVien[1]!=null">{{row.sinhVien[1].tenSinhVien}}</p>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="vaiTro">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Vai trò</th>
+                                <td mat-cell *matCellDef="let row">
+                                    {{row.vaiTro}}
+                                </td>
+                            </ng-container>
                             <ng-container matColumnDef="action">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Đánh giá</th>
                                 <td mat-cell *matCellDef="let row">
@@ -95,7 +148,7 @@
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                             <tr class="mat-row" *matNoDataRow>
-                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                                <td class="mat-cell" colspan="4">Không có dữ liệu</td>
                             </tr>
                         </table>
                         <mat-paginator [pageSizeOptions]="[25, 10, 5, 100]"

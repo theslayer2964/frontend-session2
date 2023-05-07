@@ -97,6 +97,7 @@ import { GiangvienLichComponent } from './giangvien/giangvien-lich/giangvien-lic
 import { GvShowCallendarComponent } from './dialog/gv-show-callendar/gv-show-callendar.component';
 import { QuanlyLophocphanComponent } from './quanly/quanly-lophocphan/quanly-lophocphan.component';
 import { QuanlyKetquahoctapComponent } from './quanly/quanly-ketquahoctap/quanly-ketquahoctap.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
     imports: [
@@ -137,6 +138,7 @@ import { QuanlyKetquahoctapComponent } from './quanly/quanly-ketquahoctap/quanly
         FullCalendarModule,
         MatListModule,
         MatAutocompleteModule,
+        MatExpansionModule,
     ],
     declarations: [
         AppComponent,

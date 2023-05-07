@@ -11,6 +11,7 @@ import {NhomService} from "../../shared-service/nhom.service";
 import {QuanlyLichService} from "../../shared-service/quanly-lich.service";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 import {map, Subject, take, takeUntil} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-ql-tkb-chianhom',
@@ -24,7 +25,7 @@ export class QlTkbChianhomComponent implements OnInit {
     constructor(public dialog: MatDialog, private hockyService: HockyService,
                 public xepLichNhomTransferService: XepNhomLichTransferService,
                 private fb: FormBuilder, private lichService: LichService, private nhomService: NhomService,
-                private quanLyService: QuanlyLichService) {
+                private quanLyService: QuanlyLichService, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -248,6 +249,9 @@ export class QlTkbChianhomComponent implements OnInit {
             dataList
         ).subscribe(res => {
             new NotificationsComponent().showNotification('success', 'Phân công hội đồng thành công');
+            // this.getDSLichTheoHKHD(this.hocKyHienTai, "HD");
+            // this.getDSNhomDeTaiPhanCOngPhanBien("HD");
+            // this.viTriPhanCong = "hoi dong";
         }, error => {
             console.log(error)
             new NotificationsComponent().showNotification('danger', "Không cho phép giảng viên hướng dẫn chấm hội đồng");
