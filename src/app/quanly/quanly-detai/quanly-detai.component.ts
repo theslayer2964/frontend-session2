@@ -12,6 +12,8 @@ import {ThemDeTaiGvComponent} from "../../dialog/them-de-tai-gv/them-de-tai-gv.c
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 import {DangKyDetaiComponent} from "../../dialog/dang-ky-detai/dang-ky-detai.component";
 import {DuyetdetaiComponent} from "../../dialog/duyetdetai/duyetdetai.component";
+import {DanhSach_DeTai_KLTN, DS_Nhom_KLTN} from "../../shared-service/FileNameExport";
+import {FileGeneratorService} from "../../shared-service/file-generator.service";
 
 @Component({
     selector: 'app-quanly-detai',
@@ -24,7 +26,8 @@ export class QuanlyDetaiComponent implements OnInit {
 
     constructor(public dialog: MatDialog,
                 private detaiService: DetaiService,
-                private hockyService: HockyService,) {
+                private hockyService: HockyService,
+                private fileGenerate: FileGeneratorService) {
     }
 
     ngOnInit(): void {
@@ -108,18 +111,16 @@ export class QuanlyDetaiComponent implements OnInit {
     }
 
     downloadFileSV() {
-        // this.detaiService.xuatDSDeTai().subscribe(response => {
-        //     console.log(response)
-        //     let blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;' });
-        //     var downloadURL = URL.createObjectURL(blob);
-        //     window.open(downloadURL);
-        // });
+        this.detaiService.xuatDSDeTai().subscribe(res => {
+            this.fileGenerate.generateFile(DanhSach_DeTai_KLTN, res['body'], 'xlsx');
+        });
     }
     duyetDT(row) {
         this.dialog.open(DuyetdetaiComponent, {data: {row}})
             .afterClosed().subscribe(
             rs => {
                 this.getDSDeTaiTheoHK();
+                new NotificationsComponent().showNotification('success', 'Xuất Danh Sách Đề Tài');
             });
     }
 

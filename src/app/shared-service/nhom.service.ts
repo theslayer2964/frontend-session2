@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {catchError, Observable, of, tap} from "rxjs";
 import {UserAuthService} from "../authentication/_service/user-auth.service";
+import {FileGeneratorService} from "./file-generator.service";
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,8 @@ export class NhomService {
         Authorization: `Bearer ${(this.token)}`
     })
 
-    constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) {
+    constructor(private httpClient: HttpClient, private userAuthService: UserAuthService, private filegeneate: FileGeneratorService) {
+
     }
 
     dangKyNhom(data: any): Observable<any> {
@@ -64,10 +66,13 @@ export class NhomService {
 
     getDsNhomTrongHocKy(): any{
         let headers = this.httpHeadersJWT;
-        headers = headers.set('Content-Type', 'application/json; charset=urtf8');
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
-        return this.httpClient.post<any>(this.urlQuanLy + "xuat-ds-nhom" , {
-            headers});
+        return this.httpClient.get(this.urlQuanLy + "xuat-ds-nhom" , {
+            headers: headers,
+            responseType: 'arraybuffer',
+            observe: 'response'
+        });
     }
 
     dangKyNhomCoSan(data: any) {
@@ -75,4 +80,5 @@ export class NhomService {
             tap(receiveNhom => receiveNhom),
             catchError(err => of([])));
     }
+
 }

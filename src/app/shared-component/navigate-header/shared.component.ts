@@ -36,7 +36,6 @@ export class SharedComponent implements OnInit {
                 this.userInfo = data;
             }
             this.loadThongBao();
-            this.loadThongBaoChuaDoc();
         })
 
     }
@@ -80,17 +79,17 @@ export class SharedComponent implements OnInit {
         //     this.router.
         // })
     }
-
-    soLuongTinNhanChuaDoc: any;
     loadThongBao() {
         let roleName = this.userAuthService.getRoles()[0].roleName;
         let maNguoiDung = "";
+        let tin:any;
         if (roleName == 'ROLE_GIANGVIEN' ||  roleName == 'ROLE_QUANLY') {
             maNguoiDung = this.userAuthService.getUserInfo().maGiangVien
             this.tinNhanService.layTinNhan(maNguoiDung)
                 .subscribe(res => {
-                    console.log("TIN NHẮN ĐÃ ĐỌC:",res);
-                    res.forEach(data => {
+                     tin = res;
+                    console.log("TIN NHẮN ĐÃ ĐỌC:",tin);
+                    tin.tinNhanDtos.forEach(data => {
                         this.listData.push({
                             tinnhan: "Có Đề Tài bạn cần sửa",
                             id: data.id,
@@ -100,13 +99,15 @@ export class SharedComponent implements OnInit {
                             info: data
                         });
                     })
+                    this.thongbaoMoi = tin.thongBaoChuaDoc;
                 })
         } else {
             maNguoiDung = this.userAuthService.getUserInfo().maSinhVien
             this.tinNhanService.layTinNhan(maNguoiDung)
                 .subscribe(res => {
                     console.log("TIN NHẮN:",res);
-                    res.forEach(data => {
+                    tin = res;
+                    tin.tinNhanDtos.forEach(data => {
                         this.listData.push({
                             tinnhan: "Có người muốn tham gia nhóm của bạn",
                             id: data.id,
@@ -116,28 +117,7 @@ export class SharedComponent implements OnInit {
                             info: data
                         });
                     })
-                })
-        }
-    }
-
-    loadThongBaoChuaDoc() {
-        let roleName = this.userAuthService.getRoles()[0].roleName;
-        let maNguoiDung = "";
-        if (roleName == 'ROLE_GIANGVIEN' ||  roleName == 'ROLE_QUANLY') {
-            maNguoiDung = this.userAuthService.getUserInfo().maGiangVien
-            this.tinNhanService.layTinNhanChuaDoc(maNguoiDung)
-                .subscribe(res => {
-                    this.thongbaoMoi = res.length
-                })
-        } else {
-            maNguoiDung = this.userAuthService.getUserInfo().maSinhVien
-            this.tinNhanService.layTinNhanChuaDoc(maNguoiDung)
-                .subscribe(res => {
-                    console.log("TIN NHẮN:",res);
-                    if (res.length > 0) {
-                        this.thongbaoMoi = res.length
-                    }
-
+                    this.thongbaoMoi = tin.thongBaoChuaDoc;
                 })
         }
     }

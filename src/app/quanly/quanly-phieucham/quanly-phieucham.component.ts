@@ -12,6 +12,8 @@ import {DialogExcelQlSinhvienComponent} from "../../excel/dialog-excel-ql-sinhvi
 import {TieuchichamdiemService} from "../../shared-service/tieuchichamdiem.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {DS_Nhom_KLTN} from "../../shared-service/FileNameExport";
+import {FileGeneratorService} from "../../shared-service/file-generator.service";
 
 interface GiangVien {
   value: string;
@@ -27,7 +29,8 @@ export class QuanlyPhieuchamComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private hockyService: HockyService,
               private tieuChiChamDiem: TieuchichamdiemService,
-              private userAuthService: UserAuthService, private router: Router) { }
+              private userAuthService: UserAuthService, private router: Router,
+              private fileGenerate: FileGeneratorService) { }
   ngOnInit(): void {
   }
 
@@ -103,5 +106,11 @@ export class QuanlyPhieuchamComponent implements OnInit {
 
   deleteProduct(maDeTai: any) {
     
+  }
+
+  downloadFileSV() {
+    this.tieuChiChamDiem.getKetQuaTrongHocKy().subscribe(res => {
+      this.fileGenerate.generateFile(DS_Nhom_KLTN, res['body'], 'xlsx');
+    });
   }
 }

@@ -10,6 +10,8 @@ import {MatSort} from "@angular/material/sort";
 import {ThemNhomComponent} from "../../dialog/them-nhom/them-nhom.component";
 import {MatSelectChange} from "@angular/material/select";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
+import {FileGeneratorService} from "../../shared-service/file-generator.service";
+import {DS_Nhom_KLTN} from "../../shared-service/FileNameExport";
 
 @Component({
   selector: 'app-quanly-nhom',
@@ -21,7 +23,8 @@ export class QuanlyNhomComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   dsHocKy: HocKy[];
 
-  constructor(public dialog: MatDialog, private nhomService: NhomService, private hockyService: HockyService) {
+  constructor(public dialog: MatDialog, private nhomService: NhomService, private hockyService: HockyService,
+              private userAuthService: UserAuthService,private filegenerate: FileGeneratorService) {
 
   }
 
@@ -127,11 +130,8 @@ export class QuanlyNhomComponent implements OnInit {
   }
 
   downloadFileSV() {
-    this.nhomService.getDsNhomTrongHocKy().subscribe(response => {
-      console.log(response)
-      let blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;' });
-      var downloadURL = URL.createObjectURL(blob);
-      window.open(downloadURL);
+    this.nhomService.getDsNhomTrongHocKy().subscribe(res => {
+      this.filegenerate.generateFile(DS_Nhom_KLTN, res['body'], 'xlsx');
     });
   }
 }
