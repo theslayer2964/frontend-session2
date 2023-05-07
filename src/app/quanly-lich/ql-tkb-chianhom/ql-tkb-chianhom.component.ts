@@ -142,11 +142,12 @@ export class QlTkbChianhomComponent implements OnInit {
         let dataList = [];
         for (let i = 0; i <formValue.length; i++ ){
             if(formValue[i].nhom.length > 0){
+                let dateParts = formValue[i].ngay.split("/");
                 dataList.push({
                     viTriPhanCong: this.viTriPhanCong,
                     chamCong: false,
                     dsMaGiangVienPB: [this.dsTKBPhanBien[i].dsGiangVienPB[0].maGiangVien,this.dsTKBPhanBien[i].dsGiangVienPB[1].maGiangVien],
-                    ngay: new Date(formValue[i].ngay),
+                    ngay: new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]),
                     tiet: formValue[i].tiet,
                     phong: formValue[i].phong,
                     maNhom: formValue[i].nhom,
@@ -228,12 +229,13 @@ export class QlTkbChianhomComponent implements OnInit {
         let dataList = [];
         for (let i = 0; i <formValue.length; i++ ){
             if(formValue[i].nhom.length > 0){
+                let dateParts = formValue[i].ngay.split("/");
                 dataList.push({
                     viTriPhanCong: this.viTriPhanCong,
                     chamCong: false,
                     dsMaGiangVienPB: [this.dsTKBPhanBienHD[i].dsGiangVienPB[0].maGiangVien,this.dsTKBPhanBienHD[i].dsGiangVienPB[1].maGiangVien,
                         this.dsTKBPhanBienHD[i].dsGiangVienPB[2].maGiangVien],
-                    ngay: new Date(formValue[i].ngay),
+                    ngay: new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]),
                     tiet: formValue[i].tiet,
                     phong: formValue[i].phong,
                     maNhom: formValue[i].nhom,
