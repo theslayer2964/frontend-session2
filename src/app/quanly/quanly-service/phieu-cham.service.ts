@@ -30,4 +30,11 @@ export class PhieuChamService {
             catchError(err => of([])));
   }
 
+  layDsSvDaChamDiemCuThe(data: any){
+    return this.httpClient.post<any>(this.urlPhieuCham + "lay-cu-the", data, {headers: this.httpHeadersJWT})
+        .pipe(
+            tap(res => res),
+            catchError(err => of([])));
+  }
+
 }

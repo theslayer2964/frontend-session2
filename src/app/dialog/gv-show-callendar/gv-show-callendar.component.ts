@@ -38,13 +38,14 @@ export class GvShowCallendarComponent implements OnInit {
         this.lichService.getLichTheoHocKyVaMaGV(hocky, maGV, "ROLE_GIANGVIEN").subscribe(res => {
           let a = [];
           res.forEach(data => {
-            if (data.dsNgayThucHienKhoaLuan.length <= 0) {
+            if (data.dsNgayThucHienKhoaLuan.length <= 0 && data.maLoaiLich == 3) {
+
               a.push({
                 id: data.id,
-                start: new Date(data.thoiGianBatDau).toISOString().replace(/T.*$/, ''),
-                end: new Date(data.thoiGianKetThuc).toISOString().replace(/T.*$/, ''),
+                start: new Date(data.thoiGianBatDau).toISOString(),
+                end: new Date(data.thoiGianKetThuc).toISOString(),
                 title: data.tenKeHoach,
-                allDay:true,
+                allDay:false,
                 backgroundColor:"green"
               })
             }
@@ -60,7 +61,7 @@ export class GvShowCallendarComponent implements OnInit {
             //     })
             // }
           })
-          this.data$ = a;
+          this.data$ = a
           console.log("MAP:",this.data$);
         })
       });
