@@ -27,6 +27,13 @@ export class GiangvienService {
             catchError(err => of([])));
   }
 
+  getDSSVVaiTroCuThe(data: any){
+    return this.httpClient.post<any>(this.urlGV + "lay-ds-nhom-theo-vai-tro-cu-the",data ,{headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDSDeTai => recieveDSDeTai),
+            catchError(err => of([])));
+  }
+
   chamdiemChoSV(formData: FormData){
     return this.httpClient.post<any>(this.urlGV + "/",formData, {headers: this.httpHeadersJWT})
         .pipe(

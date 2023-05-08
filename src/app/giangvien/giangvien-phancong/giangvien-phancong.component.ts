@@ -9,6 +9,7 @@ import {PhieuChamService} from "../../quanly/quanly-service/phieu-cham.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {MatAccordion} from "@angular/material/expansion";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 
 @Component({
   selector: 'app-giangvien-phancong',
@@ -22,9 +23,11 @@ export class GiangvienPhancongComponent implements OnInit {
   displayedColumns: string[] = ['maSV', 'tenSV', 'maNhom',"tenNhom", 'maDeTai',"gvhd","tenDeTai","diem","action"];
   dataSource!: MatTableDataSource<any>;
 
+  maGiangVien: any;
   ngOnInit(): void {
     this.getAllHocKy();
-    this.getDsSvCuaGV(this.userAuthService.getUserInfo().maGiangVien);
+    this.maGiangVien =  this.userAuthService.getUserInfo().maGiangVien
+
 
     this.luaChonGroup = this.formBuilder.group({
       hocKy: ['', Validators.required],
@@ -32,6 +35,7 @@ export class GiangvienPhancongComponent implements OnInit {
       ppcham: [''],
       vaitro: ['']
     })
+    this.getDsSvCuaGV(null, null, this.maGiangVien,null, null);
   }
 
   dsHocKy: HocKy[];
@@ -74,8 +78,13 @@ export class GiangvienPhancongComponent implements OnInit {
     
   }
 
-  private getDsSvCuaGV(maGV: any){
-    this.phieuchamService.layDsSvDaCham(maGV).subscribe({
+  private getDsSvCuaGV(hocKy: string, vaiTro: string[], maGiangVien: string, ppcham: string[],dotcham: string){
+    this.phieuchamService.layDsSvDaChamDiemCuThe({
+      hocKy: hocKy,
+      ppcham:ppcham,
+      dotCham: dotcham,
+      vaitro: vaiTro,
+      maNguoiDung: maGiangVien}).subscribe({
       next:(res:[]) =>{
         console.log("GV- CHAM DIEM:", res);
         this.dataSource = new MatTableDataSource(res);
@@ -109,6 +118,23 @@ export class GiangvienPhancongComponent implements OnInit {
   fileterChange() {
     this.accordion.closeAll();
     console.log(this.luaChonGroup.value);
+    if (this.luaChonGroup.controls['dotCham'].value == undefined) {
+      new NotificationsComponent().showNotification('danger', 'Xin Hãy Chọn Đợt Chấm Điểm');
+    } else {
+      if (this.luaChonGroup.controls['dotCham'].value == 'HoiDong') {
+        if (this.luaChonGroup.controls['ppcham'].value == "" || this.luaChonGroup.controls['vaitro'].value == "") {
+          new NotificationsComponent().showNotification('danger', 'Xin Hãy Chọn Phương Pháp Chấm Và Vai Trò của bạn');
+        } else {
+          this.getDsSvCuaGV(this.luaChonGroup.controls['hocKy'].value == undefined ? null : this.luaChonGroup.controls['hocKy'].value,
+              this.luaChonGroup.controls['vaitro'].value, this.maGiangVien, this.luaChonGroup.controls['ppcham'].value,
+              this.luaChonGroup.controls['dotCham'].value)
+        }
+      } else {
+        this.getDsSvCuaGV(this.luaChonGroup.controls['hocKy'].value == undefined ? null : this.luaChonGroup.controls['hocKy'].value,
+            null, this.maGiangVien, null, this.luaChonGroup.controls['dotCham'].value)
+      }
+
+    }
     // TH1: ko co hocKy -> cho HK moi nhat
     // TH2: dotcham -> HD, PB -> load
     // TH3: dotcham -> HoiDong
