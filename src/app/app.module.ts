@@ -98,6 +98,7 @@ import { GvShowCallendarComponent } from './dialog/gv-show-callendar/gv-show-cal
 import { QuanlyLophocphanComponent } from './quanly/quanly-lophocphan/quanly-lophocphan.component';
 import { QuanlyKetquahoctapComponent } from './quanly/quanly-ketquahoctap/quanly-ketquahoctap.component';
 import {MatExpansionModule} from "@angular/material/expansion";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
     imports: [
@@ -139,6 +140,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
         MatListModule,
         MatAutocompleteModule,
         MatExpansionModule,
+        MatMenuModule,
     ],
     declarations: [
         AppComponent,

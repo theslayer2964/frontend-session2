@@ -9,14 +9,20 @@
                          style="display: flex;justify-content: space-between;background-color: #4da1e8">
                         <h4 class="card-title"
                             style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH GIẢNG VIÊN</h4>
-                        <mat-form-field>
-                            <mat-label>Tùy chỉnh</mat-label>
-                            <mat-select>
-                                <mat-option (click)="openDialog()">Thêm danh sách giảng viên</mat-option>
-                                <mat-option (click)="openExcel()">Thêm danh sách bằng Excel</mat-option>
-                                <mat-option (click)="downloadFileSV()">Xuất file mẫu</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                        <button mat-button [matMenuTriggerFor]="afterMenu">Tùy chọn
+                            <mat-icon>keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #afterMenu="matMenu" xPosition="after" >
+                            <button mat-menu-item (click)="openDialog()" style="display: flex;justify-content: space-between;">
+                                <span>Thêm giảng viên</span>
+                            </button>
+                            <button mat-menu-item (click)="openExcel()" style="display: flex;justify-content: space-between;">
+                                <span>Thêm danh sách bằng Excel</span>
+                            </button>
+                            <button mat-menu-item (click)="downloadFileSV()" style="display: flex;justify-content: space-between;">
+                                <span>Xuất file Excel mẫu</span>
+                            </button>
+                        </mat-menu>
                     </div>
                     <hr>
 

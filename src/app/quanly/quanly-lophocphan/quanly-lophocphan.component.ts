@@ -120,8 +120,15 @@ export class QuanlyLophocphanComponent implements OnInit {
   @Input() validateNhom:any;
 
 
-  downloadFileSV() {
+  downloadFileMau() {
     console.log("XU LY TIP TUC...")
   }
 
+  importLopHocPhanExcel() {
+
+  }
+
+  exportFileLop() {
+
+  }
 }

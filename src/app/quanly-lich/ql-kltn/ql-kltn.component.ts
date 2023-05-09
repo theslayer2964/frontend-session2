@@ -1,8 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {HocKy} from "../../shared-service/HocKy.models";
-import {HockyService} from "../../shared-service/hocky.service";
-import {MatSelectChange} from "@angular/material/select";
-import {LichService} from "../../shared-service/lich/lich.service";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({

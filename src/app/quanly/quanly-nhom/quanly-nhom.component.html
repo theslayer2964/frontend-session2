@@ -5,14 +5,31 @@
                 <div class="card">
                     <div class="card-header card-header-warning" style="display: flex;justify-content: space-between">
                         <h4 class="card-title">DANH SÁCH NHÓM CỦA NHÓM SINH VIÊN</h4>
-                        <mat-form-field>
-                            <mat-label>Tùy chỉnh</mat-label>
-                            <mat-select>
-                                <mat-option (click)="downloadFileChamDiemNhom()">Xuất file Cham Diem Nhom</mat-option>
-                                <mat-option (click)="downloadFileSV()">Xuất file Ket qua</mat-option>
-                                <mat-option (click)="downloadFileMailMerge()">Xuất file Mailmerge</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+<!--                        <mat-form-field>-->
+<!--                            <mat-label>Tùy chỉnh</mat-label>-->
+<!--                            <mat-select>-->
+<!--                                <mat-option (click)="downloadFileChamDiemNhom()">Xuất file Cham Diem Nhom</mat-option>-->
+<!--                                <mat-option (click)="downloadFileSV()">Xuất file Ket qua</mat-option>-->
+<!--                                <mat-option (click)="downloadFileMailMerge()">Xuất file Mailmerge</mat-option>-->
+<!--                            </mat-select>-->
+<!--                        </mat-form-field>-->
+                        <button mat-button [matMenuTriggerFor]="afterMenu">Tùy chọn
+                            <mat-icon>keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #afterMenu="matMenu" xPosition="after" >
+                            <button mat-menu-item [matMenuTriggerFor]="vertebrates">Xuất file</button>
+                        </mat-menu>
+                        <mat-menu #vertebrates="matMenu">
+                            <button mat-menu-item (click)="downloadFileChamDiemNhom()" style="display: flex;justify-content: space-between;">
+                                <span>DS nhóm KLTN ra hội đồng</span>
+                            </button>
+                            <button mat-menu-item (click)="downloadFileSV()" style="display: flex;justify-content: space-between;">
+                                <span>DS nhóm KLTN</span>
+                            </button>
+                            <button mat-menu-item (click)="downloadFileMailMerge()" style="display: flex;justify-content: space-between;">
+                                <span>Mailmegre Phiếu chấm hội đồng</span>
+                            </button>
+                        </mat-menu>
                     </div>
                     <hr>
                     <div>

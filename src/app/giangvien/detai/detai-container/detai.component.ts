@@ -122,7 +122,7 @@ export class DetaiComponent implements OnInit {
 
     openDialogExcel() {
         this.dialog.open(DialogDeTaiGVComponent, {
-            width: '350px',
+            width: '650px',
         });
     }
 }

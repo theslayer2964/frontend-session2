@@ -10,31 +10,42 @@
                         <h4 class="card-title"
                             style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH ĐỀ
                             TÀI CỦA GIẢNG VIÊN</h4>
-                        <mat-form-field>
-                            <mat-label>Tùy chỉnh</mat-label>
-                            <mat-select>
-                                <mat-option (click)="openDialog()">Thêm danh sách đề tài</mat-option>
-                                <mat-option (click)="downloadFileSV()">Xuất file mẫu</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                        <button mat-button [matMenuTriggerFor]="afterMenu">Tùy chọn
+                            <mat-icon>keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #afterMenu="matMenu" xPosition="after">
+                            <button mat-menu-item (click)="openDialog()"
+                                    style="display: flex;justify-content: space-between;">
+                                <span>Thêm danh sách đề tài</span>
+                            </button>
+                            <button mat-menu-item (click)="downloadFileSV()"
+                                    style="display: flex;justify-content: space-between;">
+                                <span>Xuất file excel mẫu</span>
+                            </button>
+                        </mat-menu>
                     </div>
                     <hr>
-                    <div>
-                        <mat-form-field style="width: 500px;margin-left: 20px">
-                            <mat-label>-- Chọn học kỳ --</mat-label>
-                            <mat-select (selectionChange)="changeHocKy($event)">
-                                <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">HK{{hocKy.soHocKy}}
-                                    -20{{hocKy.maHocKy}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field style="width: 400px;margin-left: 20px">
-                            <mat-label>-- Chọn tình trạng --</mat-label>
-                            <mat-select (selectionChange)="changeTinhTrang($event)">
-                                <mat-option [value]="0">Chưa duyệt</mat-option>
-                                <mat-option [value]="1">Cần chỉnh sửa</mat-option>
-                                <mat-option [value]="2">Đã Duyệt</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <mat-form-field style="width: 500px;margin-left: 20px">
+                                <mat-label>-- Chọn học kỳ --</mat-label>
+                                <mat-select (selectionChange)="changeHocKy($event)">
+                                    <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">
+                                        HK{{hocKy.soHocKy}}
+                                        -20{{hocKy.maHocKy}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <mat-form-field style="width: 400px;margin-left: 20px">
+                                <mat-label>-- Chọn tình trạng --</mat-label>
+                                <mat-select (selectionChange)="changeTinhTrang($event)">
+                                    <mat-option [value]="0">Chưa duyệt</mat-option>
+                                    <mat-option [value]="1">Cần chỉnh sửa</mat-option>
+                                    <mat-option [value]="2">Đã Duyệt</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
                     </div>
                     <div>
                         <mat-form-field style="width: 500px;margin-left: 20px">
@@ -53,7 +64,7 @@
                                 <td mat-cell *matCellDef="let row"> {{row.maDeTai}} </td>
                             </ng-container>
                             <!-- Progress Column -->
-                            <ng-container matColumnDef="tenDeTai" >
+                            <ng-container matColumnDef="tenDeTai">
                                 <th mat-header-cell *matHeaderCellDef style="text-align: center;">
                                     TÊN ĐỀ TÀI
                                 </th>
@@ -93,7 +104,7 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="mucTieuDeTai">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center"> MỤC
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center"> MỤC
                                     TIÊU ĐỀ TÀI
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.mucTieuDeTai}}"
@@ -108,7 +119,7 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="sanPhamDuKien">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center"> SẢN
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center"> SẢN
                                     PHẨM DỰ KIẾN
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.sanPhamDuKien}}"
@@ -123,7 +134,7 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="trangThai">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center"> TRẠNG
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center"> TRẠNG
                                     THÁI
                                 </th>
                                 <td mat-cell *matCellDef="let row">
@@ -134,7 +145,7 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="yeuCauDauVao">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center"> YÊU
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center"> YÊU
                                     CẦU ĐẦU VÀO
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.yeuCauDauVao}}"
