@@ -5,7 +5,14 @@
                 <div class="card">
                     <div class="card-header card-header-warning" style="display: flex;justify-content: space-between">
                         <h4 class="card-title">DANH SÁCH NHÓM CỦA NHÓM SINH VIÊN</h4>
-                        <button mat-raised-button color="warn" (click)="downloadFileSV()" style="height: 40px">Xuất file mẫu</button>
+                        <mat-form-field>
+                            <mat-label>Tùy chỉnh</mat-label>
+                            <mat-select>
+                                <mat-option (click)="downloadFileChamDiemNhom()">Xuất file Cham Diem Nhom</mat-option>
+                                <mat-option (click)="downloadFileSV()">Xuất file Ket qua</mat-option>
+                                <mat-option (click)="downloadFileMailMerge()">Xuất file Mailmerge</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
                     <hr>
                     <div>

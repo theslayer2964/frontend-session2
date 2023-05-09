@@ -133,7 +133,11 @@
                             <ng-container matColumnDef="vaiTro">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Vai trò</th>
                                 <td mat-cell *matCellDef="let row">
-                                    {{row.vaiTro}}
+                                    <span *ngIf="row.vaiTro == 'HD'">Hướng Dẫn</span>
+                                    <span *ngIf="row.vaiTro == 'PB'">Phản Biện</span>
+                                    <span *ngIf="row.vaiTro == 'TK'">Thư Ký</span>
+                                    <span *ngIf="row.vaiTro == 'CT'">Chủ Tịch</span>
+                                    <span *ngIf="row.vaiTro == 'TV3'">Thành Viên thứ 3</span>
                                 </td>
                             </ng-container>
                             <ng-container matColumnDef="action">

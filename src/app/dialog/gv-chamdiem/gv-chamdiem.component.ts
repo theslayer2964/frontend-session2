@@ -38,7 +38,8 @@ export class GvChamdiemComponent implements OnInit {
         this.gvChamdiemTransfer.vaiTroBehaviorSubject.subscribe(res => {
             this.vaitro = res;
         })
-        this.tieuchichamdiemService.layPhieuChamMau(this.vaitro).subscribe(
+        console.log(this.editData)
+        this.tieuchichamdiemService.layPhieuChamMau(this.editData.vaiTro).subscribe(
             (res: any) => {
                 this.pheuChamMau = res.tieuChiChamDiems;
                 this.destroy$.next(this.pheuChamMau);
@@ -108,7 +109,7 @@ export class GvChamdiemComponent implements OnInit {
         var data = {
             bangDiem: this.employeeForm.value.tableRows,
             sinhVien: this.editData.sinhVien,
-            tenPhieu: this.vaitro,
+            tenPhieu: this.editData.vaiTro,
             maDeTai: this.editData.maDeTai,
             maGiangVien: this.userAuthService.getUserInfo().maGiangVien
         }
