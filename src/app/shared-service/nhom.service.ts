@@ -75,10 +75,34 @@ export class NhomService {
         });
     }
 
+    getDsNhomPB(): any{
+        let headers = this.httpHeadersJWT;
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+        headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
+        return this.httpClient.get(this.urlQuanLy + "xuat-nhom-ra-pb" , {
+            headers: headers,
+            responseType: 'arraybuffer',
+            observe: 'response'
+        });
+    }
+
+    geMailmerge(): any{
+        let headers = this.httpHeadersJWT;
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+        headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
+        return this.httpClient.get(this.urlQuanLy + "xuat-mailmerge" , {
+            headers: headers,
+            responseType: 'arraybuffer',
+            observe: 'response'
+        });
+    }
+
     dangKyNhomCoSan(data: any) {
         return this.httpClient.post<any>(this.url + "dang-ky-co-san", data, {headers: this.httpHeadersJWT}).pipe(
             tap(receiveNhom => receiveNhom),
             catchError(err => of([])));
     }
+
+
 
 }

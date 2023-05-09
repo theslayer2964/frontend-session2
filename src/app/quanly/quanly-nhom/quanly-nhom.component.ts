@@ -11,7 +11,7 @@ import {ThemNhomComponent} from "../../dialog/them-nhom/them-nhom.component";
 import {MatSelectChange} from "@angular/material/select";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 import {FileGeneratorService} from "../../shared-service/file-generator.service";
-import {DS_Nhom_KLTN} from "../../shared-service/FileNameExport";
+import {DS_Nhom_KLTN, DS_Nhom_KLTN_RA_HD_POSTER, MailMerge_PhieuChamHD} from "../../shared-service/FileNameExport";
 
 @Component({
   selector: 'app-quanly-nhom',
@@ -132,6 +132,18 @@ export class QuanlyNhomComponent implements OnInit {
   downloadFileSV() {
     this.nhomService.getDsNhomTrongHocKy().subscribe(res => {
       this.filegenerate.generateFile(DS_Nhom_KLTN, res['body'], 'xlsx');
+    });
+  }
+
+  downloadFileChamDiemNhom() {
+    this.nhomService.getDsNhomPB().subscribe(res => {
+      this.filegenerate.generateFile(DS_Nhom_KLTN_RA_HD_POSTER, res['body'], 'xlsx');
+    });
+  }
+
+  downloadFileMailMerge() {
+    this.nhomService.geMailmerge().subscribe(res => {
+      this.filegenerate.generateFile(MailMerge_PhieuChamHD, res['body'], 'xlsx');
     });
   }
 }
