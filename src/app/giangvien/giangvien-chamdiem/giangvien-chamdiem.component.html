@@ -7,15 +7,23 @@
                          style="display: flex;justify-content: space-between;background-color: #4da1e8">
                         <h4 class="card-title"
                             style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">ĐÁNH GIÁ CÁC NHÓM ĐỀ TÀI</h4>
-                        <mat-form-field>
-                            <mat-label>Tùy chỉnh</mat-label>
-                            <mat-select>
-                                <mat-option (click)="nhapDiemExcel()">Nhập điểm bằng Excel</mat-option>
-                                <mat-option (click)="xuatFileChamDiemMacDinh()">Xuất file nhập điểm mặc định
-                                </mat-option>
-                                <mat-option (click)="xuatFileExcel()">Xuất file excel</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                        <button mat-button [matMenuTriggerFor]="afterMenu">Tùy chọn
+                            <mat-icon>keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #afterMenu="matMenu" xPosition="after" >
+                            <button mat-menu-item (click)="nhapDiemExcel()" style="display: flex;justify-content: space-between;">
+                                <span>Nhập điểm bằng Excel</span>
+                            </button>
+                            <button mat-menu-item [matMenuTriggerFor]="vertebrates">Xuất phiếu chấm mẫu</button>
+                            <button mat-menu-item (click)="xuatFileExcel()" style="display: flex;justify-content: space-between;">
+                                <span>Xuất file kết quả</span>
+                            </button>
+                        </mat-menu>
+                        <mat-menu #vertebrates="matMenu">
+                            <button mat-menu-item>GV Hướng dẫn</button>
+                            <button mat-menu-item>GV Phản biện</button>
+                            <button mat-menu-item>GV Hội đồng</button>
+                        </mat-menu>
                     </div>
                     <hr>
                     <div class="row">

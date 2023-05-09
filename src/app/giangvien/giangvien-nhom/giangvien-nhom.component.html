@@ -6,8 +6,20 @@
                     <div class="card-header"
                          style="display: flex;justify-content: space-between;background-color: #4da1e8">
                     <h4 class="card-title">DANH SÁCH NHÓM THEO ĐỀ TÀI CỦA GIẢNG VIÊN</h4>
-                        <button mat-raised-button color="warn" (click)="openDialog()" style="height: 40px">Tạo nhóm
-                        </button>
+                        <div>
+                            <button mat-button [matMenuTriggerFor]="afterMenu">Tùy chọn
+                                <mat-icon>keyboard_arrow_down</mat-icon></button>
+                            <mat-menu #afterMenu="matMenu" xPosition="after">
+                                <button mat-menu-item (click)="openDialog()">
+                                    <span>Tạo nhóm  </span>
+                                    <mat-icon>group</mat-icon>
+                                </button>
+                                <button mat-menu-item (click)="openDialog()">
+                                    <span>Xuất DS Nhóm  </span>
+                                    <mat-icon> attach_file</mat-icon>
+                                </button>
+                            </mat-menu>
+                        </div>
                     </div>
                     <hr>
                     <div>

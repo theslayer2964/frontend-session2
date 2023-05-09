@@ -25,6 +25,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
 import {MatTabsModule} from "@angular/material/tabs";
 import { QlTkbChianhomComponent } from './ql-tkb-chianhom/ql-tkb-chianhom.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
     imports: [
@@ -44,7 +45,8 @@ import { QlTkbChianhomComponent } from './ql-tkb-chianhom/ql-tkb-chianhom.compon
         FullCalendarModule,
         MatPaginatorModule,
         MatTableModule,
-        MatTabsModule
+        MatTabsModule,
+        MatMenuModule
     ],
     declarations: [
         QuanlyLichContainerComponent,

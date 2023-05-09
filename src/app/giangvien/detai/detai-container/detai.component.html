@@ -9,13 +9,20 @@
                          style="display: flex;justify-content: space-between;background-color: #4da1e8">
                         <h4 class="card-title"
                             style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH ĐỀ TÀI CỦA GIẢNG VIÊN</h4>
-                        <mat-form-field style="width: 200px;margin-left: 20px">
-                            <mat-label>-- Tùy Chỉnh --</mat-label>
-                            <mat-select >
-                                <mat-option (click)="openDialog()"> Thêm đề tài </mat-option>
-                                <mat-option (click)="openDialogExcel()">  Thêm đề tài excel </mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                        <div>
+                            <button mat-button [matMenuTriggerFor]="afterMenu">Tùy chọn
+                                <mat-icon>keyboard_arrow_down</mat-icon></button>
+                            <mat-menu #afterMenu="matMenu" xPosition="after" >
+                                <button mat-menu-item (click)="openDialog()" style="display: flex;justify-content: space-between;">
+                                    <span>Thêm đề tài</span>
+                                    <mat-icon style="margin-top: 10px">add_circle_outline</mat-icon>
+                                </button>
+                                <button mat-menu-item (click)="openDialogExcel()" style="display: flex;justify-content: space-between">
+                                    <span>Thêm đề tài excel  </span>
+                                    <mat-icon style="margin-top: 10px"> attach_file</mat-icon>
+                                </button>
+                            </mat-menu>
+                        </div>
                     </div>
                     <hr>
                     <div>

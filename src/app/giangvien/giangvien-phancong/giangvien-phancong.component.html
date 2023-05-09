@@ -5,7 +5,15 @@
                 <div class="card">
                     <div class="card-header card-header-warning" style="display: flex;justify-content: space-between">
                         <h4 class="card-title">DANH SÁCH SINH VIÊN</h4>
-                        <button mat-raised-button color="warn" (click)="downloadFileSV()" style="height: 40px">Xuất file mẫu</button>
+                        <button mat-button [matMenuTriggerFor]="afterMenu">Tùy chọn
+                            <mat-icon>keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #afterMenu="matMenu" xPosition="after" >
+                            <button mat-menu-item (click)="downloadFileSV()" style="display: flex;justify-content: space-between;">
+                                <span>Xuất file kết quả</span>
+                                <mat-icon style="margin-top: 10px">cloud_download</mat-icon>
+                            </button>
+                        </mat-menu>
                     </div>
                     <hr>
                     <div class="row">

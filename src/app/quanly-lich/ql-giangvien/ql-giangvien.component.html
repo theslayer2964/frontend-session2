@@ -6,13 +6,20 @@
                     <hr>
                     <div class="card-header card-header-warning" style="display: flex;justify-content: space-between">
                         <h4 class="card-title">Xếp thời khóa biểu cho giảng viên</h4>
-                        <mat-form-field style="width: 400px;margin-left: 20px">
-                            <mat-label>Tùy chọn</mat-label>
-                            <mat-select>
-                                <mat-option (click)="addThoiKhoaBieuPB()">Thêm TKB chấm phản biện</mat-option>
-                                <mat-option (click)="addThoiKhoaBieuHD()">Thêm TKB chấm hội đồng</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                        <button mat-button [matMenuTriggerFor]="afterMenu">Tùy chọn
+                            <mat-icon>keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #afterMenu="matMenu" xPosition="after" >
+                            <button mat-menu-item (click)="addThoiKhoaBieuPB()" style="display: flex;justify-content: space-between;">
+                                <span>Thêm TKB chấm phản biện</span>
+                            </button>
+                            <button mat-menu-item (click)="addThoiKhoaBieuHD()" style="display: flex;justify-content: space-between;">
+                                <span>Thêm TKB chấm hội đồng</span>
+                            </button>
+                            <button mat-menu-item style="display: flex;justify-content: space-between;">
+                                <span>Xuất file DS Hội đồng</span>
+                            </button>
+                        </mat-menu>
                     </div>
                     <hr>
                     <div class="row">

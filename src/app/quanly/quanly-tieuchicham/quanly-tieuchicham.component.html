@@ -10,19 +10,24 @@
                         <h4 class="card-title"
                             style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH TIÊU
                             CHÍ HIỆN CÓ</h4>
-                        <mat-form-field>
-                            <mat-label>Tùy chỉnh</mat-label>
-                            <mat-select>
-                                <mat-option (click)="addTieuChiCham()">Thêm tiêu chí chấm điểm</mat-option>
-                                <mat-option (click)="nhapExcel()">Nhập bằng Excel</mat-option>
-                                <mat-option (click)="xuatFileChamDiemMacDinh()">Xuất file nhập tiêu chí mặc định
-                                </mat-option>
-                                <mat-option (click)="xuatFileExcel()">Xuất file excel</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <button mat-raised-button class="btn btn-primary" (click)="directPhieuCham()" style="height: 40px">
-                            Quay lại phiếu chấm
+                        <button mat-button [matMenuTriggerFor]="afterMenu">Tùy chọn
+                            <mat-icon>keyboard_arrow_down</mat-icon>
                         </button>
+                        <mat-menu #afterMenu="matMenu" xPosition="after" >
+                            <button mat-menu-item (click)="addTieuChiCham()" style="display: flex;justify-content: space-between;">
+                                <span>Thêm tiêu chí chấm điểm</span>
+                            </button>
+                            <button mat-menu-item (click)="nhapExcel()" style="display: flex;justify-content: space-between;">
+                                <span>Thêm tiêu chí chấm bằng Excel</span>
+                            </button>
+                            <button mat-menu-item (click)="xuatFileChamDiemMacDinh()" style="display: flex;justify-content: space-between;">
+                                <span>Xuất file Excel mẫu</span>
+                            </button>
+                            <mat-divider></mat-divider>
+                            <button mat-menu-item (click)="directPhieuCham()" style="display: flex;justify-content: space-between;">
+                                <span><b>Quay lại phiếu chấm</b></span>
+                            </button>
+                        </mat-menu>
                     </div>
                     <hr>
                     <div>
