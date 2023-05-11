@@ -109,8 +109,6 @@ export class QuanlyPhieuchamComponent implements OnInit {
   }
 
   downloadFileSV() {
-    this.tieuChiChamDiem.getKetQuaTrongHocKy().subscribe(res => {
-      this.fileGenerate.generateFile(DS_Nhom_KLTN, res['body'], 'xlsx');
-    });
+
   }
 }

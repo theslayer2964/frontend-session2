@@ -52,15 +52,4 @@ export class TieuchichamdiemService {
             catchError(err => of([])));
   }
 
-  getKetQuaTrongHocKy(): any{
-    let headers = this.httpHeadersJWT;
-    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
-    headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
-    return this.httpClient.get(this.urlQuanLy + "xuat-ketquanhom-kltn" , {
-      headers: headers,
-      responseType: 'arraybuffer',
-      observe: 'response'
-    });
-  }
-
 }

@@ -47,4 +47,15 @@ export class GiangvienService {
             tap(receiveNhom => receiveNhom),
             catchError(err => of([])));
   }
+
+  xuatfileMauGV(): any {
+    let headers = this.httpHeadersJWT;
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
+    return this.httpClient.get(this.urlQuanLy + "xuat-file-mau-gv" ,{
+      headers: headers,
+      responseType: 'arraybuffer',
+      observe: 'response'
+    });
+  }
 }

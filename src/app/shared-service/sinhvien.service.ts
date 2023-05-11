@@ -18,16 +18,13 @@ export class SinhvienService {
   })
   constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) { }
 
-  addSinhVienExcel(file: any, maGV: string) {
+  addSinhVienExcel(file: any) {
     var formData = new FormData();
     formData.append("file", file);
     return this.httpClient.post<any>(this.urlSinhVien + "them-sinh-vien-excel/", formData,{headers: {
         'Accept':'application/json',
         Authorization: `Bearer ${(this.token)}`
-      }} ).pipe(
-        tap(recieveDeTai => recieveDeTai),
-        catchError(err => of([])));
-    ;
+      }})
   }
 
 
@@ -51,4 +48,35 @@ export class SinhvienService {
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));
   }
+
+  lyaDsSinhVienLop(data: any): Observable<any[]> {
+    return this.httpClient.post<any[]>(this.urlSinhVien + "lay-sinh-vien-lop", data, {headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+  }
+
+  xuatDsSinhVienLopHocPhan(data: any): any {
+    let headers = this.httpHeadersJWT;
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
+    return this.httpClient.post(this.urlQuanLy + "xuat-ds-sinhvien" ,data, {
+      headers: headers,
+      responseType: 'arraybuffer',
+      observe: 'response'
+    });
+  }
+
+  xuatfileMauSV(): any {
+    let headers = this.httpHeadersJWT;
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
+    return this.httpClient.get(this.urlQuanLy + "xuat-file-mau-sv" ,{
+      headers: headers,
+      responseType: 'arraybuffer',
+      observe: 'response'
+    });
+  }
+
+
 }
