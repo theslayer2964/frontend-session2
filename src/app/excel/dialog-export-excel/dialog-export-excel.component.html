@@ -1,0 +1,22 @@
+<div *ngIf="editData.variable == 'hocKy'"><h3>Chọn Học Kỳ Mà Bạn Muốn Tải</h3>
+<mat-form-field style="width: 400px;margin-left: 20px" >
+    <mat-label>-- Chọn học kỳ --</mat-label>
+    <mat-select (selectionChange)="changeHocKy($event)">
+        <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">HK{{hocKy.soHocKy}}
+            -20{{hocKy.maHocKy}}</mat-option>
+    </mat-select>
+</mat-form-field>
+</div>
+<div *ngIf="editData.variable == 'hocPhan'">
+    <h3>Chọn lớp học phần Mà Bạn Muốn Tải</h3>
+<mat-form-field style="width: 400px;margin-left: 20px" >
+    <mat-label>-- Chọn Lớp Học Phần --</mat-label>
+    <mat-select (selectionChange)="changeLopHP($event)">
+        <mat-option *ngFor="let lopHP of dsLopHP" [value]="lopHP.maLopHocPhan">{{lopHP.tenLopHocPhan}}</mat-option>
+    </mat-select>
+</mat-form-field>
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
+    <button style="margin-left: 8px" mat-raised-button color="primary" [mat-dialog-close]="editData">Tải</button>
+</div>

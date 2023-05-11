@@ -8,6 +8,13 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 import {MatSelectChange} from "@angular/material/select";
+import {LopHocPhanService} from "../../shared-service/lop-hoc-phan.service";
+import {SinhvienService} from "../../shared-service/sinhvien.service";
+import {ThemgvComponent} from "../../dialog/themgv/themgv.component";
+import {ThemLopHocPhanComponent} from "../../dialog/them-lop-hoc-phan/them-lop-hoc-phan.component";
+import {DialogExportExcelComponent} from "../../excel/dialog-export-excel/dialog-export-excel.component";
+import {DS_Nhom_KLTN_RA_HD_POSTER} from "../../shared-service/FileNameExport";
+import {FileGeneratorService} from "../../shared-service/file-generator.service";
 
 @Component({
   selector: 'app-quanly-lophocphan',
@@ -15,11 +22,18 @@ import {MatSelectChange} from "@angular/material/select";
   styleUrls: ['./quanly-lophocphan.component.scss']
 })
 export class QuanlyLophocphanComponent implements OnInit {
-  displayedColumns: string[] = ['stt', 'maSV', 'hodem', 'ten',"gioitinh","ngaysinh","sdt", "nhom","action"];
+  displayedColumns: string[] = [ "maSinhVien","tenSinhVien","dienThoai","email","gioiTinh", "ngaySinh",
+    "maLopDanhNghia","maNhom","action"];
   dataSource!: MatTableDataSource<any>;
   dsHocKy: HocKy[];
 
-  constructor(public dialog: MatDialog, private nhomService: NhomService, private hockyService: HockyService) {
+  dsLop: any[];
+
+  constructor(public dialog: MatDialog,
+              private lopHocPhanService: LopHocPhanService,
+              private hockyService: HockyService,
+              private sinhVienService: SinhvienService,
+              private filegenerate: FileGeneratorService) {
 
   }
 
@@ -33,9 +47,19 @@ export class QuanlyLophocphanComponent implements OnInit {
     })
   }
 
+  private getAllLopHP() {
+    this.lopHocPhanService.layDsLop().subscribe({
+      next: (res) => {
+        this.dsLop = res;
+      }, error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
   ngOnInit(): void {
     this.getAllHocKy();
-    console.log("PAREN TO CHILD:", this.validateNhom);
+    this.getAllLopHP();
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -53,22 +77,7 @@ export class QuanlyLophocphanComponent implements OnInit {
   }
 
   editProduct(row: any) {
-    // this.nhomService.duyetNhom({
-    //   ma: row.nhom.maNhom,
-    //   trangThai: 1,
-    //   maHocKy: this.hocKyHienTai
-    // }).subscribe({
-    //   next: (res) => {
-    //     if (res) {
-    //       this.getDsNhom()
-    //       new NotificationsComponent().showNotification('success', 'Duyệt nhóm thành công');
-    //     }
-    //   },
-    //   error: () => {
-    //     console.log("Error")
-    //     new NotificationsComponent().showNotification('success', 'Duyệt nhóm thất bại');
-    //   }
-    // })
+
   }
 
   deleteProduct(id) {
@@ -80,55 +89,49 @@ export class QuanlyLophocphanComponent implements OnInit {
   changeHocKy($event: MatSelectChange) {
     this.hocKyHienTai = $event.value.toString().slice(0, 3)
     this.soHocKy = $event.value.toString().slice(2)
+    this.sinhVienService.lyaDsSinhVienLop({
+      maHocKy: this.hocKyHienTai
+    }).subscribe(res => {
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
+  }
 
-    // this.getDsNhom();
+  changeLopHP($event: MatSelectChange) {
+    this.sinhVienService.lyaDsSinhVienLop({
+      maLopHocPhan: $event.value
+    }).subscribe(res => {
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
   }
   tinhTrang: any;
-  private getDsNhom() {
-    console.log('XXX:', this.hocKyHienTai, this.soHocKy);
-    this.nhomService.getNhomRoleGV({
-      maHocKy: this.hocKyHienTai,
-      soHocKy: this.soHocKy,
-      trangThai: this.tinhTrang
-    })
-        .subscribe({
-          next: (res) => {
-            if (res) {
-              res.forEach( data => {
-                var temp;
-                temp = data.dsMaSinhVien;
-                console.log("TEMP:", temp)
-                delete data['npm it pdsMaSinhVien'];
-                data.sv1 = temp[0];
-                if(temp.length == 2 ){
-                  data.sv2 = temp[1];
-                }
-              });
-              console.log("DATA REMAKE ne: ", res)
-              this.dataSource = new MatTableDataSource(res);
-              this.dataSource.paginator = this.paginator;
-              this.dataSource.sort = this.sort;
-            }
-          },
-          error: () => {
-            console.log("Error")
-          }
-        })
-  }
 
   // Table
   @Input() validateNhom:any;
 
 
-  downloadFileMau() {
-    console.log("XU LY TIP TUC...")
-  }
-
-  importLopHocPhanExcel() {
-
+  themLopHP() {
+    this.dialog.open(ThemLopHocPhanComponent, {}).afterClosed().subscribe(val => {
+      if (val === "save") {
+        this.getAllLopHP();
+      }
+    })
   }
 
   exportFileLop() {
-
+    this.dialog.open(DialogExportExcelComponent, {data: {variable: "hocPhan", ma: null}}).afterClosed().subscribe(
+        val => {
+          if (val.ma != null && val.ma != undefined && val.ma != "") {
+            this.sinhVienService.xuatDsSinhVienLopHocPhan({maLopHocPhan: val.ma}).subscribe(res => {
+              this.filegenerate.generateFile(DS_Nhom_KLTN_RA_HD_POSTER, res['body'], 'xlsx');
+              new NotificationsComponent().showNotification('success', 'Xuất file excel thành công');
+            });
+          } else {
+            new NotificationsComponent().showNotification('danger', 'Hãy Chọn Lơớp Học Phần');
+          }
+    })
   }
 }

@@ -9,14 +9,11 @@
                             <mat-icon>keyboard_arrow_down</mat-icon>
                         </button>
                         <mat-menu #afterMenu="matMenu" xPosition="after" >
-                            <button mat-menu-item (click)="downloadFileMau()" style="display: flex;justify-content: space-between;">
-                                <span>Xuất file excel mẫu</span>
+                            <button mat-menu-item (click)="themLopHP()" style="display: flex;justify-content: space-between;">
+                                <span>Thêm Lớp Học Phần</span>
                             </button>
                             <button mat-menu-item (click)="exportFileLop()" style="display: flex;justify-content: space-between;">
                                 <span>Xuất danh sách lớp</span>
-                            </button>
-                            <button mat-menu-item (click)="importLopHocPhanExcel()" style="display: flex;justify-content: space-between;">
-                                <span>Nhập danh sách lớp</span>
                             </button>
                         </mat-menu>
                     </div>
@@ -30,24 +27,9 @@
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field style="width: 400px;margin-left: 20px">
-                            <mat-label>-- Chọn ngành --</mat-label>
-                            <mat-select>
-                                <mat-option [value]="0">Chưa duyệt</mat-option>
-                                <mat-option [value]="1">Đã Duyệt</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field style="width: 400px;margin-left: 20px">
-                            <mat-label>-- Chọn chuyên ngành --</mat-label>
-                            <mat-select>
-                                <mat-option [value]="0">Chưa duyệt</mat-option>
-                                <mat-option [value]="1">Đã Duyệt</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field style="width: 400px;margin-left: 20px">
                             <mat-label>-- Chọn lớp học phần --</mat-label>
-                            <mat-select>
-                                <mat-option [value]="0">Chưa duyệt</mat-option>
-                                <mat-option [value]="1">Đã Duyệt</mat-option>
+                            <mat-select (selectionChange)="changeLopHP($event)">
+                                <mat-option *ngFor="let lop of dsLop" [value]="lop.maLopHocPhan">HK{{lop.tenLopHocPhan}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -60,38 +42,45 @@
                     </div>
                     <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;overflow: auto;">
                         <table mat-table [dataSource]="dataSource" matSort >
-                            <ng-container matColumnDef="stt">
-                                <th mat-header-cell *matHeaderCellDef  >STT</th>
-                                <td mat-cell *matCellDef="let row"> {{row.stt}} </td>
+                            <ng-container matColumnDef="maSinhVien">
+                                <th mat-header-cell *matHeaderCellDef>Mã sinh viên</th>
+                                <td mat-cell *matCellDef="let row"> {{row.maSinhVien}} </td>
                             </ng-container>
-                            <ng-container matColumnDef="maSV">
-                                <th mat-header-cell *matHeaderCellDef>Mã SV</th>
-                                <td mat-cell *matCellDef="let row"> {{row.maSV}} </td>
+                            <ng-container matColumnDef="tenSinhVien">
+                                <th mat-header-cell *matHeaderCellDef>Tên sinh viên</th>
+                                <td mat-cell *matCellDef="let row"> {{row.tenSinhVien}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="dienThoai">
+                                <th mat-header-cell *matHeaderCellDef>Điện thoại</th>
+                                <td mat-cell *matCellDef="let row"> {{row.dienThoai}} </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="hodem">
-                                <th mat-header-cell *matHeaderCellDef  >Họ đệm</th>
-                                <td mat-cell *matCellDef="let row"> {{row.hodem}}</td>
+                            <ng-container matColumnDef="email">
+                                <th mat-header-cell *matHeaderCellDef>Email</th>
+                                <td mat-cell *matCellDef="let row"> {{row.email}}</td>
                             </ng-container>
-                            <ng-container matColumnDef="ten">
-                                <th mat-header-cell *matHeaderCellDef  >Tên</th>
-                                <td mat-cell *matCellDef="let row"> {{row.ten}} </td>
+                            <ng-container matColumnDef="gioiTinh">
+                                <th mat-header-cell *matHeaderCellDef>Giới tính</th>
+                                <td mat-cell *matCellDef="let row">
+                                <span *ngIf="row.gioiTinh == 1"> Nam</span>
+                                    <span *ngIf="row.gioiTinh != 1"> Nữ</span>
+                                </td>
                             </ng-container>
-                            <ng-container matColumnDef="gioitinh">
-                                <th mat-header-cell *matHeaderCellDef  >Giới tính</th>
-                                <td mat-cell *matCellDef="let row"> {{row.gioitinh}} </td>
+                            <ng-container matColumnDef="ngaySinh">
+                                <th mat-header-cell *matHeaderCellDef>Ngày sinh</th>
+                                <td mat-cell *matCellDef="let row"> {{row.ngaySinh | date: 'dd/MM/yyyy'}}</td>
                             </ng-container>
-                            <ng-container matColumnDef="ngaysinh">
-                                <th mat-header-cell *matHeaderCellDef  >Ngày sinh</th>
-                                <td mat-cell *matCellDef="let row"> {{row.ngaysinh}} </td>
+
+                            <ng-container matColumnDef="maLopDanhNghia">
+                                <th mat-header-cell *matHeaderCellDef>Lớp danh nghĩa</th>
+                                <td mat-cell *matCellDef="let row"> {{row.lopDanhNghia.maLopDanhNghia}}</td>
                             </ng-container>
-                            <ng-container matColumnDef="sdt">
-                                <th mat-header-cell *matHeaderCellDef  >Số điện thoại</th>
-                                <td mat-cell *matCellDef="let row"> {{row.sdt}} </td>
-                            </ng-container>
-                            <ng-container matColumnDef="nhom">
-                                <th mat-header-cell *matHeaderCellDef  >Nhóm</th>
-                                <td mat-cell *matCellDef="let row"> {{row.nhom}} </td>
+                            <ng-container matColumnDef="maNhom">
+                                <th mat-header-cell *matHeaderCellDef>Tên Nhóm</th>
+                                <td mat-cell *matCellDef="let row">
+                                <span *ngIf="row.nhom  != null">{{row.nhom.tenNhom}}</span>
+                                <span *ngIf="row.nhom  == null">--</span>
+                                </td>
                             </ng-container>
                             <ng-container matColumnDef="action">
                                 <th mat-header-cell *matHeaderCellDef  >action</th>

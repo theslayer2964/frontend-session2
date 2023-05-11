@@ -16,6 +16,7 @@ import {
   DialogExcelQlGiangvienComponent
 } from "../../excel/dialog-excel-ql-giangvien/dialog-excel-ql-giangvien.component";
 import {GiangvienService} from "../../shared-service/giangvien.service";
+import {FileGeneratorService} from "../../shared-service/file-generator.service";
 
 @Component({
   selector: 'app-quanly-giangvien',
@@ -27,7 +28,7 @@ export class QuanlyGiangvienComponent implements OnInit {
   private soHocKy: any;
 
   constructor(public dialog: MatDialog, private giangVienService: GiangvienService,
-              private userAuthService: UserAuthService) {
+              private userAuthService: UserAuthService,  private filegenerate: FileGeneratorService) {
   }
 
   ngOnInit(): void {
@@ -107,6 +108,10 @@ export class QuanlyGiangvienComponent implements OnInit {
   }
 
   downloadFileSV() {
+    this.giangVienService.xuatfileMauGV().subscribe(res => {
+      this.filegenerate.generateFile("FIle_Mau_Giang_Vien", res['body'], 'xlsx');
+      new NotificationsComponent().showNotification('success', 'Xuất file excel thành công');
+    });
 
   }
 

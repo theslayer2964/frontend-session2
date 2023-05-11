@@ -99,6 +99,8 @@ import { QuanlyLophocphanComponent } from './quanly/quanly-lophocphan/quanly-lop
 import { QuanlyKetquahoctapComponent } from './quanly/quanly-ketquahoctap/quanly-ketquahoctap.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatMenuModule} from "@angular/material/menu";
+import { ThemLopHocPhanComponent } from './dialog/them-lop-hoc-phan/them-lop-hoc-phan.component';
+import { DialogExportExcelComponent } from './excel/dialog-export-excel/dialog-export-excel.component';
 
 @NgModule({
     imports: [
@@ -202,7 +204,9 @@ import {MatMenuModule} from "@angular/material/menu";
         GiangvienLichComponent,
         GvShowCallendarComponent,
         QuanlyLophocphanComponent,
-        QuanlyKetquahoctapComponent
+        QuanlyKetquahoctapComponent,
+        ThemLopHocPhanComponent,
+        DialogExportExcelComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

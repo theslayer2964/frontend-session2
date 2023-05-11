@@ -64,33 +64,44 @@ export class NhomService {
             catchError(err => of([])));
     }
 
-    getDsNhomTrongHocKy(): any{
+    getDsNhomTrongHocKy(data: any): any{
         let headers = this.httpHeadersJWT;
         headers = headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
-        return this.httpClient.get(this.urlQuanLy + "xuat-ds-nhom" , {
+        return this.httpClient.post(this.urlQuanLy + "xuat-ds-nhom" , data,{
             headers: headers,
             responseType: 'arraybuffer',
             observe: 'response'
         });
     }
 
-    getDsNhomPB(): any{
+    getDsNhomPB(data: any): any{
         let headers = this.httpHeadersJWT;
         headers = headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
-        return this.httpClient.get(this.urlQuanLy + "xuat-nhom-ra-pb" , {
+        return this.httpClient.post(this.urlQuanLy + "xuat-nhom-ra-pb" , data,{
             headers: headers,
             responseType: 'arraybuffer',
             observe: 'response'
         });
     }
 
-    geMailmerge(): any{
+    geMailmerge(data: any): any{
         let headers = this.httpHeadersJWT;
         headers = headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
-        return this.httpClient.get(this.urlQuanLy + "xuat-mailmerge" , {
+        return this.httpClient.post(this.urlQuanLy + "xuat-mailmerge" ,data, {
+            headers: headers,
+            responseType: 'arraybuffer',
+            observe: 'response'
+        });
+    }
+
+    getKetQuaTrongHocKy(data: any): any{
+        let headers = this.httpHeadersJWT;
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+        headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
+        return this.httpClient.post(this.urlQuanLy + "xuat-ketquanhom-kltn" ,data, {
             headers: headers,
             responseType: 'arraybuffer',
             observe: 'response'
