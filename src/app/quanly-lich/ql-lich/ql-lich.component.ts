@@ -5,6 +5,7 @@ import {HocKy} from "../../shared-service/HocKy.models";
 import {MatSelectChange} from "@angular/material/select";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {DatePipe} from "@angular/common";
+import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 
 @Component({
     selector: 'app-ql-lich',
@@ -110,6 +111,8 @@ export class QlLichComponent implements OnInit {
                     }
                 })
             });
+            new NotificationsComponent().showNotification("success","Cập nhật kế hoạch cho sinh viên thành công");
+
         }
         if(this.keHoach.vaiTro == "ROLE_GIANGVIEN"){
             this.lichService.updateLich(keHoachRequest).subscribe(res => {
@@ -119,6 +122,8 @@ export class QlLichComponent implements OnInit {
                     }
                 })
             });
+            new NotificationsComponent().showNotification("success","Cập nhật kế hoạch cho giảng viên thành công");
+
         }
     }
     pipe = new DatePipe('en-US');

@@ -12,7 +12,7 @@ import {NhomService} from "../../shared-service/nhom.service";
 })
 export class DangkyCosanComponent implements OnInit {
 
-  actionBtn : string = "Có";
+  actionBtn : string = "Gửi";
 
 
   constructor(

@@ -29,7 +29,7 @@
                                 <mat-select (selectionChange)="changeHocKy($event)">
                                     <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">
                                         HK{{hocKy.soHocKy}}
-                                        -20{{hocKy.maHocKy}}</mat-option>
+                                        -20{{hocKy.maHocKy.toString().slice(0,2)}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>

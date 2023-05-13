@@ -30,7 +30,7 @@
                             <mat-label>-- Chọn học kỳ --</mat-label>
                             <mat-select (selectionChange)="changeHocKy($event)">
                                 <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">HK{{hocKy.soHocKy}}
-                                    -20{{hocKy.maHocKy}}</mat-option>
+                                    -20{{hocKy.maHocKy.toString().slice(0,2)}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -52,7 +52,7 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="tenDeTai" style="margin-left: 60px">
-                                <th mat-header-cell *matHeaderCellDef   style="margin-left: 60px"> TÊN ĐỀ
+                                <th mat-header-cell *matHeaderCellDef  > TÊN ĐỀ
                                     TÀI
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.tenDeTai}}"
@@ -68,14 +68,14 @@
                             <!-- Progress Column -->
                             <ng-container matColumnDef="gioiHanSoNhomThucHien">
                                 <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> SỐ NHÓM TỐI ĐA
+                                    > SỐ NHÓM TỐI ĐA
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.gioiHanSoNhomThucHien}}</td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="moTa" style="width: 200px;">
                                 <th mat-header-cell *matHeaderCellDef
-                                    style="margin-left: 40px;text-align: center"> MÔ TẢ
+                                    > MÔ TẢ
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.moTa}}"
                                     matTooltipClass="example-tooltip-uppercase">
@@ -89,7 +89,7 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="mucTieuDeTai">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center"> MỤC
+                                <th mat-header-cell *matHeaderCellDef   > MỤC
                                     TIÊU ĐỀ TÀI
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.mucTieuDeTai}}"
@@ -104,7 +104,7 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="sanPhamDuKien">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center"> SẢN
+                                <th mat-header-cell *matHeaderCellDef  > SẢN
                                     PHẨM DỰ KIẾN
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.sanPhamDuKien}}"
@@ -119,7 +119,7 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="trangThai">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center"> TRẠNG
+                                <th mat-header-cell *matHeaderCellDef  > TRẠNG
                                     THÁI
                                 </th>
                                 <td mat-cell *matCellDef="let row">
@@ -130,7 +130,7 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="yeuCauDauVao">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center"> YÊU
+                                <th mat-header-cell *matHeaderCellDef  > YÊU
                                     CẦU ĐẦU VÀO
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.yeuCauDauVao}}"

@@ -110,10 +110,10 @@ export class ThemNhomComponent implements OnInit {
     matKhau: string;
     user: any;
     addNhom() {
-        this.matKhau = this.formNhom.get('password').value;
+
         if (this.editData == null) {
             this.dsMaSinhVien.push(this.formNhom.get('maSoSv1').value)
-            if (this.formNhom.get('maSoSv2') != null) {
+            if (this.formNhom.get('maSoSv2') != null && this.formNhom.get('maSoSv2').value != "") {
                 this.dsMaSinhVien.push(this.formNhom.get('maSoSv2').value)
             }
 

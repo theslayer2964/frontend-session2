@@ -120,7 +120,6 @@ export class QuanlyDetaiComponent implements OnInit {
             .afterClosed().subscribe(
             rs => {
                 this.getDSDeTaiTheoHK();
-                new NotificationsComponent().showNotification('success', 'Xuất Danh Sách Đề Tài');
             });
     }
 

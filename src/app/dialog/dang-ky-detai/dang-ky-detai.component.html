@@ -1,5 +1,8 @@
-<div class="main-content">
-    <div class="card" *ngIf="day==false">
+<div class="card" *ngIf="day==true">
+    <h3 style="color: red">ĐỀ TÀI ĐÃ ĐỦ SINH VIÊN ĐĂNG KÝ. KHÔNG THỂ ĐĂNG KÝ THÊM</h3>
+</div>
+<div class="main-content" *ngIf="day==false">
+    <div class="card" >
         <div class="card-header card-header-danger">
             <h4 class="card-title">Đăng ký đề tài</h4>
             <p class="card-category">Các sinh viên lưu ý đề tài sau khi đăng ký sẽ được quản lý bộ môn
@@ -7,9 +10,7 @@
         </div>
     </div>
 
-    <div class="card" *ngIf="day==true">
-        <h1 style="color: red">ĐỀ TÀI ĐÃ ĐỦ SINH VIÊN ĐĂNG KÝ. KHÔNG THỂ ĐĂNG KÝ THÊM</h1>
-    </div>
+
     <mat-dialog-content class="mat-typography">
         <h2 style="font-weight: bold">Tên Giảng Viên: {{giangVien.tenGiangVien}}</h2>
 
