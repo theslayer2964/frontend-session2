@@ -78,10 +78,10 @@ export class SinhvienService {
     });
   }
 
-  getDiemSV(data: any){
-    return this.httpClient.post(this.urlSinhVien,data,{headers: this.httpHeadersJWT}).pipe(
+  getDiemSV(maSV: any){
+    return this.httpClient.get(this.urlSinhVien + "lay-ket-qua/" + maSV,{headers: this.httpHeadersJWT}).pipe(
         tap(recieveDeTai => recieveDeTai),
-        catchError(err => of([])));;
+        catchError(err => of([])));
   }
 
 }

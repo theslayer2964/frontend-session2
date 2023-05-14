@@ -174,7 +174,7 @@
                 <mat-label *ngIf="deTai==null" style="color: red;font-weight: bold;"> Chưa đăng ký đề tài</mat-label>
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="nhom.tinhTrang==0">
             <div class="col-md-12">
                 <button mat-raised-button color="warn" (click)="roiNhom()">Rời Nhóm</button>
             </div>

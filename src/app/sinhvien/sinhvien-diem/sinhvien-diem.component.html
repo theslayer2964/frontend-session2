@@ -8,38 +8,29 @@
                     <div class="card-header"
                          style="display: flex;justify-content: space-between;background-color: #4da1e8">
                         <h4 class="card-title"
-                            style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">KẾT QUẢ HỌC TẬP</h4>
+                            style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">KẾT QUẢ HỌC
+                            TẬP</h4>
                     </div>
                     <hr>
                     <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;overflow: auto;">
-                        <table mat-table [dataSource]="dataSource" matSort>
-                            <!-- ID Column -->
-                            <ng-container matColumnDef="STT" class="example-button">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> STT
-                                </th>
-                                <td mat-cell> 1 </td>
-                            </ng-container>
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="maLopHocPhan" style="margin-left: 60px">
-                                <th mat-header-cell *matHeaderCellDef   style="margin-left: 60px">MÃ LỚP HỌC PHẦN
+                        <table mat-table [dataSource]="dataSource">
+                            <ng-container matColumnDef="maLopHocPhan">
+                                <th mat-header-cell *matHeaderCellDef>MÃ LỚP HỌC PHẦN
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.maLopHocPhan}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                        {{row.tenDeTai}}
+                                    {{row.maLopHocPhan}}
                                 </td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="tenMonHoc">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> TÊN MÔN HỌC
+                                <th mat-header-cell *matHeaderCellDef> TÊN MÔN HỌC
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.tenMonHoc}}</td>
                             </ng-container>
                             <!-- Progress Column -->
-                            <ng-container matColumnDef="soTinChi" style="width: 200px;">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="margin-left: 40px;text-align: center"> SỐ TÍN CHỈ
+                            <ng-container matColumnDef="soTinChi">
+                                <th mat-header-cell *matHeaderCellDef> SỐ TÍN CHỈ
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.soTinChi}}"
                                     matTooltipClass="example-tooltip-uppercase">
@@ -48,52 +39,59 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="diemTongKet">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center">
+                                <th mat-header-cell *matHeaderCellDef>
                                     ĐIỂM TỔNG KẾT
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.diemTongKet}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    {{row.diemTongKet}}
+                                    <span *ngIf="row.diemTongKet > 5.0">{{row.diemTongKet}}</span>
+                                    <span *ngIf="row.gioiTinh <= 5.0" style="color: red">{{row.diemTongKet}}</span>
                                 </td>
-                            </ng-container><ng-container matColumnDef="diemThangDiem4">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center">
+                            </ng-container>
+                            <ng-container matColumnDef="thangDiem4">
+                                <th mat-header-cell *matHeaderCellDef>
                                     THANG ĐIỂM 4
                                 </th>
-                                <td mat-cell *matCellDef="let row" matTooltip="{{row.diemThangDiem4}}"
+                                <td mat-cell *matCellDef="let row" matTooltip="{{row.thangDiem4}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    {{row.diemThangDiem4}}
+                                    {{row.thangDiem4}}
                                 </td>
-                            </ng-container><ng-container matColumnDef="diemChu">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center">
+                            </ng-container>
+                            <ng-container matColumnDef="diemChu">-->
+                                <th mat-header-cell *matHeaderCellDef>
                                     ĐIỂM CHỮ
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.diemChu}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    {{row.diemChu}}
+                                                                        {{row.diemChu}}
                                 </td>
-                            </ng-container><ng-container matColumnDef="xepLoai">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center">
+                            </ng-container>
+                            <ng-container matColumnDef="xepLoai">
+                                <th mat-header-cell *matHeaderCellDef>
                                     XẾP LOẠI
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.xepLoai}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    {{row.xepLoai}}
+                                                                        {{row.xepLoai}}
                                 </td>
-                            </ng-container><ng-container matColumnDef="ghiChu">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center">
+                            </ng-container>
+                            <ng-container matColumnDef="ghiChu">
+                                <th mat-header-cell *matHeaderCellDef>
                                     GHI CHÚ
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.ghiChu}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    {{row.ghiChu}}
+                                                                        {{row.ghiChu}}
                                 </td>
-                            </ng-container><ng-container matColumnDef="dat">
-                                <th mat-header-cell *matHeaderCellDef   style="text-align: center">
+                            </ng-container>
+                            <ng-container matColumnDef="dat">
+                                <th mat-header-cell *matHeaderCellDef>
                                     ĐẠT
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.dat}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    {{row.dat}}
+                                    <span *ngIf="row.dat==true"><mat-icon style="color: #00c853">check_circle</mat-icon></span>
+                                    <span *ngIf="row.dat==false" style="color: red"><mat-icon style="color: red">cancel</mat-icon></span>
                                 </td>
                             </ng-container>
 

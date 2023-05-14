@@ -7,6 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ChangepasswordComponent} from "../../authentication/changepassword/changepassword.component";
 import {ThongbaoComponent} from "../../dialog/thongbao/thongbao.component";
 import {TinnhanService} from "../../shared-service/tinnnhan.service";
+import {LoginNotificationService} from "../../transfer-data-service/login-notification.service";
 
 @Component({
     selector: 'app-shared',
@@ -20,7 +21,7 @@ export class SharedComponent implements OnInit {
     constructor(private userAuthService: UserAuthService, private router: Router, public userService: UserService,
                 public userDataService: UserDataService,
                 public dialog: MatDialog,
-                private tinNhanService: TinnhanService) {
+                private tinNhanService: TinnhanService,private loginNotificationService:LoginNotificationService) {
     }
 
     public userInfo: any
@@ -35,9 +36,12 @@ export class SharedComponent implements OnInit {
                 console.log("LAN 1")
                 this.userInfo = data;
             }
+            // this.loadThongBao();
+        });
+        this.loginNotificationService.loginNotiSubject.subscribe(res =>{
+            console.log("DANG NHAP NE``")
             this.loadThongBao();
         })
-
     }
 
     public isLoggedIn() {
@@ -88,7 +92,7 @@ export class SharedComponent implements OnInit {
             this.tinNhanService.layTinNhan(maNguoiDung)
                 .subscribe(res => {
                      tin = res;
-                    console.log("TIN NHẮN ĐÃ ĐỌC:",tin);
+                     this.listData = [];
                     tin.tinNhanDtos.forEach(data => {
                         this.listData.push({
                             tinnhan: "Có Đề Tài bạn cần sửa",
@@ -107,6 +111,7 @@ export class SharedComponent implements OnInit {
                 .subscribe(res => {
                     console.log("TIN NHẮN:",res);
                     tin = res;
+                    this.listData = [];
                     tin.tinNhanDtos.forEach(data => {
                         this.listData.push({
                             tinnhan: "Có người muốn tham gia nhóm của bạn",

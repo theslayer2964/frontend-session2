@@ -41,7 +41,10 @@
                     <div class="notifications-wrapper">
                         <a class="content" *ngFor="let item of listData" (click)="showThongBao(item)">
                             <div class="notification-item">
-                                <h4 class="item-title">{{item.sender}} · day ago</h4>
+                                <div style="display: flex;justify-content: space-between">
+                                    <h4 class="item-title">{{item.sender}} · day ago </h4>
+                                    <mat-icon *ngIf="item.read==0" style="margin-right: 10px;font-size: 15px;color: #00bbff">star</mat-icon>
+                                </div>
                                 <p class="item-info">{{item.tinnhan}}</p>
                             </div>
                         </a>
