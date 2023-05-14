@@ -90,8 +90,6 @@ export class QuanlySinhvienComponent implements OnInit {
     changeHocKy($event: MatSelectChange) {
         this.hocKyHienTai = $event.value.toString().slice(0, 3)
         this.soHocKy = $event.value.toString().slice(2)
-        console.log('XXX:', this.hocKyHienTai, this.soHocKy);
-        // SET SV VAO``
         this.getDSSinhVien(this.hocKyHienTai, this.soHocKy);
     }
 
@@ -125,7 +123,7 @@ export class QuanlySinhvienComponent implements OnInit {
 
     downloadFileSV() {
         this.sinhVienService.xuatfileMauSV().subscribe(res => {
-            this.filegenerate.generateFile("FIle_Mau_Sinh_Vien", res['body'], 'xlsx');
+            this.filegenerate.generateFile("File_Mau_Sinh_Vien", res['body'], 'xlsx');
             new NotificationsComponent().showNotification('success', 'Xuất file excel thành công');
         });
 
@@ -134,6 +132,8 @@ export class QuanlySinhvienComponent implements OnInit {
     openExcel() {
         this.dialog.open(DialogExcelQlSinhvienComponent, {
             width: "650px"
-        })
+        }).afterClosed().subscribe(() => {
+            this.getDSSinhVien(this.hocKyHienTai, this.soHocKy);
+        });
     }
 }

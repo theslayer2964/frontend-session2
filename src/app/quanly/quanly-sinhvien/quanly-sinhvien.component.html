@@ -13,14 +13,17 @@
                         <button mat-button [matMenuTriggerFor]="afterMenu">Tùy chọn
                             <mat-icon>keyboard_arrow_down</mat-icon>
                         </button>
-                        <mat-menu #afterMenu="matMenu" xPosition="after" >
-                            <button mat-menu-item (click)="openDialog()" style="display: flex;justify-content: space-between;">
+                        <mat-menu #afterMenu="matMenu" xPosition="after">
+                            <button mat-menu-item (click)="openDialog()"
+                                    style="display: flex;justify-content: space-between;">
                                 <span>Thêm sinh viên</span>
                             </button>
-                            <button mat-menu-item (click)="openExcel()" style="display: flex;justify-content: space-between;">
+                            <button mat-menu-item (click)="openExcel()"
+                                    style="display: flex;justify-content: space-between;">
                                 <span>Thêm danh sách sinh viên bằng Excel</span>
                             </button>
-                            <button mat-menu-item (click)="downloadFileSV()" style="display: flex;justify-content: space-between;">
+                            <button mat-menu-item (click)="downloadFileSV()"
+                                    style="display: flex;justify-content: space-between;">
                                 <span>Xuất file Excel mẫu</span>
                             </button>
                         </mat-menu>
@@ -31,7 +34,7 @@
                             <mat-label>-- Chọn học kỳ --</mat-label>
                             <mat-select (selectionChange)="changeHocKy($event)">
                                 <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">HK{{hocKy.soHocKy}}
-                                    -20{{hocKy.maHocKy.toString().slice(0,2)}}</mat-option>
+                                    -20{{hocKy.maHocKy.toString().slice(0, 2)}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -59,12 +62,15 @@
 
                             <ng-container matColumnDef="email">
                                 <th mat-header-cell *matHeaderCellDef>Email</th>
-                                <td mat-cell *matCellDef="let row"> {{row.email}}</td>
+                                <td mat-cell *matCellDef="let row">
+                                    <span *ngIf="row.email == ''">---</span>
+                                    <span *ngIf="row.email != null">{{row.email}}</span>
+                                </td>
                             </ng-container>
                             <ng-container matColumnDef="gioiTinh">
                                 <th mat-header-cell *matHeaderCellDef>Giới tính</th>
-                                <td mat-cell *matCellDef="let row"> <span *ngIf="row.gioiTinh == 1"> Nam</span>
-                                    <span *ngIf="row.gioiTinh != 1"> Nữ</span> </td>
+                                <td mat-cell *matCellDef="let row"><span *ngIf="row.gioiTinh == 1"> Nam</span>
+                                    <span *ngIf="row.gioiTinh != 1"> Nữ</span></td>
                             </ng-container>
                             <ng-container matColumnDef="namNhapHoc">
                                 <th mat-header-cell *matHeaderCellDef>Năm nhập học</th>
@@ -84,7 +90,11 @@
                             </ng-container>
                             <ng-container matColumnDef="maNhom">
                                 <th mat-header-cell *matHeaderCellDef>Mã nhóm</th>
-                                <td mat-cell *matCellDef="let row"> {{row.maNhom}}</td>
+                                <td mat-cell *matCellDef="let row">
+                                    <span *ngIf="row.maNhom == ''">---</span>
+                                    <span *ngIf="row.maNhom == null">---</span>
+                                    <span *ngIf="row.maNhom != null">{{row.maNhom}}</span>
+                                </td>
                             </ng-container>
                             <ng-container matColumnDef="action">
                                 <th mat-header-cell *matHeaderCellDef>Tùy chỉnh</th>
@@ -112,95 +122,3 @@
         </div>
     </div>
 </div>
-<!--<div class="container">-->
-<!--    <div class="row">-->
-<!--        <hr>-->
-<!--        <h1>Danh Sách đề tài của giảng viên</h1>-->
-<!--        <mat-divider></mat-divider>-->
-<!--        <hr>-->
-<!--        <mat-form-field class="rounded-0" style="width: 100%">-->
-<!--            <mat-label>&#45;&#45; Chọn học kỳ &#45;&#45;</mat-label>-->
-<!--            <mat-select (selectionChange)="changeHocKy($event)">-->
-<!--                <mat-option *ngFor="let hocKy of dsHocKy" [value]="hocKy.maHocKy">HK{{hocKy.soHocKy}}-->
-<!--                    -20{{hocKy.maHocKy}}</mat-option>-->
-<!--            </mat-select>-->
-<!--        </mat-form-field>-->
-<!--        <div style="display: flex;justify-content: space-between">-->
-<!--            <mat-form-field style="width: 500px">-->
-<!--                <mat-label>Filter</mat-label>-->
-<!--                <input matInput (keyup)="applyFilter($event)" placeholder="nhập từ khóa tìm kiếm..." #input>-->
-<!--            </mat-form-field>-->
-<!--            <button mat-raised-button color="warn" (click)="openDialog()" style="height: 40px">Thêm đề tài</button>-->
-<!--        </div>-->
-<!--        <hr>-->
-<!--        <div class="mat-elevation-z8">-->
-<!--            <table mat-table [dataSource]="dataSource" matSort>-->
-<!--                &lt;!&ndash; ID Column &ndash;&gt;-->
-<!--                <ng-container matColumnDef="maDeTai">-->
-<!--                    <th mat-header-cell *matHeaderCellDef  > Mã đề tài</th>-->
-<!--                    <td mat-cell *matCellDef="let row"> {{row.maDeTai}} </td>-->
-<!--                </ng-container>-->
-
-<!--                &lt;!&ndash; Progress Column &ndash;&gt;-->
-<!--                <ng-container matColumnDef="gioiHanSoNhomThucHien">-->
-<!--                    <th mat-header-cell *matHeaderCellDef  > Giới hạn số nhóm thực hiện</th>-->
-<!--                    <td mat-cell *matCellDef="let row"> {{row.gioiHanSoNhomThucHien}}</td>-->
-<!--                </ng-container>-->
-<!--                &lt;!&ndash; Progress Column &ndash;&gt;-->
-<!--                <ng-container matColumnDef="moTa">-->
-<!--                    <th mat-header-cell *matHeaderCellDef  > Mô tả</th>-->
-<!--                    <td mat-cell *matCellDef="let row"> {{row.moTa}}</td>-->
-<!--                </ng-container>-->
-<!--                &lt;!&ndash; Progress Column &ndash;&gt;-->
-<!--                <ng-container matColumnDef="mucTieuDeTai">-->
-<!--                    <th mat-header-cell *matHeaderCellDef  > Mục tiêu đề tài</th>-->
-<!--                    <td mat-cell *matCellDef="let row"> {{row.mucTieuDeTai}}</td>-->
-<!--                </ng-container>-->
-<!--                &lt;!&ndash; Progress Column &ndash;&gt;-->
-<!--                <ng-container matColumnDef="sanPhamDuKien">-->
-<!--                    <th mat-header-cell *matHeaderCellDef  > Sản phẩm dự kiến</th>-->
-<!--                    <td mat-cell *matCellDef="let row"> {{row.sanPhamDuKien}}</td>-->
-<!--                </ng-container>-->
-<!--                &lt;!&ndash; Progress Column &ndash;&gt;-->
-<!--                <ng-container matColumnDef="tenDeTai">-->
-<!--                    <th mat-header-cell *matHeaderCellDef  > Tên đề tài</th>-->
-<!--                    <td mat-cell *matCellDef="let row"> {{row.tenDeTai}}</td>-->
-<!--                </ng-container>-->
-<!--                &lt;!&ndash; Progress Column &ndash;&gt;-->
-<!--                <ng-container matColumnDef="trangThai">-->
-<!--                    <th mat-header-cell *matHeaderCellDef  > Trạng thái</th>-->
-<!--                    <td mat-cell *matCellDef="let row">-->
-<!--                        <p *ngIf="row.trangThai==0">Chờ duyệt</p>-->
-<!--                        <p *ngIf="row.trangThai==1">Chưa đạt</p>-->
-<!--                        <p *ngIf="row.trangThai==2">Được chấp nhận</p>-->
-<!--                    </td>-->
-<!--                </ng-container>-->
-<!--                &lt;!&ndash; Progress Column &ndash;&gt;-->
-<!--                <ng-container matColumnDef="yeuCauDauVao">-->
-<!--                    <th mat-header-cell *matHeaderCellDef  > Yêu cầu đầu vào</th>-->
-<!--                    <td mat-cell *matCellDef="let row"> {{row.yeuCauDauVao}}</td>-->
-<!--                </ng-container>-->
-<!--                <ng-container matColumnDef="action">-->
-<!--                    <th mat-header-cell *matHeaderCellDef  > Tùy chỉnh</th>-->
-<!--                    <td mat-cell *matCellDef="let row">-->
-<!--                        &lt;!&ndash;Row: data cua 1 dong&ndash;&gt;-->
-<!--                        <button mat-icon-button color="primary" (click)="editProduct(row)">-->
-<!--                            <mat-icon>edit</mat-icon>-->
-<!--                        </button>-->
-<!--                        <button mat-icon-button color="accent" (click)="deleteProduct(row.maDeTai)">-->
-<!--                            <mat-icon>delete</mat-icon>-->
-<!--                        </button>-->
-<!--                    </td>-->
-<!--                </ng-container>-->
-<!--                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
-<!--                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
-<!--                &lt;!&ndash; Row shown when there is no matching data. &ndash;&gt;-->
-<!--                <tr class="mat-row" *matNoDataRow>-->
-<!--                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>-->
-<!--                </tr>-->
-<!--            </table>-->
-<!--            <mat-paginator [pageSizeOptions]="[25, 10, 5, 100]" aria-label="Select page of users"></mat-paginator>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-

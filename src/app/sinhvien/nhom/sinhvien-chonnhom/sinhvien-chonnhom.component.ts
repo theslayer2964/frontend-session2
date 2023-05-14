@@ -78,14 +78,13 @@ export class SinhvienChonnhomComponent implements OnInit {
         this.nhomService.getNhomChuaDuyet(this.tinhTrang)
             .subscribe({
                 next: (res) => {
+                    console.log("SV - CHON NHOM: ", res);
                     res.forEach(data => {
                         this.dsSinhVien.push(data.sinhViens)
                     })
-                    console.log(this.dsSinhVien)
                     this.dataSource = new MatTableDataSource(res);
                     this.dataSource.paginator = this.paginator;
                     this.dataSource.sort = this.sort;
-                    console.log( res)
                 },
                 error: () => {
                     console.log("Error")
@@ -121,6 +120,7 @@ export class SinhvienChonnhomComponent implements OnInit {
     private getNhomHienTai() {
         this.nhomService.getNhomSinhVien(this.nhom.maNhom).subscribe({
             next: (res) => {
+                console.log("NHOM HIEN TAI:", res);
                 this.nhomSV = res;
                 this.dsNhomSinhVien = this.nhomSV.dsMSSinhVien;
                 this.nhom = this.nhomSV.nhom;

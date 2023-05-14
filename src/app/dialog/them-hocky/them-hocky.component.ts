@@ -1,10 +1,11 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {SinhvienService} from "../../shared-service/sinhvien.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HockyService} from "../../shared-service/hocky.service";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 import {request} from "express";
+import {MatAccordion} from "@angular/material/expansion";
 
 @Component({
     selector: 'app-them-hocky',
@@ -14,7 +15,6 @@ import {request} from "express";
 export class ThemHockyComponent implements OnInit {
     private static MUOITAMTUAN = 10886400000;
     giangVienForm!: FormGroup;
-    actionBtn: string = "Save"
 
     constructor(private formBuilder: FormBuilder,
                 private hocKyService: HockyService,
@@ -64,5 +64,7 @@ export class ThemHockyComponent implements OnInit {
             return;
         };
     }
+    //
+    @ViewChild(MatAccordion) accordion: MatAccordion;
 
 }

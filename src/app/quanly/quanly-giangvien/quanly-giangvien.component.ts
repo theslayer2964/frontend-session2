@@ -41,7 +41,6 @@ export class QuanlyGiangvienComponent implements OnInit {
   private getAllGiangVien() {
     this.giangVienService.getGiangVien().subscribe({
       next: (res) => {
-        console.log("QL- SV- HK:" , res);
         this.dsHocKy = res;
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
@@ -55,6 +54,7 @@ export class QuanlyGiangvienComponent implements OnInit {
   openDialog() {
     this.dialog.open(ThemgvComponent, {}).afterClosed().subscribe(val => {
       if (val === "save") {
+        this.getAllGiangVien();
       }
     })
   }
@@ -64,7 +64,7 @@ export class QuanlyGiangvienComponent implements OnInit {
       data: row
     }).afterClosed().subscribe(val => {
       if (val === "update") {
-
+        this.getAllGiangVien();
       }
     })
   }
@@ -92,24 +92,12 @@ export class QuanlyGiangvienComponent implements OnInit {
 
   }
 
-  changeHocKy($event: MatSelectChange) {
-    this.hocKyHienTai = $event.value.toString().slice(0, 3)
-    this.soHocKy = $event.value.toString().slice(2)
-    console.log('XXX:', this.hocKyHienTai, this.soHocKy);
-    // SET SV VAO``
-
-  }
-  // STEP 2
-
   @Input() validateDeTai;
 
-  changeTinhTrang($event: MatSelectChange) {
-
-  }
 
   downloadFileSV() {
     this.giangVienService.xuatfileMauGV().subscribe(res => {
-      this.filegenerate.generateFile("FIle_Mau_Giang_Vien", res['body'], 'xlsx');
+      this.filegenerate.generateFile("File_Mau_Giang_Vien", res['body'], 'xlsx');
       new NotificationsComponent().showNotification('success', 'Xuất file excel thành công');
     });
 
@@ -118,6 +106,8 @@ export class QuanlyGiangvienComponent implements OnInit {
   openExcel() {
     this.dialog.open(DialogExcelQlGiangvienComponent,{
       width:"650px"
+    }).afterClosed().subscribe(() => {
+      this.getAllGiangVien();
     })
   }
 }

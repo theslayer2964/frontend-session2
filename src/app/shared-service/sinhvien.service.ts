@@ -78,5 +78,10 @@ export class SinhvienService {
     });
   }
 
+  getDiemSV(data: any){
+    return this.httpClient.post(this.urlSinhVien,data,{headers: this.httpHeadersJWT}).pipe(
+        tap(recieveDeTai => recieveDeTai),
+        catchError(err => of([])));;
+  }
 
 }

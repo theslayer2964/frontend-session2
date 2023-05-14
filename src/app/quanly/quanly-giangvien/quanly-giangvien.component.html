@@ -37,11 +37,15 @@
                         <table mat-table [dataSource]="dataSource" matSort>
                             <ng-container matColumnDef="maGiangVien">
                                 <th mat-header-cell *matHeaderCellDef  >Mã giảng viên</th>
-                                <td mat-cell *matCellDef="let row"> {{row.maGiangVien}} </td>
+                                <td mat-cell *matCellDef="let row"> <b>{{row.maGiangVien}}</b> </td>
                             </ng-container>
                             <ng-container matColumnDef="anhDaiDien">
                                 <th mat-header-cell *matHeaderCellDef  >Ảnh đại diện</th>
-                                <td mat-cell *matCellDef="let row"> {{row.anhDaiDien}}</td>
+                                <td mat-cell *matCellDef="let row">
+                                    <span *ngIf="row.anhDaiDien == ''">---</span>
+                                    <span *ngIf="row.anhDaiDien == null">---</span>
+                                    <span *ngIf="row.anhDaiDien != null">{{row.anhDaiDien}}</span>
+                                </td>
                             </ng-container>
                             <ng-container matColumnDef="tenGiangVien">
                                 <th mat-header-cell *matHeaderCellDef  >Tên giảng viên</th>
@@ -57,11 +61,14 @@
                                 <td mat-cell *matCellDef="let row"> {{row.email}}</td>
                             </ng-container>
                             <ng-container matColumnDef="gioiTinh">
-                                <th mat-header-cell *matHeaderCellDef  >Giới tính</th>
-                                <td mat-cell *matCellDef="let row"> {{row.gioiTinh}} </td>
+                                <th mat-header-cell *matHeaderCellDef >Giới tính</th>
+                                <td mat-cell *matCellDef="let row">
+                                    <span *ngIf="row.gioiTinh == 1"> Nam</span>
+                                    <span *ngIf="row.gioiTinh != 1"> Nữ</span>
+                                </td>
                             </ng-container>
                             <ng-container matColumnDef="hocVi">
-                                <th mat-header-cell *matHeaderCellDef  >Học vị</th>
+                                <th mat-header-cell *matHeaderCellDef>Học vị</th>
                                 <td mat-cell *matCellDef="let row"> {{row.hocVi}}</td>
                             </ng-container>
                             <ng-container matColumnDef="namCongTac">
@@ -82,7 +89,7 @@
                                 <td mat-cell *matCellDef="let row"> {{row.maKhoa}}</td>
                             </ng-container>
                             <ng-container matColumnDef="action">
-                                <th mat-header-cell *matHeaderCellDef  >Tùy chỉnh</th>
+                                <th mat-header-cell *matHeaderCellDef>Tùy chỉnh</th>
                                 <td mat-cell *matCellDef="let row">
                                     <!--Row: data cua 1 dong-->
                                     <button mat-icon-button color="primary" (click)="editProduct(row)">

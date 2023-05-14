@@ -1,3 +1,4 @@
+<hr>
 <div class="container">
     <div class="main-content">
         <div class="container-fluid">
@@ -8,34 +9,67 @@
                     </div>
                     <div class="card-body">
                         <form [formGroup]="giangVienForm">
-
+                            <!--                            <div class="row">-->
+                            <!--                                <div class="col-md-6">-->
+                            <!--                                    <mat-form-field class="example-full-width">-->
+                            <!--                                        <mat-label>Thời gian bắt đầu</mat-label>-->
+                            <!--                                        <input formControlName="thoiGianBatDau" matInput-->
+                            <!--                                               placeholder="Placeholder" type="date" >-->
+                            <!--                                    </mat-form-field>-->
+                            <!--                                </div>-->
+                            <!--                                <div class="col-md-6">-->
+                            <!--                                    <mat-form-field class="example-full-width">-->
+                            <!--                                        <mat-label>Thời gian kết thúc</mat-label>-->
+                            <!--                                        <input formControlName="thoiGianKetThuc" matInput-->
+                            <!--                                               placeholder="Thời gian kết thúc" type="date" >-->
+                            <!--                                    </mat-form-field>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
                             <div class="row">
-                                <div class="col-md-6">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Thời gian bắt đầu</mat-label>
-                                        <input formControlName="thoiGianBatDau" matInput
-                                               placeholder="Placeholder" type="date" >
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-6">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Thời gian kết thúc</mat-label>
-                                        <input formControlName="thoiGianKetThuc" matInput
-                                               placeholder="Thời gian kết thúc" type="date" >
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <h5 style="color: red" *ngIf="giangVienForm.errors">
-                                    {{giangVienForm.errors?.dates | json}}
-                                </h5>
+                                <mat-accordion class="example-headers-align" multi>
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                Lịch biểu
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                Chọn thời gian của học kỳ
+                                                <mat-icon>date_range</mat-icon>
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <mat-form-field color="accent">
+                                                    <mat-label>Thời gian bắt đầu</mat-label>
+                                                    <input matInput [matDatepicker]="picker1"
+                                                           formControlName="thoiGianBatDau">
+                                                    <mat-datepicker-toggle matIconSuffix
+                                                                           [for]="picker1"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker1></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <mat-form-field color="accent">
+                                                    <mat-label>Thời gian kết thúc</mat-label>
+                                                    <input matInput [matDatepicker]="picker2"
+                                                           formControlName="thoiGianKetThuc">
+                                                    <mat-datepicker-toggle matIconSuffix
+                                                                           [for]="picker2"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker2></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <h5 style="color: red" *ngIf="giangVienForm.errors">
+                                            {{giangVienForm.errors?.dates | json}}
+                                        </h5>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
                             </div>
                             <div mat-dialog-actions [align]="'end'">
                                 <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
-                                <!--                                [disabled]="!productForm.valid"-->
                                 <button style="margin-left: 8px" mat-raised-button color="primary"
-
-                                        (click)="addHocKy()">{{actionBtn}}</button>
+                                        [disabled]="!giangVienForm.valid"
+                                        (click)="addHocKy()">Lưu</button>
                             </div>
                             <div class="clearfix"></div>
                         </form>

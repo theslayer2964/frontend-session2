@@ -10,10 +10,19 @@
                              style="display: flex;justify-content: space-between;background-color: #4da1e8">
                             <h4 class="card-title"
                                 style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH
-                                NHÓM</h4>
-                            <button *ngIf="!nhom" mat-raised-button color="warn" (click)="openDialog()"
-                                    style="height: 40px">Tạo nhóm
+                                CÁC NHÓM HIỆN CÓ</h4>
+                            <!--                            <button *ngIf="!nhom" mat-raised-button color="warn" (click)="openDialog()"-->
+                            <!--                                    style="height: 40px">Tạo nhóm-->
+                            <!--                            </button>-->
+                            <button *ngIf="!nhom" mat-button [matMenuTriggerFor]="afterMenu">Tùy chọn
+                                <mat-icon>keyboard_arrow_down</mat-icon>
                             </button>
+                            <mat-menu #afterMenu="matMenu" xPosition="after">
+                                <button mat-menu-item (click)="openDialog()"
+                                        style="display: flex;justify-content: space-between;">
+                                    <span>Tạo nhóm mới</span>
+                                </button>
+                            </mat-menu>
                         </div>
                         <hr>
                         <div>
@@ -35,51 +44,58 @@
                                     <th mat-header-cell *matHeaderCellDef
                                         style="width: 120px;text-align: center">TÊN NHÓM
                                     </th>
-                                     <td mat-cell *matCellDef="let row"> {{row.nhom.tenNhom}} </td>
+                                    <td mat-cell *matCellDef="let row"> {{row.nhom.tenNhom}} </td>
                                 </ng-container>
 
                                 <ng-container matColumnDef="sv1">
-                                    <th mat-header-cell *matHeaderCellDef   style="text-align: center">
+                                    <th mat-header-cell *matHeaderCellDef style="text-align: center">
                                         SINH VIÊN 1
                                     </th>
                                     <td mat-cell *matCellDef="let row"> {{row.dsMaSinhVien[0]}}</td>
                                 </ng-container>
                                 <ng-container matColumnDef="tensv1">
-                                    <th mat-header-cell *matHeaderCellDef   style="text-align: center">
+                                    <th mat-header-cell *matHeaderCellDef style="text-align: center">
                                         TÊN SINH VIÊN 1
                                     </th>
-                                    <td mat-cell *matCellDef="let row" > {{row.sinhViens[0].tenSinhVien }}</td>
+                                    <td mat-cell *matCellDef="let row"> {{row.sinhViens[0].tenSinhVien}}</td>
                                 </ng-container>
                                 <ng-container matColumnDef="emailsv1">
-                                    <th mat-header-cell *matHeaderCellDef   style="text-align: center">
+                                    <th mat-header-cell *matHeaderCellDef style="text-align: center">
                                         Email SINH VIÊN 1
                                     </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.sinhViens[0].email}}</td>
+                                    <td mat-cell *matCellDef="let row"> {{row.sinhViens[0].email}}
+                                        <span *ngIf="row.sinhViens[0].email == ''">---</span>
+                                        <span *ngIf="row.sinhViens[0].email == null">---</span>
+                                        <span *ngIf="row.sinhViens[0].email != ''">{{row.sinhViens[0].email}}</span>
+                                    </td>
                                 </ng-container>
                                 <ng-container matColumnDef="sv2">
-                                    <th mat-header-cell *matHeaderCellDef   style="text-align: center">
+                                    <th mat-header-cell *matHeaderCellDef style="text-align: center">
                                         SINH VIÊN 2
                                     </th>
-                                    <td mat-cell *matCellDef="let row " > {{row.dsMaSinhVien[1]}}</td>
+                                    <td mat-cell *matCellDef="let row ">
+                                         <span *ngIf="row.dsMaSinhVien.length >= 2">
+                                             {{row.dsMaSinhVien[1]}}</span></td>
                                 </ng-container>
                                 <ng-container matColumnDef="tensv2">
-                                    <th mat-header-cell *matHeaderCellDef   style="text-align: center">
+                                    <th mat-header-cell *matHeaderCellDef style="text-align: center">
                                         TÊN SINH VIÊN 2
                                     </th>
                                     <td mat-cell *matCellDef="let row">
-                                        <span *ngIf="dsSinhVien.length > 2"> {{row.sinhViens[1].tenSinhVien}}</span></td>
+                                        <span *ngIf="row.dsMaSinhVien.length >= 2"> {{row.sinhViens[1].tenSinhVien}}</span>
+                                    </td>
                                 </ng-container>
                                 <ng-container matColumnDef="emailsv2">
-                                    <th mat-header-cell *matHeaderCellDef   style="text-align: center">
+                                    <th mat-header-cell *matHeaderCellDef style="text-align: center">
                                         Email SINH VIÊN 2
                                     </th>
                                     <td mat-cell *matCellDef="let row">
-                                        <span *ngIf="dsSinhVien.length > 2">{{row.sinhViens[1].email}}</span></td>
+                                        <span *ngIf="row.dsMaSinhVien.length >= 2">
+                                            <span *ngIf="row.sinhViens[1].email == ''">---</span>
+                                            <span *ngIf="row.sinhViens[1].email == null">---</span>
+                                            <span *ngIf="row.sinhViens[1].email != ''">{{row.sinhViens[1].email}}</span>
+                                        </span></td>
                                 </ng-container>
-
-
-                                <!-- Fruit Column -->
-
                                 <ng-container matColumnDef="action" stickyEnd>
                                     <th mat-header-cell *matHeaderCellDef
                                         style="width: 100px;text-align: center">TÙY CHỈNH
@@ -109,12 +125,13 @@
     <div class="container-fluid" *ngIf="nhom!=null">
         <div class="row">
             <div class="col-md-12">
-                <mat-label style="font-weight: bold; font-size: 20px" >Tên nhóm:  {{nhom.tenNhom}}</mat-label>
+                <mat-label style="font-weight: bold; font-size: 20px">Nhóm: </mat-label>
+                <mat-label style="font-weight: bold; font-size: 20px">{{nhom.maNhom}} - {{nhom.tenNhom}}</mat-label>
             </div>
             <div class="col-md-12">
-                <mat-label style="font-weight: bold">Trạng thái nhóm:</mat-label>
-                <mat-label *ngIf="trangThai==0" style="color: #00acc1"> Chờ duyệt</mat-label>
-                <mat-label *ngIf="trangThai==1" style="color: #4da1e8"> Được chấp nhận</mat-label>
+                <mat-label>Trạng thái nhóm:</mat-label>
+                <mat-label *ngIf="trangThai==0" style="color: #00acc1;font-weight: bold;"> Chờ duyệt</mat-label>
+                <mat-label *ngIf="trangThai==1" style="color: #4da1e8;font-weight: bold;"> Được chấp nhận</mat-label>
             </div>
         </div>
 
@@ -128,23 +145,23 @@
             <div class="row" style="padding-left: 20px">
                 <div class="row">
                     <div class="col-md-6">
-                        <mat-label style="font-weight: bold">MSSV:</mat-label>
-                        <mat-label style="color: #000000"> {{nhomsv.maSinhVien}}</mat-label>
+                        <mat-label>MSSV:</mat-label>
+                        <mat-label style="color: #000000;font-weight: bold;"> {{nhomsv.maSinhVien}}</mat-label>
                     </div>
                     <div class="col-md-6">
-                        <mat-label style="font-weight: bold">Tên:</mat-label>
-                        <mat-label style="color: #000000"> {{nhomsv.tenSinhVien}}</mat-label>
+                        <mat-label>Tên:</mat-label>
+                        <mat-label style="color: #000000;font-weight: bold;"> {{nhomsv.tenSinhVien}}</mat-label>
                     </div>
                 </div>
                 <br/>
-                <div class="row" >
+                <div class="row">
                     <div class="col-md-6">
-                        <mat-label style="font-weight: bold">Email:</mat-label>
-                        <mat-label style="color: #000000"> {{nhomsv.email}}</mat-label>
+                        <mat-label>Email:</mat-label>
+                        <mat-label style="color: #000000;font-weight: bold;"> {{nhomsv.email}}</mat-label>
                     </div>
                     <div class="col-md-6">
-                        <mat-label style="font-weight: bold">Số điện thoại:</mat-label>
-                        <mat-label style="color: #000000"> {{nhomsv.dienThoai}}</mat-label>
+                        <mat-label>Số điện thoại:</mat-label>
+                        <mat-label style="color: #000000;font-weight: bold;"> {{nhomsv.dienThoai}}</mat-label>
                     </div>
                 </div>
                 <br/>
@@ -152,14 +169,14 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <mat-label style="font-weight: bold">Đề tài:</mat-label>
-                <mat-label *ngIf="deTai!=null" style="color: #00acc1"> {{deTai.tenDenTai}}</mat-label>
-                <mat-label *ngIf="deTai==null" style="color: red"> Chưa đăng ký</mat-label>
+                <mat-label>Đề tài: </mat-label>
+                <mat-label *ngIf="deTai!=null" style="color: #00acc1;font-weight: bold;"> {{deTai.maDeTai}} - {{deTai.tenDeTai}}</mat-label>
+                <mat-label *ngIf="deTai==null" style="color: red;font-weight: bold;"> Chưa đăng ký đề tài</mat-label>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <button mat-raised-button color="warn" (click)="roiNhom()" >Rời Nhóm</button>
+                <button mat-raised-button color="warn" (click)="roiNhom()">Rời Nhóm</button>
             </div>
         </div>
     </div>

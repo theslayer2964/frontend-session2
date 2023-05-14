@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
+import {SinhvienService} from "../../shared-service/sinhvien.service";
 
 @Component({
   selector: 'app-sinhvien-diem',
@@ -8,9 +9,11 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class SinhvienDiemComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private sinhvienService: SinhvienService) { }
   ngOnInit(): void {
+    this.sinhvienService.getDiemSV(null).subscribe((res:[]) => {
+      this.dataSource = new MatTableDataSource(res);
+    })
   }
 
   // Table

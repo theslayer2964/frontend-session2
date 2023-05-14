@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {CalendarOptions, DateSelectArg, EventApi, EventClickArg, EventInput} from "@fullcalendar/core";
 import {createEventId, INITIAL_EVENTS} from "./event-utils";
 import interactionPlugin from '@fullcalendar/interaction';
@@ -17,23 +17,25 @@ import {getData} from "ajv/dist/compile/validate";
 export class QuanlyLich2Component implements OnInit {
     // const TODAY_STR = new Date().toISOString().replace(/T.*$/, '');
     calendarVisible = true;
+    @Input() maHK:string = '';
 
     constructor(private changeDetector: ChangeDetectorRef, private lichService: LichService) {
 
     }
 
     ngOnInit(): void {
-        this.lichService.getLichTheoHocKyVaMaGV("232",null,"ROLE_GIANGVIEN").pipe(take(1)).subscribe( res =>{
+        console.log("CHA - CON:", this.maHK);
+        this.lichService.getLichTheoHocKyVaMaGV(this.maHK,null,"ROLE_GIANGVIEN").pipe(take(1)).subscribe( res =>{
             let a = [];
                 res.forEach(data => {
                     a.push({
                         id: data.id,
-                        start: "2023-04-08T09:30:00+07:00",
-                        end: "2023-04-10T09:30:00+07:00",
+                        start: new Date(data.thoiGianBatDau).toISOString(),
+                        end: new Date(data.thoiGianKetThuc).toISOString(),
                         title: data.tenKeHoach,
                         allDay:true,
-                        backgroundColor:"red",
-                        daysOfWeek: data.dsNgayThucHienKhoaLuan
+                        backgroundColor:"orange",
+                        daysOfWeek: data.dsNgayThucHienKhoaLuan.length>0 ? data.dsNgayThucHienKhoaLuan : null
                     })
                 })
             this.data$ = a;

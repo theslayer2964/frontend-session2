@@ -21,8 +21,7 @@
                                 </h3>
                             </div>
                             <div class="card-footer">
-                                    <i class="material-icons text-danger">warning</i>
-                                    <a (click)="goToSVChonNhom('sv-lich')">Chi tiết</a>
+                                    <a (click)="direct_SVGoTo('sv-lich')">Chi tiết</a>
                             </div>
                         </div>
                     </div>
@@ -37,12 +36,28 @@
                                     <small></small>
                                 </h3>
                             </div>
-
                             <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons text-danger">warning</i>
-                                    <p *ngIf="validateDeTai.invalid==true">Chưa Thể Đăng Ký Đề Tài</p>
-                                    <a (click)="goToSVChonNhom('sv-chonDeTai')" *ngIf="validateDeTai.invalid==false">Đăng ký</a>
+                                <div class="stats" style="font-size: 15px;color: black">
+                                    <div *ngIf="validateDeTai">
+                                        <p *ngIf="validateDeTai.invalid==true">
+                                            <i class="material-icons text-danger">warning</i>
+                                            Chưa đến thời gian đăng ký Đề tài</p>
+                                        <a (click)="direct_SVGoTo('sv-chonDeTai')" *ngIf="validateDeTai.invalid==false">
+                                            <div *ngIf="nhom">
+                                                <p *ngIf="nhom.deTai!=null">
+                                                    <b>{{nhom.deTai.maDeTai}}</b> - <b>{{nhom.deTai.tenDeTai}}</b>
+                                                </p>
+                                                <p *ngIf="nhom.deTai==null">
+                                                    <i class="material-icons text-danger">warning</i>
+                                                    <b>  Đăng ký đề tài</b>
+                                                </p>
+                                            </div>
+                                        </a>
+                                        <div *ngIf="nhom==null">
+                                            <i class="material-icons text-danger">warning</i>
+                                            <b>Sinh viên chưa đăng ký nhóm</b>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -60,10 +75,22 @@
                                 </h3>
                             </div>
                             <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons text-danger">warning</i>
-                                    <p *ngIf="validateNhom.invalid==true">Chưa Thể Đăng Ký Nhóm</p>
-                                    <a (click)="goToSVChonNhom('sv-chonNhom')" *ngIf="validateNhom.invalid==false">Đăng ký</a>
+                                <div class="stats" style="font-size: 15px;color: black">
+                                    <div *ngIf="validateNhom">
+                                        <p *ngIf="validateNhom.invalid==true">
+                                            <i class="material-icons text-danger">warning</i>
+                                            Chưa đến thời gian đăng ký Nhóm
+                                        </p>
+                                        <a (click)="direct_SVGoTo('sv-chonNhom')" *ngIf="validateNhom.invalid==false">
+                                            <p *ngIf="nhom!=null">
+                                                Mã nhóm: <b>{{nhom.maNhom}}</b> - Tên nhóm: <b>{{nhom.tenNhom}}</b>
+                                            </p>
+                                            <p *ngIf="nhom==null">
+                                                <i class="material-icons text-danger">warning</i>
+                                                <b>  Đăng ký nhóm</b>
+                                            </p>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +105,7 @@
                             </div>
                             <div class="card-footer">
                                     <i class="material-icons">date_range</i>
-                                    <a (click)="goToSVChonNhom('sv-diem')">Chi tiết</a>
+                                    <a (click)="direct_SVGoTo('sv-diem')">Chi tiết</a>
                             </div>
                         </div>
                     </div>

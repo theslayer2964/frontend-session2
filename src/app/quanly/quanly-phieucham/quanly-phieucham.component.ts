@@ -32,9 +32,19 @@ export class QuanlyPhieuchamComponent implements OnInit {
               private userAuthService: UserAuthService, private router: Router,
               private fileGenerate: FileGeneratorService) { }
   ngOnInit(): void {
+    this.getAllHocKy();
   }
 
   dsHocKy: HocKy[];
+  private getAllHocKy() {
+    this.hockyService.getHocKy().subscribe({
+      next: (res) => {
+        this.dsHocKy = res;
+      }, error: (err) => {
+        console.log(err)
+      }
+    })
+  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

@@ -5,6 +5,7 @@ import {UserService} from "../../authentication/_service/user.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 import {Router} from "@angular/router";
+import {DkDetaiContainerTranferService} from "../../transfer-data-service/dk-detai-container-tranfer.service";
 
 @Component({
     selector: 'app-dang-ky-detai',
@@ -23,7 +24,8 @@ export class DangKyDetaiComponent implements OnInit {
         public dialogRef: MatDialogRef<DangKyDetaiComponent>,
         @Inject(MAT_DIALOG_DATA) private data: any,
         private deTaiService: DetaiSvService,
-        private userAuthService: UserAuthService) {
+        private userAuthService: UserAuthService,
+        private dkDetaiContainerTranferService: DkDetaiContainerTranferService) {
     }
 
 
@@ -49,13 +51,14 @@ export class DangKyDetaiComponent implements OnInit {
             vaiTro: this.userAuthService.getRoles()[0].roleName
         }).subscribe({
             next: (res) => {
-                console.log(res);
+                console.log("DK DE TAI:",res);
                 var user = this.userAuthService.getUserInfo();
-                new NotificationsComponent().showNotification('success', 'Thêm nhóm thành công');
+                new NotificationsComponent().showNotification('success', 'Đã đăng ký đề tài.');
                 this.dialogRef.close();
                 user.nhom = res;
                 this.userAuthService.setUserInfo(user);
-                this.router.navigate(["/trangchuSV"])
+                this.router.navigate(["/trangchuSV"]);
+                this.dkDetaiContainerTranferService.clickDangKyDeTai("click");
             }
         })
     }

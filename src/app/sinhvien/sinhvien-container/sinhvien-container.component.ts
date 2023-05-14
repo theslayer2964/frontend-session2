@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {LichService} from "../../shared-service/lich/lich.service";
+import {Subject} from "rxjs";
+import {DkDetaiContainerTranferService} from "../../transfer-data-service/dk-detai-container-tranfer.service";
 
 @Component({
     selector: 'app-sinhvien-container',
@@ -9,26 +11,25 @@ import {LichService} from "../../shared-service/lich/lich.service";
     styleUrls: ['./sinhvien-container.component.css']
 })
 export class SinhvienContainerComponent implements OnInit {
-
     nhom: any;
-
-    haveNhom: any;
 
     constructor(
         private router: Router,
         private userAuthService: UserAuthService,
-        private lichService: LichService
-    ) {
+        private lichService: LichService,
+        private dkDetaiContainerTranferService: DkDetaiContainerTranferService) {
     }
 
     ngOnInit(): void {
         this.nhom = this.userAuthService.getUserInfo().nhom;
         this.validateLich();
-        this.haveNhom = this.nhom != null ? true : false;
-
+        // coi lai
+        this.dkDetaiContainerTranferService.dkDeTai_ContainerBehaviorSubject.subscribe(data => {
+            this.validateLich();
+        });
     }
 
-    goToSVChonNhom(url: string) {
+    direct_SVGoTo(url: string) {
         if (url) {
             this.router.navigate([`${url}`])
         }
@@ -36,26 +37,36 @@ export class SinhvienContainerComponent implements OnInit {
     dsValidate: any
     validateNhom: any;
     validateDeTai: any;
+    destroy$ = new Subject();
+    destroy2$ = new Subject();
     private validateLich() {
         this.lichService.validateLich({
             vaiTro: this.userAuthService.getRoles()[0].roleName
         }).subscribe({
             next: (res) => {
+                console.log("SV - LICH:", res);
                 this.dsValidate = res;
                 for (const data of this.dsValidate) {
                     if (data.tenKeHoach =='Lịch đăng ký nhóm') {
-                        this.validateNhom = data;
+                        this.destroy$.next(data);
+                        // this.validateNhom = data;
                     }
                     if (data.tenKeHoach == 'Lịch đăng ký đề tài') {
-                        this.validateDeTai = data;
+                        this.destroy2$.next(data);
+                        // this.validateDeTai = data;
                     }
-
                 }
-                console.log(this.validateDeTai.invalid);
-
             }, error: (err) => {
                 console.log(err);
             }
+        })
+        this.destroy$.subscribe(data => {
+            this.validateNhom = data;
+            console.log("validateNhom", this.validateNhom);
+        });
+        this.destroy2$.subscribe(data => {
+            this.validateDeTai = data;
+            console.log("validateDeTai", this.validateDeTai);
         })
     }
 }

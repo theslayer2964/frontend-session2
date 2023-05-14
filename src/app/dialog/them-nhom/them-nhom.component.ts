@@ -107,7 +107,6 @@ export class ThemNhomComponent implements OnInit {
     }
 
     nhom: Nhom
-    matKhau: string;
     user: any;
     addNhom() {
 

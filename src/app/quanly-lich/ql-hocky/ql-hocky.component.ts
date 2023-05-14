@@ -29,9 +29,7 @@ export class QlHockyComponent implements OnInit {
     openDialog() {
         console.log("action")
         this.dialog.open(ThemHockyComponent, {}).afterClosed().subscribe(val => {
-            if (val === "save") {
-
-            }
+            this.getAllHocKy();
         })
     }
 
