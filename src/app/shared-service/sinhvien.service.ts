@@ -10,6 +10,7 @@ import {HocKy} from "./HocKy.models";
 export class SinhvienService {
   private urlSinhVien = "http://localhost:8080/api/sinh-vien/";
   private urlQuanLy = "http://localhost:8080/api/quan-ly/";
+  private urlPhieuCham = "http://localhost:8080/api/phieu-cham/";
 
   private  urlGiangVien = "http://localhost:8080/api/giang-vien/";
   token: string = this.userAuthService.getToken();
@@ -85,8 +86,10 @@ export class SinhvienService {
   }
 
   getKetQuaHocTapToanBoSV(hocKy: string){
-    // return this.httpClient.get(this.urlSinhVien + "lay-ket-qua/" + maSV,{headers: this.httpHeadersJWT}).pipe(
-    //     tap(recieveDeTai => recieveDeTai),
-    //     catchError(err => of([])));
+    return this.httpClient.post(this.urlPhieuCham + "lay-cu-the-ql/", {
+      maHocKy: hocKy
+    } ,{headers: this.httpHeadersJWT}).pipe(
+        tap(recieveDeTai => recieveDeTai),
+        catchError(err => of([])));
   }
 }

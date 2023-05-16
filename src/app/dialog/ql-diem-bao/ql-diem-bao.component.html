@@ -1,0 +1,17 @@
+<h3>
+    Nhóm có tham gia đề tài khoa học
+</h3>
+<mat-divider></mat-divider>
+<form [formGroup]="productForm">
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+                <mat-label  mat-header-cell *matHeaderCellDef>Điểm thêm</mat-label>
+                <input formControlName="diem" matInput placeholder="điểm thêm">
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-success" (click)="themDiemBaiBao()" value="1">{{actionBtn}}</button>
+        </div>
+    </div>
+</form>
