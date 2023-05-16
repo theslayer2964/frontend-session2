@@ -102,6 +102,8 @@ import {MatMenuModule} from "@angular/material/menu";
 import { ThemLopHocPhanComponent } from './dialog/them-lop-hoc-phan/them-lop-hoc-phan.component';
 import { DialogExportExcelComponent } from './excel/dialog-export-excel/dialog-export-excel.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { QlDiemBaoComponent } from './dialog/ql-diem-bao/ql-diem-bao.component';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 @NgModule({
     imports: [
@@ -145,6 +147,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
         MatExpansionModule,
         MatMenuModule,
         MatCheckboxModule,
+        MatBottomSheetModule
     ],
     declarations: [
         AppComponent,
@@ -208,7 +211,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
         QuanlyLophocphanComponent,
         QuanlyKetquahoctapComponent,
         ThemLopHocPhanComponent,
-        DialogExportExcelComponent
+        DialogExportExcelComponent,
+        QlDiemBaoComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,

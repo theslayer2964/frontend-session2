@@ -11,6 +11,8 @@ import {SinhvienService} from "../../shared-service/sinhvien.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatAccordion} from "@angular/material/expansion";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
+import {MatBottomSheet} from "@angular/material/bottom-sheet";
+import {QlDiemBaoComponent} from "../../dialog/ql-diem-bao/ql-diem-bao.component";
 
 @Component({
   selector: 'app-quanly-ketquahoctap',
@@ -45,6 +47,39 @@ export class QuanlyKetquahoctapComponent implements OnInit {
       hocKy: ['', Validators.required],
       giangvienCham:['']
     })
+    this.sinhvienService.getKetQuaHocTapToanBoSV(this.hocKyHienTai).subscribe((res:any) =>{
+      console.log("QL - KQHT:", res);
+      let dsKQ:any = [];
+      let i = 1;
+      res.forEach(sv => {
+          dsKQ.push({
+            'sttnhom':i,
+            'maSV': sv.maSV,
+            'hoten':sv.tenSV,
+            'madetai':sv.tenNhom,
+            'tendetai':sv.tendetai,
+            "gvhd":sv.gvhd,
+            "duocraPB": "XU LY TIP",
+            "diemGVHD": sv.phieuChamDiemHD.diemPhieuCham,
+            "pb1": sv.phieuChamDiemPB1.diemPhieuCham,
+            "pb2": sv.phieuChamDiemPB1.diemPhieuCham,
+            "tbbm": sv.diemTBBM,
+            "tvhd1": sv.phieuChamDiemCT.diemPhieuCham,
+            "tvhd2": sv.phieuChamDiemTK.diemPhieuCham,
+            "tbtvhd": (sv.phieuChamDiemCT.diemPhieuCham + sv.phieuChamDiemTK.diemPhieuCham)/2 > 8 ?
+                (sv.phieuChamDiemCT.diemPhieuCham + sv.phieuChamDiemTK.diemPhieuCham)/2 : 8  ,
+            "ketqua": sv.ketQua,
+            "diembao": sv.diembao ? sv.diembao : "chua-co",
+            "diemTK": sv.diemTBTVHD,
+            "hoidong":  sv.diemTBBM >= 8 ? "HD" : "---"
+          })
+        i++;
+      })
+      this.dataSource = new MatTableDataSource(dsKQ);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
+
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -59,23 +94,10 @@ export class QuanlyKetquahoctapComponent implements OnInit {
     }
   }
 
-  editProduct(row: any) {
-    // this.nhomService.duyetNhom({
-    //   ma: row.nhom.maNhom,
-    //   trangThai: 1,
-    //   maHocKy: this.hocKyHienTai
-    // }).subscribe({
-    //   next: (res) => {
-    //     if (res) {
-    //       this.getDsNhom()
-    //       new NotificationsComponent().showNotification('success', 'Duyệt nhóm thành công');
-    //     }
-    //   },
-    //   error: () => {
-    //     console.log("Error")
-    //     new NotificationsComponent().showNotification('success', 'Duyệt nhóm thất bại');
-    //   }
-    // })
+  addDiemBao(row: any) {
+    this.dialog.open(QlDiemBaoComponent, {
+      data:row
+    });
   }
 
   deleteProduct(id) {
@@ -87,7 +109,6 @@ export class QuanlyKetquahoctapComponent implements OnInit {
   changeHocKy($event: MatSelectChange) {
     this.hocKyHienTai = $event.value.toString().slice(0, 3)
     this.soHocKy = $event.value.toString().slice(2)
-    // sinhvienService.getKetQuaHocTapToanBoSV($event.value)
   }
   tinhTrang: any;
 
