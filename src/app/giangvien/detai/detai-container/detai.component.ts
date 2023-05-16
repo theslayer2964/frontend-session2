@@ -102,8 +102,8 @@ export class DetaiComponent implements OnInit {
             maHocKy: maHocKy,
             soHocKy: soHocKy
         })
-            .subscribe({
-                next: (res) => {
+            .subscribe(
+                (res) => {
                     if (res) {
                         // table
                         this.dataSource = new MatTableDataSource(res);
@@ -111,12 +111,10 @@ export class DetaiComponent implements OnInit {
                         this.dataSource.sort = this.sort;
                     }
                 },
-                error: () => {
-                    console.log("Error")
-                }
-            })
+                (err) => {
+                    console.log(err)
+                });
     }
-
     @Input() validateDeTai;
 
 

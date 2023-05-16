@@ -101,7 +101,7 @@ export class SharedComponent implements OnInit {
                     this.listData = [];
                     tin.tinNhanDtos.forEach(data => {
                         this.listData.push({
-                            tinnhan: "Có Đề Tài bạn cần sửa",
+                            tinnhan: data.tenTinNhan,
                             id: data.id,
                             sender: data.nguoiGui.maGiangVien,
                             createdAt: new Date(data.createdAt),
@@ -120,7 +120,7 @@ export class SharedComponent implements OnInit {
                     this.listData = [];
                     tin.tinNhanDtos.forEach(data => {
                         this.listData.push({
-                            tinnhan: "Có người muốn tham gia nhóm của bạn",
+                            tinnhan: data.tenTinNhan,
                             id: data.id,
                             sender: data.nguoiGui.maSinhVien,
                             createdAt: new Date(data.createdAt),

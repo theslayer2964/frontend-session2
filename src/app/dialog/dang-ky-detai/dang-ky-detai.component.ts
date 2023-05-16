@@ -49,9 +49,8 @@ export class DangKyDetaiComponent implements OnInit {
             maNhom: this.userAuthService.getUserInfo().nhom.maNhom,
             maDeTai: this.deTai.maDeTai,
             vaiTro: this.userAuthService.getRoles()[0].roleName
-        }).subscribe({
-            next: (res) => {
-                console.log("DK DE TAI:",res);
+        }).subscribe(
+            (res:any) => {
                 var user = this.userAuthService.getUserInfo();
                 new NotificationsComponent().showNotification('success', 'Đã đăng ký đề tài.');
                 this.dialogRef.close();
@@ -59,8 +58,11 @@ export class DangKyDetaiComponent implements OnInit {
                 this.userAuthService.setUserInfo(user);
                 this.router.navigate(["/trangchuSV"]);
                 this.dkDetaiContainerTranferService.clickDangKyDeTai("click");
-            }
-        })
+            },
+            error => {
+                console.log("XXX",error)
+                // new NotificationsComponent().showNotification("danger", error);
+            });
     }
 
 }

@@ -20,8 +20,8 @@ export class NhomService {
 
     }
 
-    dangKyNhom(data: any): Observable<any> {
-        return this.httpClient.post<any>(this.url + "dang-ky-nhom", data, {headers: this.httpHeadersJWT});
+    dangKyNhom(data: any){
+        return this.httpClient.post(this.url + "dang-ky-nhom", data, {headers: this.httpHeadersJWT});
     }
 
 
@@ -109,9 +109,7 @@ export class NhomService {
     }
 
     dangKyNhomCoSan(data: any) {
-        return this.httpClient.post<any>(this.url + "dang-ky-co-san", data, {headers: this.httpHeadersJWT}).pipe(
-            tap(receiveNhom => receiveNhom),
-            catchError(err => of([])));
+        return this.httpClient.post<any>(this.url + "dang-ky-co-san", data, {headers: this.httpHeadersJWT});
     }
 
 

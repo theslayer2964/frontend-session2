@@ -1,5 +1,5 @@
 <div *ngIf="editData.info.nguoiGui.maSinhVien != null">
-    <h2 mat-dialog-title style="color: #00acc1">Có sinh viên muốn xin tham gia vào nhóm của bạn</h2>
+    <h2 mat-dialog-title>Thông Báo</h2>
     <mat-divider></mat-divider>
     <hr>
     <mat-dialog-content class="mat-typography">
@@ -7,7 +7,7 @@
         <h4>Tên Sinh viên: <b>{{editData.info.nguoiGui.tenSinhVien}}</b></h4>
         <h4>Số Điện Thoại: <b>{{editData.info.nguoiGui.dienThoai}}</b></h4>
         <h4>Email: <b>{{editData.info.nguoiGui.email}}</b></h4>
-        <p>Lời Nhắn: <b>{{editData.info.noiDung}}</b></p>
+        <p>Lời Nhắn: <b>{{editData.info.noiDung.split('|')[3]}}</b></p>
     </mat-dialog-content>
     <mat-divider></mat-divider>
     <mat-dialog-actions align="end">
@@ -17,10 +17,11 @@
 </div>
 
 <div *ngIf="editData.info.nguoiGui.maGiangVien != null">
-    <h2 mat-dialog-title>Có đề tài bạn cần chỉnh sửa</h2>
-    <mat-divider></mat-divider>
+    <h2 mat-dialog-title>Thông Báo</h2>
     <mat-dialog-content class="mat-typography">
-        <p>Lời Nhắn: {{editData.info.noiDung}}</p>
+        <p>{{editData.info.noiDung.split("|")[0]}}  {{editData.info.noiDung.split("|")[1]}}</p>
+        <p *ngIf="editData.info.noiDung.split('|')[2] != ''">Lời Nhắn: {{editData.info.noiDung.split("|")[2]}}
+        </p>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
         <button mat-button mat-dialog-close>Cancel</button>

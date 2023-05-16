@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['/quanly', this.loginForm.value.tenTaiKhoan])
             }
         }, error => {
+            console.log(error)
             new NotificationsComponent().showNotification("danger",error.error.message);
         })
     }

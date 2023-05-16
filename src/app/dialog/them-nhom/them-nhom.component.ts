@@ -12,6 +12,7 @@ import {Nhom} from "../../sinhvien/Nhom.models";
 import {NhomService} from "../../shared-service/nhom.service";
 import {catchError, of, tap} from "rxjs";
 import {Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
     selector: 'app-them-nhom',
@@ -109,7 +110,6 @@ export class ThemNhomComponent implements OnInit {
     nhom: Nhom
     user: any;
     addNhom() {
-
         if (this.editData == null) {
             this.dsMaSinhVien.push(this.formNhom.get('maSoSv1').value)
             if (this.formNhom.get('maSoSv2') != null && this.formNhom.get('maSoSv2').value != "") {
@@ -126,8 +126,7 @@ export class ThemNhomComponent implements OnInit {
                     maDeTai: this.maDeTaiHienTai,
                     vaiTro: this.userAuthService.getRoles()[0].roleName
                 })
-                    .subscribe({
-                        next: (res) => {
+                    .subscribe((res) => {
                             this.formNhom.reset();
                             this.dialogRef.close('save');
                             new NotificationsComponent().showNotification('success', 'Thêm nhóm thành công');
@@ -137,9 +136,9 @@ export class ThemNhomComponent implements OnInit {
                             this.router.navigate(["/trangchuSV"])
 
                         },
-                        error: (err) => {
-                            new NotificationsComponent().showNotification('danger', 'Không thể thêm nhóm');
-                        }
+                        (err: HttpErrorResponse) => {
+                            console.log(JSON.stringify(err));
+                            new NotificationsComponent().showNotification('danger', err);
                     })
             }
         }

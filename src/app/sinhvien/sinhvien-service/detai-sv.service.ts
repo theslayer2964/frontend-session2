@@ -17,16 +17,16 @@ export class DetaiSvService {
   constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) {
   }
 
-  dangKyDeTai(data: any): Observable<any> {
-    return this.httpClient.post<any>(this.url + 'dang-ky-de-tai', data, {headers: this.httpHeadersJWT}).pipe(
-        tap(recieveDeTai => recieveDeTai),
-        catchError(err => of([])));
+  dangKyDeTai(data: any){
+    return this.httpClient.post(this.url + 'dang-ky-de-tai', data, {headers: this.httpHeadersJWT});
+        // .pipe(
+        // tap(recieveDeTai => recieveDeTai));
   }
 
   xemDeTaiCanDangKy(data: any): Observable<any[]> {
     return this.httpClient.post<any[]>(this.url + 'xem-de-tai-da-duyet', data,{headers: this.httpHeadersJWT}).pipe(
         tap(recieveDeTai => recieveDeTai),
-        catchError(err => of([])));
+        catchError(err => of(err)));
   }
 
 
