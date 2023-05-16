@@ -4,7 +4,6 @@
     <div class="col-6"></div>
     <div class="col-6 text-end">
         <button class="btn btn-sm btn-success" (click)="addRow()">Add Employee</button>
-        <button class="btn btn-sm btn-success" (click)="setValue()">Set value</button>
     </div>
 </div>
 <div class="pt-2">
@@ -12,32 +11,36 @@
         <table class="table table-bordered">
             <thead>
             <tr class="text-uppercase table-dark">
-                <th scope="col">Ngày</th>
-                <th scope="col">Tiết</th>
-                <th scope="col">Phòng</th>
-                <th scope="col">Nhóm</th>
-                <th scope="col">Tùy chọn</th>
+                <th scope="col">
+                    <input type="checkbox" name="isCheckAll" [(ngModel)]="isCheckAll" (ngModelChange)="checkAll($event)" />
+                </th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">City</th>
+                <th scope="col">State</th>
+                <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody [formGroup]="employeeForm">
             <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
                 <tr [formGroupName]="i">
+                    <td scope="row" class="align-middle">
+                        <input type="checkbox" formControlName="ischecked" />
+                    </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="ngay" placeholder="Enter First" disabled>
-                        <div class="text-danger" *ngIf="getFormControls.controls[i].get('ngay')?.touched">
-                            <span *ngIf="getFormControls.controls[i].get('ngay')?.errors?.['required']">Required</span>
-                            <span *ngIf="getFormControls.controls[i].get('ngay')?.errors?.['minlength']">3 Chars
+                        <input type="text" class="form-control" formControlName="firstname" placeholder="Enter First">
+                        <div class="text-danger" *ngIf="getFormControls.controls[i].get('firstname')?.touched">
+                            <span *ngIf="getFormControls.controls[i].get('firstname')?.errors?.['required']">Required</span>
+                            <span *ngIf="getFormControls.controls[i].get('firstname')?.errors?.['minlength']">3 Chars
                   Required</span>
                         </div>
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="tiet" placeholder="Enter Last" disabled>
-                        <div class="text-danger" *ngIf="getFormControls.controls[i].get('tiet')?.touched">
-                            <span *ngIf="getFormControls.controls[i].get('tiet')?.errors?.['required']">Required</span>
+                        <input type="text" class="form-control" formControlName="lastname" placeholder="Enter Last">
+                        <div class="text-danger" *ngIf="getFormControls.controls[i].get('lastname')?.touched">
+                            <span *ngIf="getFormControls.controls[i].get('lastname')?.errors?.['required']">Required</span>
                         </div>
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" formControlName="phong" placeholder="phong..." disabled>
                     </td>
                     <td>
                         <select formControlName="status" (change)="onStatusChange($event,i)" class="form-control">
@@ -45,6 +48,12 @@
                             <option value="active">Active</option>
                             <option value="deactive">De-Active</option>
                         </select>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="city" placeholder="Enter City">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="state" placeholder="Enter state">
                     </td>
                     <td>
                         <button class="btn btn-danger" (click)="removeEmployee(i)">Remove</button>
@@ -56,9 +65,7 @@
                     <td colspan="7">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <button class="btn btn-success" [disabled]="employeeForm.invalid"
-                                        (click)="onSaveForm()">Lưu
-                                </button>
+                                <button class="btn btn-success" [disabled]="employeeForm.invalid" (click)="onSaveForm()">Save Bulk Employee</button>
                             </div>
                         </div>
                     </td>

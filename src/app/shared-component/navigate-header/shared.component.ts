@@ -21,7 +21,7 @@ export class SharedComponent implements OnInit {
     constructor(private userAuthService: UserAuthService, private router: Router, public userService: UserService,
                 public userDataService: UserDataService,
                 public dialog: MatDialog,
-                private tinNhanService: TinnhanService,private loginNotificationService:LoginNotificationService) {
+                private tinNhanService: TinnhanService, private loginNotificationService: LoginNotificationService) {
     }
 
     public userInfo: any
@@ -38,7 +38,7 @@ export class SharedComponent implements OnInit {
             }
             // this.loadThongBao();
         });
-        this.loginNotificationService.loginNotiSubject.subscribe(res =>{
+        this.loginNotificationService.loginNotiSubject.subscribe(res => {
             console.log("DANG NHAP NE``")
             this.loadThongBao();
         })
@@ -75,24 +75,30 @@ export class SharedComponent implements OnInit {
         item.trangThai = 1;
         this.tinNhanService.docTinNhan(item).subscribe(res => {
             this.dialog.open(ThongbaoComponent, {
-                data:item,
-                width:"850px"
+                data: item,
+                width: "850px"
             })
         });
         //     .afterClosed().subscribe(val => {
         //     this.router.
         // })
     }
+
     loadThongBao() {
-        let roleName = this.userAuthService.getRoles()[0].roleName;
+        let roleName = "";
+        if (this.userAuthService.getRoles() != null) {
+            roleName = this.userAuthService.getRoles()[0].roleName;
+        }
+
         let maNguoiDung = "";
-        let tin:any;
-        if (roleName == 'ROLE_GIANGVIEN' ||  roleName == 'ROLE_QUANLY') {
+        let tin: any;
+        if (roleName == 'ROLE_GIANGVIEN' || roleName == 'ROLE_QUANLY') {
             maNguoiDung = this.userAuthService.getUserInfo().maGiangVien
             this.tinNhanService.layTinNhan(maNguoiDung)
                 .subscribe(res => {
-                     tin = res;
-                     this.listData = [];
+                    console.log("XỬ LÝ TÍP KHÚC NÀY-- CẮT NỘI DUNG");
+                    tin = res;
+                    this.listData = [];
                     tin.tinNhanDtos.forEach(data => {
                         this.listData.push({
                             tinnhan: "Có Đề Tài bạn cần sửa",
@@ -109,7 +115,7 @@ export class SharedComponent implements OnInit {
             maNguoiDung = this.userAuthService.getUserInfo().maSinhVien
             this.tinNhanService.layTinNhan(maNguoiDung)
                 .subscribe(res => {
-                    console.log("TIN NHẮN:",res);
+                    console.log("TIN NHẮN:", res);
                     tin = res;
                     this.listData = [];
                     tin.tinNhanDtos.forEach(data => {

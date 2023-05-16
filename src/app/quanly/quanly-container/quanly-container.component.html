@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card card-stats">
-                    <div class="card-header card-header-info card-header-icon">
+                    <div class="card-header card-header-success card-header-icon">
                         <div class="card-icon">
-                            <i class="fa fa-twitter"></i>
+                            <i class="material-icons">class</i>
                         </div>
                         <p class="card-category">Lớp học phần</p>
                         <h3 class="card-title">Lớp học phần</h3>
@@ -13,24 +13,9 @@
                     <div class="card-footer">
                         <div class="stats">
                             <i class="material-icons">update</i>
-                            <button (click)="goToQLDetail('lophocphan')" style="border: none;background-color: #fff ">Chi tiết nhóm</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">content_copy</i>
-                        </div>
-                        <p class="card-category">Nhóm khóa luận</p>
-                        <h3 class="card-title">Nhóm khóa luận</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">date_range</i>
-                            <button (click)="goToQLDetail('nhom')" style="border: none;background-color: #fff ">Chi tiết nhóm</button>
+                            <button (click)="goToQLDetail('lophocphan')" style="border: none;background-color: #fff ">
+                                Chi tiết nhóm
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -39,65 +24,10 @@
                 <div class="card card-stats">
                     <div class="card-header card-header-success card-header-icon">
                         <div class="card-icon">
-                            <i class="material-icons">store</i>
-                        </div>
-                        <p class="card-category">Đề tài</p>
-                        <h3 class="card-title">Đề tài</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">date_range</i>
-                            <button (click)="goToQLDetail('detai')" style="border: none;background-color: #fff ">Chi tiết đề tài</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-danger card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">info_outline</i>
-                        </div>
-                        <p class="card-category">Giảng viên</p>
-                        <h3 class="card-title">Giảng viên</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">local_offer</i>
-                            <button (click)="goToQLDetail('giangvien')" style="border: none;background-color: #fff ">Chi tiết giảng viên</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-info card-header-icon">
-                        <div class="card-icon">
-                            <i class="fa fa-twitter"></i>
-                        </div>
-                        <p class="card-category">Sinh viên</p>
-                        <h3 class="card-title">Sinh viên</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">update</i>
-                            <button (click)="goToQLDetail('sinhvien')" style="border: none;background-color: #fff ">Chi tiết sinh viên</button>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-info card-header-icon">
-                        <div class="card-icon">
-                            <i class="fa fa-twitter"></i>
+                            <i class="material-icons">timeline</i>
                         </div>
                         <p class="card-category">Phân công giảng viên</p>
-                        <h3 class="card-title">+245</h3>
+                        <h3 class="card-title">Phân công giảng viên</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
@@ -109,9 +39,9 @@
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card card-stats">
-                    <div class="card-header card-header-info card-header-icon">
+                    <div class="card-header card-header-success card-header-icon">
                         <div class="card-icon">
-                            <i class="fa fa-twitter"></i>
+                            <i class="material-icons">perm_contact_calendar</i>
                         </div>
                         <p class="card-category">Lịch biểu</p>
                         <h3 class="card-title">Lịch biểu</h3>
@@ -119,7 +49,9 @@
                     <div class="card-footer">
                         <div class="stats">
                             <i class="material-icons">update</i>
-                            <button (click)="goToQLich()" style="border: none;background-color: #fff ">Chi tiết lịch biểu</button>
+                            <button (click)="goToQLich()" style="border: none;background-color: #fff ">Chi tiết lịch
+                                biểu
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -128,15 +60,58 @@
                 <div class="card card-stats">
                     <div class="card-header card-header-success card-header-icon">
                         <div class="card-icon">
-                            <i class="material-icons">store</i>
+                            <i class="material-icons">library_books</i>
                         </div>
-                        <p class="card-category">PHIẾU CHẤM</p>
-                        <h3 class="card-title">PHIẾU CHẤM</h3>
+                        <p class="card-category">Phiếu chấm điểm</p>
+                        <h3 class="card-title">Phiếu chấm điểm</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
                             <i class="material-icons">date_range</i>
-                            <button (click)="goToQLDetail('phieucham')" style="border: none;background-color: #fff ">Chi tiết</button>
+                            <button (click)="goToQLDetail('phieucham')" style="border: none;background-color: #fff ">Chi
+                                tiết
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">perm_identity</i>
+                        </div>
+                        <p class="card-category">Giảng viên</p>
+                        <h3 class="card-title">Giảng viên</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">local_offer</i>
+                            <button (click)="goToQLDetail('giangvien')" style="border: none;background-color: #fff ">Chi
+                                tiết giảng viên
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_paste</i>
+                        </div>
+                        <p class="card-category">Đề tài</p>
+                        <h3 class="card-title">Đề tài</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">date_range</i>
+                            <button (click)="goToQLDetail('detai')" style="border: none;background-color: #fff ">Chi
+                                tiết đề tài
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -145,9 +120,48 @@
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card card-stats">
-                    <div class="card-header card-header-info card-header-icon">
+                    <div class="card-header card-header-warning card-header-icon">
                         <div class="card-icon">
-                            <i class="fa fa-twitter"></i>
+                            <i class="material-icons">school</i>
+                        </div>
+                        <p class="card-category">Sinh viên</p>
+                        <h3 class="card-title">Sinh viên</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i>
+                            <button (click)="goToQLDetail('sinhvien')" style="border: none;background-color: #fff ">Chi
+                                tiết sinh viên
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">group</i>
+                        </div>
+                        <p class="card-category">Nhóm khóa luận</p>
+                        <h3 class="card-title">Nhóm khóa luận</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">date_range</i>
+                            <button (click)="goToQLDetail('nhom')" style="border: none;background-color: #fff ">Thông
+                                tin chi tiết
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">grade</i>
                         </div>
                         <p class="card-category">Kết quả học tập</p>
                         <h3 class="card-title">Kết quả học tập</h3>
@@ -155,12 +169,15 @@
                     <div class="card-footer">
                         <div class="stats">
                             <i class="material-icons">update</i>
-                            <button (click)="goToQLDetail('ketqua-hoctap')" style="border: none;background-color: #fff ">Chi tiết</button>
+                            <button (click)="goToQLDetail('ketqua-hoctap')"
+                                    style="border: none;background-color: #fff ">Chi tiết
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <router-outlet></router-outlet>

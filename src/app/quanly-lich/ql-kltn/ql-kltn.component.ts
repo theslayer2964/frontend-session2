@@ -10,45 +10,23 @@ export class QlKltnComponent implements OnInit {
 
     public employeeForm: FormGroup;
 
-    ngOnInit() {
-    }
-
+    isCheckAll: boolean = false;
 
     constructor(private fb: FormBuilder) {
         this.employeeForm = this.fb.group({
-            tableRows: this.fb.array([], [Validators.required])
+            tableRows: this.fb.array([],[Validators.required])
         });
         this.addRow();
-        this.addRow();
-        this.addRow();
-    }
-
-    setValue() {
-        var data = {
-            tableRows: [
-                {
-                    ngay: 'lala',
-                    tiet: 'meoem',
-                    nhom: '',
-                    phong: 'xxx'
-                },
-                {
-                    ngay: 'lala',
-                    tiet: 'meoem',
-                    nhom: '',
-                    phong: 'xxx'
-                }
-            ]
-        }
-        this.employeeForm.patchValue(data);
     }
 
     createFormGroup(): FormGroup {
         return this.fb.group({
-            ngay: ['', [Validators.required, Validators.minLength(3)]],
-            tiet: ['', [Validators.required]],
-            nhom: [''],
-            phong: ['']
+            firstname: ['',[Validators.required,Validators.minLength(3)]],
+            lastname: ['',[Validators.required]],
+            city:[''],
+            state: [''],
+            status: [''],
+            ischecked: [false]
         });
     }
 
@@ -58,30 +36,40 @@ export class QlKltnComponent implements OnInit {
     }
 
     addRow() {
-        const control = this.employeeForm.get('tableRows') as FormArray;
+        const control =  this.employeeForm.get('tableRows') as FormArray;
         control.push(this.createFormGroup());
     }
 
-    onStatusChange(event: any, index: number) {
+    checkAll(checkVal: boolean) {
+
+        this.getFormControls.controls.forEach(formGroup => {
+            formGroup.get('ischecked')?.setValue(checkVal);
+        });
+    }
+
+    onStatusChange(event:any, index: number) {
         debugger
-        if (event.target.value == 'deactive') {
-            const control = this.employeeForm.get('tableRows') as FormArray;
+        if(event.target.value == 'deactive'){
+            const control =  this.employeeForm.get('tableRows') as FormArray;
             control.controls[index].get('state')?.disable();
             control.controls[index].get('city')?.disable();
         } else {
-            const control = this.employeeForm.get('tableRows') as FormArray;
+            const control =  this.employeeForm.get('tableRows') as FormArray;
             control.controls[index].get('state')?.enable();
             control.controls[index].get('city')?.enable();
         }
     }
 
-    removeEmployee(index: number) {
-        const control = this.employeeForm.get('tableRows') as FormArray;
+    removeEmployee(index:number) {
+        const control =  this.employeeForm.get('tableRows') as FormArray;
         control.removeAt(index);
     }
 
     onSaveForm() {
         const formValue = this.employeeForm.value;
-        console.log("ON SAVE:", formValue);
+
     }
+    ngOnInit(): void {
+    }
+
 }

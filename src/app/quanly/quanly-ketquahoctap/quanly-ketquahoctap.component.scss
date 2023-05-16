@@ -1,0 +1,9 @@
+// TABLE
+th{
+  font-size: 13px;
+  color: #4da1e8;
+  font-weight: bold;
+}
+tr.mat-row:nth-child(even){
+  background-color: #c6e0f3;
+}

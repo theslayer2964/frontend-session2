@@ -101,6 +101,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatMenuModule} from "@angular/material/menu";
 import { ThemLopHocPhanComponent } from './dialog/them-lop-hoc-phan/them-lop-hoc-phan.component';
 import { DialogExportExcelComponent } from './excel/dialog-export-excel/dialog-export-excel.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
     imports: [
@@ -143,6 +144,7 @@ import { DialogExportExcelComponent } from './excel/dialog-export-excel/dialog-e
         MatAutocompleteModule,
         MatExpansionModule,
         MatMenuModule,
+        MatCheckboxModule,
     ],
     declarations: [
         AppComponent,

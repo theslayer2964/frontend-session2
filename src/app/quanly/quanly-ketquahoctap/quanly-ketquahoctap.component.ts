@@ -7,7 +7,9 @@ import {HockyService} from "../../shared-service/hocky.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatSelectChange} from "@angular/material/select";
-import {PhieuChamService} from "../quanly-service/phieu-cham.service";
+import {SinhvienService} from "../../shared-service/sinhvien.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MatAccordion} from "@angular/material/expansion";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 
 @Component({
@@ -20,7 +22,9 @@ export class QuanlyKetquahoctapComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   dsHocKy: HocKy[];
 
-  constructor(public dialog: MatDialog, private nhomService: NhomService, private hockyService: HockyService) {
+  constructor(public dialog: MatDialog, private nhomService: NhomService, private hockyService: HockyService,
+              private userAuthService: UserAuthService,private formBuilder: FormBuilder,
+              private sinhvienService: SinhvienService) {
 
   }
 
@@ -33,9 +37,14 @@ export class QuanlyKetquahoctapComponent implements OnInit {
       }
     })
   }
-
+  maGiangVien: any;
   ngOnInit(): void {
     this.getAllHocKy();
+    this.maGiangVien =  this.userAuthService.getUserInfo().maGiangVien
+    this.luaChonGroup = this.formBuilder.group({
+      hocKy: ['', Validators.required],
+      giangvienCham:['']
+    })
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -78,16 +87,36 @@ export class QuanlyKetquahoctapComponent implements OnInit {
   changeHocKy($event: MatSelectChange) {
     this.hocKyHienTai = $event.value.toString().slice(0, 3)
     this.soHocKy = $event.value.toString().slice(2)
-
-    // this.getDsNhom();
+    // sinhvienService.getKetQuaHocTapToanBoSV($event.value)
   }
   tinhTrang: any;
-
-
-
 
   downloadFileSV() {
     console.log("XU LY TIP TUC...")
   }
+///
+  // FORM BUILDER:
+  luaChonGroup: FormGroup;
+  phuongPhapList: any[] = [{value:'chamPoster',viewValue:"Poster"},{value: 'chamHoiDong', viewValue: "Được Hội Đồng"}];
+  dsVaiTro: any[] = [
+    {value: "CT", viewValue:"Chủ tịch hội đồng" },
+    {value: "TK", viewValue:"Thư ký hướng dẫn" },
+    {value: "TV3", viewValue:"Thành viên thứ 3" },
+  ];
 
+  @ViewChild(MatAccordion) accordion: MatAccordion;
+
+  fileterChange() {
+    this.accordion.closeAll();
+    console.log(this.luaChonGroup.value);
+    // this.getDsSvCuaGV(this.luaChonGroup.controls['hocKy'].value == undefined ? null : this.luaChonGroup.controls['hocKy'].value,
+    //     this.luaChonGroup.controls['vaitro'].value == "" ? null :this.luaChonGroup.controls['vaitro'].value ,
+    //     this.maGiangVien, this.luaChonGroup.controls['ppcham'].value == "" ? null : this.luaChonGroup.controls['ppcham'].value,
+    //     this.luaChonGroup.controls['dotCham'].value)
+  }
+
+  dsGV: any[]
+  changeGVCham($event: MatSelectChange) {
+
+  }
 }

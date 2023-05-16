@@ -12,13 +12,9 @@ import {DuyetdetaiComponent} from "../duyetdetai/duyetdetai.component";
 })
 export class LoiNhanComponent implements OnInit {
 
-  constructor( private userAuthService: UserAuthService,
-               private nhomService: NhomService,
-               @Inject(MAT_DIALOG_DATA) public data: any,
-               private dialogRef: MatDialogRef<DuyetdetaiComponent>,) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    console.log(this.data)
   }
 
 }

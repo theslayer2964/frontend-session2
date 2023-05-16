@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {HocKy} from "../../shared-service/HocKy.models";
 import {MatDialog} from "@angular/material/dialog";
@@ -6,7 +6,7 @@ import {NhomService} from "../../shared-service/nhom.service";
 import {HockyService} from "../../shared-service/hocky.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {MatPaginator} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
+import {MatSort, Sort} from "@angular/material/sort";
 import {ThemNhomComponent} from "../../dialog/them-nhom/them-nhom.component";
 import {MatSelectChange} from "@angular/material/select";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
@@ -19,6 +19,7 @@ import {
 } from "../../shared-service/FileNameExport";
 import {QlXepTKBComponent} from "../../dialog/ql-xep-tkb/ql-xep-tkb.component";
 import {DialogExportExcelComponent} from "../../excel/dialog-export-excel/dialog-export-excel.component";
+import {LiveAnnouncer} from "@angular/cdk/a11y";
 
 @Component({
     selector: 'app-quanly-nhom',
@@ -31,7 +32,8 @@ export class QuanlyNhomComponent implements OnInit {
     dsHocKy: HocKy[];
 
     constructor(public dialog: MatDialog, private nhomService: NhomService, private hockyService: HockyService,
-                private userAuthService: UserAuthService, private filegenerate: FileGeneratorService) {
+                private userAuthService: UserAuthService, private filegenerate: FileGeneratorService,
+                private _liveAnnouncer: LiveAnnouncer) {
 
     }
 
@@ -51,9 +53,14 @@ export class QuanlyNhomComponent implements OnInit {
     }
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
-    @ViewChild(MatSort) sort!: MatSort;
-    impType: any;
-    selected: any;
+    @ViewChild(MatSort) sort: MatSort;
+    announceSortChange(sortState: Sort) {
+        if (sortState.direction) {
+            this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+        } else {
+            this._liveAnnouncer.announce('Sorting cleared');
+        }
+    }
 
     applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
@@ -100,7 +107,6 @@ export class QuanlyNhomComponent implements OnInit {
     tinhTrang: any;
 
     private getDsNhom() {
-        console.log('XXX:', this.hocKyHienTai, this.soHocKy);
         this.nhomService.getNhomRoleGV({
             maHocKy: this.hocKyHienTai,
             soHocKy: this.soHocKy,
@@ -109,18 +115,17 @@ export class QuanlyNhomComponent implements OnInit {
             .subscribe({
                 next: (res) => {
                     if (res) {
+                        let rs = [];
                         res.forEach(data => {
-                            var temp;
-                            temp = data.dsMaSinhVien;
-                            console.log("TEMP:", temp)
-                            delete data['npm it pdsMaSinhVien'];
-                            data.sv1 = temp[0];
-                            if (temp.length == 2) {
-                                data.sv2 = temp[1];
-                            }
+                            rs.push({
+                                maNhom: data.nhom.maNhom,
+                                maDeTai: data.maDeTai ? data.maDeTai : "---",
+                                sv1: data.sinhViens[0].maSinhVien + " - " + data.sinhViens[0].tenSinhVien,
+                                sv2: data.sinhViens[1] ? data.sinhViens[1].maSinhVien + " - " + data.sinhViens[1].tenSinhVien : "---",
+                                danhGia: data.nhom.tinhTrang
+                            })
                         });
-                        console.log("DATA REMAKE ne: ", res)
-                        this.dataSource = new MatTableDataSource(res);
+                        this.dataSource = new MatTableDataSource(rs);
                         this.dataSource.paginator = this.paginator;
                         this.dataSource.sort = this.sort;
                     }

@@ -84,4 +84,9 @@ export class SinhvienService {
         catchError(err => of([])));
   }
 
+  getKetQuaHocTapToanBoSV(hocKy: string){
+    // return this.httpClient.get(this.urlSinhVien + "lay-ket-qua/" + maSV,{headers: this.httpHeadersJWT}).pipe(
+    //     tap(recieveDeTai => recieveDeTai),
+    //     catchError(err => of([])));
+  }
 }

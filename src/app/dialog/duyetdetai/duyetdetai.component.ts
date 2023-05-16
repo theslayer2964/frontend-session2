@@ -44,7 +44,7 @@ export class DuyetdetaiComponent implements OnInit {
         this.day = this.data.row.full;
         console.log(this.data.row);
     }
-    editProduct() {
+    duyetDeTai() {
         this.deTaiService.duyetDeTai({
             ma: this.deTai.maDeTai,
             trangThai: 2
@@ -61,7 +61,7 @@ export class DuyetdetaiComponent implements OnInit {
     }
 
     loiNhan: any = "";
-    deleteProduct() {
+    khongDuyetDeTai() {
         this.dialog.open(LoiNhanComponent, {data: this.loiNhan})
             .afterClosed().subscribe(result => {
             if ( result != "'close'") {
@@ -72,7 +72,7 @@ export class DuyetdetaiComponent implements OnInit {
                 }).subscribe({
                     next: (res) => {
                         this.dialogRef.close();
-                        new NotificationsComponent().showNotification('success', 'Đề tài đã duyệt thành công');
+                        new NotificationsComponent().showNotification('success', 'Yêu cầu chỉnh sửa của bạn sẽ được gửi đến giảng viên hướng dẫn của đề tài');
                     },
                     error: () => {
                         new NotificationsComponent().showNotification('danger', 'Không duyệt đề tài này');

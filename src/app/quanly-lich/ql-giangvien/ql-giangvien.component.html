@@ -50,21 +50,20 @@
                         <table mat-table [dataSource]="dataSourcePB" matSort>
                             <!-- ID Column -->
                             <ng-container matColumnDef="maLich" sticky class="example-button">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> MÃ LỊCH
+                                <th mat-header-cell *matHeaderCellDef> MÃ LỊCH
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.maLich}} </td>
                             </ng-container>
                             <!-- Progress Column -->
-                            <ng-container matColumnDef="tenLich" style="margin-left: 60px">
-                                <th mat-header-cell *matHeaderCellDef style="margin-left: 60px"> TÊN LỊCH
+                            <ng-container matColumnDef="tenLich">
+                                <th mat-header-cell *matHeaderCellDef> TÊN LỊCH
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.tenLich}}"
                                     matTooltipClass="example-tooltip-uppercase"> {{row.tenLich}}
                                 </td>
                             </ng-container><!-- Progress Column -->
-                            <ng-container matColumnDef="ngay" style="margin-left: 60px">
-                                <th mat-header-cell *matHeaderCellDef style="margin-left: 60px"> NGÀY CHẤM
+                            <ng-container matColumnDef="ngay">
+                                <th mat-header-cell *matHeaderCellDef> NGÀY CHẤM
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.ngay}}"
                                     matTooltipClass="example-tooltip-uppercase"> {{row.ngay}}
@@ -72,43 +71,36 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="tiet">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> TIẾT
+                                <th mat-header-cell *matHeaderCellDef> TIẾT
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.tiet}}</td>
                             </ng-container>
-                            <ng-container matColumnDef="gvpb1" style="width: 200px;">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="margin-left: 40px;text-align: center"> GV PB 1
+                            <ng-container matColumnDef="gvpb1">
+                                <th mat-header-cell *matHeaderCellDef> GV PB 1
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.dsGiangVienPB[0].tenGiangVien}}"
                                     matTooltipClass="example-tooltip-uppercase">{{row.dsGiangVienPB[0].tenGiangVien}}</td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="gvpb2">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">GV PB 2
+                                <th mat-header-cell *matHeaderCellDef>GV PB 2
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.dsGiangVienPB[1].tenGiangVien}}"
                                     matTooltipClass="example-tooltip-uppercase">{{row.dsGiangVienPB[1].tenGiangVien}}</td>
                             </ng-container> <!-- Progress Column -->
                             <ng-container matColumnDef="phong">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">PHONG
+                                <th mat-header-cell *matHeaderCellDef>PHÒNG
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.phong}}"
                                     matTooltipClass="example-tooltip-uppercase">{{row.phong}}</td>
                             </ng-container>
                             <ng-container matColumnDef="action" stickyEnd>
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> CHỈNH SỬA
+                                <th mat-header-cell *matHeaderCellDef> CHỈNH SỬA
                                 </th>
                                 <td mat-cell *matCellDef="let row">
                                     <!--Row: data cua 1 dong-->
-                                    <button mat-icon-button color="primary" (click)="editLichPB(row)">
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
-                                    <button mat-icon-button color="accent" (click)="deleteLichPB(row.maLich)">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
+                                        <mat-icon (click)="editLichPB(row)" style="color: #00bbff">edit</mat-icon>
+                                        <mat-icon (click)="deleteLichPB(row.maLich)" style="color: red">delete</mat-icon>
                                 </td>
                             </ng-container>
                             <tr mat-header-row *matHeaderRowDef="displayedColumnsPB"></tr>
@@ -128,21 +120,20 @@
                         <table mat-table [dataSource]="dataSourceHD" matSort>
                             <!-- ID Column -->
                             <ng-container matColumnDef="maLich" sticky class="example-button">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> MÃ LỊCH
+                                <th mat-header-cell *matHeaderCellDef> MÃ LỊCH
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.maLich}} </td>
                             </ng-container>
                             <!-- Progress Column -->
-                            <ng-container matColumnDef="tenLich" style="margin-left: 60px">
-                                <th mat-header-cell *matHeaderCellDef style="margin-left: 60px"> TÊN LỊCH
+                            <ng-container matColumnDef="tenLich">
+                                <th mat-header-cell *matHeaderCellDef> TÊN LỊCH
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.tenLich}}"
                                     matTooltipClass="example-tooltip-uppercase"> {{row.tenLich}}
                                 </td>
                             </ng-container><!-- Progress Column -->
-                            <ng-container matColumnDef="ngay" style="margin-left: 60px">
-                                <th mat-header-cell *matHeaderCellDef style="margin-left: 60px"> NGÀY CHẤM
+                            <ng-container matColumnDef="ngay">
+                                <th mat-header-cell *matHeaderCellDef > NGÀY CHẤM
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.ngay}}"
                                     matTooltipClass="example-tooltip-uppercase"> {{row.ngay}}
@@ -150,48 +141,41 @@
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="tiet">
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> TIẾT
+                                <th mat-header-cell *matHeaderCellDef> TIẾT
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.tiet}}</td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="chutichhd">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">CHỦ TỊCH HỘI ĐỒNG/ GV CHẤM POSTER 1
+                                <th mat-header-cell *matHeaderCellDef>CHỦ TỊCH HỘI ĐỒNG/ GV CHẤM POSTER 1
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.dsGiangVienPB[0].tenGiangVien}}"
                                     matTooltipClass="example-tooltip-uppercase">{{row.dsGiangVienPB[0].tenGiangVien}}</td>
                             </ng-container>
                             <ng-container matColumnDef="thukyHD">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">THƯ KÝ HĐ/ GV CHẤM POSTER 2
+                                <th mat-header-cell *matHeaderCellDef>THƯ KÝ HĐ/ GV CHẤM POSTER 2
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.dsGiangVienPB[1].tenGiangVien}}"
                                     matTooltipClass="example-tooltip-uppercase">{{row.dsGiangVienPB[1].tenGiangVien}}</td>
                             </ng-container>
                             <ng-container matColumnDef="tv3">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">THÀNH VIÊN THỨ 3
+                                <th mat-header-cell *matHeaderCellDef>THÀNH VIÊN THỨ 3
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.dsGiangVienPB[2].tenGiangVien}}"
                                     matTooltipClass="example-tooltip-uppercase">{{row.dsGiangVienPB[2].tenGiangVien}}</td>
                             </ng-container>
                             <ng-container matColumnDef="phong">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">PHONG
+                                <th mat-header-cell *matHeaderCellDef>PHÒNG
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.phong}}"
                                     matTooltipClass="example-tooltip-uppercase">{{row.phong}}</td>
                             </ng-container>
                             <ng-container matColumnDef="action" stickyEnd>
-                                <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> CHỈNH SỬA
+                                <th mat-header-cell *matHeaderCellDef> CHỈNH SỬA
                                 </th>
                                 <td mat-cell *matCellDef="let row">
-                                    <!--Row: data cua 1 dong-->
-                                    <button mat-icon-button color="primary" (click)="editLichPB(row)">
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
-                                    <button mat-icon-button color="accent" (click)="deleteLichPB(row.maLich)">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
+                                        <mat-icon (click)="editLichPB(row)" style="color: #00bbff">edit</mat-icon>
+                                        <mat-icon (click)="deleteLichPB(row.maLich)" style="color: red">delete</mat-icon>
                                 </td>
                             </ng-container>
                             <tr mat-header-row *matHeaderRowDef="displayedColumnsHD"></tr>

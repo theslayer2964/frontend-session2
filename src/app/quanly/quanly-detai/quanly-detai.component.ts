@@ -3,17 +3,16 @@ import {MatTableDataSource} from "@angular/material/table";
 import {HocKy} from "../../shared-service/HocKy.models";
 import {MatDialog} from "@angular/material/dialog";
 import {HockyService} from "../../shared-service/hocky.service";
-import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatSelectChange} from "@angular/material/select";
 import {DetaiService} from "../../giangvien/detai/detai-service/detai.service";
 import {ThemDeTaiGvComponent} from "../../dialog/them-de-tai-gv/them-de-tai-gv.component";
-import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
-import {DangKyDetaiComponent} from "../../dialog/dang-ky-detai/dang-ky-detai.component";
 import {DuyetdetaiComponent} from "../../dialog/duyetdetai/duyetdetai.component";
-import {DanhSach_DeTai_KLTN, DS_Nhom_KLTN} from "../../shared-service/FileNameExport";
+import {DanhSach_DeTai_KLTN} from "../../shared-service/FileNameExport";
 import {FileGeneratorService} from "../../shared-service/file-generator.service";
+import {SelectionModel} from "@angular/cdk/collections";
+import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 
 @Component({
     selector: 'app-quanly-detai',
@@ -27,7 +26,8 @@ export class QuanlyDetaiComponent implements OnInit {
     constructor(public dialog: MatDialog,
                 private detaiService: DetaiService,
                 private hockyService: HockyService,
-                private fileGenerate: FileGeneratorService) {
+                private fileGenerate: FileGeneratorService,
+                private deTaiService: DetaiService) {
     }
 
     ngOnInit(): void {
@@ -57,7 +57,7 @@ export class QuanlyDetaiComponent implements OnInit {
     }
 
     // Table
-    displayedColumns: string[] = ['maDeTai', "tenDeTai", 'gioiHanSoNhomThucHien', 'moTa', "mucTieuDeTai", "sanPhamDuKien", "trangThai", "yeuCauDauVao", "action"];
+    displayedColumns: string[] = ['select','maDeTai', "tenDeTai", 'gioiHanSoNhomThucHien', 'moTa', "mucTieuDeTai", "sanPhamDuKien", "yeuCauDauVao", "trangThai", "action"];
     dataSource!: MatTableDataSource<any>;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -122,5 +122,53 @@ export class QuanlyDetaiComponent implements OnInit {
                 this.getDSDeTaiTheoHK();
             });
     }
+    // CHECK ALL:
+    selection = new SelectionModel<any>(true, []);
+    isAllSelected() {
+        const numSelected = this.selection.selected.length;
+        const numRows = this.dataSource.data.length;
+        return numSelected === numRows;
+    }
+    toggleAllRows() {
+        if (this.isAllSelected()) {
+            this.selection.clear();
+            return;
+        }
+        this.selection.select(...this.dataSource.data);
+    }
+    checkboxLabel(row?: any): string {
+        if (!row) {
+            return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+        }
+        return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    }
 
+    chonHet() {
+        console.log(this.selection.selected);
+        if(this.selection.selected.length <=0)
+            new NotificationsComponent().showNotification('warning', 'Chọn đề tài mà bạn muốn duyệt');
+        else{
+            this.selection.selected.forEach(detai => {
+                if(detai.trangThai == 2){
+                    new NotificationsComponent().showNotification('warning', detai.maDeTai + " - " + detai.tenDeTai + " đã được chấp nhận");
+                }
+                else{
+                    this.deTaiService.duyetDeTai({
+                        ma: detai.maDeTai,
+                        trangThai: 2
+                    }).subscribe({
+                        next: () => {
+                            this.getDSDeTaiTheoHK();
+                            new NotificationsComponent().showNotification('success', 'Cập nhật đề tài thành công');
+                            this.selection = new SelectionModel<any>(true, []);
+                        },
+                        error: () => {
+                            new NotificationsComponent().showNotification('danger', 'Không duyệt đề tài này');
+                            console.log("Error")
+                        }
+                    })
+                }
+            });
+        }
+    }
 }
