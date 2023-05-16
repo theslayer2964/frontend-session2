@@ -6,7 +6,11 @@
             <full-calendar *ngIf='calendarVisible' [options]='calendarOptions' [events]="data$">
                 <ng-template #eventContent let-arg>
                     <b>{{ arg.timeText }}</b>
-                    <i>{{ arg.event.title }}</i>
+                    <br>
+                    <i>{{ arg.event.title.split("|")[0] }}</i>
+                    <br>
+                    <i>Phòng: {{ arg.event.title.split("|")[1] }}</i>
+<!--                    <p >{{arg.even.title.phong}}</p>-->
                 </ng-template>
             </full-calendar>
         </div>

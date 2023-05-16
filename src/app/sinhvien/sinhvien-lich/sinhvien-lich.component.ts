@@ -31,54 +31,21 @@ export class SinhvienLichComponent implements OnInit {
             maHocKy = res.maHocKy;
             this.destroy$.next(maHocKy);
         });
-        if (role.roleName == "ROLE_GIANGVIEN") {
-            console.log("GV _ LICH _ TUI NE");
-            let maGV = this.userAuthService.getUserInfo().maGiangVien;
-            this.destroy$.subscribe(hocky => {
-                    this.lichService.getLichTheoHocKyVaMaGV(hocky, maGV, "ROLE_GIANGVIEN").subscribe(res => {
-                    let a = [];
-                    res.forEach(data => {
-                        if (data.dsNgayThucHienKhoaLuan.length <= 0) {
-                            a.push({
-                                id: data.id,
-                                start: new Date(data.thoiGianBatDau).toISOString().replace(/T.*$/, ''),
-                                end: new Date(data.thoiGianKetThuc).toISOString().replace(/T.*$/, ''),
-                                title: data.tenKeHoach,
-                                allDay:true,
-                                backgroundColor:"green"
-                            })
-                        }
-                        // else {
-                        //     a.push({
-                        //         id: data.id,
-                        //         start: new Date(data.thoiGianBatDau).toISOString().replace(/T.*$/, ''),
-                        //         end: new Date(data.thoiGianKetThuc).toISOString().replace(/T.*$/, ''),
-                        //         title: data.tenKeHoach,
-                        //         allDay:true,
-                        //         backgroundColor:"green",
-                        //         daysOfWeek: data.dsNgayThucHienKhoaLuan
-                        //     })
-                        // }
-                    })
-                    this.data$ = a;
-                    console.log("MAP:",this.data$);
-                })
-            });
 
-        } else if (role.roleName == "ROLE_SINHVIEN") {
+            if (role.roleName == "ROLE_SINHVIEN") {
             console.log("TUI NE");
             let maSV = this.userAuthService.getUserInfo().maSinhVien;
             this.destroy$.subscribe(hocky => {
                 this.lichService.getLichTheoHocKyVaMaGV(hocky, maSV, "ROLE_SINHVIEN").subscribe(res => {
                     let a = [];
                     res.forEach(data => {
-                        if (data.dsNgayThucHienKhoaLuan.length <= 0) {
+                        if (data.dsNgayThucHienKhoaLuan.length <= 0 && data.maLoaiLich == 3) {
                             a.push({
                                 id: data.id,
-                                start: new Date(data.thoiGianBatDau).toISOString().replace(/T.*$/, ''),
-                                end: new Date(data.thoiGianKetThuc).toISOString().replace(/T.*$/, ''),
-                                title: data.tenKeHoach,
-                                allDay:true,
+                                start: new Date(data.thoiGianBatDau).toISOString(),
+                                end: new Date(data.thoiGianKetThuc).toISOString(),
+                                title: data.tenKeHoach + "|" + data.phong,
+                                allDay:false,
                                 backgroundColor:"green"
                             })
                         }
@@ -95,16 +62,7 @@ export class SinhvienLichComponent implements OnInit {
                         // }
 
                     })
-                    // this.data$ = a;
-                    this.data$ = [{
-                        groupId:'999',
-                        title:'lala',
-                        start:'2023-04-25T16:00:00'
-                    },{
-                        title: 'Meeting',
-                        start:'2023-04-25T06:00:00',
-                        end: '2023-04-25T07:00:00'
-                    }]
+                    this.data$ = a;
                 })
             });
 

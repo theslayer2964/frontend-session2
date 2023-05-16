@@ -39,12 +39,11 @@ export class GvShowCallendarComponent implements OnInit {
           let a = [];
           res.forEach(data => {
             if (data.dsNgayThucHienKhoaLuan.length <= 0 && data.maLoaiLich == 3) {
-
               a.push({
                 id: data.id,
                 start: new Date(data.thoiGianBatDau).toISOString(),
                 end: new Date(data.thoiGianKetThuc).toISOString(),
-                title: data.tenKeHoach,
+                title: data.tenKeHoach + "|" + data.phong,
                 allDay:false,
                 backgroundColor:"green"
               })
@@ -82,13 +81,13 @@ export class GvShowCallendarComponent implements OnInit {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'},
     initialView: 'timeGridWeek',
     weekends: true,
-    editable: true,
-    selectable: true,
-    selectMirror: true,
+    editable: false,
+    selectable: false,
+    selectMirror: false,
     dayMaxEvents: true,
-    select: this.handleDateSelect.bind(this),
-    eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this),
+    // select: this.handleDateSelect.bind(this),
+    // eventClick: this.handleEventClick.bind(this),
+    // eventsSet: this.handleEvents.bind(this),
 
   };
   currentEvents: EventApi[] = [];
@@ -120,17 +119,17 @@ export class GvShowCallendarComponent implements OnInit {
     }
   }
 
-  handleEventClick(clickInfo: EventClickArg) {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove();
-    }
-  }
-
-  handleEvents(events: EventApi[]) {
-    this.currentEvents = events;
-    events.forEach((res) => {
-      console.log(JSON.stringify(res));
-    })
-    this.changeDetector.detectChanges();
-  }
+  // handleEventClick(clickInfo: EventClickArg) {
+  //   if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+  //     clickInfo.event.remove();
+  //   }
+  // }
+  //
+  // handleEvents(events: EventApi[]) {
+  //   this.currentEvents = events;
+  //   events.forEach((res) => {
+  //     console.log(JSON.stringify(res));
+  //   })
+  //   this.changeDetector.detectChanges();
+  // }
 }

@@ -19,7 +19,7 @@
         <div class="col-6" style="padding-right: 0px">
             <table class="table table-bordered">
                 <thead>
-                <tr class="text-uppercase table-dark">
+                <tr class="text-uppercase " style="background-color: #00bbff; color: white; height: 80px">
                     <th scope="col">STT</th>
                     <th scope="col">Tiêu chí chấm</th>
                     <th scope="col">Điểm tối đa</th>
@@ -38,7 +38,7 @@
             <form *ngIf="editData.sinhVien.length==2">
                 <table class="table table-bordered">
                     <thead>
-                    <tr class="text-uppercase table-dark">
+                    <tr class="text-uppercase  " style="background-color: #00bbff; color: white; height: 80px">
                         <th scope="col">{{editData.sinhVien[0].maSinhVien}}</th>
                         <th scope="col">{{editData.sinhVien[1].maSinhVien}}</th>
                         <th scope="col">Ý kiến đánh giá</th>
@@ -76,7 +76,7 @@
             <form *ngIf="editData.sinhVien.length==1">
                 <table class="table table-bordered">
                     <thead>
-                    <tr class="text-uppercase table-dark">
+                    <tr class="text-uppercase " style="background-color: #00bbff; color: white; height: 80px">
                         <th scope="col">{{editData.sinhVien[0].maSinhVien}}</th>
                         <th scope="col">Ý kiến đánh giá</th>
                     </tr>

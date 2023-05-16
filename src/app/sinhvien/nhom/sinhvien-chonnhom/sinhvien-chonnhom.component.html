@@ -32,45 +32,45 @@
                                        #input>
                             </mat-form-field>
                         </div>
-                        <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;overflow: auto;">
+                        <div class="mat-elevation-z8">
                             <table mat-table [dataSource]="dataSource" matSort>
                                 <ng-container matColumnDef="maNhom">
                                     <th mat-header-cell *matHeaderCellDef
-                                        style="width: 120px;text-align: center">MÃ NHÓM
+                                        >MÃ NHÓM
                                     </th>
                                     <td mat-cell *matCellDef="let row"> {{row.nhom.maNhom}} </td>
                                 </ng-container>
                                 <ng-container matColumnDef="tenNhom">
                                     <th mat-header-cell *matHeaderCellDef
-                                        style="width: 120px;text-align: center">TÊN NHÓM
+                                        >TÊN NHÓM
                                     </th>
                                     <td mat-cell *matCellDef="let row"> {{row.nhom.tenNhom}} </td>
                                 </ng-container>
 
                                 <ng-container matColumnDef="sv1">
-                                    <th mat-header-cell *matHeaderCellDef style="text-align: center">
+                                    <th mat-header-cell *matHeaderCellDef >
                                         SINH VIÊN 1
                                     </th>
                                     <td mat-cell *matCellDef="let row"> {{row.dsMaSinhVien[0]}}</td>
                                 </ng-container>
                                 <ng-container matColumnDef="tensv1">
-                                    <th mat-header-cell *matHeaderCellDef style="text-align: center">
+                                    <th mat-header-cell *matHeaderCellDef >
                                         TÊN SINH VIÊN 1
                                     </th>
                                     <td mat-cell *matCellDef="let row"> {{row.sinhViens[0].tenSinhVien}}</td>
                                 </ng-container>
                                 <ng-container matColumnDef="emailsv1">
-                                    <th mat-header-cell *matHeaderCellDef style="text-align: center">
+                                    <th mat-header-cell *matHeaderCellDef >
                                         Email SINH VIÊN 1
                                     </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.sinhViens[0].email}}
+                                    <td mat-cell *matCellDef="let row">
                                         <span *ngIf="row.sinhViens[0].email == ''">---</span>
                                         <span *ngIf="row.sinhViens[0].email == null">---</span>
                                         <span *ngIf="row.sinhViens[0].email != ''">{{row.sinhViens[0].email}}</span>
                                     </td>
                                 </ng-container>
                                 <ng-container matColumnDef="sv2">
-                                    <th mat-header-cell *matHeaderCellDef style="text-align: center">
+                                    <th mat-header-cell *matHeaderCellDef >
                                         SINH VIÊN 2
                                     </th>
                                     <td mat-cell *matCellDef="let row ">
@@ -78,7 +78,7 @@
                                              {{row.dsMaSinhVien[1]}}</span></td>
                                 </ng-container>
                                 <ng-container matColumnDef="tensv2">
-                                    <th mat-header-cell *matHeaderCellDef style="text-align: center">
+                                    <th mat-header-cell *matHeaderCellDef >
                                         TÊN SINH VIÊN 2
                                     </th>
                                     <td mat-cell *matCellDef="let row">
@@ -86,7 +86,7 @@
                                     </td>
                                 </ng-container>
                                 <ng-container matColumnDef="emailsv2">
-                                    <th mat-header-cell *matHeaderCellDef style="text-align: center">
+                                    <th mat-header-cell *matHeaderCellDef >
                                         Email SINH VIÊN 2
                                     </th>
                                     <td mat-cell *matCellDef="let row">
