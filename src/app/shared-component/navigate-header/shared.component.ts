@@ -33,13 +33,10 @@ export class SharedComponent implements OnInit {
         }
         this.userDataService.userBehaviorSubject.subscribe(data => {
             if (data) {
-                console.log("LAN 1")
                 this.userInfo = data;
             }
-            // this.loadThongBao();
         });
         this.loginNotificationService.loginNotiSubject.subscribe(res => {
-            console.log("DANG NHAP NE``")
             this.loadThongBao();
         })
     }
@@ -50,12 +47,10 @@ export class SharedComponent implements OnInit {
 
     public logout() {
         this.userAuthService.clean();
-        console.log("LOGOUT")
         this.router.navigate([''])
     }
 
     login() {
-        console.log("LOGIN")
         this.router.navigate(['login'])
     }
 
@@ -96,7 +91,6 @@ export class SharedComponent implements OnInit {
             maNguoiDung = this.userAuthService.getUserInfo().maGiangVien
             this.tinNhanService.layTinNhan(maNguoiDung)
                 .subscribe(res => {
-                    console.log("XỬ LÝ TÍP KHÚC NÀY-- CẮT NỘI DUNG");
                     tin = res;
                     this.listData = [];
                     tin.tinNhanDtos.forEach(data => {
@@ -115,7 +109,6 @@ export class SharedComponent implements OnInit {
             maNguoiDung = this.userAuthService.getUserInfo().maSinhVien
             this.tinNhanService.layTinNhan(maNguoiDung)
                 .subscribe(res => {
-                    console.log("TIN NHẮN:", res);
                     tin = res;
                     this.listData = [];
                     tin.tinNhanDtos.forEach(data => {

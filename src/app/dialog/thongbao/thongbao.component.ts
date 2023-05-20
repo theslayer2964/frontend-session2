@@ -1,8 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 import {NhomService} from "../../shared-service/nhom.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
+import {ThemDeTaiGvComponent} from "../them-de-tai-gv/them-de-tai-gv.component";
 
 @Component({
   selector: 'app-thongbao',
@@ -11,20 +12,18 @@ import {UserAuthService} from "../../authentication/_service/user-auth.service";
 })
 export class ThongbaoComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<ThongbaoComponent>,
+  constructor(private dialogRef: MatDialogRef<ThongbaoComponent>, private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public editData: any,
               private nhomService: NhomService,
               private userAuthService: UserAuthService) { }
 
   ngOnInit(): void {
-    console.log(this.editData)
+    console.log("NOI DUNG TIN NHAN:",this.editData);
   }
 
 
   choPhepThamGiaNhom() {
-
     let dsMaSinhVien = [];
-
     dsMaSinhVien.push(this.userAuthService.getUserInfo().maSinhVien);
     dsMaSinhVien.push(this.editData.sender);
     let maDeTai = null;
@@ -42,4 +41,12 @@ export class ThongbaoComponent implements OnInit {
           }
         })
   }
+    detai:any = "abc";
+    chinhSuaDeTai(detai: any) {
+      this.dialog.open(ThemDeTaiGvComponent, {
+        data: null
+      }).afterClosed().subscribe(val => {
+        ////
+      })
+    }
 }

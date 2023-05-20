@@ -104,6 +104,7 @@ import { DialogExportExcelComponent } from './excel/dialog-export-excel/dialog-e
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { QlDiemBaoComponent } from './dialog/ql-diem-bao/ql-diem-bao.component';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @NgModule({
     imports: [
@@ -147,7 +148,8 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
         MatExpansionModule,
         MatMenuModule,
         MatCheckboxModule,
-        MatBottomSheetModule
+        MatBottomSheetModule,
+        MatSlideToggleModule
     ],
     declarations: [
         AppComponent,

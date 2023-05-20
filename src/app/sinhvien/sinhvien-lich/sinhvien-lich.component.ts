@@ -46,7 +46,7 @@ export class SinhvienLichComponent implements OnInit {
                                 end: new Date(data.thoiGianKetThuc).toISOString(),
                                 title: data.tenKeHoach + "|" + data.phong,
                                 allDay:false,
-                                backgroundColor:"green"
+                                backgroundColor:"#79b1e1"
                             })
                         }
                         // else {
@@ -88,7 +88,7 @@ export class SinhvienLichComponent implements OnInit {
         selectMirror: true,
         dayMaxEvents: true,
         select: this.handleDateSelect.bind(this),
-        eventClick: this.handleEventClick.bind(this),
+        // eventClick: this.handleEventClick.bind(this),
         eventsSet: this.handleEvents.bind(this),
 
     };
@@ -121,11 +121,11 @@ export class SinhvienLichComponent implements OnInit {
         }
     }
 
-    handleEventClick(clickInfo: EventClickArg) {
-        if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-            clickInfo.event.remove();
-        }
-    }
+    // handleEventClick(clickInfo: EventClickArg) {
+    //     if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+    //         clickInfo.event.remove();
+    //     }
+    // }
 
     handleEvents(events: EventApi[]) {
         this.currentEvents = events;

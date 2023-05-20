@@ -1,3 +1,5 @@
+<!--<hr>-->
+<!--<hr>-->
 <div class="container">
     <div class="main-content">
         <div class="container-fluid">
@@ -29,13 +31,13 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-10">
                                     <mat-form-field class="example-full-width">
                                         <mat-label mat-header-cell *matHeaderCellDef>Tên đề tài</mat-label>
                                         <input formControlName="tenDeTai" matInput placeholder="Tên đề tài">
                                     </mat-form-field>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Giới hạn số nhóm thực hiện</mat-label>
                                         <input formControlName="gioiHanSoNhomThucHien" matInput
@@ -45,43 +47,44 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <label>Mô tả</label>
                                     <mat-form-field class="example-full-width">
-                                        <textarea formControlName="moTa" matInput></textarea>
+                                        <textarea formControlName="moTa" matInput rows="4"></textarea>
                                     </mat-form-field>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <label>Mục tiêu đề tài</label>
                                     <mat-form-field class="example-full-width">
-                                        <textarea formControlName="mucTieuDeTai"
-                                        matInput></textarea>
+                                        <textarea formControlName="mucTieuDeTai" rows="4"
+                                                  matInput></textarea>
                                     </mat-form-field>
                                 </div>
                             </div>
+<!--                            <div class="row">-->
+<!--                            </div>-->
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <label>Sản phẩm dự kiến</label>
                                     <mat-form-field class="example-full-width">
-                                        <textarea formControlName="sanPhamDuKien" matInput></textarea>
+                                        <textarea formControlName="sanPhamDuKien" rows="4" matInput></textarea>
                                     </mat-form-field>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <label>Yêu cầu đầu vào</label>
                                     <mat-form-field class="example-full-width">
-                                        <textarea formControlName="yeuCauDauVao" matInput></textarea>
+                                        <textarea formControlName="yeuCauDauVao" rows="4" matInput></textarea>
                                     </mat-form-field>
                                 </div>
                             </div>
+<!--                            <div class="row">-->
+<!--                                -->
+<!--                            </div>-->
                             <div mat-dialog-actions [align]="'end'">
                                 <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
 <!--                                [disabled]="!productForm.valid"-->
                                 <button style="margin-left: 8px" mat-raised-button color="primary"
-
+                                        [disabled]="productForm.invalid"
                                         (click)="addDeTai()">{{actionBtn}}</button>
                             </div>
                             <div class="clearfix"></div>

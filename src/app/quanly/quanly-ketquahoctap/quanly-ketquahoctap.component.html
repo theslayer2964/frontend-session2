@@ -34,7 +34,6 @@
 <!--                        </div>-->
 <!--                    </div>-->
                     <div class="row">
-                        <div class="col-lg-1 col-md-1"></div>
                         <div class="col-lg-10">
                             <form [formGroup]="luaChonGroup">
                                 <mat-accordion class="example-headers-align">
@@ -105,6 +104,9 @@
                                 </mat-accordion>
 
                             </form>
+                        </div>
+                        <div class="col-lg-2 col-md-2">
+                            <mat-slide-toggle [(ngModel)]="isCheckedChoXemDiem" (click)="onChangeChoPhepXemDiem(isCheckedChoXemDiem)">Cho phép sinh viên xem điểm</mat-slide-toggle>
                         </div>
                     </div>
                     <br>
