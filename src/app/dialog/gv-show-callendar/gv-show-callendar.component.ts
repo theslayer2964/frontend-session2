@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {CalendarOptions, DateSelectArg, EventApi, EventClickArg} from "@fullcalendar/core";
 import interactionPlugin from "@fullcalendar/interaction";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -9,6 +9,8 @@ import {LichService} from "../../shared-service/lich/lich.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {HockyService} from "../../shared-service/hocky.service";
 import {Subject} from "rxjs";
+import { FullCalendarComponent } from '@fullcalendar/angular';
+import {calendar} from "ngx-bootstrap/chronos/moment/calendar";
 
 @Component({
   selector: 'app-gv-show-callendar',
@@ -25,7 +27,6 @@ export class GvShowCallendarComponent implements OnInit {
   data$: any[] = [];
   ngOnInit(): void {
     let role = this.userAuthService.getRoles()[0];
-
     let maHocKy;
     this.hockyService.getHocKyMoiNhat().subscribe(res => {
       maHocKy = res.maHocKy;
@@ -64,7 +65,6 @@ export class GvShowCallendarComponent implements OnInit {
           console.log("MAP:",this.data$);
         })
       });
-
     }
   }
   calendarOptions: CalendarOptions = {
@@ -118,6 +118,8 @@ export class GvShowCallendarComponent implements OnInit {
       });
     }
   }
+  ///////
+  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
   // handleEventClick(clickInfo: EventClickArg) {
   //   if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {

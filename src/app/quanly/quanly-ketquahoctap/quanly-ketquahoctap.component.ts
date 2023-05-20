@@ -47,39 +47,43 @@ export class QuanlyKetquahoctapComponent implements OnInit {
       hocKy: ['', Validators.required],
       giangvienCham:['']
     })
+    this.layKetQua();
+
+  }
+
+  layKetQua() {
     this.sinhvienService.getKetQuaHocTapToanBoSV(this.hocKyHienTai).subscribe((res:any) =>{
       console.log("QL - KQHT:", res);
       let dsKQ:any = [];
       let i = 1;
       res.forEach(sv => {
-          dsKQ.push({
-            'sttnhom':i,
-            'maSV': sv.maSV,
-            'hoten':sv.tenSV,
-            'madetai':sv.tenNhom,
-            'tendetai':sv.tendetai,
-            "gvhd":sv.gvhd,
-            "duocraPB": "XU LY TIP",
-            "diemGVHD": sv.phieuChamDiemHD.diemPhieuCham,
-            "pb1": sv.phieuChamDiemPB1.diemPhieuCham,
-            "pb2": sv.phieuChamDiemPB1.diemPhieuCham,
-            "tbbm": sv.diemTBBM,
-            "tvhd1": sv.phieuChamDiemCT.diemPhieuCham,
-            "tvhd2": sv.phieuChamDiemTK.diemPhieuCham,
-            "tbtvhd": (sv.phieuChamDiemCT.diemPhieuCham + sv.phieuChamDiemTK.diemPhieuCham)/2 > 8 ?
-                (sv.phieuChamDiemCT.diemPhieuCham + sv.phieuChamDiemTK.diemPhieuCham)/2 : 8  ,
-            "ketqua": sv.ketQua,
-            "diembao": sv.diembao ? sv.diembao : "chua-co",
-            "diemTK": sv.diemTBTVHD,
-            "hoidong":  sv.diemTBBM >= 8 ? "HD" : "---"
-          })
+        dsKQ.push({
+          'sttnhom':i,
+          'maSV': sv.maSV,
+          'hoten':sv.tenSV,
+          'madetai':sv.maDeTai,
+          'tendetai':sv.tenDeTai,
+          "gvhd":sv.gvhd,
+          "duocraPB": sv.duocRaPB,
+          "diemGVHD": sv.phieuChamDiemHD.diemPhieuCham,
+          "pb1": sv.phieuChamDiemPB1.diemPhieuCham,
+          "pb2": sv.phieuChamDiemPB1.diemPhieuCham,
+          "tbbm": sv.diemTBBM,
+          "tvhd1": sv.phieuChamDiemCT.diemPhieuCham,
+          "tvhd2": sv.phieuChamDiemTK.diemPhieuCham,
+          "tbtvhd": (sv.phieuChamDiemCT.diemPhieuCham + sv.phieuChamDiemTK.diemPhieuCham)/2 > 8 ?
+              (sv.phieuChamDiemCT.diemPhieuCham + sv.phieuChamDiemTK.diemPhieuCham)/2 : 8  ,
+          "ketqua": sv.ketQua,
+          "diembao": sv.diembao != 0 ? sv.diembao : "---",
+          "diemTK": sv.diemTK,
+          "hoidong":  sv.diemTBBM >= 8 ? "HD" : "---"
+        })
         i++;
       })
       this.dataSource = new MatTableDataSource(dsKQ);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
-
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -97,6 +101,8 @@ export class QuanlyKetquahoctapComponent implements OnInit {
   addDiemBao(row: any) {
     this.dialog.open(QlDiemBaoComponent, {
       data:row
+    }).afterClosed().subscribe(res => {
+      this.layKetQua();
     });
   }
 

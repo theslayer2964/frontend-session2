@@ -37,4 +37,8 @@ export class PhieuChamService {
             catchError(err => of([])));
   }
 
+  chamDiemBao(data: any){
+    return this.httpClient.put(this.urlPhieuCham + "them-diem-bao", data, {headers: this.httpHeadersJWT});
+  }
+
 }
