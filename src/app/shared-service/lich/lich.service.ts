@@ -34,6 +34,20 @@ export class LichService {
                 catchError(err => of([])));
     }
 
+    getLichPB(maHocKy: any, maNguoiDung: string, role: string | null): Observable<any> {
+        let data = {
+            "maHocKy": maHocKy,
+            "maNguoiDung": maNguoiDung,
+            "vaiTro": role
+        }
+        return this.httpClient.post<any>(this.url + 'lay-ke-hoach-pb/', data, {headers: this.httpHeadersJWT})
+            .pipe(
+                tap(res => {
+                    res = res;
+                }),
+                catchError(err => of([])));
+    }
+
     updateLich(keHoach: any): Observable<any> {
         console.log("SERVCIE:", keHoach);
         return this.httpClient.put<any>(this.urlQL + "cap-nhat-ke-hoach", keHoach, {headers: this.httpHeadersJWT})

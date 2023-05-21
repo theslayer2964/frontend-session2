@@ -1,7 +1,9 @@
-<div class="main-content">
-
-    <h4 style="font-weight: bold">Tên Giảng Viên:  </h4>
-    <p >{{giangVien.tenGiangVien}}</p>
+<h2 mat-dialog-title>Thông tin chi tiết của đề tài</h2>
+<mat-dialog-content class="mat-typography">
+    <!--<div class="main-content">-->
+    <mat-divider></mat-divider>
+    <h4 style="font-weight: bold">Tên Giảng Viên: </h4>
+    <p>{{giangVien.tenGiangVien}}</p>
     <h4 style="font-weight: bold">Tên đề tài:</h4>
     <p>{{deTai.tenDeTai}}</p>
     <h4 style="font-weight: bold">Mục Tiêu Đề Tài</h4>
@@ -10,15 +12,18 @@
     <p>{{deTai.sanPhamDuKien}}</p>
     <h4 style="font-weight: bold">Yêu Cầu Đầu Vào</h4>
     <p>{{deTai.yeuCauDauVao}}</p>
-    <h4 style="font-weight: bold">Số Nhóm Thực Hiện: <span>{{deTai.gioiHanSoNhomThucHien}}</span> </h4>
-
-    <div mat-dialog-actions [align]="'end'">
-        <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
-        <button style="margin-left: 8px" mat-raised-button
-                (click)="khongDuyetDeTai()" color="primary">Đề tài cần bổ sung</button>
-        <button style="margin-left: 8px" mat-raised-button
-                (click)="duyetDeTai()" color="primary">Duyệt đề tài</button>
-
-    </div>
+    <h4 style="font-weight: bold">Số Nhóm Thực Hiện: <span>{{deTai.gioiHanSoNhomThucHien}}</span></h4>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
+    <button style="margin-left: 8px" mat-raised-button
+            (click)="khongDuyetDeTai()" color="primary">Đề tài cần bổ sung
+    </button>
+    <button style="margin-left: 8px" mat-raised-button
+            (click)="duyetDeTai()" color="primary" *ngIf="deTai.trangThai!=2">Duyệt đề tài
+    </button>
 
 </div>
+
+<!--</div>-->

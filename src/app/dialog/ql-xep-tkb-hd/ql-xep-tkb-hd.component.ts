@@ -82,9 +82,17 @@ export class QlXepTKBHDComponent implements OnInit {
     }
   }
   showGV = false;
+  disableButtonCLick = false;
   onDropdownList($event: MatSelectChange) {
     if($event.value.length > 3){
-      new NotificationsComponent().showNotification("danger","Yêu cầu chỉ 3 giảng viên phản biện")
+      new NotificationsComponent().showNotification("danger","Yêu cầu chỉ 2 hoặc 3 giảng viên phản biện")
+      this.disableButtonCLick = true;
+    }
+    else if($event.value.length == 3 || $event.value.length == 2){
+      this.disableButtonCLick = false;
+    }
+    else{
+      this.disableButtonCLick = true;
     }
   }
 

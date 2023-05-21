@@ -5,12 +5,16 @@
         <div class="col-lg-12 col-md-12">
             <full-calendar #calendar *ngIf='calendarVisible' [options]='calendarOptions'
                            [events]="data$">
-                <ng-template #eventContent let-arg>
+                <ng-template #eventContent let-arg style="height: 100px">
                     <b>{{ arg.timeText }}</b>
                     <br>
                     <i>{{ arg.event.title.split("|")[0] }}</i>
                     <br>
                     <i>Phòng: {{ arg.event.title.split("|")[1] }}</i>
+                    <br>
+                    <i>Nhóm: {{ arg.event.title.split("|")[2] }}</i>
+                    <br>
+                    <i>GV: {{ arg.event.title.split("|")[3] }}</i>
 <!--                    <p >{{arg.even.title.phong}}</p>-->
                 </ng-template>
             </full-calendar>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {HocKy} from "../../shared-service/HocKy.models";
 import {MatDialog} from "@angular/material/dialog";
@@ -9,17 +9,22 @@ import {MatSelectChange} from "@angular/material/select";
 import {DetaiService} from "../../giangvien/detai/detai-service/detai.service";
 import {ThemDeTaiGvComponent} from "../../dialog/them-de-tai-gv/them-de-tai-gv.component";
 import {DuyetdetaiComponent} from "../../dialog/duyetdetai/duyetdetai.component";
-import {DanhSach_DeTai_KLTN} from "../../shared-service/FileNameExport";
+import {DanhSach_DeTai_KLTN, KetQua_Nhom_KLTN} from "../../shared-service/FileNameExport";
 import {FileGeneratorService} from "../../shared-service/file-generator.service";
 import {SelectionModel} from "@angular/cdk/collections";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
+import {DialogExportExcelComponent} from "../../excel/dialog-export-excel/dialog-export-excel.component";
 
 @Component({
     selector: 'app-quanly-detai',
     templateUrl: './quanly-detai.component.html',
     styleUrls: ['./quanly-detai.component.css']
 })
-export class QuanlyDetaiComponent implements OnInit {
+export class QuanlyDetaiComponent implements OnInit,AfterViewInit {
+    ngAfterViewInit(): void {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    }
     private hocKyHienTai: any;
     private soHocKy: any;
 
@@ -27,7 +32,7 @@ export class QuanlyDetaiComponent implements OnInit {
                 private detaiService: DetaiService,
                 private hockyService: HockyService,
                 private fileGenerate: FileGeneratorService,
-                private deTaiService: DetaiService) {
+                private deTaiService: DetaiService,) {
     }
 
     ngOnInit(): void {
@@ -36,7 +41,7 @@ export class QuanlyDetaiComponent implements OnInit {
     }
 
     dsHocKy: HocKy[];
-
+    hockyMoiNhat: any;
     // 1. STEP 1
     private getAllHocKy() {
         this.hockyService.getHocKy().subscribe({
@@ -46,18 +51,13 @@ export class QuanlyDetaiComponent implements OnInit {
                 console.log(err)
             }
         })
-    }
-
-    openDialog() {
-        this.dialog.open(ThemDeTaiGvComponent, {}).afterClosed().subscribe(val => {
-            if (val === "save") {
-                this.getDSDeTaiTheoHK();
-            }
+        this.hockyService.getHocKyMoiNhat().subscribe(res => {
+            this.hockyMoiNhat = res.maHocKy
         })
     }
 
     // Table
-    displayedColumns: string[] = ['select','maDeTai', "tenDeTai", 'gioiHanSoNhomThucHien', 'moTa', "mucTieuDeTai", "sanPhamDuKien", "yeuCauDauVao", "trangThai", "action"];
+    displayedColumns: string[] = ['select','maDeTai', "tenDeTai",'giangVien', 'gioiHanSoNhomThucHien', 'moTa', "mucTieuDeTai", "sanPhamDuKien", "yeuCauDauVao", "trangThai", "action"];
     dataSource!: MatTableDataSource<any>;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -90,7 +90,6 @@ export class QuanlyDetaiComponent implements OnInit {
                 next: (res) => {
                     if (res) {
                         console.log("GV _ DeTai:", res);
-                        // table
                         this.dataSource = new MatTableDataSource(res);
                         this.dataSource.paginator = this.paginator;
                         this.dataSource.sort = this.sort;
@@ -111,9 +110,16 @@ export class QuanlyDetaiComponent implements OnInit {
     }
 
     downloadFileSV() {
-        this.detaiService.xuatDSDeTai().subscribe(res => {
-            this.fileGenerate.generateFile(DanhSach_DeTai_KLTN, res['body'], 'xlsx');
-        });
+        this.dialog.open(DialogExportExcelComponent, {data: {variable: 'hocKy', ma: null}}).afterClosed().subscribe(val => {
+            if (val.ma != null && val.ma != undefined && val.ma != "") {
+                this.detaiService.xuatDSDeTai(val.ma).subscribe(res => {
+                    this.fileGenerate.generateFile(DanhSach_DeTai_KLTN, res['body'], 'xlsx');
+                    new NotificationsComponent().showNotification('success', 'Xuất '+DanhSach_DeTai_KLTN+' thành công');
+                });
+            }else {
+                new NotificationsComponent().showNotification('danger', 'Hãy chọn học kỳ');
+            }
+        })
     }
     duyetDT(row) {
         this.dialog.open(DuyetdetaiComponent, {data: {row}})

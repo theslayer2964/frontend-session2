@@ -31,6 +31,7 @@ export class DuyetdetaiComponent implements OnInit {
     day: boolean;
 
     ngOnInit(): void {
+        console.log("TUI NE", this.data);
         this.giangVien = this.data.row.giangVien;
         this.deTai = {
             maDeTai: this.data.row.maDeTai,
@@ -62,7 +63,9 @@ export class DuyetdetaiComponent implements OnInit {
 
     loiNhan: any = "";
     khongDuyetDeTai() {
-        this.dialog.open(LoiNhanComponent, {data: this.loiNhan})
+        this.dialog.open(LoiNhanComponent, {
+            data: this.loiNhan,
+            width:'500px'})
             .afterClosed().subscribe(result => {
             if ( result != "'close'") {
                 this.deTaiService.duyetDeTai({

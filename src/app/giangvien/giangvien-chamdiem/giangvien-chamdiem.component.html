@@ -20,9 +20,9 @@
                             </button>
                         </mat-menu>
                         <mat-menu #vertebrates="matMenu">
-                            <button mat-menu-item>GV Hướng dẫn</button>
-                            <button mat-menu-item>GV Phản biện</button>
-                            <button mat-menu-item>GV Hội đồng</button>
+                            <button mat-menu-item (click)="xuatFile('HD')">GV Hướng dẫn</button>
+                            <button mat-menu-item (click)="xuatFile('PB')">GV Phản biện</button>
+                            <button mat-menu-item (click)="xuatFile('HoiDong')">GV Hội đồng</button>
                         </mat-menu>
                     </div>
                     <hr>

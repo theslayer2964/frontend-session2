@@ -36,5 +36,14 @@ export class PhieuChamService {
             tap(res => res),
             catchError(err => of([])));
   }
-
+  getPhieuChamWord(data: any): any{
+    let headers = this.httpHeadersJWT;
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
+    return this.httpClient.post(this.urlPhieuCham + "xuat-phieu-cham-gv" ,data ,{
+      headers: headers,
+      responseType: 'arraybuffer',
+      observe: 'response'
+    });
+  }
 }

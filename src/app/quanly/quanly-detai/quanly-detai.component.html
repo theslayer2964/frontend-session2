@@ -13,10 +13,6 @@
                             <mat-icon>keyboard_arrow_down</mat-icon>
                         </button>
                         <mat-menu #afterMenu="matMenu" xPosition="after">
-                            <button mat-menu-item (click)="openDialog()"
-                                    style="display: flex;justify-content: space-between;">
-                                <span>Thêm danh sách đề tài</span>
-                            </button>
                             <button mat-menu-item (click)="downloadFileSV()"
                                     style="display: flex;justify-content: space-between;">
                                 <span>Xuất file excel mẫu</span>
@@ -83,97 +79,112 @@
                             <!-- ID Column -->
                             <ng-container matColumnDef="maDeTai" sticky class="example-button">
                                 <th mat-header-cell *matHeaderCellDef
-                                    style="text-align: center;width: 50px"> MÃ ĐỀ TÀI
+                                    style="text-align: center;width: 50px" mat-sort-header> MÃ ĐỀ TÀI
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.maDeTai}} </td>
                             </ng-container>
+                            <ng-container matColumnDef="giangVien">
+                                <th mat-header-cell *matHeaderCellDef  mat-sort-header>
+                                    GIẢNG VIÊN
+                                </th>
+                                <td mat-cell *matCellDef="let row" matTooltip="{{row.giangVien.maGiangVien}}"
+                                    matTooltipClass="example-tooltip-uppercase">
+                                    <div *ngIf="row.giangVien.tenGiangVien.length < 50">
+                                        <p>{{row.giangVien.tenGiangVien}}</p>
+                                    </div>
+                                    <div *ngIf="row.giangVien.tenGiangVien.length >= 50">
+                                        <p>{{row.giangVien.tenGiangVien.slice(0, 50)}}...</p>
+                                    </div>
+                                </td>
+                            </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="tenDeTai">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center;">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                     TÊN ĐỀ TÀI
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.tenDeTai}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    <div *ngIf="row.tenDeTai.length < 40">
+                                    <div *ngIf="row.tenDeTai.length < 50">
                                         <p>{{row.tenDeTai}}</p>
                                     </div>
-                                    <div *ngIf="row.tenDeTai.length >= 40">
-                                        <p>{{row.tenDeTai.slice(0, 40)}}...</p>
+                                    <div *ngIf="row.tenDeTai.length >= 50">
+                                        <p>{{row.tenDeTai.slice(0, 50)}}...</p>
                                     </div>
                                 </td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="gioiHanSoNhomThucHien">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    style="text-align: center;width: 100px">
                                     SỐ NHÓM TỐI ĐA
                                 </th>
-                                <td mat-cell *matCellDef="let row" style="text-align: center">
+                                <td mat-cell *matCellDef="let row" >
                                     {{row.gioiHanSoNhomThucHien}}
                                 </td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="moTa" style="width: 200px;">
                                 <th mat-header-cell *matHeaderCellDef
-                                    style="margin-left: 40px;text-align: center"> MÔ TẢ
+                                     mat-sort-header> MÔ TẢ
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.moTa}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    <div *ngIf="row.moTa.length < 40">
+                                    <div *ngIf="row.moTa.length < 50">
                                         <p>{{row.moTa}}</p>
                                     </div>
-                                    <div *ngIf="row.moTa.length >= 40">
-                                        <p>{{row.moTa.slice(0, 40)}}...</p>
+                                    <div *ngIf="row.moTa.length >= 50">
+                                        <p>{{row.moTa.slice(0, 50)}}...</p>
                                     </div>
                                 </td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="mucTieuDeTai">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> MỤC
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> MỤC
                                     TIÊU ĐỀ TÀI
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.mucTieuDeTai}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    <div *ngIf="row.mucTieuDeTai.length < 40">
+                                    <div *ngIf="row.mucTieuDeTai.length < 50">
                                         <p>{{row.mucTieuDeTai}}</p>
                                     </div>
-                                    <div *ngIf="row.mucTieuDeTai.length >= 40">
-                                        <p>{{row.mucTieuDeTai.slice(0, 40)}}...</p>
+                                    <div *ngIf="row.mucTieuDeTai.length >= 50">
+                                        <p>{{row.mucTieuDeTai.slice(0, 50)}}...</p>
                                     </div>
                                 </td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="sanPhamDuKien">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center"> SẢN
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> SẢN
                                     PHẨM DỰ KIẾN
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.sanPhamDuKien}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    <div *ngIf="row.sanPhamDuKien.length < 40">
+                                    <div *ngIf="row.sanPhamDuKien.length < 50">
                                         <p>{{row.sanPhamDuKien}}</p>
                                     </div>
-                                    <div *ngIf="row.sanPhamDuKien.length >= 40">
-                                        <p>{{row.sanPhamDuKien.slice(0, 40)}}...</p>
+                                    <div *ngIf="row.sanPhamDuKien.length >= 50">
+                                        <p>{{row.sanPhamDuKien.slice(0, 50)}}...</p>
                                     </div>
                                 </td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="yeuCauDauVao">
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center"> YÊU
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center" mat-sort-header> YÊU
                                     CẦU ĐẦU VÀO
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.yeuCauDauVao}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    <div *ngIf="row.yeuCauDauVao.length < 40">
+                                    <div *ngIf="row.yeuCauDauVao.length < 50">
                                         <p>{{row.yeuCauDauVao}}</p>
                                     </div>
-                                    <div *ngIf="row.yeuCauDauVao.length >= 40">
-                                        <p>{{row.yeuCauDauVao.slice(0, 40)}}...</p>
+                                    <div *ngIf="row.yeuCauDauVao.length >= 50">
+                                        <p>{{row.yeuCauDauVao.slice(0, 50)}}...</p>
                                     </div>
                                 </td>
                             </ng-container>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="trangThai" stickyEnd>
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center;width: 100px"> TRẠNG
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;width: 100px" mat-sort-header> TRẠNG
                                     THÁI
                                 </th>
                                 <td mat-cell *matCellDef="let row">

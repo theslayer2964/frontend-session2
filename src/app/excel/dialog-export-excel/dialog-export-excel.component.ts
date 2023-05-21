@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {
   DS_Nhom_KLTN,
   DS_Nhom_KLTN_RA_HD_POSTER,
@@ -27,20 +27,21 @@ export class DialogExportExcelComponent implements OnInit {
       private hockyService: HockyService,
       private lopHocPhanService: LopHocPhanService) { }
 
-  dsHocKy: any[]
+  dsHocKy: any[];
+  choBam: boolean = true;
   ngOnInit(): void {
     console.log(this.editData)
     this.getAllHocKy();
     this.getAllLopHP();
   }
   changeHocKy($event: MatSelectChange) {
-    this.editData.ma =$event.value
-
+    this.editData.ma =$event.value;
+    this.choBam = false;
   }
 
   changeLopHP($event: MatSelectChange) {
-    this.editData.ma =$event.value
-
+    this.editData.ma = $event.value;
+    this.choBam = false;
   }
   dsLopHP: any[];
   private getAllLopHP() {
