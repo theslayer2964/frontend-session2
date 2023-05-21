@@ -180,13 +180,24 @@ export class GiangvienChamdiemComponent implements OnInit {
                 tenFile = MailMerge_PhieuChamHoiDong;
                 break;
         }
-        this.phieuchamService.getPhieuChamWord({maGiangVien: this.maGiangVien, vaiTro: hd}).subscribe(res => {
-            this.fileGenerate.generateFileWord(tenFile, res['body'], 'docx');
-            new NotificationsComponent().showNotification('success', 'Xuất file '+tenFile+' thành công');
-        },
-            error => {
-                console.log(error)
-                new NotificationsComponent().showNotification('danger', 'Xuất file không thành công');
-            });
+        // Cach1 - dang loi
+        // this.phieuchamService.getPhieuChamWord({maGiangVien: this.maGiangVien, vaiTro: hd}).subscribe(res => {
+        //     this.fileGenerate.generateFileWord(tenFile, res['body'], 'docx');
+        //     new NotificationsComponent().showNotification('success', 'Xuất file '+tenFile+' thành công');
+        // },
+        //     error => {
+        //         console.log(error)
+        //         new NotificationsComponent().showNotification('danger', 'Xuất file không thành công');
+        //     });
+        // Cach 2 - download zip:
+        this.phieuchamService.downloadZipPhieuChamWord({maGiangVien: this.maGiangVien, vaiTro: hd})
+            .subscribe(blob => {
+                const a = document.createElement('a')
+                const objectUrl = URL.createObjectURL(blob)
+                a.href = objectUrl
+                a.download = 'archive.zip';
+                a.click();
+                URL.revokeObjectURL(objectUrl);
+            })
     }
 }

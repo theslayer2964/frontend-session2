@@ -33,7 +33,7 @@ export class FileGeneratorService {
 
     generateFileWord(fileName: string, data: any, fileType: string, isBlob = false) {
         const blob = isBlob ? data : new Blob([data],
-            {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;'});
+            {type: 'multipart/x-mixed-replace;boundary=END'});
         //@ts-ignore
         if (window.navigator.msSaveOrOpenBlob) {
             //@ts-ignore
@@ -47,6 +47,7 @@ export class FileGeneratorService {
                 link.setAttribute('download', fileName + '.' + fileType);
                 link.click();
             } else {
+                console.log("DO NHANH NAY");
                 data = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;' + data;
                 window.open(encodeURI(data));
             }

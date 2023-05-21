@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {HocKy} from "../../shared-service/HocKy.models";
-import {catchError, of, tap} from "rxjs";
+import {catchError, Observable, of, tap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +45,13 @@ export class PhieuChamService {
       responseType: 'arraybuffer',
       observe: 'response'
     });
+  }
+
+  downloadZipPhieuChamWord(data: any): Observable<Blob> {
+    let headers = this.httpHeadersJWT;
+    return this.httpClient.post(this.urlPhieuCham + "xuat-phieu-cham-gv" ,data,{
+      headers: headers,
+      responseType: 'blob'
+    })
   }
 }
