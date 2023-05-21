@@ -8,7 +8,7 @@ export class FileGeneratorService {
     constructor() {
     }
 
-    generateFile(fileName: string, data: any, fileType: 'xlsx', isBlob = false) {
+    generateFile(fileName: string, data: any, fileType: string, isBlob = false) {
         const blob = isBlob ? data : new Blob([data],
             {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;'});
         //@ts-ignore
@@ -21,7 +21,7 @@ export class FileGeneratorService {
             document.body.appendChild(link);
             if (link.download !== undefined) {
                 link.setAttribute('href', URL.createObjectURL(blob));
-                link.setAttribute('download', fileName + '.xlsx');
+                link.setAttribute('download', fileName + '.' + fileType);
                 link.click();
             } else {
                 data = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;' + data;

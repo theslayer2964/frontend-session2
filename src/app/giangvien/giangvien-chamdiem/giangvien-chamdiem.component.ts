@@ -13,6 +13,9 @@ import {MatSort} from "@angular/material/sort";
 import {MatAccordion} from "@angular/material/expansion";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
+import {MailMerge_PhieuChamHD} from "../../shared-service/FileNameExport";
+import {PhieuChamService} from "../../quanly/quanly-service/phieu-cham.service";
+import {FileGeneratorService} from "../../shared-service/file-generator.service";
 
 @Component({
   selector: 'app-giangvien-chamdiem',
@@ -23,6 +26,8 @@ export class GiangvienChamdiemComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private hockyService: HockyService, public userAuthService: UserAuthService,
               private giangvienService: GiangvienService, private gvDialogChamDiemTransfer: GvDialogchamdiemService,
+              private phieuchamService: PhieuChamService,
+              private fileGenerate: FileGeneratorService,
               private formBuilder: FormBuilder) { }
   maGiangVien: any;
 
@@ -95,7 +100,11 @@ export class GiangvienChamdiemComponent implements OnInit {
   }
 
   xuatFileExcel() {
-    console.log("XUAT FILE EXCEL KQ")
+    console.log("aaaa")
+    this.phieuchamService.getPhieuChamWord({maGiangVien: null, vaiTro: null}).subscribe(res => {
+      this.fileGenerate.generateFile(MailMerge_PhieuChamHD, res['body'], 'docx');
+      new NotificationsComponent().showNotification('success', 'Xuất file excel thành công');
+    });
   }
   vaitro:any;
   dsSV:any;
