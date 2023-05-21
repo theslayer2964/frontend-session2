@@ -82,6 +82,8 @@ export class GvChamdiemComponent implements OnInit {
         console.log(formValue);
         console.log(this.pheuChamMau)
         if (this.editData.sinhVien.length == 2) {
+            let tongDiemSV1 = 0;
+            let tongDiemSV2 = 0;
             for (let i = 0; i <= this.pheuChamMau.length - 1; i++) {
                 if (this.pheuChamMau[i].diemToiDa < formValue.tableRows[i].diemSV1) {
                     new NotificationsComponent().showNotification
@@ -95,6 +97,18 @@ export class GvChamdiemComponent implements OnInit {
                         this.pheuChamMau[i].tenChuanDauRa + " điểm số không được vượt quá " + this.pheuChamMau[i].diemToiDa);
                     return;
                 }
+                tongDiemSV1 += formValue.tableRows[i].diemSV1
+                tongDiemSV2 += formValue.tableRows[i].diemSV2
+            }
+            console.log("DIEM SV1:",tongDiemSV1, " - ", tongDiemSV2);
+            // TH: 1 rớt 1 đậu:
+            if(tongDiemSV1 >= 5 && tongDiemSV2 < 5 || tongDiemSV2 >= 5 && tongDiemSV1 < 5){
+                new NotificationsComponent().showNotification("danger",'Lưu ý: 1 nhóm phải cùng đậu (>=5) hoặc cùng rớt (<5). Xin hãy điều chỉnh phù hợp');
+                return;
+            }
+            if(Math.abs(tongDiemSV1 - tongDiemSV2) > 2){
+                new NotificationsComponent().showNotification("danger",'Lưu ý: Điểm hợp lệ là các sinh viên không thể chênh nhau quá 2 điểm. Xin hãy điều chỉnh phù hợp');
+                return;
             }
         } else {
             for (let i = 0; i <= this.pheuChamMau.length - 1; i++) {

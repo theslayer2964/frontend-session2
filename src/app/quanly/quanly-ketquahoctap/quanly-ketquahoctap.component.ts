@@ -14,6 +14,9 @@ import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {MatBottomSheet} from "@angular/material/bottom-sheet";
 import {QlDiemBaoComponent} from "../../dialog/ql-diem-bao/ql-diem-bao.component";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
+import {DialogExportExcelComponent} from "../../excel/dialog-export-excel/dialog-export-excel.component";
+import {KetQua_Nhom_KLTN} from "../../shared-service/FileNameExport";
+import {FileGeneratorService} from "../../shared-service/file-generator.service";
 
 @Component({
   selector: 'app-quanly-ketquahoctap',
@@ -28,7 +31,7 @@ export class QuanlyKetquahoctapComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private nhomService: NhomService, private hockyService: HockyService,
               private userAuthService: UserAuthService,private formBuilder: FormBuilder,
-              private sinhvienService: SinhvienService) {
+              private sinhvienService: SinhvienService, private filegenerate: FileGeneratorService) {
 
   }
 
@@ -127,7 +130,16 @@ export class QuanlyKetquahoctapComponent implements OnInit {
   tinhTrang: any;
 
   downloadFileSV() {
-    console.log("XU LY TIP TUC...")
+    this.dialog.open(DialogExportExcelComponent, {data: {variable: 'hocKy', ma: null}}).afterClosed().subscribe(val => {
+      if (val.ma != null && val.ma != undefined && val.ma != "") {
+        this.nhomService.getKetQuaTrongHocKy({maHocKy: val.ma}).subscribe(res => {
+          this.filegenerate.generateFile(KetQua_Nhom_KLTN, res['body'], 'xlsx');
+          new NotificationsComponent().showNotification('success', 'Xuất file excel thành công');
+        });
+      }else {
+        new NotificationsComponent().showNotification('danger', 'Hãy chọn học kỳ');
+      }
+    })
   }
 ///
   // FORM BUILDER:

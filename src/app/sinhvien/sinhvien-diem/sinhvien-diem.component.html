@@ -45,7 +45,7 @@
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.diemTongKet}}"
                                     matTooltipClass="example-tooltip-uppercase">
                                     <span *ngIf="row.diemTongKet > 5.0">{{row.diemTongKet}}</span>
-                                    <span *ngIf="row.gioiTinh <= 5.0" style="color: red">{{row.diemTongKet}}</span>
+                                    <span *ngIf="row.diemTongKet <= 5.0" style="color: red">{{row.diemTongKet}}</span>
                                 </td>
                             </ng-container>
                             <ng-container matColumnDef="thangDiem4">
