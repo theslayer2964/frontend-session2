@@ -14,10 +14,15 @@ export class SinhvienDiemComponent implements OnInit {
   constructor(private sinhvienService: SinhvienService, private userAuthService: UserAuthService, private convertDiem: ConvertDiemSVService) { }
   ngOnInit(): void {
     this.sinhvienService.getDiemSV(this.userAuthService.getUserInfo().maSinhVien).subscribe((res:any) => {
-      if(res.diemTongKet!=null){
+      if(res!=null){
+        if(res.diemTongKet!=null){
         res.xepLoai = this.convertDiem.convertToXepLoai(res.diemChu);
         res.dat = this.convertDiem.convertToDat(res.thangDiem4);
         this.dataSource = new MatTableDataSource([res]);
+        }
+        else{
+          console.log("KHONG CHO SV COI DIEM")
+        }
       }
       else{
         this.dataSource = new MatTableDataSource([]);

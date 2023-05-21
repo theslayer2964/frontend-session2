@@ -3,8 +3,9 @@
 <mat-dialog-content class="mat-typography">
     <div class="row">
         <div class="col-lg-12 col-md-12">
-            <full-calendar #calendar *ngIf='calendarVisible' [options]='calendarOptions' [events]="data$">
-                <ng-template #eventContent let-arg >
+            <full-calendar #calendar *ngIf='calendarVisible' [options]='calendarOptions'
+                           [events]="data$">
+                <ng-template #eventContent let-arg>
                     <b>{{ arg.timeText }}</b>
                     <br>
                     <i>{{ arg.event.title.split("|")[0] }}</i>

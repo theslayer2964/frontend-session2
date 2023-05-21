@@ -19,7 +19,7 @@ export class ThemDeTaiGvComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
-      maDeTai: [''],
+      maDeTai: ['', Validators.required],
       gioiHanSoNhomThucHien: ['1', Validators.required],
       moTa: ['', Validators.required],
       mucTieuDeTai: ['', Validators.required],

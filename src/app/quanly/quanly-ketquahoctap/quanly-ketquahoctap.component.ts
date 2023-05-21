@@ -13,6 +13,7 @@ import {MatAccordion} from "@angular/material/expansion";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {MatBottomSheet} from "@angular/material/bottom-sheet";
 import {QlDiemBaoComponent} from "../../dialog/ql-diem-bao/ql-diem-bao.component";
+import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 
 @Component({
   selector: 'app-quanly-ketquahoctap',
@@ -23,6 +24,7 @@ export class QuanlyKetquahoctapComponent implements OnInit {
   displayedColumns: string[] = ['sttnhom','maSV', 'hoten','madetai', 'tendetai',"gvhd","duocraPB","diemGVHD", "pb1","pb2","tbbm","tvhd1","tvhd2","tbtvhd","ketqua","diembao","diemTK","hoidong","action"];
   dataSource!: MatTableDataSource<any>;
   dsHocKy: HocKy[];
+  hocKyHienHanh: string
 
   constructor(public dialog: MatDialog, private nhomService: NhomService, private hockyService: HockyService,
               private userAuthService: UserAuthService,private formBuilder: FormBuilder,
@@ -36,6 +38,13 @@ export class QuanlyKetquahoctapComponent implements OnInit {
         this.dsHocKy = res;
       }, error: (err) => {
         console.log(err)
+      }
+    });
+
+    this.hockyService.getHocKyMoiNhat().subscribe({
+      next:(res) => {
+        this.hocKyHienHanh = res.maHocKy;
+        this.isCheckedChoXemDiem = res.choXemDiem;
       }
     })
   }
@@ -53,7 +62,6 @@ export class QuanlyKetquahoctapComponent implements OnInit {
 
   layKetQua() {
     this.sinhvienService.getKetQuaHocTapToanBoSV(this.hocKyHienTai).subscribe((res:any) =>{
-      console.log("QL - KQHT:", res);
       let dsKQ:any = [];
       let i = 1;
       res.forEach(sv => {
@@ -145,5 +153,26 @@ export class QuanlyKetquahoctapComponent implements OnInit {
   dsGV: any[]
   changeGVCham($event: MatSelectChange) {
 
+  }
+  // cho phep SV xem
+  isCheckedChoXemDiem: boolean;
+
+  onChangeChoPhepXemDiem(isCheckedChoXemDiem: boolean) {
+    if(isCheckedChoXemDiem==false){
+      const rs = confirm("Bạn cho phép sinh viên xem điểm ?");
+      if(rs==true){
+        this.hockyService.choXemDiem({maHocKy: this.hocKyHienHanh, choXemDiem: true}).subscribe((res) => {
+          new NotificationsComponent().showNotification('success', 'Cho phép sinh viên xem');
+        });
+      }
+    }
+    else{
+      const rs = confirm("Bạn không cho phép sinh viên xem điểm ?");
+      if(rs==true){
+        this.hockyService.choXemDiem({maHocKy: this.hocKyHienHanh, choXemDiem: false}).subscribe( (res) => {
+          new NotificationsComponent().showNotification('warning', 'Không cho phép sinh viên xem');
+        });
+      }
+    }
   }
 }

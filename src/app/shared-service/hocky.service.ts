@@ -47,4 +47,11 @@ export class HockyService {
             tap(receiveHocKy => receiveHocKy),
             catchError(err => of([])));
   }
+
+  choXemDiem(data){
+    return this.httpClient.post(this.url + 'cho-xem-diem', data,{headers: this.httpHeadersJWT})
+        .pipe(
+            tap(receiveHocKy => receiveHocKy),
+            catchError(err => of([])));
+  }
 }

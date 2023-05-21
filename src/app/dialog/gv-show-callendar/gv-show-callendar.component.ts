@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {CalendarOptions, DateSelectArg, EventApi, EventClickArg} from "@fullcalendar/core";
 import interactionPlugin from "@fullcalendar/interaction";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -9,8 +9,8 @@ import {LichService} from "../../shared-service/lich/lich.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {HockyService} from "../../shared-service/hocky.service";
 import {Subject} from "rxjs";
-import { FullCalendarComponent } from '@fullcalendar/angular';
-import {calendar} from "ngx-bootstrap/chronos/moment/calendar";
+import {GvChamdiemComponent} from "../gv-chamdiem/gv-chamdiem.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-gv-show-callendar',
@@ -20,13 +20,16 @@ import {calendar} from "ngx-bootstrap/chronos/moment/calendar";
 export class GvShowCallendarComponent implements OnInit {
   calendarVisible = true;
 
-  constructor(private changeDetector: ChangeDetectorRef, private lichService: LichService,
-              private userAuthService: UserAuthService, private hockyService: HockyService) { }
+  constructor(public dialog: MatDialog, private changeDetector: ChangeDetectorRef, private lichService: LichService,
+              private userAuthService: UserAuthService, private hockyService: HockyService) {
+  }
 
   destroy$ = new Subject();
   data$: any[] = [];
+
   ngOnInit(): void {
     let role = this.userAuthService.getRoles()[0];
+
     let maHocKy;
     this.hockyService.getHocKyMoiNhat().subscribe(res => {
       maHocKy = res.maHocKy;
@@ -45,28 +48,18 @@ export class GvShowCallendarComponent implements OnInit {
                 start: new Date(data.thoiGianBatDau).toISOString(),
                 end: new Date(data.thoiGianKetThuc).toISOString(),
                 title: data.tenKeHoach + "|" + data.phong,
-                allDay:false,
-                backgroundColor:"green"
+                allDay: false,
+                backgroundColor: "#3597ea",
               })
             }
-            // else {
-            //     a.push({
-            //         id: data.id,
-            //         start: new Date(data.thoiGianBatDau).toISOString().replace(/T.*$/, ''),
-            //         end: new Date(data.thoiGianKetThuc).toISOString().replace(/T.*$/, ''),
-            //         title: data.tenKeHoach,
-            //         allDay:true,
-            //         backgroundColor:"green",
-            //         daysOfWeek: data.dsNgayThucHienKhoaLuan
-            //     })
-            // }
           })
           this.data$ = a
-          console.log("MAP:",this.data$);
+          console.log("MAP:", this.data$);
         })
       });
     }
   }
+
   calendarOptions: CalendarOptions = {
     locale: 'vi',
     plugins: [
@@ -85,53 +78,31 @@ export class GvShowCallendarComponent implements OnInit {
     selectable: false,
     selectMirror: false,
     dayMaxEvents: true,
+    height: 2000,
+    contentHeight:'auto',
     // select: this.handleDateSelect.bind(this),
-    // eventClick: this.handleEventClick.bind(this),
+    eventClick: this.handleEventClick.bind(this),
     // eventsSet: this.handleEvents.bind(this),
-
+    // eventResize:
   };
-  currentEvents: EventApi[] = [];
 
-  handleCalendarToggle() {
-    this.calendarVisible = !this.calendarVisible;
+
+  goToChamDiem(){
+    this.dialog.open(GvChamdiemComponent, {
+      data: null,
+      width:"1150px"
+    }).afterClosed().subscribe(res => {
+      /// cont
+    });
   }
 
-  handleWeekendsToggle() {
-    const {calendarOptions} = this;
-    calendarOptions.weekends = !calendarOptions.weekends;
+  handleEventClick(clickInfo: EventClickArg) {
+    console.log("GV - lich- click:", clickInfo.event);
+    this.dialog.open(GvChamdiemComponent, {
+      data: null,
+      width:"1150px"
+    }).afterClosed().subscribe(res => {
+      /// cont
+    });
   }
-
-  handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Please enter a new title for your event');
-    const calendarApi = selectInfo.view.calendar;
-
-    calendarApi.unselect(); // clear date selection
-
-    if (title) {
-      console.log("INFO:",selectInfo);
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      });
-    }
-  }
-  ///////
-  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
-
-  // handleEventClick(clickInfo: EventClickArg) {
-  //   if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-  //     clickInfo.event.remove();
-  //   }
-  // }
-  //
-  // handleEvents(events: EventApi[]) {
-  //   this.currentEvents = events;
-  //   events.forEach((res) => {
-  //     console.log(JSON.stringify(res));
-  //   })
-  //   this.changeDetector.detectChanges();
-  // }
 }

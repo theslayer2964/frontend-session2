@@ -3,7 +3,6 @@
     <mat-divider></mat-divider>
     <hr>
     <mat-dialog-content class="mat-typography">
-
         <h4>Tên Sinh viên: <b>{{editData.info.nguoiGui.tenSinhVien}}</b></h4>
         <h4>Số Điện Thoại: <b>{{editData.info.nguoiGui.dienThoai}}</b></h4>
         <h4>Email: <b>{{editData.info.nguoiGui.email}}</b></h4>
@@ -18,13 +17,21 @@
 
 <div *ngIf="editData.info.nguoiGui.maGiangVien != null">
     <h2 mat-dialog-title>Thông Báo</h2>
-    <mat-dialog-content class="mat-typography">
-        <p>{{editData.info.noiDung.split("|")[0]}}  {{editData.info.noiDung.split("|")[1]}}</p>
-        <p *ngIf="editData.info.noiDung.split('|')[2] != ''">Lời Nhắn: {{editData.info.noiDung.split("|")[2]}}
-        </p>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-dialog-content class="mat-typography" style="font-size: 15px">
+        <b>Đề tài: </b>
+        <span>{{editData.info.noiDung.split("|")[0]}}</span>
+        <br>
+        <b>Trạng thái: </b>
+        <span>{{editData.info.noiDung.split("|")[1]}}</span>
+        <br>
+        <b *ngIf="editData.info.noiDung.split('|')[2] != ''">Lời Nhắn:</b>
+        <span *ngIf="editData.info.noiDung.split('|')[2] != ''"> {{editData.info.noiDung.split("|")[2]}}
+        </span>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="choPhepThamGiaNhom()">Đồng ý</button>
+        <button mat-button mat-dialog-close>Đóng</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn btn-danger" (click)="chinhSuaDeTai(detai)">Chỉnh sửa đề tài</button>
     </mat-dialog-actions>
 </div>
