@@ -33,11 +33,11 @@ export class FileGeneratorService {
 
     generateFileWord(fileName: string, data: any, fileType: string, isBlob = false) {
         const blob = isBlob ? data : new Blob([data],
-            {type: 'multipart/x-mixed-replace;boundary=END'});
+            {type: 'application/zip'});
         //@ts-ignore
         if (window.navigator.msSaveOrOpenBlob) {
             //@ts-ignore
-            navigator.msSaveOrOpenBlob(blob, fileName + '.xlsx')
+            navigator.msSaveOrOpenBlob(blob, fileName + '.' + fileType)
         } else {
             const link = document.createElement('a');
             link.style.display = 'none';

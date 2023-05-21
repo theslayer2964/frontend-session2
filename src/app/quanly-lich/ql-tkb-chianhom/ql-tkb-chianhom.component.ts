@@ -196,7 +196,7 @@ export class QlTkbChianhomComponent implements OnInit {
         this.quanLyService.themDSPhanCong(
             dataList
         ).subscribe(res => {
-            new NotificationsComponent().showNotification('success', 'Phân công phản biên thành công');
+            new NotificationsComponent().showNotification('success', 'Phân công phản biện thành công');
         }, error => {
             console.log(error)
             new NotificationsComponent().showNotification('danger', "Không cho phép giang viên hướng dẫn chấm phản biện");
@@ -286,11 +286,14 @@ export class QlTkbChianhomComponent implements OnInit {
         for (let i = 0; i < formValue.length; i++) {
             if (formValue[i].nhom.length > 0) {
                 let dateParts = formValue[i].ngay.split("/");
+                let dsGVGuiDia = [];
+                this.dsTKBPhanBienHD.forEach(gv => {
+                    dsGVGuiDia.push(gv.maGiangVien)
+                })
                 dataList.push({
                     viTriPhanCong: this.viTriPhanCong,
                     chamCong: false,
-                    dsMaGiangVienPB: [this.dsTKBPhanBienHD[i].dsGiangVienPB[0].maGiangVien, this.dsTKBPhanBienHD[i].dsGiangVienPB[1].maGiangVien,
-                        this.dsTKBPhanBienHD[i].dsGiangVienPB[2].maGiangVien],
+                    dsMaGiangVienPB: dsGVGuiDia,
                     ngay: new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]),
                     tiet: formValue[i].tiet,
                     phong: formValue[i].phong,

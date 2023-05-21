@@ -97,7 +97,9 @@ export class GiangvienChamdiemComponent implements OnInit {
             data: row,
             width: "1150px"
         }).afterClosed().subscribe(res => {
+            console.log("XXX")
             this.getDSTheoVaiTro(null, null, this.maGiangVien, null, null);
+            console.log("YYY")
         });
     }
 
@@ -125,7 +127,7 @@ export class GiangvienChamdiemComponent implements OnInit {
             maNguoiDung: maGiangVien
         }).subscribe(res => {
             this.dsSV = res;
-            console.log("RES", res);
+            console.log("RES + GV + CHAM DIEM ", res);
             this.dataSource = new MatTableDataSource(res);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
@@ -181,23 +183,23 @@ export class GiangvienChamdiemComponent implements OnInit {
                 break;
         }
         // Cach1 - dang loi
-        // this.phieuchamService.getPhieuChamWord({maGiangVien: this.maGiangVien, vaiTro: hd}).subscribe(res => {
-        //     this.fileGenerate.generateFileWord(tenFile, res['body'], 'docx');
-        //     new NotificationsComponent().showNotification('success', 'Xuất file '+tenFile+' thành công');
-        // },
-        //     error => {
-        //         console.log(error)
-        //         new NotificationsComponent().showNotification('danger', 'Xuất file không thành công');
-        //     });
+        this.phieuchamService.getPhieuChamWord({maGiangVien: this.maGiangVien, vaiTro: hd}).subscribe(res => {
+            this.fileGenerate.generateFileWord(tenFile, res['body'], 'zip');
+            new NotificationsComponent().showNotification('success', 'Xuất file '+tenFile+' thành công');
+        },
+            error => {
+                console.log(error)
+                new NotificationsComponent().showNotification('danger', 'Xuất file không thành công');
+            });
         // Cach 2 - download zip:
-        this.phieuchamService.downloadZipPhieuChamWord({maGiangVien: this.maGiangVien, vaiTro: hd})
-            .subscribe(blob => {
-                const a = document.createElement('a')
-                const objectUrl = URL.createObjectURL(blob)
-                a.href = objectUrl
-                a.download = 'archive.zip';
-                a.click();
-                URL.revokeObjectURL(objectUrl);
-            })
+        // this.phieuchamService.downloadZipPhieuChamWord({maGiangVien: this.maGiangVien, vaiTro: hd})
+        //     .subscribe(blob => {
+        //         const a = document.createElement('a')
+        //         const objectUrl = URL.createObjectURL(blob)
+        //         a.href = objectUrl
+        //         a.download = 'archive.zip';
+        //         a.click();
+        //         URL.revokeObjectURL(objectUrl);
+        //     })
     }
 }

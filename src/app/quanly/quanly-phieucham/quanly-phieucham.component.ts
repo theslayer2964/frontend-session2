@@ -56,6 +56,7 @@ export class QuanlyPhieuchamComponent implements OnInit {
     {value: "PB", viewValue:"Giảng viên phản biện" },
     {value: "CT", viewValue:"Chủ tịch hội đồng" },
     {value: "TK", viewValue:"Thư ký hướng dẫn" },
+    {value: "TV3", viewValue:"Thành viên thứ 3" }
   ];
 
   changeHocKy($event: MatSelectChange) {
