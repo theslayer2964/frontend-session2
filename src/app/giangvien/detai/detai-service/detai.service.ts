@@ -36,6 +36,12 @@ export class DetaiService {
             catchError(err => of([])));
     }
 
+    getDeTaiRoleGV_Mot(data: string): Observable<DeTai[]> {
+        return this.httpClient.get<DeTai[]>(this.url + 'lay-theo-ma/' + data.trim(), {headers: this.httpHeadersJWT}).pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+    }
+
     updateDeTai(data: any, id: any): Observable<any> {
         console.log("DETAI SẺVICE:" + JSON.stringify(data));
         return this.httpClient.put<any>(this.url + "sua-de-tai/", data, {headers: this.httpHeadersJWT}).pipe(
@@ -74,14 +80,25 @@ export class DetaiService {
         ;
     }
 
-    xuatDSDeTai() {
+    xuatDSDeTai(maHK: string) {
         let headers = this.httpHeadersJWT;
         headers = headers.set('Content-Type', 'application/json; charset=urtf8');
         headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
-        return this.httpClient.get(this.urlQuanLy + "xuat-ds-de-tai" ,{
+        return this.httpClient.post(this.urlQuanLy + "xuat-ds-de-tai" ,{maHocKy: maHK},{
             headers: headers,
             responseType: 'arraybuffer',
             observe: 'response'
     });
+    }
+
+    xuatFileExcelDetaiMau(){
+        let headers = this.httpHeadersJWT;
+        headers = headers.set('Content-Type', 'application/json; charset=urtf8');
+        headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
+        return this.httpClient.get(this.url + "xuat-file-mau-de-tai" ,{
+            headers: headers,
+            responseType: 'arraybuffer',
+            observe: 'response'
+        });
     }
 }

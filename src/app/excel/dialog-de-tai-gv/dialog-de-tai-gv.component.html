@@ -23,7 +23,7 @@
                             <div mat-dialog-actions [align]="'end'">
                                 <button mat-raised-button color="warn" mat-dialog-close="'close'">Close</button>
                                 <button style="margin-left: 8px" mat-raised-button color="primary"
-
+                                        [disabled]="excelName==null"
                                         (click)="importFile()">Thêm đề tài</button>
                             </div>
                             <div class="clearfix"></div>

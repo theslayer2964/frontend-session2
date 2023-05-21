@@ -15,7 +15,7 @@ export class SinhvienDiemComponent implements OnInit {
   ngOnInit(): void {
     this.sinhvienService.getDiemSV(this.userAuthService.getUserInfo().maSinhVien).subscribe((res:any) => {
       if(res!=null){
-        if(res.diemTongKet!=null){
+        if(res[0].diemTongKet!=null){
         res.xepLoai = this.convertDiem.convertToXepLoai(res.diemChu);
         res.dat = this.convertDiem.convertToDat(res.thangDiem4);
         this.dataSource = new MatTableDataSource([res]);

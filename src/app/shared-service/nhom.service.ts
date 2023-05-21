@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {catchError, Observable, of, tap} from "rxjs";
 import {UserAuthService} from "../authentication/_service/user-auth.service";
 import {FileGeneratorService} from "./file-generator.service";
+import next from "ajv/dist/vocabularies/next";
 
 @Injectable({
     providedIn: 'root'

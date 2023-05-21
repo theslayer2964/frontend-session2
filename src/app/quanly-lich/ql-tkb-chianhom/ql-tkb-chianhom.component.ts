@@ -33,19 +33,15 @@ export class QlTkbChianhomComponent implements OnInit {
         this.chiaNhomPB = this.fb.group({
             tableRows: this.fb.array([], [Validators.required])
         });
-        this.trandata.pipe(take(1)).subscribe((res:any) => {
+        this.trandata.pipe(take(1)).subscribe((res: any) => {
             res.forEach(() => this.addRow());
         })
         this.chiaNhomHD = this.fb.group({
             tableRowsHD: this.fb.array([], [Validators.required])
         });
-        this.trandataHD.pipe(take(1)).subscribe((res:any) => {
+        this.trandataHD.pipe(take(1)).subscribe((res: any) => {
             res.forEach(() => this.addRowHD());
         })
-        // this.addRowHD();
-        // this.addRowHD();
-        // this.addRowHD();
-        // this.addRowHD();
     }
 
     dsHocKy: HocKy[];
@@ -69,6 +65,7 @@ export class QlTkbChianhomComponent implements OnInit {
 
     showBangData: any;
     viTriPhanCong: any;
+
     changeLoaiLich($event: MatSelectChange) {
         this.showBangData = $event.value
         if (this.showBangData == 0) {
@@ -85,25 +82,56 @@ export class QlTkbChianhomComponent implements OnInit {
     dsTKBPhanBien: any = [];
     // destroyPB$ = new Subject<void>();
     trandata = new Subject();
+
     private getDSLichTheoHK(maHocKy: any, loaiLich: any) {
         this.lichService.layTKBPhanBien(maHocKy, loaiLich).subscribe((res: []) => {
             this.dsTKBPhanBien = res;
             this.trandata.next(res);
-            if(loaiLich == "PB"){
-            this.setValuePB(res); //////////////
+            if (loaiLich == "PB") {
+                console.log("QL-TKB-CHIANHOM - Pb:", res);
+                let dataPB = [];
+                res.forEach((lich: any) => {
+                    let temp = {
+                        ngay: lich.ngay,
+                        tiet: lich.tiet,
+                        phong: lich.phong,
+                        gv: lich.dsGiangVienPB[0].tenGiangVien + " - " + lich.dsGiangVienPB[1].tenGiangVien,
+                        maLich: lich.maLich,
+                        tenLich: lich.tenLich,
+                        dsGiangVienPB: lich.dsGiangVienPB
+                    }
+                    dataPB.push(temp);
+                    console.log("QL-TKB-CHIANHOM - Pb - temp:", temp);
+                })
+                this.setValuePB(dataPB); //////////////
             }
-            // if(loaiLich == "HD"){
-            //     this.setValueHD(res);
-            // }
         })
     }
+
     trandataHD = new Subject();
     dsTKBPhanBienHD: any = [];
+
     private getDSLichTheoHKHD(maHocKy: any, loaiLich: any) {
         this.lichService.layTKBPhanBien(maHocKy, loaiLich).subscribe((res: []) => {
             this.dsTKBPhanBienHD = res;
             this.trandataHD.next(res);
-            if(loaiLich == "HD"){
+            if (loaiLich == "HD") {
+                ////////////CHUA XONG NÈ/////////////
+                // console.log("QL-TKB-CHIANHOM - HD - temp:", res);
+                // let dataHD = [];
+                // res.forEach((lich: any) => {
+                //     let temp = {
+                //         ngay: lich.ngay,
+                //         tiet: lich.tiet,
+                //         phong: lich.phong,
+                //         gv: lich.dsGiangVienPB[0].tenGiangVien + " - " + lich.dsGiangVienPB[1].tenGiangVien,
+                //         maLich: lich.maLich,
+                //         tenLich: lich.tenLich,
+                //         dsGiangVienPB: lich.dsGiangVienPB
+                //     }
+                //     dataHD.push(temp);
+                //     console.log("QL-TKB-CHIANHOM - Pb - temp:", temp);
+                // })
                 this.setValueHD(res);
             }
         })
@@ -117,7 +145,8 @@ export class QlTkbChianhomComponent implements OnInit {
             ngay: ['', [Validators.required, Validators.minLength(3)]],
             tiet: ['', [Validators.required]],
             nhom: [''],
-            phong: ['']
+            phong: [''],
+            gv: ['']
         });
     }
 
@@ -131,9 +160,13 @@ export class QlTkbChianhomComponent implements OnInit {
         control.push(this.createFormGroup());
     }
 
+    gvPBCuaPhongDo;
+
     removeEmployee(index: number) {
         const control = this.chiaNhomPB.get('tableRows') as FormArray;
-        control.removeAt(index);
+        // control.removeAt(index);
+        // console.log("CHO TUI XEM VS:",control.value[0].gv);
+        // this.gvPBCuaPhongDo = control.value[0].gv;
     }
 
     onSaveForm() {
@@ -141,13 +174,13 @@ export class QlTkbChianhomComponent implements OnInit {
         console.log("ON SAVE PB 1:", formValue);
         // console.log("ON SAVE PB 1 - DS GV:", this.dsMaGVPB);
         let dataList = [];
-        for (let i = 0; i <formValue.length; i++ ){
-            if(formValue[i].nhom.length > 0){
+        for (let i = 0; i < formValue.length; i++) {
+            if (formValue[i].nhom.length > 0) {
                 let dateParts = formValue[i].ngay.split("/");
                 dataList.push({
                     viTriPhanCong: this.viTriPhanCong,
                     chamCong: false,
-                    dsMaGiangVienPB: [this.dsTKBPhanBien[i].dsGiangVienPB[0].maGiangVien,this.dsTKBPhanBien[i].dsGiangVienPB[1].maGiangVien],
+                    dsMaGiangVienPB: [this.dsTKBPhanBien[i].dsGiangVienPB[0].maGiangVien, this.dsTKBPhanBien[i].dsGiangVienPB[1].maGiangVien],
                     ngay: new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]),
                     tiet: formValue[i].tiet,
                     phong: formValue[i].phong,
@@ -173,6 +206,7 @@ export class QlTkbChianhomComponent implements OnInit {
         }
         this.chiaNhomPB.patchValue(data);
     }
+
     setValueHD(res) {
         console.log("HOI DONG:", res);
         var data = {
@@ -189,10 +223,30 @@ export class QlTkbChianhomComponent implements OnInit {
             soHocKy: this.soHocKy,
             vaiTro: loaiLich
         })
-            .subscribe(res => {
+            .subscribe((res: []) => {
                 this.dsNhomDePhanCong = res;
-                console.log("NHOM DETAI PHAN CONG:", res);
             });
+    }
+
+    private getDSSauKhiLoaiDiDongThuI(i: number) {
+        if(this.dsNhomDePhanCong){
+            let dsGVCham = this.chiaNhomPB.get('tableRows').value[i].gv.split('-')
+            let rs = [];
+            this.dsNhomDePhanCong.forEach(nhom => {
+                let dem = 0;
+                dsGVCham.forEach(gv => {
+                    if (gv.trim() != nhom.tenGiangVienHD) {
+                        dem++;
+                        console.log("TRUNG NE CHA");
+                    }
+                })
+                if(dem==2){
+                    console.log("KHONG TRUNG DAU");
+                    rs.push(nhom);
+                }
+            })
+            return rs;
+        }
     }
 
     // Table HOI DONG
@@ -203,7 +257,8 @@ export class QlTkbChianhomComponent implements OnInit {
             ngay: ['', [Validators.required, Validators.minLength(3)]],
             tiet: ['', [Validators.required]],
             nhom: [''],
-            phong: ['']
+            phong: [''],
+            gv: ['']
         });
     }
 
@@ -218,7 +273,6 @@ export class QlTkbChianhomComponent implements OnInit {
     }
 
 
-
     removeEmployeeHD(index: number) {
         const control = this.chiaNhomHD.get('tableRowsHD') as FormArray;
         control.removeAt(index);
@@ -228,13 +282,13 @@ export class QlTkbChianhomComponent implements OnInit {
         const formValue = this.chiaNhomHD.value.tableRowsHD;
         console.log("ON SAVE HD 1:", formValue);
         let dataList = [];
-        for (let i = 0; i <formValue.length; i++ ){
-            if(formValue[i].nhom.length > 0){
+        for (let i = 0; i < formValue.length; i++) {
+            if (formValue[i].nhom.length > 0) {
                 let dateParts = formValue[i].ngay.split("/");
                 dataList.push({
                     viTriPhanCong: this.viTriPhanCong,
                     chamCong: false,
-                    dsMaGiangVienPB: [this.dsTKBPhanBienHD[i].dsGiangVienPB[0].maGiangVien,this.dsTKBPhanBienHD[i].dsGiangVienPB[1].maGiangVien,
+                    dsMaGiangVienPB: [this.dsTKBPhanBienHD[i].dsGiangVienPB[0].maGiangVien, this.dsTKBPhanBienHD[i].dsGiangVienPB[1].maGiangVien,
                         this.dsTKBPhanBienHD[i].dsGiangVienPB[2].maGiangVien],
                     ngay: new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]),
                     tiet: formValue[i].tiet,

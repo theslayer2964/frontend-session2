@@ -1,9 +1,12 @@
-<h3 class="">Đánh giá đề tài</h3>
-<div>
+<h3 mat-dialog-title>Đánh giá đề tài</h3>
+<div mat-dialog-content style="width: 100%">
     <mat-label mat-header-cell *matHeaderCellDef>Bạn Có Muốn Đánh giá Đề Tài Này Chưa Đạt?</mat-label>
-    <textarea [(ngModel)]="data" placeholder="Gửi tin nhắn cho giảng viên hướng dẫn đề tài này..."></textarea>
+    <textarea [(ngModel)]="data"
+              rows="5"
+              cols="50"
+              placeholder="Gửi tin nhắn cho giảng viên hướng dẫn đề tài này..."></textarea>
 </div>
-<div>
+<div mat-dialog-actions>
     <button mat-raised-button color="warn" mat-dialog-close="'close'">Không</button>
     <button style="margin-left: 8px" mat-raised-button color="primary" [mat-dialog-close]="data"
             cdkFocusInitial>Gửi yêu cầu

@@ -28,7 +28,7 @@ export class ThemDeTaiGvComponent implements OnInit {
       yeuCauDauVao: ['', Validators.required],
       maHocKy:['']
     })
-    console.log(this.editData)
+    console.log("MA HOC KY NÈ:",this.editData);
     if (this.editData) {
       this.productForm.controls['maDeTai'].setValue(this.editData.maDeTai);
       this.productForm.controls['gioiHanSoNhomThucHien'].setValue(this.editData.gioiHanSoNhomThucHien);
@@ -53,7 +53,7 @@ export class ThemDeTaiGvComponent implements OnInit {
             next: (res) => {
               this.productForm.reset();
               this.dialogRef.close('save');
-              new NotificationsComponent().showNotification('success', 'Thêm đề tài thành công');
+              new NotificationsComponent().showNotification('success', 'Cập nhật đề tài thành công');
             },
             error: () => {
               new NotificationsComponent().showNotification('DANGER', 'Không thể thêm đề tài');

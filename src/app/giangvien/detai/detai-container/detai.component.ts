@@ -11,6 +11,8 @@ import {MatSelectChange} from "@angular/material/select";
 import {UserAuthService} from "../../../authentication/_service/user-auth.service";
 import {NotificationsComponent} from "../../../shared-component/notifications/notifications.component";
 import {DialogDeTaiGVComponent} from "../../../excel/dialog-de-tai-gv/dialog-de-tai-gv.component";
+import {DanhSach_DeTai_KLTN, FILE_MAU_DETAI} from "../../../shared-service/FileNameExport";
+import {FileGeneratorService} from "../../../shared-service/file-generator.service";
 
 @Component({
     selector: 'app-detai',
@@ -22,7 +24,7 @@ export class DetaiComponent implements OnInit {
     private soHocKy: any;
 
     constructor(public dialog: MatDialog, private detaiService: DetaiService, private hockyService: HockyService,
-                private userAuthService: UserAuthService) {
+                private userAuthService: UserAuthService, private fileGenerate: FileGeneratorService) {
     }
 
     ngOnInit(): void {
@@ -121,6 +123,13 @@ export class DetaiComponent implements OnInit {
     openDialogExcel() {
         this.dialog.open(DialogDeTaiGVComponent, {
             width: '650px',
+        });
+    }
+
+    downloadExcelMau() {
+        this.detaiService.xuatFileExcelDetaiMau().subscribe(res => {
+            this.fileGenerate.generateFile(FILE_MAU_DETAI, res['body'], 'xlsx');
+            new NotificationsComponent().showNotification('success', 'Xuất '+FILE_MAU_DETAI+' thành công');
         });
     }
 }

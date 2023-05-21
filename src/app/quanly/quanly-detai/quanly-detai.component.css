@@ -29,12 +29,17 @@ table {
 th{
   font-size: 13px;
   color: #4da1e8;
-  text-align: center;
+  /*text-align: center;*/
   font-weight: bold;
 }
 td{
-  text-align: center;
+  /*text-align: center;*/
+  margin-left: 20px;
+  padding-left: 20px;
 }
 tr.mat-row:nth-child(even){
   background-color: #c6e0f3;
+}
+.mat-sort-header-container {
+  margin-left: 35px !important;
 }

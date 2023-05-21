@@ -4,6 +4,7 @@ import {NotificationsComponent} from "../../shared-component/notifications/notif
 import {NhomService} from "../../shared-service/nhom.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {ThemDeTaiGvComponent} from "../them-de-tai-gv/them-de-tai-gv.component";
+import {DetaiService} from "../../giangvien/detai/detai-service/detai.service";
 
 @Component({
   selector: 'app-thongbao',
@@ -15,12 +16,15 @@ export class ThongbaoComponent implements OnInit {
   constructor(private dialogRef: MatDialogRef<ThongbaoComponent>, private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public editData: any,
               private nhomService: NhomService,
-              private userAuthService: UserAuthService) { }
+              private userAuthService: UserAuthService, private detaiService: DetaiService) { }
 
+  khongCoNoiDungTinNhan: boolean = false;
   ngOnInit(): void {
-    console.log("NOI DUNG TIN NHAN:",this.editData);
+    console.log("XXX: ",this.editData.info.noiDung.split('|'));
+    if(this.editData.info.noiDung.split('|')[2].trim()=='null' || this.editData.info.noiDung.split('|')[2].trim()==' '){
+      this.khongCoNoiDungTinNhan = true;
+    }
   }
-
 
   choPhepThamGiaNhom() {
     let dsMaSinhVien = [];
@@ -41,12 +45,17 @@ export class ThongbaoComponent implements OnInit {
           }
         })
   }
-    detai:any = "abc";
+
     chinhSuaDeTai(detai: any) {
-      this.dialog.open(ThemDeTaiGvComponent, {
-        data: null
-      }).afterClosed().subscribe(val => {
-        ////
-      })
+      if(detai){
+        console.log("MA DE TAI - THNOG BAO", detai)
+        this.detaiService.getDeTaiRoleGV_Mot(detai).subscribe(res => {
+          this.dialog.open(ThemDeTaiGvComponent, {
+            data: res
+          }).afterClosed().subscribe(val => {
+          })
+        });
+      }
+
     }
 }

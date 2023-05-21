@@ -11,6 +11,7 @@ import {HockyService} from "../../shared-service/hocky.service";
 import {Subject} from "rxjs";
 import {GvChamdiemComponent} from "../gv-chamdiem/gv-chamdiem.component";
 import {MatDialog} from "@angular/material/dialog";
+import {GiangvienService} from "../../giangvien/giangvien-service/giangvien.service";
 
 @Component({
   selector: 'app-gv-show-callendar',
@@ -21,25 +22,27 @@ export class GvShowCallendarComponent implements OnInit {
   calendarVisible = true;
 
   constructor(public dialog: MatDialog, private changeDetector: ChangeDetectorRef, private lichService: LichService,
-              private userAuthService: UserAuthService, private hockyService: HockyService) {
+              private userAuthService: UserAuthService, private hockyService: HockyService,
+              private giangvienService: GiangvienService) {
   }
 
   destroy$ = new Subject();
   data$: any[] = [];
-
+  hocKyHienHanh: any;
   ngOnInit(): void {
     let role = this.userAuthService.getRoles()[0];
 
     let maHocKy;
     this.hockyService.getHocKyMoiNhat().subscribe(res => {
       maHocKy = res.maHocKy;
+      this.hocKyHienHanh = res.maHocKy;
       this.destroy$.next(maHocKy);
     });
     if (role.roleName == "ROLE_GIANGVIEN") {
       console.log("GV _ LICH _ TUI NE");
       let maGV = this.userAuthService.getUserInfo().maGiangVien;
       this.destroy$.subscribe(hocky => {
-        this.lichService.getLichTheoHocKyVaMaGV(hocky, maGV, "ROLE_GIANGVIEN").subscribe(res => {
+        this.lichService.getLichPB(hocky, maGV, "ROLE_GIANGVIEN").subscribe(res => {
           let a = [];
           res.forEach(data => {
             if (data.dsNgayThucHienKhoaLuan.length <= 0 && data.maLoaiLich == 3) {
@@ -47,7 +50,8 @@ export class GvShowCallendarComponent implements OnInit {
                 id: data.id,
                 start: new Date(data.thoiGianBatDau).toISOString(),
                 end: new Date(data.thoiGianKetThuc).toISOString(),
-                title: data.tenKeHoach + "|" + data.phong,
+                title: data.tenKeHoach + "|" + data.phong + "|" + data.nhomSinhVien.tenNhom + "|" +
+                  data.nhomGiangVienPb[0].tenGiangVien + ", " + data.nhomGiangVienPb[1].tenGiangVien + "|" + data.nhomSinhVien.maNhom ,
                 allDay: false,
                 backgroundColor: "#3597ea",
               })
@@ -78,7 +82,7 @@ export class GvShowCallendarComponent implements OnInit {
     selectable: false,
     selectMirror: false,
     dayMaxEvents: true,
-    height: 2000,
+    height: '100%',
     contentHeight:'auto',
     // select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
@@ -86,23 +90,22 @@ export class GvShowCallendarComponent implements OnInit {
     // eventResize:
   };
 
-
-  goToChamDiem(){
-    this.dialog.open(GvChamdiemComponent, {
-      data: null,
-      width:"1150px"
-    }).afterClosed().subscribe(res => {
-      /// cont
-    });
-  }
-
   handleEventClick(clickInfo: EventClickArg) {
-    console.log("GV - lich- click:", clickInfo.event);
-    this.dialog.open(GvChamdiemComponent, {
-      data: null,
-      width:"1150px"
-    }).afterClosed().subscribe(res => {
-      /// cont
+    console.log("truyen ne", clickInfo.event.title.split("|")[4]);
+    let data = {
+      maNguoiDung: this.userAuthService.getUserInfo().maGiangVien,
+    }
+    this.giangvienService.getDSSVVaiTroCuThe(data).subscribe((res:[]) => {
+      res.forEach((nhom:any) => {
+        if(nhom.maNhom == clickInfo.event.title.split("|")[4]){
+          this.dialog.open(GvChamdiemComponent, {
+            data: nhom,
+            width:"1150px"
+          }).afterClosed().subscribe(res => {
+            /// cont
+          });
+        }
+      })
     });
   }
 }

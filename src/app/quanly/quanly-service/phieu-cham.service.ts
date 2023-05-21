@@ -42,11 +42,12 @@ export class PhieuChamService {
   chamDiemBao(data: any){
     return this.httpClient.put(this.urlPhieuCham + "them-diem-bao", data, {headers: this.httpHeadersJWT});
   }
+
   getPhieuChamWord(data: any): any{
     let headers = this.httpHeadersJWT;
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
-    return this.httpClient.get(this.urlPhieuCham + "xuat-phieu-cham-gv" , {
+    return this.httpClient.post(this.urlPhieuCham + "xuat-phieu-cham-gv" ,data ,{
       headers: headers,
       responseType: 'arraybuffer',
       observe: 'response'

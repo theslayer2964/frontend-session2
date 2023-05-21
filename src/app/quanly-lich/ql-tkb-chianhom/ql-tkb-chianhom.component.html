@@ -31,8 +31,7 @@
                     </div>
                     <!--                    PHAN BIEN-->
                     <div class="row" *ngIf="showBangData==0">
-                        <div class="col-lg-1 col-md-1"></div>
-                        <div class="col-lg-10 col-md-10">
+                        <div class="col-lg-12 col-md-12">
                             <form>
                                 <table class="table " style="border: gray 1px solid" >
                                     <thead>
@@ -40,6 +39,7 @@
                                         <th scope="col">Ngày</th>
                                         <th scope="col">Tiết</th>
                                         <th scope="col">Phòng</th>
+                                        <th scope="col">Giảng viên</th>
                                         <th scope="col">Nhóm</th>
                                         <th scope="col">Tùy chọn</th>
                                     </tr>
@@ -58,8 +58,12 @@
                                                 <input type="text" class="form-control" formControlName="phong" disabled>
                                             </td>
                                             <td>
+<!--                                                <input type="text" class="form-control" formControlName="gv" disabled>-->
+                                                <textarea matInput cols="20" rows="2" formControlName="gv" disabled></textarea>
+                                            </td>
+                                            <td>
                                                 <select formControlName="nhom"  class="form-control" >
-                                                    <option value="{{nhom.maNhom}}" *ngFor="let nhom of dsNhomDePhanCong">{{nhom.tenNhom}}</option>
+                                                    <option value="{{nhom.maNhom}}" *ngFor="let nhom of getDSSauKhiLoaiDiDongThuI(i)">{{nhom.tenNhom}}</option>
                                                 </select>
                                             </td>
                                             <td>
@@ -90,8 +94,7 @@
 
                     <!--                    HỘI ĐỒNG-->
                     <div class="row" *ngIf="showBangData==1">
-                        <div class="col-lg-1 col-md-1"></div>
-                        <div class="col-lg-10 col-md-10">
+                        <div class="col-lg-12 col-md-12">
                             <form>
                                 <table class="table table-bordered">
                                     <thead>
@@ -100,6 +103,7 @@
                                         <th scope="col">Tiết</th>
                                         <th scope="col">Phòng</th>
                                         <th scope="col">Nhóm</th>
+                                        <th scope="col">Giảng viên</th>
                                         <th scope="col">Tùy chọn</th>
                                     </tr>
                                     </thead>
@@ -117,8 +121,12 @@
                                                 <input type="text" class="form-control" formControlName="phong" disabled>
                                             </td>
                                             <td>
+<!--                                                <input type="text" class="form-control" formControlName="gv" disabled>-->
+                                                <textarea matInput cols="20" rows="2" formControlName="gv" disabled></textarea>
+                                            </td>
+                                            <td>
                                                 <select formControlName="nhom"  class="form-control" >
-                                                    <option value="{{nhom.maNhom}}" *ngFor="let nhom of dsNhomDePhanCong">{{nhom.tenNhom}}</option>
+                                                    <option value="{{nhom.maNhom}}" *ngFor="let nhom of dsNhomDePhanCong" disabled>{{nhom.tenNhom}}</option>
                                                 </select>
                                             </td>
                                             <td>
