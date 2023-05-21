@@ -117,22 +117,26 @@ export class QlTkbChianhomComponent implements OnInit {
             this.trandataHD.next(res);
             if (loaiLich == "HD") {
                 ////////////CHUA XONG NÈ/////////////
-                // console.log("QL-TKB-CHIANHOM - HD - temp:", res);
-                // let dataHD = [];
-                // res.forEach((lich: any) => {
-                //     let temp = {
-                //         ngay: lich.ngay,
-                //         tiet: lich.tiet,
-                //         phong: lich.phong,
-                //         gv: lich.dsGiangVienPB[0].tenGiangVien + " - " + lich.dsGiangVienPB[1].tenGiangVien,
-                //         maLich: lich.maLich,
-                //         tenLich: lich.tenLich,
-                //         dsGiangVienPB: lich.dsGiangVienPB
-                //     }
-                //     dataHD.push(temp);
-                //     console.log("QL-TKB-CHIANHOM - Pb - temp:", temp);
-                // })
-                this.setValueHD(res);
+                let dataHD = [];
+                console.log("QL-TKB-CHIANHOM - HD:", res);
+                res.forEach((lich: any) => {
+                    let gvTemp  = '';
+                    lich.dsGiangVienPB.forEach(gv => {
+                        gvTemp += gv.tenGiangVien + " - "
+                    });
+                    let temp = {
+                        ngay: lich.ngay,
+                        tiet: lich.tiet,
+                        phong: lich.phong,
+                        gv: gvTemp,
+                        maLich: lich.maLich,
+                        tenLich: lich.tenLich,
+                        dsGiangVienPB: lich.dsGiangVienPB
+                    }
+                    dataHD.push(temp);
+                    console.log("QL-TKB-CHIANHOM - HD - temp:", temp);
+                })
+                this.setValueHD(dataHD);
             }
         })
     }
@@ -164,15 +168,14 @@ export class QlTkbChianhomComponent implements OnInit {
 
     removeEmployee(index: number) {
         const control = this.chiaNhomPB.get('tableRows') as FormArray;
-        // control.removeAt(index);
-        // console.log("CHO TUI XEM VS:",control.value[0].gv);
-        // this.gvPBCuaPhongDo = control.value[0].gv;
+        control.removeAt(index);
+        console.log("INDEX ne:", index);
     }
 
     onSaveForm() {
         const formValue = this.chiaNhomPB.value.tableRows;
         console.log("ON SAVE PB 1:", formValue);
-        // console.log("ON SAVE PB 1 - DS GV:", this.dsMaGVPB);
+
         let dataList = [];
         for (let i = 0; i < formValue.length; i++) {
             if (formValue[i].nhom.length > 0) {
@@ -187,13 +190,13 @@ export class QlTkbChianhomComponent implements OnInit {
                     maNhom: formValue[i].nhom,
                     maHocKy: this.hocKyHienTai
                 })
+                this.removeEmployee(i);
             }
         }
-        console.log("ON SAVE PB 2:", dataList);
         this.quanLyService.themDSPhanCong(
             dataList
         ).subscribe(res => {
-            new NotificationsComponent().showNotification('success', 'Phân công phản biên thành công');
+            new NotificationsComponent().showNotification('success', 'Phân công phản biện thành công');
         }, error => {
             console.log(error)
             new NotificationsComponent().showNotification('danger', "Không cho phép giang viên hướng dẫn chấm phản biện");
@@ -237,11 +240,9 @@ export class QlTkbChianhomComponent implements OnInit {
                 dsGVCham.forEach(gv => {
                     if (gv.trim() != nhom.tenGiangVienHD) {
                         dem++;
-                        console.log("TRUNG NE CHA");
                     }
                 })
                 if(dem==2){
-                    console.log("KHONG TRUNG DAU");
                     rs.push(nhom);
                 }
             })
@@ -285,11 +286,14 @@ export class QlTkbChianhomComponent implements OnInit {
         for (let i = 0; i < formValue.length; i++) {
             if (formValue[i].nhom.length > 0) {
                 let dateParts = formValue[i].ngay.split("/");
+                let dsGVGuiDia = [];
+                this.dsTKBPhanBienHD.forEach(gv => {
+                    dsGVGuiDia.push(gv.maGiangVien)
+                })
                 dataList.push({
                     viTriPhanCong: this.viTriPhanCong,
                     chamCong: false,
-                    dsMaGiangVienPB: [this.dsTKBPhanBienHD[i].dsGiangVienPB[0].maGiangVien, this.dsTKBPhanBienHD[i].dsGiangVienPB[1].maGiangVien,
-                        this.dsTKBPhanBienHD[i].dsGiangVienPB[2].maGiangVien],
+                    dsMaGiangVienPB: dsGVGuiDia,
                     ngay: new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]),
                     tiet: formValue[i].tiet,
                     phong: formValue[i].phong,

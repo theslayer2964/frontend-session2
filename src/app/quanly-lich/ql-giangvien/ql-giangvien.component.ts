@@ -79,9 +79,7 @@ export class QlGiangvienComponent implements OnInit {
 
     addThoiKhoaBieuPB() {
         this.dialog.open(QlXepTKBComponent, {}).afterClosed().subscribe(val => {
-            if (val == "save") {
                 this.getDSLichTheoHKPB(this.hocKyHienTai, "PB");
-            }
         })
     }
 

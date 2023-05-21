@@ -17,7 +17,7 @@
                                    #input>
                         </mat-form-field>
                     </div>
-                    <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;" tabindex="0">
+                    <div class="mat-elevation-z8"  tabindex="0">
                         <table mat-table [dataSource]="dataSource" matSort>
 
                             <ng-container matColumnDef="giangVien" sticky>
@@ -53,10 +53,10 @@
                             </ng-container>
 
                             <ng-container matColumnDef="action" stickyEnd>
-                                <th mat-header-cell *matHeaderCellDef  >Đăng ký</th>
+                                <th mat-header-cell *matHeaderCellDef >Đăng ký</th>
                                 <td mat-cell *matCellDef="let row">
                                     <!--Row: data cua 1 dong-->
-                                    <button mat-icon-button color="primary" (click)="dangDT(row)">
+                                    <button mat-icon-button color="primary" [disabled]="row.full == true ? true : false" (click)="dangDT(row)">
                                         <mat-icon>bookmark</mat-icon>
                                     </button>
 

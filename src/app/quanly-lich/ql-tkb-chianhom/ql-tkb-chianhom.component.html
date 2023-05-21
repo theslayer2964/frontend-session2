@@ -102,8 +102,8 @@
                                         <th scope="col">Ngày</th>
                                         <th scope="col">Tiết</th>
                                         <th scope="col">Phòng</th>
-                                        <th scope="col">Nhóm</th>
                                         <th scope="col">Giảng viên</th>
+                                        <th scope="col">Nhóm</th>
                                         <th scope="col">Tùy chọn</th>
                                     </tr>
                                     </thead>
@@ -126,7 +126,7 @@
                                             </td>
                                             <td>
                                                 <select formControlName="nhom"  class="form-control" >
-                                                    <option value="{{nhom.maNhom}}" *ngFor="let nhom of dsNhomDePhanCong" disabled>{{nhom.tenNhom}}</option>
+                                                    <option value="{{nhom.maNhom}}" *ngFor="let nhom of dsNhomDePhanCong">{{nhom.tenNhom}}</option>
                                                 </select>
                                             </td>
                                             <td>

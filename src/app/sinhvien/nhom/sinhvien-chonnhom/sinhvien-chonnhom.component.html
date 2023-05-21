@@ -9,8 +9,7 @@
                         <div class="card-header"
                              style="display: flex;justify-content: space-between;background-color: #4da1e8">
                             <h4 class="card-title"
-                                style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH
-                                CÁC NHÓM HIỆN CÓ</h4>
+                                style="color: #fff;font-family: Arial, Helvetica Neue, Helvetica, sans-serif">DANH SÁCH CÁC NHÓM HIỆN CÓ</h4>
                             <!--                            <button *ngIf="!nhom" mat-raised-button color="warn" (click)="openDialog()"-->
                             <!--                                    style="height: 40px">Tạo nhóm-->
                             <!--                            </button>-->
@@ -102,7 +101,8 @@
                                     </th>
                                     <td mat-cell *matCellDef="let row">
                                         <!--Row: data cua 1 dong-->
-                                        <button mat-icon-button color="primary" (click)="dangKyNhom(row)">
+                                        <button mat-icon-button color="primary" (click)="dangKyNhom(row)"
+                                        [disabled]="row.dsMaSinhVien.length==2 ? true: false">
                                             <mat-icon>note_add</mat-icon>
                                         </button>
 

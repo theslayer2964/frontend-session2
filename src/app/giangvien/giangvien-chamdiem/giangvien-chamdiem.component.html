@@ -128,14 +128,14 @@
                             <ng-container matColumnDef="maSV2">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã Sinh viên 2</th>
                                 <td mat-cell *matCellDef="let row">
-                                    <p *ngIf="row.sinhVien[1]!=null">{{row.sinhVien[1].maSinhVien}}</p>
+                                    <span *ngIf="row.sinhVien[1]!=null">{{row.sinhVien[1].maSinhVien}}</span>
 
                                 </td>
                             </ng-container>
                             <ng-container matColumnDef="tenSV2">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên Sinh viên 2</th>
                                 <td mat-cell *matCellDef="let row">
-                                    <p *ngIf="row.sinhVien[1]!=null">{{row.sinhVien[1].tenSinhVien}}</p>
+                                    <span *ngIf="row.sinhVien[1]!=null">{{row.sinhVien[1].tenSinhVien}}</span>
                                 </td>
                             </ng-container>
                             <ng-container matColumnDef="vaiTro">

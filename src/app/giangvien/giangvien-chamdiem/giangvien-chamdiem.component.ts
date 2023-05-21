@@ -97,7 +97,9 @@ export class GiangvienChamdiemComponent implements OnInit {
             data: row,
             width: "1150px"
         }).afterClosed().subscribe(res => {
+            console.log("XXX")
             this.getDSTheoVaiTro(null, null, this.maGiangVien, null, null);
+            console.log("YYY")
         });
     }
 
@@ -125,7 +127,7 @@ export class GiangvienChamdiemComponent implements OnInit {
             maNguoiDung: maGiangVien
         }).subscribe(res => {
             this.dsSV = res;
-            console.log("RES", res);
+            console.log("RES + GV + CHAM DIEM ", res);
             this.dataSource = new MatTableDataSource(res);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;

@@ -58,5 +58,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Đóng</button>
-    <button mat-button cdkFocusInitial [disabled]="disableButtonCLick" (click)="addTKBPB()">Thêm thời khóa biểu</button>
+    <button mat-button cdkFocusInitial class="btn btn-success" [disabled]="this.nhomDKGVHD.value?.dsMaGiangVienPB.length != 2 ?
+     this.nhomDKGVHD.value?.dsMaGiangVienPB.length != 3 ? true : false : false" (click)="addTKBPB()">Thêm thời khóa biểu</button>
 </mat-dialog-actions>
