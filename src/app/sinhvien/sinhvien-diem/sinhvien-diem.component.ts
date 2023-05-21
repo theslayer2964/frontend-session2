@@ -16,15 +16,17 @@ export class SinhvienDiemComponent implements OnInit {
     this.sinhvienService.getDiemSV(this.userAuthService.getUserInfo().maSinhVien).subscribe((res:any) => {
       if(res!=null){
         if(res[0].diemTongKet!=null){
-        res.xepLoai = this.convertDiem.convertToXepLoai(res.diemChu);
-        res.dat = this.convertDiem.convertToDat(res.thangDiem4);
-        this.dataSource = new MatTableDataSource([res]);
+        res[0].xepLoai = this.convertDiem.convertToXepLoai(res[0].diemChu);
+        res[0].dat = this.convertDiem.convertToDat(res[0].thangDiem4);
+          console.log("CHO COI:", res);
+        this.dataSource = new MatTableDataSource(res);
         }
         else{
           console.log("KHONG CHO SV COI DIEM")
         }
       }
       else{
+        console.log("KO CO z`` coi")
         this.dataSource = new MatTableDataSource([]);
       }
     })
