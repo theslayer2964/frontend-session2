@@ -82,17 +82,11 @@ export class QlXepTKBHDComponent implements OnInit {
     }
   }
   showGV = false;
-  disableButtonCLick = false;
+  koChoBam:boolean = true;
   onDropdownList($event: MatSelectChange) {
     if($event.value.length > 3){
       new NotificationsComponent().showNotification("danger","Yêu cầu chỉ 2 hoặc 3 giảng viên phản biện")
-      this.disableButtonCLick = true;
-    }
-    else if($event.value.length == 3 || $event.value.length == 2){
-      this.disableButtonCLick = false;
-    }
-    else{
-      this.disableButtonCLick = true;
+      this.koChoBam =true;
     }
   }
 
@@ -100,7 +94,10 @@ export class QlXepTKBHDComponent implements OnInit {
     console.log("LICH ne:", this.nhomDKGVHD.value);
     this.lichService.xepLichGiangVienHD(this.nhomDKGVHD.value).subscribe(res => {
       this.dialogRef.close();
-      new NotificationsComponent().showNotification("success","Xếp lịch thành công")
-    })
+      new NotificationsComponent().showNotification("success","Xếp lịch hội đồng thành công")
+    },
+        error => {
+          new NotificationsComponent().showNotification("danger","Xếp lịch hội đồng thất bại")
+        });
   }
 }

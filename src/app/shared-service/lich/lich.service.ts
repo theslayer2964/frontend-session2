@@ -117,11 +117,7 @@ export class LichService {
     }
 
     xepLichGiangVienHD(data: any){
-        return this.httpClient.post(this.url + "tao-kehoach-giangvien-hd", data, {headers: this.httpHeadersJWT})
-            .pipe(tap(res => {
-                    res = res;
-                }),
-                catchError(err => of([])));
+        return this.httpClient.post(this.url + "tao-kehoach-giangvien-hd", data, {headers: this.httpHeadersJWT});
     }
 
     layTKBPhanBien(maHocKy: any, lich: any){

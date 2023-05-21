@@ -15,7 +15,7 @@ import {LichService} from "../../shared-service/lich/lich.service";
 })
 export class QlXepTKBComponent implements OnInit {
   nhomDKGVPB!: FormGroup;
-  actionBtn : string = "Save"
+  actionBtn : string = "Thêm thời khóa biểu"
   constructor(private formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<QlXepTKBComponent>,
               @Inject(MAT_DIALOG_DATA) public editData: any,
@@ -82,9 +82,11 @@ export class QlXepTKBComponent implements OnInit {
     }
   }
   showGV = false;
+  koChoBam:boolean = true;
   onDropdownList($event: MatSelectChange) {
     if($event.value.length > 2){
       new NotificationsComponent().showNotification("danger","Yêu cầu chỉ 2 giảng viên phản biện")
+      this.koChoBam =true;
     }
   }
 
