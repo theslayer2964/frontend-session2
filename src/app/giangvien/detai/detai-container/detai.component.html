@@ -50,22 +50,22 @@
                             <!-- ID Column -->
                             <ng-container matColumnDef="maDeTai" sticky class="example-button">
                                 <th mat-header-cell *matHeaderCellDef
-                                    style="width: 100px;text-align: center"> MÃ ĐỀ TÀI
+                                    style="width: 50px;"> MÃ ĐỀ TÀI
                                 </th>
                                 <td mat-cell *matCellDef="let row"> {{row.maDeTai}} </td>
                             </ng-container>
                             <!-- Progress Column -->
-                            <ng-container matColumnDef="tenDeTai" style="margin-left: 60px">
+                            <ng-container matColumnDef="tenDeTai" >
                                 <th mat-header-cell *matHeaderCellDef  > TÊN ĐỀ
                                     TÀI
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.tenDeTai}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    <div *ngIf="row.tenDeTai.length < 20">
+                                    <div *ngIf="row.tenDeTai.length < 50">
                                         <p>{{row.tenDeTai}}</p>
                                     </div>
-                                    <div *ngIf="row.tenDeTai.length >= 20">
-                                        <p>{{row.tenDeTai.slice(0, 20)}}...</p>
+                                    <div *ngIf="row.tenDeTai.length >= 50">
+                                        <p>{{row.tenDeTai.slice(0, 50)}}...</p>
                                     </div>
                                 </td>
                             </ng-container>
@@ -77,17 +77,17 @@
                                 <td mat-cell *matCellDef="let row"> {{row.gioiHanSoNhomThucHien}}</td>
                             </ng-container>
                             <!-- Progress Column -->
-                            <ng-container matColumnDef="moTa" style="width: 200px;">
+                            <ng-container matColumnDef="moTa" >
                                 <th mat-header-cell *matHeaderCellDef
                                     > MÔ TẢ
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.moTa}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    <div *ngIf="row.moTa.length < 20">
+                                    <div *ngIf="row.moTa.length < 50">
                                         <p>{{row.moTa}}</p>
                                     </div>
-                                    <div *ngIf="row.moTa.length >= 20">
-                                        <p>{{row.moTa.slice(0, 20)}}...</p>
+                                    <div *ngIf="row.moTa.length >= 50">
+                                        <p>{{row.moTa.slice(0, 50)}}...</p>
                                     </div>
                                 </td>
                             </ng-container>
@@ -98,11 +98,11 @@
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.mucTieuDeTai}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    <div *ngIf="row.mucTieuDeTai.length < 20">
+                                    <div *ngIf="row.mucTieuDeTai.length < 50">
                                         <p>{{row.mucTieuDeTai}}</p>
                                     </div>
-                                    <div *ngIf="row.mucTieuDeTai.length >= 20">
-                                        <p>{{row.mucTieuDeTai.slice(0, 20)}}...</p>
+                                    <div *ngIf="row.mucTieuDeTai.length >= 50">
+                                        <p>{{row.mucTieuDeTai.slice(0, 50)}}...</p>
                                     </div>
                                 </td>
                             </ng-container>
@@ -113,11 +113,11 @@
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.sanPhamDuKien}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    <div *ngIf="row.sanPhamDuKien.length < 20">
+                                    <div *ngIf="row.sanPhamDuKien.length < 50">
                                         <p>{{row.sanPhamDuKien}}</p>
                                     </div>
-                                    <div *ngIf="row.sanPhamDuKien.length >= 20">
-                                        <p>{{row.sanPhamDuKien.slice(0, 20)}}...</p>
+                                    <div *ngIf="row.sanPhamDuKien.length >= 50">
+                                        <p>{{row.sanPhamDuKien.slice(0, 50)}}...</p>
                                     </div>
                                 </td>
                             </ng-container>
@@ -139,11 +139,11 @@
                                 </th>
                                 <td mat-cell *matCellDef="let row" matTooltip="{{row.yeuCauDauVao}}"
                                     matTooltipClass="example-tooltip-uppercase">
-                                    <div *ngIf="row.yeuCauDauVao.length < 20">
+                                    <div *ngIf="row.yeuCauDauVao.length < 50">
                                         <p>{{row.yeuCauDauVao}}</p>
                                     </div>
-                                    <div *ngIf="row.yeuCauDauVao.length >= 20">
-                                        <p>{{row.yeuCauDauVao.slice(0, 20)}}...</p>
+                                    <div *ngIf="row.yeuCauDauVao.length >= 50">
+                                        <p>{{row.yeuCauDauVao.slice(0, 50)}}...</p>
                                     </div>
                                 </td>
                             </ng-container>

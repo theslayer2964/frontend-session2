@@ -282,14 +282,19 @@ export class QlTkbChianhomComponent implements OnInit {
     onSaveFormHD() {
         const formValue = this.chiaNhomHD.value.tableRowsHD;
         console.log("ON SAVE HD 1:", formValue);
+        console.log("PB _ HD:", this.dsTKBPhanBienHD);
         let dataList = [];
         for (let i = 0; i < formValue.length; i++) {
             if (formValue[i].nhom.length > 0) {
                 let dateParts = formValue[i].ngay.split("/");
                 let dsGVGuiDia = [];
-                this.dsTKBPhanBienHD.forEach(gv => {
-                    dsGVGuiDia.push(gv.maGiangVien)
-                })
+                if(this.dsTKBPhanBienHD[i].dsGiangVienPB.length==2){
+                    dsGVGuiDia = [this.dsTKBPhanBienHD[i].dsGiangVienPB[0].maGiangVien, this.dsTKBPhanBienHD[i].dsGiangVienPB[1].maGiangVien]
+                }
+                else if(this.dsTKBPhanBienHD[i].dsGiangVienPB.length==3){
+                    dsGVGuiDia = [this.dsTKBPhanBienHD[i].dsGiangVienPB[0].maGiangVien, this.dsTKBPhanBienHD[i].dsGiangVienPB[1].maGiangVien, this.dsTKBPhanBienHD[i].dsGiangVienPB[2].maGiangVien]
+                }
+                console.log("KQ NE:", dsGVGuiDia);
                 dataList.push({
                     viTriPhanCong: this.viTriPhanCong,
                     chamCong: false,
