@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
 
   openCallendar() {
     this.dialog.open(GvShowCallendarComponent, {
-      width: "1000px"
+      width: "1400px"
     })
   }
 }

@@ -10,6 +10,9 @@ import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {MatAccordion} from "@angular/material/expansion";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
+import {DialogExportExcelComponent} from "../../excel/dialog-export-excel/dialog-export-excel.component";
+import {MailMerge_PhieuChamHD} from "../../shared-service/FileNameExport";
+import {FileGeneratorService} from "../../shared-service/file-generator.service";
 
 @Component({
   selector: 'app-giangvien-phancong',
@@ -19,6 +22,7 @@ import {NotificationsComponent} from "../../shared-component/notifications/notif
 export class GiangvienPhancongComponent implements OnInit {
 
   constructor(private hockyService: HockyService, private phieuchamService: PhieuChamService,
+              private fileGenerate: FileGeneratorService,
               private userAuthService: UserAuthService,private formBuilder: FormBuilder) { }
   displayedColumns: string[] = ['maSV', 'tenSV', 'maNhom',"tenNhom", 'maDeTai',"gvhd","tenDeTai","diem","action"];
   dataSource!: MatTableDataSource<any>;
@@ -138,4 +142,12 @@ export class GiangvienPhancongComponent implements OnInit {
     //            -> Nếu thấy rối quá thì bỏ chỉ cho ngta chọn 1 thôi thì nói tao sửa lại
 
   }
+
+  downloadFileMailMerge() {
+    console.log("aaaa")
+        this.phieuchamService.getPhieuChamWord({maHocKy: null}).subscribe(res => {
+          this.fileGenerate.generateFile(MailMerge_PhieuChamHD, res['body'], 'docx');
+          new NotificationsComponent().showNotification('success', 'Xuất file excel thành công');
+        });
+      }
 }

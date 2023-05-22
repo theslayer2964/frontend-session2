@@ -184,7 +184,7 @@ export class GiangvienChamdiemComponent implements OnInit {
         }
         // Cach1 - dang loi
         this.phieuchamService.getPhieuChamWord({maGiangVien: this.maGiangVien, vaiTro: hd}).subscribe(res => {
-            this.fileGenerate.generateFileWord(tenFile, res['body'], 'zip');
+            this.fileGenerate.generateFileZip(tenFile, res['body'], 'zip');
             new NotificationsComponent().showNotification('success', 'Xuất file '+tenFile+' thành công');
         },
             error => {
