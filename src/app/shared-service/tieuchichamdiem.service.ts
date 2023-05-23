@@ -52,4 +52,26 @@ export class TieuchichamdiemService {
             catchError(err => of([])));
   }
 
+  addTieuChiExcel(file: any) {
+    var formData = new FormData();
+    formData.append("file", file);
+    return this.httpClient.post<any>(this.url + "them-tieu-chi-excel", formData,{headers: {
+        'Accept':'application/json',
+        Authorization: `Bearer ${(this.token)}`
+      }} ).pipe(
+        tap(recieveDeTai => recieveDeTai),
+        catchError(err => of([])));
+  }
+
+  xuatFileMauTC(): any {
+    let headers = this.httpHeadersJWT;
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;')
+    return this.httpClient.get(this.url + "xuat-tieu-chi-excel-mau" ,{
+      headers: headers,
+      responseType: 'arraybuffer',
+      observe: 'response'
+    });
+  }
+
 }

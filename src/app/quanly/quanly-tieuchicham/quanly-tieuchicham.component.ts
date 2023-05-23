@@ -11,6 +11,16 @@ import {ThemTieuChiChamdiemComponent} from "../../dialog/them-tieu-chi-chamdiem/
 import {TieuchichamdiemService} from "../../shared-service/tieuchichamdiem.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {
+  DialogExcelQlGiangvienComponent
+} from "../../excel/dialog-excel-ql-giangvien/dialog-excel-ql-giangvien.component";
+import {
+  DialogExcelTieuChiChamDiemComponent
+} from "../../excel/dialog-excel-tieu-chi-cham-diem/dialog-excel-tieu-chi-cham-diem.component";
+import {DialogExportExcelComponent} from "../../excel/dialog-export-excel/dialog-export-excel.component";
+import {DanhSach_DeTai_KLTN, FILE_MAU_TIEUCHI} from "../../shared-service/FileNameExport";
+import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
+import {FileGeneratorService} from "../../shared-service/file-generator.service";
 
 @Component({
   selector: 'app-quanly-tieuchicham',
@@ -20,7 +30,8 @@ import {MatSort} from "@angular/material/sort";
 export class QuanlyTieuchichamComponent implements OnInit {
 
   constructor(public dialog: MatDialog,   private tieuChiChamDiem: TieuchichamdiemService,
-              private userAuthService: UserAuthService, private router: Router) { }
+              private userAuthService: UserAuthService, private router: Router,
+              private fileGenerator: FileGeneratorService) { }
   ngOnInit(): void {
     this.getAllTieuChiChamDiem();
   }
@@ -46,15 +57,18 @@ export class QuanlyTieuchichamComponent implements OnInit {
 
 
     xuatFileChamDiemMacDinh() {
-
-    }
-
-  xuatFileExcel() {
-
-  }
+          this.tieuChiChamDiem.xuatFileMauTC().subscribe(res => {
+            this.fileGenerator.generateFile(FILE_MAU_TIEUCHI, res['body'], 'xlsx');
+            new NotificationsComponent().showNotification('success', 'Xuất '+FILE_MAU_TIEUCHI+' thành công');
+          });
+      }
 
   nhapExcel() {
-
+    this.dialog.open(DialogExcelTieuChiChamDiemComponent,{
+      width:"650px"
+    }).afterClosed().subscribe(() => {
+      this.getAllTieuChiChamDiem();
+    })
   }
 
   addTieuChiCham() {
