@@ -150,7 +150,7 @@ export class ThemPhieuChamMauComponent implements OnInit {
         })
         if (tongDiem != 10) {
             new NotificationsComponent().showNotification("warning", "Tổng điểm tất cả các tiêu chí phải là 10đ");
-            return;
+            this.dsMaTieuChi = [];
         } else {
             if (this.sinhVienForm.valid && this.giangVien != null) {
                 this.tieuChiChamDiem.themPhieuChamMau({
@@ -164,13 +164,16 @@ export class ThemPhieuChamMauComponent implements OnInit {
                         this.dialogRef.close('save');
                         console.log("GV - THEm DETAI:", res);
                         new NotificationsComponent().showNotification('success', 'Thêm phiếu thành công');
+                        this.dsMaTieuChi = [];
                     },
                     error: () => {
                         new NotificationsComponent().showNotification('danger', 'Không thể thêm phiếu');
+                        this.dsMaTieuChi = [];
                     }
                 })
             } else {
                 new NotificationsComponent().showNotification("danger", "Điền Đủ thông tin.....");
+                this.dsMaTieuChi = [];
             }
 
 

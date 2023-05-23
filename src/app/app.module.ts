@@ -105,6 +105,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import { QlDiemBaoComponent } from './dialog/ql-diem-bao/ql-diem-bao.component';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { DialogExcelTieuChiChamDiemComponent } from './excel/dialog-excel-tieu-chi-cham-diem/dialog-excel-tieu-chi-cham-diem.component';
 
 @NgModule({
     imports: [
@@ -214,7 +215,8 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
         QuanlyKetquahoctapComponent,
         ThemLopHocPhanComponent,
         DialogExportExcelComponent,
-        QlDiemBaoComponent
+        QlDiemBaoComponent,
+        DialogExcelTieuChiChamDiemComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,
