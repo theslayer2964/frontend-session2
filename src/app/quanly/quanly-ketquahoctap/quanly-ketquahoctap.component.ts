@@ -78,7 +78,7 @@ export class QuanlyKetquahoctapComponent implements OnInit {
           "duocraPB": sv.duocRaPB,
           "diemGVHD": sv.phieuChamDiemHD.diemPhieuCham,
           "pb1": sv.phieuChamDiemPB1.diemPhieuCham,
-          "pb2": sv.phieuChamDiemPB1.diemPhieuCham,
+          "pb2": sv.phieuChamDiemPB2.diemPhieuCham,
           "tbbm": sv.diemTBBM,
           "tvhd1": sv.phieuChamDiemCT.diemPhieuCham,
           "tvhd2": sv.phieuChamDiemTK.diemPhieuCham,
