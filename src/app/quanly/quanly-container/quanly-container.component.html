@@ -5,34 +5,15 @@
                 <div class="card card-stats">
                     <div class="card-header card-header-success card-header-icon">
                         <div class="card-icon">
-                            <i class="material-icons">class</i>
-                        </div>
-                        <p class="card-category">Lớp học phần</p>
-                        <h3 class="card-title">Lớp học phần</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">update</i>
-                            <button (click)="goToQLDetail('lophocphan')" style="border: none;background-color: #fff ">
-                                Chi tiết lớp học phần
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-success card-header-icon">
-                        <div class="card-icon">
                             <i class="material-icons">timeline</i>
                         </div>
-                        <p class="card-category">Phân công giảng viên</p>
-                        <h3 class="card-title">Phân công giảng viên</h3>
+                        <p class="card-category">Tiến trình môn học</p>
+                        <h3 class="card-title">Tiến trình môn học</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
                             <i class="material-icons">update</i>
-                            <button (click)="goToQLPC()" style="border: none;background-color: #fff ">Chi tiết</button>
+                            <button (click)="goToQLDetail('tientrinh')" style="border: none;background-color: #fff ">Chi tiết</button>
                         </div>
                     </div>
                 </div>
@@ -75,7 +56,25 @@
                     </div>
                 </div>
             </div>
-
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">class</i>
+                        </div>
+                        <p class="card-category">Lớp học phần</p>
+                        <h3 class="card-title">Lớp học phần</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i>
+                            <button (click)="goToQLDetail('lophocphan')" style="border: none;background-color: #fff ">
+                                Chi tiết lớp học phần
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
@@ -112,6 +111,23 @@
                             <button (click)="goToQLDetail('detai')" style="border: none;background-color: #fff ">Chi
                                 tiết đề tài
                             </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">timeline</i>
+                        </div>
+                        <p class="card-category">Phân công giảng viên</p>
+                        <h3 class="card-title">Phân công giảng viên</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i>
+                            <button (click)="goToQLPC()" style="border: none;background-color: #fff ">Chi tiết</button>
                         </div>
                     </div>
                 </div>
@@ -177,7 +193,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <router-outlet></router-outlet>

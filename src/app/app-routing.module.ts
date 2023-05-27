@@ -24,6 +24,7 @@ import {QuanlyPhieuchamComponent} from "./quanly/quanly-phieucham/quanly-phieuch
 import {QlPcContainerComponent} from "./quanly/quanly-phancong/ql-pc-container/ql-pc-container.component";
 import {QuanlyLophocphanComponent} from "./quanly/quanly-lophocphan/quanly-lophocphan.component";
 import {QuanlyKetquahoctapComponent} from "./quanly/quanly-ketquahoctap/quanly-ketquahoctap.component";
+import {QuanlyTientrinhComponent} from "./quanly/quanly-tientrinh/quanly-tientrinh.component";
 
 const routes: Routes = [
 
@@ -53,12 +54,6 @@ const routes: Routes = [
         data: {roles: ['ROLE_QUANLY']}
     },
     {
-        path: 'quanly/sinhvien',
-        component: QuanlySinhvienComponent,
-        canActivate: [AuthGuard],
-        data: {roles: ['ROLE_QUANLY']}
-    },
-    {
         path: 'quanly/giangvien',
         component: QuanlyGiangvienComponent,
         canActivate: [AuthGuard],
@@ -73,6 +68,12 @@ const routes: Routes = [
     {
         path: 'quanly/sinhvien',
         component: QuanlySinhvienComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ROLE_QUANLY']}
+    },
+    {
+        path: 'quanly/tientrinh',
+        component: QuanlyTientrinhComponent,
         canActivate: [AuthGuard],
         data: {roles: ['ROLE_QUANLY']}
     },

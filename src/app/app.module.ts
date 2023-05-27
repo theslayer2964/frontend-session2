@@ -106,6 +106,10 @@ import { QlDiemBaoComponent } from './dialog/ql-diem-bao/ql-diem-bao.component';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { DialogExcelTieuChiChamDiemComponent } from './excel/dialog-excel-tieu-chi-cham-diem/dialog-excel-tieu-chi-cham-diem.component';
+import { QuanlyTientrinhComponent } from './quanly/quanly-tientrinh/quanly-tientrinh.component';
+import { QuanlyTientrinhChungComponent } from './quanly/quanly-tientrinh-chung/quanly-tientrinh-chung.component';
+import { QuanlyTientrinhDetaiComponent } from './quanly/quanly-tientrinh-detai/quanly-tientrinh-detai.component';
+import { QuanlyTientrinhSinhvienComponent } from './quanly/quanly-tientrinh-sinhvien/quanly-tientrinh-sinhvien.component';
 
 @NgModule({
     imports: [
@@ -216,7 +220,11 @@ import { DialogExcelTieuChiChamDiemComponent } from './excel/dialog-excel-tieu-c
         ThemLopHocPhanComponent,
         DialogExportExcelComponent,
         QlDiemBaoComponent,
-        DialogExcelTieuChiChamDiemComponent
+        DialogExcelTieuChiChamDiemComponent,
+        QuanlyTientrinhComponent,
+        QuanlyTientrinhChungComponent,
+        QuanlyTientrinhDetaiComponent,
+        QuanlyTientrinhSinhvienComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,
