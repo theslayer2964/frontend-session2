@@ -110,6 +110,10 @@ import { QuanlyTientrinhComponent } from './quanly/quanly-tientrinh/quanly-tient
 import { QuanlyTientrinhChungComponent } from './quanly/quanly-tientrinh-chung/quanly-tientrinh-chung.component';
 import { QuanlyTientrinhDetaiComponent } from './quanly/quanly-tientrinh-detai/quanly-tientrinh-detai.component';
 import { QuanlyTientrinhSinhvienComponent } from './quanly/quanly-tientrinh-sinhvien/quanly-tientrinh-sinhvien.component';
+import { DsGVChuaDuDeTaiComponent } from './dialog/ds-gvchua-du-de-tai/ds-gvchua-du-de-tai.component';
+import { DSSVChuaDkNhomComponent } from './dialog/dssvchua-dk-nhom/dssvchua-dk-nhom.component';
+import { DSNhomChuaDkDeTaiComponent } from './dialog/dsnhom-chua-dk-de-tai/dsnhom-chua-dk-de-tai.component';
+import { SvXinDangKyDeTaiComponent } from './dialog/sv-xin-dang-ky-de-tai/sv-xin-dang-ky-de-tai.component';
 
 @NgModule({
     imports: [
@@ -224,7 +228,11 @@ import { QuanlyTientrinhSinhvienComponent } from './quanly/quanly-tientrinh-sinh
         QuanlyTientrinhComponent,
         QuanlyTientrinhChungComponent,
         QuanlyTientrinhDetaiComponent,
-        QuanlyTientrinhSinhvienComponent
+        QuanlyTientrinhSinhvienComponent,
+        DsGVChuaDuDeTaiComponent,
+        DSSVChuaDkNhomComponent,
+        DSNhomChuaDkDeTaiComponent,
+        SvXinDangKyDeTaiComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,
