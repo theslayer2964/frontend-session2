@@ -116,10 +116,9 @@
                                                     </td>
                                                     <td>
 <!--                                                        (change)="onStatusChange($event,i)"-->
-                                                        <select formControlName="hocPhanTienQuyet"  class="form-control">
-                                                            <option value="">Select Status</option>
-                                                            <option value="active">Active</option>
-                                                            <option value="deactive">De-Active</option>
+                                                        <select formControlName="hocPhanTienQuyet"   class="form-control">
+                                                            <option *ngFor="let hptq of dsHocPhanTienQuyet; " value="{{hptq.maHocPhan}}">
+                                                                {{hptq.tenHocPhan}}</option>
                                                         </select>
                                                     </td>
                                                     <td>
