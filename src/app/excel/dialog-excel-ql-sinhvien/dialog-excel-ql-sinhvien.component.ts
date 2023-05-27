@@ -55,7 +55,7 @@ export class DialogExcelQlSinhvienComponent implements OnInit {
           next: (res) => {
             this.excelForm.reset();
             this.dialogRef.close()
-            new NotificationsComponent().showNotification('success', 'Thêm danh sách giảng viên từ excel thành công');
+            new NotificationsComponent().showNotification('success', 'Thêm danh sách sinh viên từ excel thành công');
           },
           error: () => {
             new NotificationsComponent().showNotification('danger', 'Thêm không thành công');

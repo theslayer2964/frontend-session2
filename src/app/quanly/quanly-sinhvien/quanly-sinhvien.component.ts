@@ -65,7 +65,7 @@ export class QuanlySinhvienComponent implements OnInit {
 
     // Table
     displayedColumns: string[] = [
-        "maSinhVien", "dienThoai", "email", "gioiTinh", "namNhapHoc", "ngaySinh", "noiSinh", "tenSinhVien",
+        "maSinhVien", "tenSinhVien", "dienThoai", "email", "gioiTinh", "namNhapHoc", "ngaySinh", "noiSinh",
         "maLopDanhNghia", "maNhom", "action"
     ];
     dataSource!: MatTableDataSource<any>;

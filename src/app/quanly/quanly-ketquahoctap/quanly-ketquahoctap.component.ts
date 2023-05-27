@@ -170,6 +170,7 @@ export class QuanlyKetquahoctapComponent implements OnInit {
   isCheckedChoXemDiem: boolean;
 
   onChangeChoPhepXemDiem(isCheckedChoXemDiem: boolean) {
+    console.log(isCheckedChoXemDiem)
     if(isCheckedChoXemDiem==false){
       const rs = confirm("Bạn cho phép sinh viên xem điểm ?");
       if(rs==true){
