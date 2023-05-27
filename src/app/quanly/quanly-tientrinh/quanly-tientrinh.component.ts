@@ -2,6 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {Chart, registerables} from "chart.js";
 import {ColorRenderService} from "../../shared-service/color-render.service";
 import {QuanlyLichService} from "../../shared-service/quanly-lich.service";
+import {QlTientrinhDetaiTransferService} from "../../transfer-data-service/ql-tientrinh-detai-transfer.service";
+import {QlTientrinhSvTransferService} from "../../transfer-data-service/ql-tientrinh-sv-transfer.service";
+import {QlTientrinhGvTransferService} from "../../transfer-data-service/ql-tientrinh-gv-transfer.service";
+import {
+    QlTientrinhSvChuaNhomTransferService
+} from "../../transfer-data-service/ql-tientrinh-sv-chua-nhom-transfer.service";
+import {
+    QlTientrinhNhomChuaDeTaiTransferService
+} from "../../transfer-data-service/ql-tientrinh-nhom-chua-de-tai-transfer.service";
 
 Chart.register(...registerables);
 
@@ -13,7 +22,12 @@ Chart.register(...registerables);
 export class QuanlyTientrinhComponent implements OnInit {
 
     constructor(private colorRenderService: ColorRenderService,
-                private quanLyService: QuanlyLichService) {
+                private quanLyService: QuanlyLichService,
+                private qlTientrinhDetaiTransferService: QlTientrinhDetaiTransferService,
+                private qlTientrinhSVTransferService: QlTientrinhSvTransferService,
+                private qlTientrinhGVTransferService: QlTientrinhGvTransferService,
+                private qlTientrinhSVChuaNhomTransferService: QlTientrinhSvChuaNhomTransferService,
+                private qlTientrinhNhomChuaDTTransferService: QlTientrinhNhomChuaDeTaiTransferService) {
     }
 
     ngOnInit() {
@@ -47,6 +61,8 @@ export class QuanlyTientrinhComponent implements OnInit {
                     }
                 }
             });
+            this.qlTientrinhSVTransferService.sendSV(res.dataSets[0].datas[res.dataSets[0].datas.length - 1]);
+            this.qlTientrinhDetaiTransferService.sendDeTai(res.dataSets[1].datas[res.dataSets[1].datas.length - 1]);
         })
 
         /// char 2: sinh vien
@@ -75,6 +91,7 @@ export class QuanlyTientrinhComponent implements OnInit {
                     }
                 }
             });
+            this.qlTientrinhSVChuaNhomTransferService.sendSVChuaNhom(res.dataSets[0].datas[1]);
         })
 
         // chart 3: de tai
@@ -103,6 +120,7 @@ export class QuanlyTientrinhComponent implements OnInit {
                     }
                 }
             });
+            this.qlTientrinhNhomChuaDTTransferService.sendNhomChuaDeTai(res.dataSets[0].datas[1]);
         })
 
         /// char 4: giang vien
@@ -151,6 +169,7 @@ export class QuanlyTientrinhComponent implements OnInit {
                     }
                 },
             });
+            this.qlTientrinhGVTransferService.sendGV(res.labels.length);
         })
 
         // chart 5:

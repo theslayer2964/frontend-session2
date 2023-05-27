@@ -7,6 +7,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {DangKyDetaiComponent} from "../../dialog/dang-ky-detai/dang-ky-detai.component";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
+import {SvXinDangKyDeTaiComponent} from "../../dialog/sv-xin-dang-ky-de-tai/sv-xin-dang-ky-de-tai.component";
 
 
 @Component({
@@ -86,14 +87,25 @@ export class SinhvienDetaiComponent implements OnInit {
     }
 
     dangDT(row) {
-        this.dialog.open(DangKyDetaiComponent, {data: {row}})
-            .afterClosed().subscribe(
-            rs => {
-                this.nhom = this.userAuthService.getUserInfo().nhom;
-                if (this.nhom.deTai != null) {
-                    this.deTai = this.nhom.deTai;
-                }
+        // if(0 == 0){ // check coi có đủ điểm học phần tiên quyết ko
+        //
+        // }
+        // else{ // đủ rồi
+            this.dialog.open(SvXinDangKyDeTaiComponent, {
+                data:row,
+                width: '650px'
             });
+        // }
+
+            // dk de tai:
+        // this.dialog.open(DangKyDetaiComponent, {data: {row}})
+        //     .afterClosed().subscribe(
+        //     rs => {
+        //         this.nhom = this.userAuthService.getUserInfo().nhom;
+        //         if (this.nhom.deTai != null) {
+        //             this.deTai = this.nhom.deTai;
+        //         }
+        //     });
     }
 
 

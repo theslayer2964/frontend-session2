@@ -6,27 +6,37 @@
                     <div class="card-header card-header-warning" style="display: flex;justify-content: space-between">
                         <h4 class="card-title">Thống kê số lượng đề tài / sinh viên </h4>
                     </div>
+                    <hr>
                     <div class="row">
-                        <div class="col-lg-12 col-md-12">
+                        <div class="col-lg-11 col-md-11 ml-4">
                             <table>
                                 <tr>
                                     <td>Số lượng sinh viên: </td>
-                                    <td>{{soLuongSinhVien}}</td>
+                                    <td><b>{{soLuongSinhVien}}</b></td>
                                 </tr>
                                 <tr>
                                     <td>Số lượng đề tài: </td>
-                                    <td>{{soLuongDeTai}}</td>
+                                    <td><b>{{soLuongDeTai}}</b></td>
                                 </tr>
-                                <tr *ngIf="soLuongSinhVien/soLuongDeTai > 2">
+                                <tr>
+                                    <td>Số lượng đề tài tối thiểu của học kì này: </td>
+                                    <td><b>{{ceilNumber(soLuongSinhVien/2) + 5}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Số đề tài mỗi giáo viên hướng dẫn cần có tối thiểu: </td>
+                                    <td><b>{{ceilNumber((soLuongSinhVien/2 + 5)/soLuongGiangVien)}}</b></td>
+                                </tr>
+                                <mat-divider></mat-divider>
+                                <tr *ngIf="soLuongSinhVien/soLuongDeTai > 2" style="color: orangered">
                                     <td>Cảnh báo:</td>
                                     <td>
-                                        <p>Số lượng đề tài tối thiểu của học kì này: {{ceilNumber(soLuongSinhVien/2) + 5}}</p>
-                                        <p>Mỗi giáo viên hướng dẫn cần có tối thiểu: {{ceilNumber((soLuongSinhVien/2 + 5)/soLuongGiangVien)}} đề tài</p>
                                         <p>Số lượng đề tài vẫn chưa đủ. Hãy thông báo đến giảng viên hướng dẫn về vấn đề này</p>
+                                        <span>Danh sách giảng viên chưa đủ số lượng đề tài: </span>
+                                        <mat-icon (click)="showDSGVChuaDuDeTai()"> format_list_bulleted</mat-icon>
                                     </td>
                                 </tr>
-                                <tr *ngIf="soLuongSinhVien/soLuongDeTai <= 2">
-                                    <td>Cảnh báo:</td>
+                                <tr *ngIf="soLuongSinhVien/soLuongDeTai <= 2" style="color: #00c853">
+                                    <td></td>
                                     <td>
                                         <p>Số lượng đề tài đã đủ cho sinh viên đăng ký.</p>
                                     </td>
