@@ -198,7 +198,91 @@ export class QuanlyTientrinhComponent implements OnInit {
                 },
             });
         })
+        /// char 6: thong ke de tai theo do kho cua giang vien
+        // this.quanLyService.thongKeDeTaiGV().subscribe((res:any)=> {
+            var myChart4 = new Chart("myChart6", {
+                type: 'bar',
+                data: {
+                    labels: ['Nguyen A', 'Nguyen B', 'Tran Thi B'],
+                    datasets: [{
+                        label: 'Khó',
+                        data: [1,2,3],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgb(75, 192, 192)',
+                        ],
+                        borderWidth: 1
+                    },{
+                        label: 'khá',
+                        data: [4,5,6],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgb(255, 99, 132)',
+                        ],
+                        borderWidth: 1
+                    },{
+                        label: 'Trung bình',
+                        data: [7,8,9],
+                        backgroundColor: [
+                            'rgb(75, 192, 192)',
+                        ],
+                        borderColor: [
+                            'rgb(75, 192, 192)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        x:{
+                            stacked: true
+                        },
+                        y: {
+                            beginAtZero: true,
+                            stacked: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Thống kê đề tài theo độ khó của từng giảng viên'
+                        }
+                    }
+                },
+            });
+        // })
 
+        // chart 6: thong ke de tai theo do kho
+        // this.quanLyService.thongKeNhomDaDKDeTai().subscribe((res:any) => {
+            var myChart3 = new Chart("myChart7", {
+                type: 'pie',
+                data: {
+                    labels: ['Khó','Khá','Trung bình'],
+                    datasets: [{
+                        label: 'Số lượng: ',
+                        data: [20,30,40],
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(75, 192, 192)',
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Thống kê đề tài theo độ khó'
+                        }
+                    }
+                }
+            });
+        // })
     }
 
 
