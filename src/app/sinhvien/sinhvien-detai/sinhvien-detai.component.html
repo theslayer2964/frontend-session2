@@ -52,6 +52,15 @@
                                 <td mat-cell *matCellDef="let row"> {{row.deTai.gioiHanSoNhomThucHien}} </td>
                             </ng-container>
 
+                            <ng-container matColumnDef="doKhoDeTai">
+                                <th mat-header-cell *matHeaderCellDef  >Độ khó đề tài</th>
+                                <td mat-cell *matCellDef="let row">
+                                <span *ngIf="row.deTai.doKhoDeTai == 1">Khá</span>
+                                    <span *ngIf="row.deTai.doKhoDeTai == 0">Trung bình</span>
+                                    <span *ngIf="row.deTai.doKhoDeTai == 2">Cao</span>
+                                </td>
+                            </ng-container>
+
                             <ng-container matColumnDef="action" stickyEnd>
                                 <th mat-header-cell *matHeaderCellDef >Đăng ký</th>
                                 <td mat-cell *matCellDef="let row">
@@ -81,18 +90,19 @@
 <div class="container" *ngIf="deTai != null">
 
     <mat-dialog-content class="mat-typography">
+        <table>
         <h2 style="font-weight: bold">Giảng Viên Hướng Dẫn: {{giangVien.tenGiangVien}}</h2>
 
         <h3 style="font-weight: bold">Tên đề tài: {{deTai.tenDeTai}}</h3>
 
         <h3 style="font-weight: bold">Mục Tiêu Đề Tài:</h3>
-        <textarea rows="5" cols="100" [disabled]="true" class="area">{{deTai.mucTieuDeTai}}</textarea>
+        <p rows="5" cols="100" class="area">{{deTai.mucTieuDeTai}}</p>
 
         <h3 style="font-weight: bold">Sản Phẩm Dự Kiến:</h3>
-        <textarea rows="5" cols="100" [disabled]="true" class="area">{{deTai.sanPhamDuKien}}</textarea>
+        <p rows="5" cols="100"  class="area">{{deTai.sanPhamDuKien}}</p>
 
         <h3 style="font-weight: bold">Yêu Cầu Đầu Vào:</h3>
-        <textarea rows="5" cols="100" [disabled]="true" class="area">{{deTai.yeuCauDauVao}}</textarea>
-
+        <p rows="5" cols="100"  class="area">{{deTai.yeuCauDauVao}}</p>
+        </table>
     </mat-dialog-content>
 </div>

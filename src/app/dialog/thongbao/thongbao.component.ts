@@ -5,6 +5,7 @@ import {NhomService} from "../../shared-service/nhom.service";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
 import {ThemDeTaiGvComponent} from "../them-de-tai-gv/them-de-tai-gv.component";
 import {DetaiService} from "../../giangvien/detai/detai-service/detai.service";
+import {DetaiSvService} from "../../sinhvien/sinhvien-service/detai-sv.service";
 
 @Component({
   selector: 'app-thongbao',
@@ -16,11 +17,13 @@ export class ThongbaoComponent implements OnInit {
   constructor(private dialogRef: MatDialogRef<ThongbaoComponent>, private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public editData: any,
               private nhomService: NhomService,
-              private userAuthService: UserAuthService, private detaiService: DetaiService) { }
+              private userAuthService: UserAuthService,
+              private detaiService: DetaiService,
+              private deTaiServiceSV: DetaiSvService) { }
 
   khongCoNoiDungTinNhan: boolean = false;
   ngOnInit(): void {
-    console.log("XXX: ",this.editData.info.noiDung.split('|'));
+    console.log("XXX: ",this.editData.info.noiDung.split("|")[2].split("["));
     if(this.editData.info.noiDung.split('|')[2].trim()=='null' || this.editData.info.noiDung.split('|')[2].trim()==' '){
       this.khongCoNoiDungTinNhan = true;
     }
@@ -58,4 +61,23 @@ export class ThongbaoComponent implements OnInit {
       }
 
     }
+
+  chapNhanHuongDan() {
+    let detai = {
+      maDeTai: this.editData.info.noiDung.split('|')[3].trim(),
+      maNhom: this.editData.info.noiDung.split('|')[4].trim(),
+      vaiTro: this.userAuthService.getRoles()[0].roleName
+    }
+    if(detai.maDeTai && detai.maNhom && detai.vaiTro){
+      console.log("MA DE TAI - THNOG BAO", detai)
+      this.deTaiServiceSV.dangKyDeTai(detai).subscribe(res => {
+        this.dialogRef.close()
+          new NotificationsComponent().showNotification('success', 'Chấp nhận hướng dẫn đề tài thành công');
+      },
+          error => {
+            console.log(error)
+          });
+    }
+
+  }
 }

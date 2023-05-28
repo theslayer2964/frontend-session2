@@ -15,7 +15,9 @@
     </mat-dialog-actions>
 </div>
 
-<div *ngIf="editData.info.nguoiGui.maGiangVien != null">
+<div *ngIf="editData.info.nguoiGui.maGiangVien != null && editData.info.tenTinNhan != 'Bạn có tin nhắn từ sinh viên xin thực hiện đề tài'
+ && editData.info.tenTinNhan != 'Bạn có tin nhắn từ người quản lý'
+ && editData.info.tenTinNhan != 'Giảng viên đã chấp nhận hướng dẫn đề tài mà bạn yêu cầu'">
     <h2 mat-dialog-title>Thông Báo</h2>
     <mat-divider></mat-divider>
     <br>
@@ -38,5 +40,79 @@
         <button mat-button *ngIf="editData.info.noiDung.split('|')[1].trim() != 'Đã Được Duyệt'"
                 [mat-dialog-close]="true" cdkFocusInitial class="btn btn-danger"
                 (click)="chinhSuaDeTai(editData.info.noiDung.split('|')[3])">Chỉnh sửa đề tài</button>
+    </mat-dialog-actions>
+</div>
+<div *ngIf="editData.info.nguoiGui.maGiangVien != null && editData.info.tenTinNhan == 'Bạn có tin nhắn từ sinh viên xin thực hiện đề tài'">
+    <h2 mat-dialog-title>Thông Báo</h2>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-dialog-content class="mat-typography" style="font-size: 15px">
+        <b>Đề tài: </b>
+        <span>{{editData.info.noiDung.split("|")[3]}}</span>
+        <br>
+        <b *ngIf="editData.info.noiDung.split('|')[2] != '' ">Lời Nhắn:</b>
+        <span *ngIf="khongCoNoiDungTinNhan == true"> Tin nhắn mặc định: Quản lý yêu cầu bạn chỉnh sửa đề tài
+        </span
+        ><span *ngIf="khongCoNoiDungTinNhan == false">
+        <p> Kính gửi giảng viên.</p> Nhóm  {{editData.info.noiDung.split("|")[4]}}
+        muốn xin phép được đăng ký đề tài hướng dẫn của thầy/cô.
+       <p> Về các yêu cầu đầu vào của đề tài chúng em có </p>
+        <p>
+        <b>{{editData.info.noiDung.split("|")[2].split("[")[1].split("]")[0] }}</b>
+        </p>
+        <p>
+        <p style="margin-left: 20px">
+        {{editData.info.noiDung.split("|")[2].split("[")[1].split("]")[1]}}
+        </p>
+        <p>
+        <b>{{editData.info.noiDung.split("|")[2].split("[")[2].split("]")[0] }}</b>
+        </p>
+        <p style="margin-left: 20px">
+        {{editData.info.noiDung.split("|")[2].split("[")[2].split("]")[1] }}
+        </p>
+        <p>
+         <b>{{editData.info.noiDung.split("|")[2].split("[")[3].split("]")[0]}} </b>
+        </p>
+        <p style="margin-left: 20px">
+         {{editData.info.noiDung.split("|")[2].split("[")[3].split("]")[1]}}
+        </p>
+        </span>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Đóng</button>
+        <button mat-button *ngIf="editData.info.noiDung.split('|')[1].trim() != 'Đã Được Duyệt'"
+                [mat-dialog-close]="true" cdkFocusInitial class="btn btn-success"
+                (click)="chapNhanHuongDan()">Chấp nhận hướng dẫn</button>
+    </mat-dialog-actions>
+</div>
+
+<div *ngIf="editData.info.nguoiGui.maGiangVien != null && editData.info.tenTinNhan == 'Bạn có tin nhắn từ người quản lý'">
+    <h2 mat-dialog-title>Thông Báo</h2>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-dialog-content class="mat-typography" style="font-size: 15px">
+        <span>{{editData.info.noiDung.split("|")[3]}}</span>
+        <br>
+        <p>Lời Nhắn: <b>{{editData.info.noiDung.split('|')[2]}}</b></p>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Đóng</button>
+    </mat-dialog-actions>
+</div>
+
+<div *ngIf="editData.info.nguoiGui.maGiangVien != null && editData.info.tenTinNhan == 'Giảng viên đã chấp nhận hướng dẫn đề tài mà bạn yêu cầu'">
+    <h2 mat-dialog-title>Thông Báo</h2>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-dialog-content class="mat-typography" style="font-size: 15px">
+        <span>{{editData.info.noiDung.split("|")[3]}}</span>
+        <br>
+        <p>Lời Nhắn: <b>{{editData.info.noiDung.split('|')[2]}} {{editData.info.noiDung.split('|')[0]}}</b></p>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Đóng</button>
     </mat-dialog-actions>
 </div>

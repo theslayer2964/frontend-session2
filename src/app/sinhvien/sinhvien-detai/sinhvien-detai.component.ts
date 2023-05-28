@@ -68,7 +68,8 @@ export class SinhvienDetaiComponent implements OnInit {
         })
     }
 
-    displayedColumns: string[] = ['giangVien', 'tenDeTai', 'mucTieuDeTai', 'sanPhamDuKien', 'yeuCauDauVao', 'soNhomThucHien', 'action'];
+    displayedColumns: string[] = ['giangVien', 'tenDeTai', 'mucTieuDeTai', 'sanPhamDuKien', 'yeuCauDauVao', 'soNhomThucHien',
+        'doKhoDeTai','action'];
     dataSource!: MatTableDataSource<any>;
 
     nhom: any;

@@ -62,19 +62,19 @@ export class ThemDeTaiGvComponent implements OnInit {
     addDeTai() {
         console.log("GV - THEm DETAI:", this.deTaiForm.value);
     //     if (this.editData == null) {
-    //         if (this.deTaiForm.valid) {
-    //             this.detaiService.postDeTai(this.deTaiForm.value)
-    //                 .subscribe({
-    //                     next: (res) => {
-    //                         this.deTaiForm.reset();
-    //                         this.dialogRef.close('save');
-    //                         new NotificationsComponent().showNotification('success', 'Cập nhật đề tài thành công');
-    //                     },
-    //                     error: () => {
-    //                         new NotificationsComponent().showNotification('DANGER', 'Không thể thêm đề tài');
-    //                     }
-    //                 })
-    //         }
+            if (this.deTaiForm.valid) {
+                this.detaiService.postDeTai(this.deTaiForm.value)
+                    .subscribe({
+                        next: (res) => {
+                            this.deTaiForm.reset();
+                            this.dialogRef.close('save');
+                            new NotificationsComponent().showNotification('success', 'Cập nhật đề tài thành công');
+                        },
+                        error: () => {
+                            new NotificationsComponent().showNotification('DANGER', 'Không thể thêm đề tài');
+                        }
+                    })
+            }
     //     } else {
     //         console.log('UPDATE NGHE: ' + JSON.stringify(this.deTaiForm.value))
     //         const dtoForm = {
