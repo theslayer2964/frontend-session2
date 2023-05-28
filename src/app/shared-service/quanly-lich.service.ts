@@ -42,6 +42,15 @@ export class QuanlyLichService {
 
   dsGvChuaDangKyDuSoLuongDeTai(soLuongToiThieu: number){
     return this.httpClient.get(this.url + "ds-giangvien-chuadu-so-detai-toithieu/" + soLuongToiThieu,  {headers: this.httpHeadersJWT})
+  }
+
+  dsSvChuaDkNhom(){
+    return this.httpClient.get(this.url + "ds-sinhvien-chua-dangky-nhom/" ,  {headers: this.httpHeadersJWT})
+
+  }
+
+  dsNhomChuaCoDeTai(){
+    return this.httpClient.get(this.url + "ds-sinhvien-chua-dangky-detai/" ,  {headers: this.httpHeadersJWT})
 
   }
 }

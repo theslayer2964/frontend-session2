@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 import {MatAccordion} from "@angular/material/expansion";
 import {HocphantienquyetService} from "../../shared-service/hocphantienquyet.service";
+import {MatSelectChange} from "@angular/material/select";
 
 @Component({
     selector: 'app-them-de-tai-gv',
@@ -37,7 +38,8 @@ export class ThemDeTaiGvComponent implements OnInit {
             tenDeTai: ['', Validators.required],
             yeuCauDauVao: ['', Validators.required],
             maHocKy: [''],
-            hocPhanTienQuyet: ['']
+            hocPhanTienQuyet: [''],
+            doKhoDeTai:['', Validators.required]
         })
         console.log("MA HOC KY NÈ:", this.editData);
         if (this.editData) {
@@ -161,4 +163,10 @@ export class ThemDeTaiGvComponent implements OnInit {
             new NotificationsComponent().showNotification('danger', 'Đánh dấu vào học phần tiên quyết mà bạn muốn');
 
     }
+
+    changeDoKho($event: MatSelectChange) {
+        
+    }
+
+
 }

@@ -4,17 +4,17 @@
         <div class="col-lg-12 col-md-12">
             <div class="mat-elevation-z8" style="width: 100%;max-width: 100%;overflow: auto;">
                 <table mat-table [dataSource]="dataSource" matSort>
-                    <ng-container matColumnDef="maGiangVien" sticky class="example-button">
+                    <ng-container matColumnDef="maGiangVien" class="example-button">
                         <th mat-header-cell *matHeaderCellDef> MÃ GV
                         </th>
                         <td mat-cell *matCellDef="let row"> {{row.maGiangVien}} </td>
                     </ng-container>
-                    <ng-container matColumnDef="tenGiangVien" sticky class="example-button">
+                    <ng-container matColumnDef="tenGiangVien" class="example-button">
                         <th mat-header-cell *matHeaderCellDef> TÊN GV
                         </th>
                         <td mat-cell *matCellDef="let row"> {{row.tenGiangVien}} </td>
                     </ng-container>
-                    <ng-container matColumnDef="soLuongDeTaiDaCo" sticky class="example-button">
+                    <ng-container matColumnDef="soLuongDeTaiDaCo" class="example-button">
                         <th mat-header-cell *matHeaderCellDef> SỐ LƯỢNG ĐÃ ĐĂNG KÝ
                         </th>
                         <td mat-cell *matCellDef="let row" style="color: red"> <b>{{row.soLuongDeTaiDaCo}}</b> </td>
@@ -43,5 +43,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="sendMessageAll()">Gửi đến toàn bộ danh sách</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="sendMessageAll()" class="btn btn-success">Gửi đến toàn bộ danh sách</button>
 </mat-dialog-actions>

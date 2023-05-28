@@ -9,6 +9,7 @@ import {QuanlyLichService} from "../../shared-service/quanly-lich.service";
 import {Dialog} from "@angular/cdk/dialog";
 import {DSSVChuaDkNhomComponent} from "../../dialog/dssvchua-dk-nhom/dssvchua-dk-nhom.component";
 import {DSNhomChuaDkDeTaiComponent} from "../../dialog/dsnhom-chua-dk-de-tai/dsnhom-chua-dk-de-tai.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-quanly-tientrinh-sinhvien',
@@ -19,7 +20,7 @@ export class QuanlyTientrinhSinhvienComponent implements OnInit {
     svChuaNhom: number;
     nhomChuaDeTai: number;
     constructor(private qlTientrinhSVChuaNhomTransferService: QlTientrinhSvChuaNhomTransferService,
-                private dialog: Dialog,
+                private dialog: MatDialog,
                 private qlTienTrinhNhomChuaDTTransferService: QlTientrinhNhomChuaDeTaiTransferService,
                 private quanLyService: QuanlyLichService) {
 
