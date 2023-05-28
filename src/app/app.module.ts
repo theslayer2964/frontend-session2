@@ -113,6 +113,7 @@ import { DsGVChuaDuDeTaiComponent } from './dialog/ds-gvchua-du-de-tai/ds-gvchua
 import { DSSVChuaDkNhomComponent } from './dialog/dssvchua-dk-nhom/dssvchua-dk-nhom.component';
 import { DSNhomChuaDkDeTaiComponent } from './dialog/dsnhom-chua-dk-de-tai/dsnhom-chua-dk-de-tai.component';
 import { SvXinDangKyDeTaiComponent } from './dialog/sv-xin-dang-ky-de-tai/sv-xin-dang-ky-de-tai.component';
+import { QuanlyTientrinhDetaiGanComponent } from './quanly/quanly-tientrinh-detai-gan/quanly-tientrinh-detai-gan.component';
 
 @NgModule({
     imports: [
@@ -231,7 +232,8 @@ import { SvXinDangKyDeTaiComponent } from './dialog/sv-xin-dang-ky-de-tai/sv-xin
         DsGVChuaDuDeTaiComponent,
         DSSVChuaDkNhomComponent,
         DSNhomChuaDkDeTaiComponent,
-        SvXinDangKyDeTaiComponent
+        SvXinDangKyDeTaiComponent,
+        QuanlyTientrinhDetaiGanComponent
     ],
     providers: [AuthGuard, {
         provide: HTTP_INTERCEPTORS,
