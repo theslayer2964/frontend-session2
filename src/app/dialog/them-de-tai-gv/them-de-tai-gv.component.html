@@ -31,13 +31,23 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-10">
+                                <div class="col-md-9">
                                     <mat-form-field class="example-full-width">
                                         <mat-label mat-header-cell *matHeaderCellDef>Tên đề tài</mat-label>
                                         <input formControlName="tenDeTai" matInput placeholder="Tên đề tài">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-2">
+                                    <mat-form-field>
+                                        <mat-label>-- Độ khó đề tài --</mat-label>
+                                        <mat-select (selectionChange)="changeDoKho($event)" formControlName="doKhoDeTai">
+                                            <mat-option value="0">Trung bình</mat-option>
+                                            <mat-option value="1">Khá</mat-option>
+                                            <mat-option value="2">Khó</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-1">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Giới hạn số nhóm thực hiện</mat-label>
                                         <input formControlName="gioiHanSoNhomThucHien" matInput

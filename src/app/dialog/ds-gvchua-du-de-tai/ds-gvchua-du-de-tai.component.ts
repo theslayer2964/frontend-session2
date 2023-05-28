@@ -21,7 +21,6 @@ export class DsGVChuaDuDeTaiComponent implements OnInit {
     if(this.data){
     this.qlLichService.dsGvChuaDangKyDuSoLuongDeTai(this.data).subscribe((res:[]) => {
       if(res){
-        console.log("GV :", res);
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
