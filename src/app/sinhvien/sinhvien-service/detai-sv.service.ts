@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {UserAuthService} from "../../authentication/_service/user-auth.service";
-import {catchError, Observable, of, tap} from "rxjs";
+import {catchError, Observable, of, tap, throwError} from "rxjs";
 import {DeTai} from "../../giangvien/detai/DeTai.models";
+import {logger} from "codelyzer/util/logger";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class DetaiSvService {
   dangKyDeTai(data: any){
     return this.httpClient.post(this.url + 'dang-ky-de-tai', data, {headers: this.httpHeadersJWT});
         // .pipe(
-        // tap(recieveDeTai => recieveDeTai));
+        // tap(recieveDeTai => recieveDeTai), catchError(err => throwError(err) ));
   }
 
   xemDeTaiCanDangKy(data: any): Observable<any[]> {

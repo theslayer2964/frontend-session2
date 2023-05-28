@@ -37,5 +37,19 @@ export class TinnhanService {
             catchError(err => of([])));
   }
 
+  themTinNhan(data: any): Observable<any[]> {
+    return this.httpClient.post<any[]>(this.url + "them-tin-nhan", data, {headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+  }
+
+  themTinNhanDKDeTai(data: any): Observable<any[]> {
+    return this.httpClient.post<any[]>(this.url + "them-tin-nhan-dangky-detai", data, {headers: this.httpHeadersJWT})
+        .pipe(
+            tap(recieveDeTai => recieveDeTai),
+            catchError(err => of([])));
+  }
+
 
 }

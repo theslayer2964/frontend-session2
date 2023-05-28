@@ -5,6 +5,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {TinnhanService} from "../../shared-service/tinnnhan.service";
+import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 
 @Component({
   selector: 'app-ds-gvchua-du-de-tai',
@@ -38,13 +39,33 @@ export class DsGVChuaDuDeTaiComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   sendMessage1Nguoi(row) {
-    
+    let soDeTaiConThiu = this.data - row.soLuongDeTaiDaCo;
+    let noiDung = " | | " + "Thầy/cô cần thêm " + soDeTaiConThiu + " đề tài nữa để có thể đủ số sinh viên đăng ký";
+    this.tinNhanService.themTinNhan({
+      maNguoiNhan: row.maGiangVien,
+      maNguoiGui: "12392401",
+      noiDung: noiDung
+    }).subscribe(res => {
+      this.dialogRef.close();
+      new NotificationsComponent().showNotification('success', 'Gửi tin thành công thành công');
+    })
+    console.log(noiDung)
   }
 
   dsGV:[];
   sendMessageAll() {
-    // this.dsGV.forEach(gv => {
-    // this.tinNhanService.layTinNhan()
-    // })
+    this.dsGV.forEach((gv : any) => {
+      let soDeTaiConThiu = this.data - gv.soLuongDeTaiDaCo;
+      let noiDung = " | | " + "Thầy/cô cần thêm " + soDeTaiConThiu + " đề tài nữa để có thể đủ số sinh viên đăng ký";
+      this.tinNhanService.themTinNhan({
+        maNguoiNhan: gv.maGiangVien,
+        maNguoiGui: "12392401",
+        noiDung: noiDung
+      }).subscribe(res => {
+        this.dialogRef.close();
+        new NotificationsComponent().showNotification('success', 'Gửi tin thành công thành công');
+      })
+      console.log(gv)
+    })
   }
 }
