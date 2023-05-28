@@ -1,11 +1,9 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {QuanlyLichService} from "../../shared-service/quanly-lich.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
-import {DanhSach_DeTai_KLTN} from "../../shared-service/FileNameExport";
 
 @Component({
   selector: 'app-quanly-tientrinh-detai',
@@ -17,6 +15,9 @@ export class QuanlyTientrinhDetaiComponent implements OnInit {
   constructor(private qlLichService: QuanlyLichService) { }
 
   ngOnInit(): void {
+    this.getDSNhomChuaGanDeTai();
+  }
+  getDSNhomChuaGanDeTai(){
     this.qlLichService.dsSvChuaDkNhom().subscribe((res:[]) => {
       if(res){
         this.dataSource = new MatTableDataSource(res);
@@ -38,7 +39,19 @@ export class QuanlyTientrinhDetaiComponent implements OnInit {
   }
 
   ganNhomNgauNhien() {
-    console.log("DS SV:",this.clickedRows);
-    new NotificationsComponent().showNotification('success', 'Xử lý típ đi');
+    let temp = [];
+    this.clickedRows.forEach(sv => {
+      temp.push(sv.maSinhVien)
+    })
+    console.log("DS SV:",temp);
+    this.qlLichService.ganNhomNgauNhienBoiNgQuLy(temp).subscribe(res => {
+      this.getDSNhomChuaGanDeTai();
+      this.clickedRows = new Set<any>();
+      new NotificationsComponent().showNotification('success', 'Gán nhóm thành công');
+    })
+  }
+
+  ganNhomNgauNhienChoTonBO() {
+
   }
 }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {QuanlyLichService} from "../../shared-service/quanly-lich.service";
+import {DetaiSvService} from "../../sinhvien/sinhvien-service/detai-sv.service";
+import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 
 @Component({
   selector: 'app-quanly-tientrinh-detai-gan',
@@ -12,11 +15,10 @@ export class QuanlyTientrinhDetaiGanComponent implements OnInit {
 
   isCheckAll: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private quanlyService: QuanlyLichService, private detaiSVService: DetaiSvService ) {
     this.ganNhomChoDeTaiForm = this.fb.group({
       tableRows: this.fb.array([],[Validators.required])
     });
-    this.addRow();
   }
 
   createFormGroup(): FormGroup {
@@ -59,9 +61,38 @@ export class QuanlyTientrinhDetaiGanComponent implements OnInit {
 
   onSaveForm() {
     const formValue = this.ganNhomChoDeTaiForm.value;
+    formValue.tableRows.forEach(detai =>{
+      if(detai.nhom!=""){
+        this.detaiSVService.dangKyDeTai({maNhom: detai.nhom, maDeTai: detai.maDeTai}).subscribe( res => {
+          new NotificationsComponent().showNotification('success', 'Gán đề tài thành công');
 
+        });
+      }
+    });
   }
   ngOnInit(): void {
+    this.getDSNhomChuaDKDeTai();
+    this.quanlyService.layDSDeTaiChuaAiDangKy().subscribe((res:[]) => {
+      res.forEach(detai => {
+        this.addRow();
+      })
+    this.setValueDSDeTai(res);
+    });
+
   }
 
+
+  setValueDSDeTai(res){
+    var data = {
+      tableRows: res
+    }
+    this.ganNhomChoDeTaiForm.patchValue(data);
+  }
+
+  nhomChuaDK;
+  private getDSNhomChuaDKDeTai() {
+    this.quanlyService.layDSNhomChuaChiuDK().subscribe(res =>{
+      this.nhomChuaDK = res;
+    })
+  }
 }

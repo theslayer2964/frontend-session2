@@ -21,7 +21,7 @@
                                             <th scope="col">Tên đề tài</th>
                                             <th scope="col">GV Hướng dẫn</th>
                                             <th scope="col">Độ khó</th>
-                                            <th scope="col">Số lượng tối đa</th>
+                                            <th scope="col">Số lượng còn lại</th>
                                             <th scope="col">Nhóm chưa đăng ký</th>
                                             <th scope="col">Tùy chỉnh</th>
                                         </tr>
@@ -33,25 +33,23 @@
                                                     <input type="checkbox" formControlName="ischecked" />
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" formControlName="maDeTai" placeholder="Enter First">
+                                                    <input type="text" class="form-control" formControlName="maDeTai"disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" formControlName="tenDeTai" placeholder="Enter Last">
+                                                    <input type="text" class="form-control" formControlName="tenDeTai" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" formControlName="gvhd" placeholder="Enter City">
+                                                    <input type="text" class="form-control" formControlName="gvhd" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" formControlName="doKho" placeholder="Enter state">
+                                                    <input type="text" class="form-control" formControlName="doKho" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" formControlName="soLuongCon" placeholder="Enter state">
+                                                    <input type="text" class="form-control" formControlName="soLuongCon" disabled>
                                                 </td>
                                                 <td>
                                                     <select formControlName="nhom" (change)="onStatusChange($event,i)" class="form-control">
-                                                        <option value="">Select Status</option>
-                                                        <option value="active">Active</option>
-                                                        <option value="deactive">De-Active</option>
+                                                        <option value="{{nhom.maNhom}}" *ngFor="let nhom of nhomChuaDK">{{nhom.tenNhom}}</option>
                                                     </select>
                                                 </td>
                                                 <td>
@@ -64,7 +62,7 @@
                                                 <td colspan="7">
                                                     <div class="row">
                                                         <div class="col-12 text-center">
-                                                            <button class="btn btn-success" [disabled]="ganNhomChoDeTaiForm.invalid" (click)="onSaveForm()">Gán đề tài cho nhóm</button>
+                                                            <button class="btn btn-success" (click)="onSaveForm()">Gán đề tài cho nhóm</button>
                                                         </div>
                                                     </div>
                                                 </td>

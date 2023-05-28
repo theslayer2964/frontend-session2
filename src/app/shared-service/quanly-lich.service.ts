@@ -9,6 +9,8 @@ import {HocKy} from "./HocKy.models";
 })
 export class QuanlyLichService {
   private url = "http://localhost:8080/api/quan-ly/";
+  private urlNhom = "http://localhost:8080/api/nhom/";
+  private urlDeTai = "http://localhost:8080/api/de-tai/";
 
   token: string = this.userAuthService.getToken();
   private httpHeadersJWT = new HttpHeaders({
@@ -51,6 +53,16 @@ export class QuanlyLichService {
 
   dsNhomChuaCoDeTai(){
     return this.httpClient.get(this.url + "ds-sinhvien-chua-dangky-detai/" ,  {headers: this.httpHeadersJWT})
+  }
 
+  ganNhomNgauNhienBoiNgQuLy(data){
+    return this.httpClient.post(this.urlNhom + "gan-nhom-tudong" ,data,  {headers: this.httpHeadersJWT})
+  }
+
+  layDSDeTaiChuaAiDangKy(){
+    return this.httpClient.get(this.urlDeTai + "lay-ds-detai-chua-duoc-dangky",  {headers: this.httpHeadersJWT})
+  }
+  layDSNhomChuaChiuDK(){
+    return this.httpClient.get(this.urlNhom + "lay-ds-nhom-chua-dangky-detai", {headers: this.httpHeadersJWT} )
   }
 }

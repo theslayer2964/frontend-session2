@@ -49,7 +49,19 @@
                 <div class="card">
                     <div class="card-header card-header-success" style="display: flex;justify-content: space-between">
                         <h4 class="card-title">Chia nhóm sinh viên</h4>
-                        <button style="height: 30px;line-height: 10px;margin-top: 0px" class="btn btn-danger" (click)="ganNhomNgauNhien()">Gán nhóm cho sinh viên</button>
+                        <div>
+                            <button mat-button [matMenuTriggerFor]="afterMenu">Tùy chọn
+                                <mat-icon>keyboard_arrow_down</mat-icon></button>
+                            <mat-menu #afterMenu="matMenu" xPosition="after">
+                                <button mat-menu-item (click)="ganNhomNgauNhien()">
+                                    <span>Gán nhóm cho danh sách sinh viên</span>
+                                </button>
+                                <button mat-menu-item (click)="ganNhomNgauNhienChoTonBO()">
+                                    <span>Gán toàn bộ danh sách</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+<!--                        <button style="height: 30px;line-height: 10px;margin-top: 0px" class="btn btn-danger" (click)="ganNhomNgauNhien()">Gán nhóm cho sinh viên</button>-->
                     </div>
                     <div class="row" style="padding-left: 30px">
                         <div>
