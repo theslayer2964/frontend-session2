@@ -106,23 +106,40 @@ export class SharedComponent implements OnInit {
                     this.thongbaoMoi = tin.thongBaoChuaDoc;
                 })
         } else {
-            maNguoiDung = this.userAuthService.getUserInfo().maSinhVien
-            this.tinNhanService.layTinNhan(maNguoiDung)
-                .subscribe(res => {
-                    tin = res;
-                    this.listData = [];
-                    tin.tinNhanDtos.forEach(data => {
-                        this.listData.push({
-                            tinnhan: data.tenTinNhan,
-                            id: data.id,
-                            sender: data.nguoiGui.maSinhVien,
-                            createdAt: new Date(data.createdAt),
-                            read: data.trangThai,
-                            info: data
-                        });
+            if (this.userAuthService.getUserInfo().maSinhVien != null) {
+                maNguoiDung = this.userAuthService.getUserInfo().maSinhVien
+
+                this.tinNhanService.layTinNhan(maNguoiDung)
+                    .subscribe(res => {
+                        tin = res;
+                        this.listData = [];
+                        tin.tinNhanDtos.forEach(data => {
+                            if ( data.tenTinNhan == 'Bạn có tin nhắn từ người quản lý' ||
+                                data.tenTinNhan == 'Giảng viên đã chấp nhận hướng dẫn đề tài mà bạn yêu cầu' ) {
+                                console.log(data)
+                                this.listData.push({
+                                    tinnhan: data.tenTinNhan,
+                                    id: data.id,
+                                    sender: data.nguoiGui.maGiangVien,
+                                    createdAt: new Date(data.createdAt),
+                                    read: data.trangThai,
+                                    info: data
+                                });
+                            } else {
+                                this.listData.push({
+                                    tinnhan: data.tenTinNhan,
+                                    id: data.id,
+                                    sender: data.nguoiGui.maSinhVien,
+                                    createdAt: new Date(data.createdAt),
+                                    read: data.trangThai,
+                                    info: data
+                                });
+                            }
+
+                        })
+                        this.thongbaoMoi = tin.thongBaoChuaDoc;
                     })
-                    this.thongbaoMoi = tin.thongBaoChuaDoc;
-                })
+            }
         }
     }
 }

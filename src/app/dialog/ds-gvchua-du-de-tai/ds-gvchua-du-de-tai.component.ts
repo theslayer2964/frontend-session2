@@ -55,7 +55,8 @@ export class DsGVChuaDuDeTaiComponent implements OnInit {
   sendMessageAll() {
     this.dsGV.forEach((gv : any) => {
       let soDeTaiConThiu = this.data - gv.soLuongDeTaiDaCo;
-      let noiDung = " | | " + "Thầy/cô cần thêm " + soDeTaiConThiu + " đề tài nữa để có thể đủ số sinh viên đăng ký";
+      let noiDung = " | | " + "Thầy/cô cần thêm " + soDeTaiConThiu + " đề tài nữa để có thể đủ số sinh viên đăng ký | " +
+          "số lượng đề tài tối tối thiểu " + this.data  + " | " + "số lượng đề tài hiện có " + gv.soLuongDeTaiDaCo;
       this.tinNhanService.themTinNhan({
         maNguoiNhan: gv.maGiangVien,
         maNguoiGui: "12392401",

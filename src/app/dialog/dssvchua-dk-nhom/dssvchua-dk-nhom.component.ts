@@ -5,6 +5,7 @@ import {TinnhanService} from "../../shared-service/tinnnhan.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {NotificationsComponent} from "../../shared-component/notifications/notifications.component";
 
 @Component({
   selector: 'app-dssvchua-dk-nhom',
@@ -36,11 +37,32 @@ export class DSSVChuaDkNhomComponent implements OnInit {
   dsNhom: [];
 
   sendMessage1Nguoi(row) {
-
+    let noiDung = " | | " + "Các sinh viên cần nhanh chóng đăng ký nhóm trước khi hết thời gian " ;
+    this.tinNhanService.themTinNhan({
+      maNguoiNhan: row.maSinhVien,
+      maNguoiGui: "12392401",
+      noiDung: noiDung
+    }).subscribe(res => {
+      this.dialogRef.close();
+      new NotificationsComponent().showNotification('success', 'Gửi tin thành công thành công');
+    })
+    console.log(noiDung)
   }
 
   sendMessageAll() {
-
+    this.dsNhom.forEach((gv : any) => {
+      console.log(gv)
+      let noiDung = " | | " + "Các sinh viên cần nhanh chóng đăng ký nhóm trước khi hết thời gian " ;
+      this.tinNhanService.themTinNhan({
+        maNguoiNhan: gv.maSinhVien,
+        maNguoiGui: "12392401",
+        noiDung: noiDung
+      }).subscribe(res => {
+        this.dialogRef.close();
+        new NotificationsComponent().showNotification('success', 'Gửi tin thành công thành công');
+      })
+      console.log(gv)
+    })
   }
 
 }

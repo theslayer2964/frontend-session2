@@ -23,7 +23,7 @@ export class ThongbaoComponent implements OnInit {
 
   khongCoNoiDungTinNhan: boolean = false;
   ngOnInit(): void {
-    console.log("XXX: ",this.editData.info.noiDung.split("|")[3]);
+    console.log("XXX: ",this.editData.info.noiDung.split("|")[2].split("["));
     if(this.editData.info.noiDung.split('|')[2].trim()=='null' || this.editData.info.noiDung.split('|')[2].trim()==' '){
       this.khongCoNoiDungTinNhan = true;
     }
@@ -62,8 +62,13 @@ export class ThongbaoComponent implements OnInit {
 
     }
 
-  chapNhanHuongDan(detai: any) {
-    if(detai){
+  chapNhanHuongDan() {
+    let detai = {
+      maDeTai: this.editData.info.noiDung.split('|')[3].trim(),
+      maNhom: this.editData.info.noiDung.split('|')[4].trim(),
+      vaiTro: this.userAuthService.getRoles()[0].roleName
+    }
+    if(detai.maDeTai && detai.maNhom && detai.vaiTro){
       console.log("MA DE TAI - THNOG BAO", detai)
       this.deTaiServiceSV.dangKyDeTai(detai).subscribe(res => {
         this.dialogRef.close()
