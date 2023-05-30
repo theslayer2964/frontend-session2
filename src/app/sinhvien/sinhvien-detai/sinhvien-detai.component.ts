@@ -21,7 +21,6 @@ export class SinhvienDetaiComponent implements OnInit {
     ngOnInit(): void {
         this.getDSDeTaiTheoHK();
         this.nhom = this.userAuthService.getUserInfo().nhom;
-        console.log(this.nhom);
         if (this.nhom.deTai != null) {
             this.deTai = this.nhom.deTai;
             this.giangVien = this.deTai.giangVien;
@@ -43,7 +42,6 @@ export class SinhvienDetaiComponent implements OnInit {
             next: (res) => {
 
                 this.hocKyHienTai = res;
-                console.log("DS Hoc ky:", this.hocKyHienTai);
                 this.detaiService.xemDeTaiCanDangKy({
                     maHocKy: this.hocKyHienTai.maHocKy,
                     soHocKy: this.hocKyHienTai.soHocKy,
@@ -51,7 +49,6 @@ export class SinhvienDetaiComponent implements OnInit {
                 })
                     .subscribe({
                         next: (res) => {
-                            console.log("DS DE TAI:", res);
                             this.dataSource = new MatTableDataSource(res);
                             this.dataSource.paginator = this.paginator;
                             this.dataSource.sort = this.sort;
@@ -69,12 +66,12 @@ export class SinhvienDetaiComponent implements OnInit {
     }
 
     displayedColumns: string[] = ['giangVien', 'tenDeTai', 'mucTieuDeTai', 'sanPhamDuKien', 'yeuCauDauVao', 'soNhomThucHien',
-        'doKhoDeTai','action'];
+        'doKhoDeTai', 'action'];
     dataSource!: MatTableDataSource<any>;
 
     nhom: any;
     giangVien: any;
-    deTai:any;
+    deTai: any;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -88,17 +85,18 @@ export class SinhvienDetaiComponent implements OnInit {
     }
 
     dangDT(row) {
-        // if(0 == 0){ // check coi có đủ điểm học phần tiên quyết ko
-        //
-        // }
-        // else{ // đủ rồi
+        this.detaiService.kiemTraTinhHopLe({
+            maDeTai: row.deTai.maDeTai,
+            maSinhVien: this.userAuthService.getUserInfo().maSinhVien
+        }).subscribe(res => {
             this.dialog.open(SvXinDangKyDeTaiComponent, {
-                data:row,
+                data: {deTai: row, tinhHopLe: res},
                 width: '650px'
             });
-        // }
+        })
 
-            // dk de tai:
+
+        // dk de tai:
         // this.dialog.open(DangKyDetaiComponent, {data: {row}})
         //     .afterClosed().subscribe(
         //     rs => {

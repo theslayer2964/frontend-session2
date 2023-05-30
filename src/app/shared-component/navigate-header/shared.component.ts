@@ -116,7 +116,6 @@ export class SharedComponent implements OnInit {
                         tin.tinNhanDtos.forEach(data => {
                             if ( data.tenTinNhan == 'Bạn có tin nhắn từ người quản lý' ||
                                 data.tenTinNhan == 'Giảng viên đã chấp nhận hướng dẫn đề tài mà bạn yêu cầu' ) {
-                                console.log(data)
                                 this.listData.push({
                                     tinnhan: data.tenTinNhan,
                                     id: data.id,

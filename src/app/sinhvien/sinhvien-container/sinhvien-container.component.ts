@@ -44,7 +44,6 @@ export class SinhvienContainerComponent implements OnInit {
             vaiTro: this.userAuthService.getRoles()[0].roleName
         }).subscribe({
             next: (res) => {
-                console.log("SV - LICH:", res);
                 this.dsValidate = res;
                 for (const data of this.dsValidate) {
                     if (data.tenKeHoach =='Lịch đăng ký nhóm') {
@@ -62,11 +61,9 @@ export class SinhvienContainerComponent implements OnInit {
         })
         this.destroy$.subscribe(data => {
             this.validateNhom = data;
-            console.log("validateNhom", this.validateNhom);
         });
         this.destroy2$.subscribe(data => {
             this.validateDeTai = data;
-            console.log("validateDeTai", this.validateDeTai);
         })
     }
 }

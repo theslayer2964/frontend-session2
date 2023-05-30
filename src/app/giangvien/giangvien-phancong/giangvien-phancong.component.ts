@@ -90,7 +90,6 @@ export class GiangvienPhancongComponent implements OnInit {
       vaitro: vaiTro,
       maNguoiDung: maGiangVien}).subscribe({
       next:(res:[]) =>{
-        console.log("GV- CHAM DIEM:", res);
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

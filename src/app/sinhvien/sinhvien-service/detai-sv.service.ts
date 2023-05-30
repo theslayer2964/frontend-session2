@@ -30,5 +30,11 @@ export class DetaiSvService {
         catchError(err => of(err)));
   }
 
+  kiemTraTinhHopLe(data: any): Observable<any> {
+    return this.httpClient.post(this.url + 'kiem-tra-hop-le', data,{headers: this.httpHeadersJWT}).pipe(
+        tap(recieveDeTai => recieveDeTai),
+        catchError(err => of(err)));
+  }
+
 
 }
