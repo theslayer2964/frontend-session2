@@ -43,14 +43,18 @@ export class ThemDeTaiGvComponent implements OnInit {
         })
         console.log("MA HOC KY NÈ:", this.editData);
         if (this.editData) {
-            this.deTaiForm.controls['maDeTai'].setValue(this.editData.maDeTai);
-            this.deTaiForm.controls['gioiHanSoNhomThucHien'].setValue(this.editData.gioiHanSoNhomThucHien);
-            this.deTaiForm.controls['moTa'].setValue(this.editData.moTa);
-            this.deTaiForm.controls['mucTieuDeTai'].setValue(this.editData.mucTieuDeTai);
-            this.deTaiForm.controls['sanPhamDuKien'].setValue(this.editData.sanPhamDuKien);
-            this.deTaiForm.controls['tenDeTai'].setValue(this.editData.tenDeTai);
-            this.deTaiForm.controls['yeuCauDauVao'].setValue(this.editData.yeuCauDauVao);
-            this.deTaiForm.controls['maHocKy'].setValue(this.editData.hocKy.maHocKy);
+            this.deTaiForm = this.formBuilder2.group({
+                maDeTai: [ this.editData.maDeTai],
+                gioiHanSoNhomThucHien: [ this.editData.gioiHanSoNhomThucHien,Validators.required],
+                moTa: [ this.editData.moTa,Validators.required],
+                mucTieuDeTai: [this.editData.mucTieuDeTai,Validators.required],
+                sanPhamDuKien: [ this.editData.sanPhamDuKien,Validators.required],
+                tenDeTai: [this.editData.tenDeTai,Validators.required],
+                yeuCauDauVao: [this.editData.yeuCauDauVao,Validators.required],
+                maHocKy: [ this.editData.hocKy.maHocKy],
+                hocPhanTienQuyet: [this.editData.hocPhanTienQuyet_DeTais],
+                doKhoDeTai:[ this.editData.doKhoDeTai,Validators.required]
+            });
             this.actionBtn = "Update"
         }
 
@@ -60,8 +64,7 @@ export class ThemDeTaiGvComponent implements OnInit {
     deTaiForm!: FormGroup;
 
     addDeTai() {
-        console.log("GV - THEm DETAI:", this.deTaiForm.value);
-    //     if (this.editData == null) {
+        if (this.editData == null) {
             if (this.deTaiForm.valid) {
                 this.detaiService.postDeTai(this.deTaiForm.value)
                     .subscribe({
@@ -75,35 +78,20 @@ export class ThemDeTaiGvComponent implements OnInit {
                         }
                     })
             }
-    //     } else {
-    //         console.log('UPDATE NGHE: ' + JSON.stringify(this.deTaiForm.value))
-    //         const dtoForm = {
-    //             maDeTai: this.deTaiForm.value.maDeTai,
-    //             tenDeTai: this.deTaiForm.value.tenDeTai,
-    //             mucTieuDeTai: this.deTaiForm.value.mucTieuDeTai,
-    //             sanPhamDuKien: this.deTaiForm.value.sanPhamDuKien,
-    //             moTa: this.deTaiForm.value.moTa,
-    //             yeuCauDauVao: this.deTaiForm.value.yeuCauDauVao,
-    //             gioiHanSoNhomThucHien: this.deTaiForm.value.gioiHanSoNhomThucHien,
-    //             maGiangVien: this.deTaiForm.value.maGiangVien,
-    //             hocKy: {
-    //                 maHocKy: this.deTaiForm.value.maHocKy
-    //             }
-    //
-    //         };
-    //         this.detaiService.updateDeTai(dtoForm, this.editData.id)
-    //             .subscribe({
-    //                 next: (res) => {
-    //                     this.deTaiForm.reset();
-    //                     this.dialogRef.close('update');
-    //                     new NotificationsComponent().showNotification('success', 'Cập nhật đề tài thành công');
-    //                 },
-    //                 error: () => {
-    //                     new NotificationsComponent().showNotification('danger', 'Không thể cập nhật đề tài');
-    //                 }
-    //             })
-    //         this.editData = null;
-    //     }
+        } else {
+            this.detaiService.updateDeTai(this.deTaiForm.value, this.editData.giangVien.maGiangVien)
+                .subscribe({
+                    next: (res) => {
+                        this.deTaiForm.reset();
+                        this.dialogRef.close('update');
+                        new NotificationsComponent().showNotification('success', 'Cập nhật đề tài thành công');
+                    },
+                    error: () => {
+                        new NotificationsComponent().showNotification('danger', 'Không thể cập nhật đề tài');
+                    }
+                })
+            this.editData = null;
+        }
     }
 
     /// YEU CAU DAU VAO - FORM BUILDER:
@@ -116,13 +104,7 @@ export class ThemDeTaiGvComponent implements OnInit {
         control.push(this.createFormGroup());
     }
 
-    createFormGroup(): FormGroup {
-        return this.formBuilder2.group({
-            hocPhanTienQuyet: [''],
-            diemHocPhanTienQuyet: [''],
-            ischecked: [false]
-        })
-    };
+
 
     get getFormControls() {
         const control = this.hocPhanTienQuyetForm.get('tableRows') as FormArray;
@@ -167,6 +149,38 @@ export class ThemDeTaiGvComponent implements OnInit {
     changeDoKho($event: MatSelectChange) {
         
     }
+    createFormGroup(): FormGroup {
+        if (this.editData == null){
+            return this.formBuilder2.group({
+                hocPhanTienQuyet: [''],
+                diemHocPhanTienQuyet: [''],
+                ischecked: [false]
+            })
+        } else {
+            let diemHPTQ;
+            let len =  this.editData.hocPhanTienQuyet_DeTais.length > 0 ? this.editData.hocPhanTienQuyet_DeTais.length - 1: 0;
+            let dtep = this.editData.hocPhanTienQuyet_DeTais[len] ? this.editData.hocPhanTienQuyet_DeTais[len].diemTrungBinh : 0;
+            switch (dtep) {
+                case 0:
+                    diemHPTQ = '';
+                    break;
+                case 5:
+                    diemHPTQ = 'trungbinh';
+                    break;
+                case 7:
+                    diemHPTQ = 'kha';
+                    break;
+                case 8:
+                    diemHPTQ = 'gioi';
+                    break;
+            }
+            return this.formBuilder2.group({
+                hocPhanTienQuyet: [''],
+                diemHocPhanTienQuyet: [diemHPTQ],
+                ischecked: [true]
+            })
+        }
 
+    };
 
 }

@@ -42,9 +42,9 @@ export class DetaiService {
             catchError(err => of([])));
     }
 
-    updateDeTai(data: any, id: any): Observable<any> {
+    updateDeTai(data: any, maGiangVien: any): Observable<any> {
         console.log("DETAI SẺVICE:" + JSON.stringify(data));
-        return this.httpClient.put<any>(this.url + "sua-de-tai/", data, {headers: this.httpHeadersJWT}).pipe(
+        return this.httpClient.put<any>(this.url + "sua-de-tai/"+maGiangVien, data, {headers: this.httpHeadersJWT}).pipe(
             tap(recieveDeTai => recieveDeTai),
             catchError(err => of([])));
     }
