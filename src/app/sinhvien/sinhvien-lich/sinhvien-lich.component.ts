@@ -33,7 +33,6 @@ export class SinhvienLichComponent implements OnInit {
         });
 
             if (role.roleName == "ROLE_SINHVIEN") {
-            console.log("TUI NE");
             let maSV = this.userAuthService.getUserInfo().maSinhVien;
             this.destroy$.subscribe(hocky => {
                 this.lichService.getLichTheoHocKyVaMaGV(hocky, maSV, "ROLE_SINHVIEN").subscribe(res => {

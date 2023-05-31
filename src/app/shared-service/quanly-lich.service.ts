@@ -41,6 +41,12 @@ export class QuanlyLichService {
   thongKeSoNhomGiangVienCoTheNhan () {
     return this.httpClient.get(this.url + "thong-ke-giangvien-cothenhan",  {headers: this.httpHeadersJWT})
   }
+  thongKeDeTaiTheoMucDoKho () {
+    return this.httpClient.get(this.url + "thong-ke-mucdokho-detai",  {headers: this.httpHeadersJWT})
+  }
+  thongKeDeTaiTheoMucDoKhoCuaTungGiangVien () {
+    return this.httpClient.get(this.url + "thong-ke-mucdokho-detai-giangvien",  {headers: this.httpHeadersJWT})
+  }
 
   dsGvChuaDangKyDuSoLuongDeTai(soLuongToiThieu: number){
     return this.httpClient.get(this.url + "ds-giangvien-chuadu-so-detai-toithieu/" + soLuongToiThieu,  {headers: this.httpHeadersJWT})

@@ -39,7 +39,6 @@ export class GiangvienNhomComponent implements OnInit {
 
     ngOnInit(): void {
         this.getAllHocKy();
-        console.log("PAREN TO CHILD:", this.validateNhom);
     }
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;

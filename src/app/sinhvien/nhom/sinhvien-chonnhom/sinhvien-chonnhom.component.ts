@@ -65,11 +65,7 @@ export class SinhvienChonnhomComponent implements OnInit {
 
 
     dangKyNhom(row) {
-        console.log("ROW ne:",row);
         this.dialog.open(DangkyCosanComponent, {data: row}).afterClosed().subscribe(val => {
-            // if (val === "save") {
-            //     this.router.navigate(["/trangchuSV"])
-            // }
             this.getNhomHienTai();
         })
     }
@@ -80,8 +76,6 @@ export class SinhvienChonnhomComponent implements OnInit {
         this.nhomService.getNhomChuaDuyet(this.tinhTrang)
             .subscribe({
                 next: (res) => {
-                    console.log("SV - CHON NHOM: ", res);
-
                     res.forEach(data => {
                         this.dsSinhVien.push(data.sinhViens)
                     })
@@ -107,7 +101,6 @@ export class SinhvienChonnhomComponent implements OnInit {
         this.hockyService.getHocKy().subscribe({
             next: (res) => {
                 this.dsHocKy = res;
-                console.log(this.dsHocKy)
             }, error: (err) => {
                 console.log(err)
             }
@@ -124,13 +117,11 @@ export class SinhvienChonnhomComponent implements OnInit {
         if(this.nhom != null){
             this.nhomService.getNhomSinhVien(this.nhom.maNhom).subscribe({
                 next: (res) => {
-                    console.log("NHOM HIEN TAI:", res);
                     this.nhomSV = res;
                     this.dsNhomSinhVien = this.nhomSV.dsMSSinhVien;
                     this.nhom = this.nhomSV.nhom;
                     this.trangThai = this.nhomSV.trangThai;
                     this.deTai = this.nhomSV.deTai;
-                    console.log(this.nhomSV);
                 }, error: (err) => {
                     console.log(err);
                 }

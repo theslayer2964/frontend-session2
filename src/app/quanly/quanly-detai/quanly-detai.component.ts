@@ -57,7 +57,7 @@ export class QuanlyDetaiComponent implements OnInit,AfterViewInit {
     }
 
     // Table
-    displayedColumns: string[] = ['select','maDeTai', "tenDeTai",'giangVien', 'gioiHanSoNhomThucHien', 'moTa', "mucTieuDeTai", "sanPhamDuKien", "yeuCauDauVao", "trangThai", "action"];
+    displayedColumns: string[] = ['select','maDeTai', "tenDeTai",'giangVien', 'gioiHanSoNhomThucHien', 'moTa', "mucTieuDeTai", "sanPhamDuKien", "yeuCauDauVao", "doKhoDeTai", "trangThai", "action"];
     dataSource!: MatTableDataSource<any>;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;

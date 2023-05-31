@@ -121,6 +121,15 @@
                                     </div>
                                 </td>
                             </ng-container>
+
+                            <ng-container matColumnDef="doKhoDeTai">
+                                <th mat-header-cell *matHeaderCellDef  >Độ khó đề tài</th>
+                                <td mat-cell *matCellDef="let row">
+                                    <span *ngIf="row.doKhoDeTai == 1">Khá</span>
+                                    <span *ngIf="row.doKhoDeTai == 0">Trung bình</span>
+                                    <span *ngIf="row.doKhoDeTai == 2">Cao</span>
+                                </td>
+                            </ng-container>v
                             <!-- Progress Column -->
                             <ng-container matColumnDef="trangThai">
                                 <th mat-header-cell *matHeaderCellDef  > TRẠNG

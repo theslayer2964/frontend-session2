@@ -1,29 +1,35 @@
-<h2 mat-dialog-title>Thư xin đăng ký thực hiện đề tài</h2>
-<mat-dialog-content class="mat-typography">
-    <form [formGroup]="formXinThucHienDetai">
-        <div class="row">
-            <div class="col-md-6">
-                <label>Kiến thức</label>
-                <mat-form-field class="example-full-width">
-                    <textarea formControlName="kienThuc" rows="4" matInput></textarea>
-                </mat-form-field>
+<div *ngIf="tinhHopLe == true">
+    <h2 mat-dialog-title>Thư xin đăng ký thực hiện đề tài</h2>
+    <mat-dialog-content class="mat-typography">
+        <form [formGroup]="formXinThucHienDetai">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Kiến thức</label>
+                    <mat-form-field class="example-full-width">
+                        <textarea formControlName="kienThuc" rows="4" matInput></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <label>Kỹ năng</label>
+                    <mat-form-field class="example-full-width">
+                        <textarea formControlName="kynang" rows="4" matInput></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <label>Thái độ</label>
+                    <mat-form-field class="example-full-width">
+                        <textarea formControlName="thaido" rows="4" matInput></textarea>
+                    </mat-form-field>
+                </div>
             </div>
-            <div class="col-md-6">
-                <label>Kỹ năng</label>
-                <mat-form-field class="example-full-width">
-                    <textarea formControlName="kynang" rows="4" matInput></textarea>
-                </mat-form-field>
-            </div>
-            <div class="col-md-6">
-                <label>Thái độ</label>
-                <mat-form-field class="example-full-width">
-                    <textarea formControlName="thaido" rows="4" matInput></textarea>
-                </mat-form-field>
-            </div>
-        </div>
-    </form>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="guiDeTai()">Gửi đề xuất</button>
-</mat-dialog-actions>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="guiDeTai()">Gửi đề xuất</button>
+    </mat-dialog-actions>
+</div>
+<div   *ngIf="tinhHopLe == false">
+    <h2 style="color: red">Điểm học phần tiên quyết của bạn không đủ để đăng ký đê tài này</h2>
+
+</div>

@@ -63,7 +63,8 @@ export class DetaiComponent implements OnInit {
     }
 
     // Table
-    displayedColumns: string[] = ['maDeTai', "tenDeTai", 'gioiHanSoNhomThucHien', 'moTa', "mucTieuDeTai", "sanPhamDuKien", "trangThai", "yeuCauDauVao" ,"action"];
+    displayedColumns: string[] = ['maDeTai', "tenDeTai", 'gioiHanSoNhomThucHien', 'moTa', "mucTieuDeTai", "sanPhamDuKien",
+        "doKhoDeTai","trangThai", "yeuCauDauVao" ,"action"];
     dataSource!: MatTableDataSource<any>;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;

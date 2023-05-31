@@ -200,13 +200,14 @@ export class QuanlyTientrinhComponent implements OnInit {
         })
         /// char 6: thong ke de tai theo do kho cua giang vien
         // this.quanLyService.thongKeDeTaiGV().subscribe((res:any)=> {
+        this.quanLyService.thongKeDeTaiTheoMucDoKhoCuaTungGiangVien().subscribe((res: any) => {
             var myChart4 = new Chart("myChart6", {
                 type: 'bar',
                 data: {
-                    labels: ['Nguyen A', 'Nguyen B', 'Tran Thi B'],
+                    labels: res.labels,
                     datasets: [{
                         label: 'Khó',
-                        data: [1,2,3],
+                        data: res.dataSets[0].datas,
                         backgroundColor: [
                             'rgba(75, 192, 192, 0.2)',
                         ],
@@ -216,7 +217,7 @@ export class QuanlyTientrinhComponent implements OnInit {
                         borderWidth: 1
                     },{
                         label: 'khá',
-                        data: [4,5,6],
+                        data: res.dataSets[1].datas,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                         ],
@@ -226,7 +227,7 @@ export class QuanlyTientrinhComponent implements OnInit {
                         borderWidth: 1
                     },{
                         label: 'Trung bình',
-                        data: [7,8,9],
+                        data: res.dataSets[2].datas,
                         backgroundColor: [
                             'rgb(75, 192, 192)',
                         ],
@@ -254,17 +255,20 @@ export class QuanlyTientrinhComponent implements OnInit {
                     }
                 },
             });
+        })
+
         // })
 
         // chart 6: thong ke de tai theo do kho
         // this.quanLyService.thongKeNhomDaDKDeTai().subscribe((res:any) => {
+        this.quanLyService.thongKeDeTaiTheoMucDoKho().subscribe((res:any)=> {
             var myChart3 = new Chart("myChart7", {
                 type: 'pie',
                 data: {
-                    labels: ['Khó','Khá','Trung bình'],
+                    labels: res.labes,
                     datasets: [{
                         label: 'Số lượng: ',
-                        data: [20,30,40],
+                        data: res.dataSets[0].datas,
                         backgroundColor: [
                             'rgb(255, 99, 132)',
                             'rgb(54, 162, 235)',
@@ -282,7 +286,7 @@ export class QuanlyTientrinhComponent implements OnInit {
                     }
                 }
             });
-        // })
+        })
     }
 
 

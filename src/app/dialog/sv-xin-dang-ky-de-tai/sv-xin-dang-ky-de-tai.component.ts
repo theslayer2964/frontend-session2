@@ -12,6 +12,7 @@ import {NotificationsComponent} from "../../shared-component/notifications/notif
 })
 export class SvXinDangKyDeTaiComponent implements OnInit {
   formXinThucHienDetai: FormGroup;
+  tinhHopLe: boolean;
 
   constructor(private formBuilder: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public editData: any,
@@ -20,6 +21,7 @@ export class SvXinDangKyDeTaiComponent implements OnInit {
               private userService: UserAuthService) { }
 
   ngOnInit(): void {
+    this.tinhHopLe = this.editData.tinhHopLe;
     this.formXinThucHienDetai = this.formBuilder.group({
       kienThuc:[''],
       kynang:[''],

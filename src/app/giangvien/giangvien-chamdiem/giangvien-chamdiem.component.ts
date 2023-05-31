@@ -127,7 +127,6 @@ export class GiangvienChamdiemComponent implements OnInit {
             maNguoiDung: maGiangVien
         }).subscribe(res => {
             this.dsSV = res;
-            console.log("RES + GV + CHAM DIEM ", res);
             this.dataSource = new MatTableDataSource(res);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
